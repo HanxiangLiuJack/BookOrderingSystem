@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eeeeee"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.AddressActivity">
+
+    <TextView
+        android:id="@+id/addInfo"
+        android:layout_width="540dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="26dp"
+        android:text="Please Add Your Delivery Informaion"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstName"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="30dp"
+        android:text="First Name"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addInfo" />
+
+    <TextView
+        android:id="@+id/lastName"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="30dp"
+        android:text="Last Name"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addInfo" />
+
+    <EditText
+        android:id="@+id/editFirstName"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstName" />
+
+    <EditText
+        android:id="@+id/editLastName"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
+    <TextView
+        android:id="@+id/phoneNum"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:text="Phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editFirstName" />
+
+    <TextView
+        android:id="@+id/postCode"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:text="Post Code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLastName" />
+
+    <EditText
+        android:id="@+id/editPhoneNum"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNum" />
+
+    <EditText
+        android:id="@+id/editPostCode"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postCode" />
+
+    <TextView
+        android:id="@+id/addressInfo"
+        android:layout_width="540dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Address"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPhoneNum" />
+
+    <EditText
+        android:id="@+id/editAddressInfo"
+        android:layout_width="540dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressInfo" />
+
+    <TextView
+        android:id="@+id/additionInfo"
+        android:layout_width="540dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="Additional Infomation"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAddressInfo" />
+
+    <EditText
+        android:id="@+id/editAdditionInfo"
+        android:layout_width="540dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/additionInfo" />
+
+    <Button
+        android:id="@+id/addCancel"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/button_style"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addSubmit"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_style"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

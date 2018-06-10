@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.EditBookActivity">
 
     <TextView
         android:id="@+id/bookTitle"
@@ -148,10 +148,11 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/button_style"
-
+        android:onClick="buttonBookSubmit"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+         />
 
 
 </android.support.constraint.ConstraintLayout>

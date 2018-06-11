@@ -59,8 +59,9 @@
         android:layout_marginLeft="200dp"
         android:layout_marginTop="92dp"
         android:background="@drawable/button_style"
-        android:text="BUY Textbooks"
+        android:onClick="buttonSellOnClick"
 
+        android:text="SELL Textbooks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/umname" />
 
@@ -72,6 +73,7 @@
         android:layout_marginLeft="200dp"
         android:layout_marginTop="72dp"
         android:background="@drawable/button_style"
+        android:onClick="buttonBuyOnClick"
         android:text="BUY Textbooks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsSeller" />

@@ -83,7 +83,7 @@ public class AccessBooks {
         return bookPersistence.searchBook(id);
     }
 
-    public Book updateBook(Book currentBook, String bookName, String authorName, String bookPic, String bookDescription, String category, double price)
+    public Book updateBook(Book currentBook, String bookName, String authorName, int bookPic, String bookDescription, String category, double price)
     {
         return bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
     }

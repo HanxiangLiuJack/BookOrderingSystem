@@ -1,4 +1,4 @@
-package com.example.ding.umutos;
+package com.example.ding.umutos.objects;
 
 import org.junit.Test;
 
@@ -23,8 +23,8 @@ public class AccountTest {
        assertNotNull(account);
        assertTrue(12345 == account.getUserID());
        assertTrue("John".equals(account.getUserName()));
-       
-       setUserName("Amy");
+
+       account.setUserName("Amy");
        assertTrue("Amy".equals(account.getUserName()));
        
        System.out.println("Account Tests done");

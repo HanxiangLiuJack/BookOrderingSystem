@@ -9,7 +9,7 @@ public interface  BookPersistence {
 
     Book insertBook(Book currentBook);
 
-    Book updateBook(Book currentBook, String book_Name, String author_Name, String book_Picture, String book_Description, String book_Category, double price);
+    Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price);
     
     Book searchBook(int id);
     

@@ -1,4 +1,4 @@
-package com.example.ding.umutos;
+package com.example.ding.umutos.business;
 
 import java.util.List;
 import org.junit.After;

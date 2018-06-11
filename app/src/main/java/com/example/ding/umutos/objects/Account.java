@@ -14,7 +14,7 @@ public class Account
     public int getUserID(){return userID;}
     public String getUserName(){return userName;}
 
-    public void setUserID(String newName){userName = newName;}
+    public void setUserName(String newName){userName = newName;}
 
     
 }

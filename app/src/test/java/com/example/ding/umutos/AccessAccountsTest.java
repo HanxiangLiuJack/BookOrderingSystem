@@ -56,7 +56,7 @@ public class AccessAccountsTest {
     {
         templateAccount = new Account(7, "huahua");//insert a new account
         accessAccounts.insertAccount(templateAccount);
-        templateAccount.setUserID("newName");
+        templateAccount.setUserName("newName");
         assertTrue(accessAccounts.updateAccount(templateAccount).getUserID() == 7 &&
                 accessAccounts.updateAccount(templateAccount).getUserName().equals("newName"));
         accessAccounts.deleteAccount(templateAccount);

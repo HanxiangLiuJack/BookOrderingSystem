@@ -3,7 +3,7 @@ package com.example.ding.umutos.objects;
 public class Account
 {
     private final int userID;
-    private final String userName;
+    private String userName;
    
     public Account( int userID , String userName )
     {
@@ -13,6 +13,8 @@ public class Account
     
     public int getUserID(){return userID;}
     public String getUserName(){return userName;}
-    
+
+    public void setUserID(String newName){userName = newName;}
+
     
 }

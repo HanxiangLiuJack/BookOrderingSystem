@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/uofm_bkgd"
+    tools:context=".presentation.HomeActivity">
+
+
+    <ImageView
+        android:id="@+id/homelogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/uofm_logo2" />
+
+
+    <TextView
+        android:id="@+id/umname"
+        android:layout_width="289dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="24dp"
+        android:inputType="text"
+        android:text="Used Textbook Ordering System"
+        android:textColor="#fffff0"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appname" />
+
+
+    <TextView
+        android:id="@+id/appname"
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="88dp"
+        android:inputType="text"
+        android:text="University of Manitoba"
+        android:textColor="#fffff0"
+        android:textSize="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homelogo" />
+
+
+    <Button
+        android:id="@+id/buttonLoginAsSeller"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="92dp"
+        android:background="@drawable/button_style"
+        android:text="BUY Textbooks"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/umname" />
+
+    <Button
+        android:id="@+id/buttonLoginAsCustomer"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/button_style"
+        android:text="BUY Textbooks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsSeller" />
+
+</android.support.constraint.ConstraintLayout>

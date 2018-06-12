@@ -6,18 +6,16 @@
     android:orientation="vertical" >
 
 
-
-
-<ListView
+        <ListView
             android:id="@+id/cusListView"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="60dp"
             android:paddingBottom="50dp"
             android:cacheColorHint="#00000000"
-            android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll"  />
-
+              />
 
 
 

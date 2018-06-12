@@ -54,7 +54,6 @@ public class SingleBookActivity extends AppCompatActivity {
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
 
-
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());

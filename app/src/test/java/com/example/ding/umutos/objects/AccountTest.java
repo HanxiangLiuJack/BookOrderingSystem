@@ -1,5 +1,7 @@
 package com.example.ding.umutos.objects;
 
+import com.example.ding.umutos.objects.Account;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

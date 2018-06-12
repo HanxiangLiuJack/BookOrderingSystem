@@ -48,7 +48,7 @@ public class AccessBooks {
     private boolean validateBook(Book book)
     {
         return validateBookName(book.getName()) && validateAuthorName(book.getAuthor()) &&
-                validatePrice(book.getPrice()) &&validateCategory(book.getCategory());
+                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice()) &&validateCategory(book.getCategory());
     }
 
     private boolean validateBookName(String bookName)
@@ -61,6 +61,11 @@ public class AccessBooks {
     {
         //same standard as book name
         return authorName != null && !authorName.equals("") && !authorName.trim().isEmpty() && authorName.length()<=20;
+    }
+
+    private boolean validateBookPictureIndex(double index)
+    {
+        return index>=0;
     }
 
     private boolean validatePrice(double price)

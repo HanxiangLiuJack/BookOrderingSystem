@@ -45,31 +45,39 @@ public class AccessBooksTest {
     @Test
     public void testGetBookList()
     {
+        System.out.println("\nStarting test testGetBookList\n");
         accessBooks = new AccessBooks();
         testBookList = accessBooks.getBooks();
         numOfBooks = testBookList.size();
         assertTrue(numOfBooks == 10); //there are 10 books in the stub database
+        System.out.println("\nFinished testing testGetBookList\n");
     }
 
     @Test
     public void testGetUserBookList()
     {
+        System.out.println("\nStarting test testGetUserBookList\n");
         accessBooks = new AccessBooks();
         testUserBookList = accessBooks.getUserBooks(1);
         numOfBooks = testUserBookList.size();
         assertTrue(numOfBooks == 2);//account 1 has 2 books
+        System.out.println("\nFinished testing testGetUserBookList\n");
     }
 
     @Test
     public void testInsertBook()
     {
+        System.out.println("\nStarting test testInsertBook\n");
+        //test inserting invalid and valid books
         accessBooks = new AccessBooks();
         testInsertInvalidBook();
         testInsertValidBook();
+        System.out.println("\nStarting test testInsertBook\n");
     }
 
     private void testInsertInvalidBook()
     {
+        //different types of invalid book
         testNullBook();
         testNullBookName();
         testEmptyBookName();
@@ -77,6 +85,7 @@ public class AccessBooksTest {
         testNullAuthorName();
         testEmptyAuthorName();
         testLongAuthorName();
+        testNegativeBookPictureIndex();
         testNegativeInvalidPrice();
         testHighInvalidPrice();
         testNullCategory();
@@ -133,6 +142,12 @@ public class AccessBooksTest {
         assertTrue(accessBooks.insertBook(templateBook) == null);
     }
 
+    private void testNegativeBookPictureIndex()
+    {
+        templateBook = new Book( "name", "Author", -1, "info", "COMP", 100, 1 );
+        assertTrue(accessBooks.insertBook(templateBook) == null);
+    }
+
     private void testNegativeInvalidPrice()
     {
         templateBook = new Book( "name", "author", 5, "info", "COMP", -10, 1 );
@@ -166,6 +181,7 @@ public class AccessBooksTest {
     @Test
     public void testUpdateBook()
     {
+        System.out.println("\nStarting test testUpdateBook\n");
         accessBooks = new AccessBooks();
         templateBook = new Book("name", "author", 5, "info", "COMP", 100, 1);
         accessBooks.insertBook(templateBook);
@@ -187,25 +203,30 @@ public class AccessBooksTest {
         assertTrue(newBook.getCategory().equals("COMP1"));
         assertTrue(newBook.getPrice() == 200);
         accessBooks.deleteBook(templateBook.getBookID());
+        System.out.println("\nStarting test testUpdateBook\n");
     }
 
     @Test
     public void testSearchBook()
     {
+        System.out.println("\nStarting test testSearchBook\n");
         accessBooks = new AccessBooks();
         templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
         accessBooks.insertBook(templateBook);
         assertTrue(accessBooks.searchBook(templateBook.getBookID()).getBookID() == templateBook.getBookID());
         accessBooks.deleteBook(templateBook.getBookID());
+        System.out.println("\nStarting test testSearchBook\n");
     }
 
     @Test
     public void testDeleteBook()
     {
+        System.out.println("\nStarting test testDeleteBook\n");
         accessBooks = new AccessBooks();
         templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
         accessBooks.insertBook(templateBook);
         accessBooks.deleteBook(templateBook.getBookID());
         assertTrue(accessBooks.searchBook(templateBook.getBookID()) == null);
+        System.out.println("\nStarting test testDeleteBook\n");
     }
 }

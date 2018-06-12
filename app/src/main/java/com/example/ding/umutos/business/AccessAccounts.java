@@ -44,4 +44,5 @@ public class AccessAccounts {
     {
         accountPersistence.deleteAccount(currentAccount);
     }
+
 }

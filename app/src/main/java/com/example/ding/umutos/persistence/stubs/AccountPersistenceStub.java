@@ -29,6 +29,17 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
+    public Account getAccountByID(int userID)
+    {
+        for(int i = 0; i < Accounts.size(); i++)
+        {
+            if(Accounts.get(i).getUserID() == userID)
+                return Accounts.get(i);
+        }
+        return null;
+    }
+
+    @Override
     public Account insertAccount(Account currentAccount)
     {
         Accounts.add(currentAccount);

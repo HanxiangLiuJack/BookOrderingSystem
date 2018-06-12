@@ -18,7 +18,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void buttonSellOnClick(View v) {
-        Intent sellIntent = new Intent(HomeActivity.this, CustomerBookListActivity.class);
+        Intent sellIntent = new Intent(HomeActivity.this, SellerBookListActivity.class);
         HomeActivity.this.startActivity(sellIntent);
     }
 

@@ -1,22 +1,28 @@
 package com.example.ding.umutos.presentation;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.widget.TextView;
 
 import com.example.ding.umutos.R;
 
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
+    private int bookID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
+        bookID = getIntent().getIntExtra("bookID",-1);
+        editFirstName=(EditText)findViewById(R.id.editFirstName);
+        editFirstName.setText(""+bookID);
     }
 
     public void buttonAddSubmit(View view) {
@@ -58,11 +64,14 @@ public class AddressActivity extends AppCompatActivity {
     private void showDialog(String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+title+" has been added.")
+                .setMessage("\n Click OK to place your order.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        Intent intent = new Intent(AddressActivity.this, CustomerBookListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

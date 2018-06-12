@@ -16,22 +16,20 @@ import com.example.ding.umutos.R;
 
 public class SingleBookActivity extends AppCompatActivity {
 
+    private int bookID;
     private TextView bookTitle;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Intent intent = getIntent();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singlebook);
-//        int lv_item_id = intent.getIntExtra("lv_item_id", 0);
-//        String aaa=""+lv_item_id;
-//        Log.v("aaa",aaa);
+        bookID = getIntent().getIntExtra("bookID",-1);
 
 
-
-//        bookTitle = (TextView)findViewById(R.id.singleBookTitle);
-//        bookTitle.setText(lv_item_id);
+        bookTitle = (TextView)findViewById(R.id.singleBookTitle);
+        bookTitle.setText(""+bookID);
 
     }
 
@@ -39,19 +37,19 @@ public class SingleBookActivity extends AppCompatActivity {
 
     public void buttonAdd(View view) {
         showDialog("a");
-
-
-
     }
 
     private void showDialog(String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+title+" has been added.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setMessage("\n"+"Sure to buy "+title+"? Press 'Yes' to Delivery Info page.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        Intent intent = new Intent(SingleBookActivity.this,AddressActivity.class);
+                        intent.putExtra("bookID", bookID);
+                        SingleBookActivity.this.startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

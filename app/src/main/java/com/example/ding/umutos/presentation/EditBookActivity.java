@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.ding.umutos.R;
@@ -17,6 +18,9 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
     private String[] ctg = {"Agriculture","Architecture and design","Business","Divinity","Education","Engineering and technology","Environmental studies and forestry","Family and consumer science","Human physical performance and recreation", "Journalism, media studies and communication","Law","Library and museum studies","Medicine","Military sciences","Public administration","Public policy","Social work","Transportation"};
+
+    private int bookID;
+    private String bookTitle;
 
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
@@ -29,6 +33,13 @@ public class EditBookActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ctg);
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+
+        bookID=-1;
+        bookID = getIntent().getIntExtra("bookID",-1);
+
+        if (bookID!=-1){
+
+        }
 
     }
 
@@ -59,8 +70,17 @@ public class EditBookActivity extends AppCompatActivity {
 
         if (title.length()<1 || author.length()<1 || price.length()<1 )
             showDialog();
-        else
-            showDialog(title);
+        else {
+            if (bookID==-1){
+                showDialog("\n"+title+" has been added.");
+            }
+            else {
+                showDialog("\n"+title+" has been modified.");
+            }
+
+
+            finish();
+        }
 
     }
 
@@ -76,10 +96,10 @@ public class EditBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
-    private void showDialog(String title){
+    private void showDialog(String msgs){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+title+" has been added.")
+                .setMessage(msgs)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
@@ -95,8 +115,8 @@ public class EditBookActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void buttonBookCancel(View view) {
-
+    public void buttonEditBookCancel(View view) {
+        finish();
     }
 
 

@@ -1,5 +1,4 @@
 package com.example.ding.umutos.presentation;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +6,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.widget.TextView;
-
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 
@@ -45,9 +42,6 @@ public class AddressActivity extends AppCompatActivity {
             showDialog();
         else
             showDialog(firstName);
-
-
-
     }
 
     private void showDialog(){

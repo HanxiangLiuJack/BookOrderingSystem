@@ -1,11 +1,8 @@
 package com.example.ding.umutos.presentation;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-
 import com.example.ding.umutos.R;
 
 public class HomeActivity extends AppCompatActivity {

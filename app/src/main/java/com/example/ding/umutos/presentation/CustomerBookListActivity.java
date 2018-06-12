@@ -3,7 +3,6 @@ import com.example.ding.umutos.business.AccessBooks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -47,9 +46,8 @@ public class CustomerBookListActivity extends AppCompatActivity {
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,
-                R.layout.activity_book_row,//每一个user xml 相当ListView的一个组件
+                R.layout.activity_book_row,
                 new String[] {"img", "title", "price","id" },
-                // 分别对应view 的id
                 new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID});
 
 
@@ -59,7 +57,7 @@ public class CustomerBookListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                //获得选中项的HashMap对象
+
                 HashMap<String,String> map=(HashMap<String,String>)bookList.getItemAtPosition(arg2);
                 String id=map.get("id");
                 bookID=Integer.parseInt(id);

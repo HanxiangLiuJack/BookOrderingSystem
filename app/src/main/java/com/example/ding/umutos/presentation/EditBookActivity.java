@@ -1,20 +1,15 @@
 package com.example.ding.umutos.presentation;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
-import android.widget.ListView;
 import android.widget.Spinner;
-
 import com.example.ding.umutos.R;
-import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 
@@ -22,6 +17,7 @@ import java.util.List;
 
 
 public class EditBookActivity extends AppCompatActivity {
+
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
     private String[] ctg = {"Agriculture","Architecture and design","Business","Divinity","Education","Engineering and technology","Environmental studies and forestry","Family and consumer science","Human physical performance and recreation", "Journalism, media studies and communication","Law","Library and museum studies","Medicine","Military sciences","Public administration","Public policy","Social work","Transportation"};
@@ -39,6 +35,7 @@ public class EditBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
+
         editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ctg);
         editBookCategory.setAdapter(adapter);
@@ -62,21 +59,17 @@ public class EditBookActivity extends AppCompatActivity {
             editBookDetail.setText(newBook.getDescription());
 
         }
-
     }
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                                   long arg3) {
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
             category=ctg[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
-
-
 
     public void buttonBookSubmit(View view) {
         editBookTitle=(EditText)findViewById(R.id.editBookTitle);
@@ -107,9 +100,7 @@ public class EditBookActivity extends AppCompatActivity {
                 .setMessage("\nPlease enter valid book title, author and price.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                    }
+                    public void onClick(DialogInterface dialog,int which) {}
                 })
                 .show();
     }

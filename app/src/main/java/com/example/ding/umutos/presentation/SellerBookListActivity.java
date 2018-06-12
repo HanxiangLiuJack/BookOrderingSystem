@@ -1,5 +1,4 @@
 package com.example.ding.umutos.presentation;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,11 +9,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-
+import android.widget.TextView;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +24,7 @@ public class SellerBookListActivity extends AppCompatActivity {
     private String bookTitle;
     private AccessBooks accessBookList;
     private List<Book> newBookList;
-
+    private TextView infoBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class SellerBookListActivity extends AppCompatActivity {
         bookID=-1;
         accessBookList=new AccessBooks();
         newBookList=accessBookList.getUserBooks(2);
+        infoBar=(TextView)findViewById(R.id.sellListInfoBar);
         int size=newBookList.size();
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
@@ -50,24 +49,22 @@ public class SellerBookListActivity extends AppCompatActivity {
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,
-                R.layout.activity_book_row,//每一个user xml 相当ListView的一个组件
+                R.layout.activity_book_row,
                 new String[] {"img", "title", "price","id" },
-                // 分别对应view 的id
+
                 new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID});
 
-
         bookList.setAdapter(sItems);
-
 
         bookList.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
-                //获得选中项的HashMap对象
                 HashMap<String,String> map=(HashMap<String,String>)bookList.getItemAtPosition(arg2);
                 String id=map.get("id");
                 bookID=Integer.parseInt(id);
                 bookTitle=map.get("title");
+                infoBar.setText("You selected book: "+bookTitle);
 
             }
 
@@ -98,10 +95,7 @@ public class SellerBookListActivity extends AppCompatActivity {
                 .setMessage("\n"+"Please select a book to delete.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-
-                    }
+                    public void onClick(DialogInterface dialog,int which) {}
                 })
                 .show();
     }
@@ -122,9 +116,7 @@ public class SellerBookListActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                    }
+                    public void onClick(DialogInterface dialog,int which) {}
                 })
                 .show();
     }
@@ -135,12 +127,8 @@ public class SellerBookListActivity extends AppCompatActivity {
                 .setMessage("\n"+"Please select a book to edit.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-
-                    }
+                    public void onClick(DialogInterface dialog,int which) {}
                 })
-
                 .show();
     }
 

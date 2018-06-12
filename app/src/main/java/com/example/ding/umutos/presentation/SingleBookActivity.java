@@ -2,27 +2,15 @@ package com.example.ding.umutos.presentation;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
-
-
 import com.example.ding.umutos.R;
-import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
-
-import java.io.File;
-
 
 public class SingleBookActivity extends AppCompatActivity {
 
@@ -32,7 +20,6 @@ public class SingleBookActivity extends AppCompatActivity {
     private Book newBook;
     private AccessBooks accessBookList;
     private AccessAccounts accessAccounts;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +76,4 @@ public class SingleBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
-
-
 }

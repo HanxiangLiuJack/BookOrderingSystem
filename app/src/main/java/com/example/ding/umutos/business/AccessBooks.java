@@ -39,14 +39,16 @@ public class AccessBooks {
     //===================================book insertion part=========================================
     //===============================================================================================
 
-    public Book insertBook(Book currentBook)
+    public boolean insertBook(Book currentBook)
     {
         if(currentBook != null) {
-            if(validateBook(currentBook))
-                return bookPersistence.insertBook(currentBook);
+            if(validateBook(currentBook)) {
+                bookPersistence.insertBook(currentBook);
+                return true;
+            }
         }
 
-        return currentBook;
+        return false;
     }
 
     private boolean validateBook(Book book)
@@ -74,7 +76,7 @@ public class AccessBooks {
 
     private boolean validatePrice(double price)
     {
-        return price >= 0 ;
+        return price >= 0;
     }
 
 
@@ -87,13 +89,18 @@ public class AccessBooks {
         return bookPersistence.searchBook(id);
     }
 
-    public Book updateBook(Book currentBook, String bookName, String authorName, int bookPic, String bookDescription, String category, double price)
+    public boolean updateBook(Book currentBook, String bookName, String authorName, int bookPic, String bookDescription, String category, double price)
     {
-        return bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
+        if(validateBookName(bookName)&&validateAuthorName(authorName)&&validateBookPictureIndex(bookPic)&&validatePrice(price)) {
+            bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
+            return true;
+        }
+        return false;
     }
 
     public void deleteBook(int bookID)
     {
-        bookPersistence.deleteBook(bookID);
+        if(searchBook(bookID) != null)
+          bookPersistence.deleteBook(bookID);
     }
 }

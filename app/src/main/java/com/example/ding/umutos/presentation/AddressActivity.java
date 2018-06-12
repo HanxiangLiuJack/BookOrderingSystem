@@ -10,19 +10,20 @@ import android.support.v7.app.AlertDialog;
 import android.widget.TextView;
 
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.business.AccessBooks;
 
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
+    private AccessBooks accessBookList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
-        editFirstName=(EditText)findViewById(R.id.editFirstName);
-        editFirstName.setText(""+bookID);
+        accessBookList=new AccessBooks();
     }
 
     public void buttonAddSubmit(View view) {
@@ -64,11 +65,12 @@ public class AddressActivity extends AppCompatActivity {
     private void showDialog(String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n Click OK to place your order.")
+                .setMessage("\n Click 'OK' to place your order.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        accessBookList.deleteBook(bookID);
                         Intent intent = new Intent(AddressActivity.this, CustomerBookListActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

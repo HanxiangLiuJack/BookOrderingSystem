@@ -62,13 +62,13 @@ public class SingleBookActivity extends AppCompatActivity {
 
 
     public void buttonAdd(View view) {
-        showDialog("a");
+        showDialog(newBook.getName());
     }
 
     private void showDialog(String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+"Sure to buy "+title+"? Press 'Yes' to Delivery Info page.")
+                .setMessage("\n"+"Sure to buy "+title+"? \nPress 'Yes' to the Delivery Info page.")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,

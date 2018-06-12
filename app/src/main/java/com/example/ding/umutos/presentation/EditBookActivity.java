@@ -1,7 +1,9 @@
 package com.example.ding.umutos.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,11 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.business.AccessAccounts;
+import com.example.ding.umutos.business.AccessBooks;
+import com.example.ding.umutos.objects.Book;
+
+import java.util.List;
 
 
 public class EditBookActivity extends AppCompatActivity {
@@ -25,6 +32,9 @@ public class EditBookActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
 
+    private Book newBook;
+    private AccessBooks accessBookList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +44,22 @@ public class EditBookActivity extends AppCompatActivity {
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
+        accessBookList=new AccessBooks();
+
         bookID=-1;
         bookID = getIntent().getIntExtra("bookID",-1);
 
         if (bookID!=-1){
+            newBook=accessBookList.searchBook(bookID);
+            editBookTitle=(EditText)findViewById(R.id.editBookTitle);
+            editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
+            editBookPrice=(EditText)findViewById(R.id.editBookPrice);
+            editBookDetail=(EditText)findViewById(R.id.editBookDetail);
+
+            editBookTitle.setText(newBook.getName());
+            editBookAuthor.setText(newBook.getAuthor());
+            editBookPrice.setText(""+newBook.getPrice());
+            editBookDetail.setText(newBook.getDescription());
 
         }
 
@@ -61,6 +83,7 @@ public class EditBookActivity extends AppCompatActivity {
         editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
         editBookPrice=(EditText)findViewById(R.id.editBookPrice);
         editBookDetail=(EditText)findViewById(R.id.editBookDetail);
+
         title=editBookTitle.getText().toString();
         author=editBookAuthor.getText().toString();
         price=editBookPrice.getText().toString();
@@ -98,13 +121,19 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        finish();
+                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),2);
+                        accessBookList.insertBook(aBook);
+                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        finish();
                     }
                 })
                 .show();
@@ -118,13 +147,19 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        finish();
+                        Book aBook=accessBookList.searchBook(bookID);
+                        accessBookList.updateBook(aBook,title,author,aBook.getPicture(),detail,category,Double.parseDouble(price));
+                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+
+                        finish();
                     }
                 })
                 .show();

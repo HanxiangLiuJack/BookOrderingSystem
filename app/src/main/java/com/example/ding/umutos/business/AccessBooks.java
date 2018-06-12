@@ -1,5 +1,7 @@
 package com.example.ding.umutos.business;
 
+import android.util.Log;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -33,7 +35,6 @@ public class AccessBooks {
 
 
 
-
     //===============================================================================================
     //===================================book insertion part=========================================
     //===============================================================================================
@@ -41,16 +42,17 @@ public class AccessBooks {
     public Book insertBook(Book currentBook)
     {
         if(currentBook != null) {
-            if (validateBook(currentBook))
+            if(validateBook(currentBook))
                 return bookPersistence.insertBook(currentBook);
         }
-        return null;
+
+        return currentBook;
     }
 
     private boolean validateBook(Book book)
     {
         return validateBookName(book.getName()) && validateAuthorName(book.getAuthor()) &&
-                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice()) && validateCategory(book.getCategory());
+                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice());
     }
 
     private boolean validateBookName(String bookName)
@@ -65,21 +67,16 @@ public class AccessBooks {
         return authorName != null && !authorName.equals("") && !authorName.trim().isEmpty() && authorName.length()<=20;
     }
 
-    private boolean validateBookPictureIndex(double index)
+    private boolean validateBookPictureIndex(int index)
     {
         return index>=0;
     }
 
     private boolean validatePrice(double price)
     {
-        return price >= 0 && price <= 10000;
+        return price >= 0 ;
     }
 
-    private boolean validateCategory(String category)
-    {
-        //same standard as book name
-        return category != null && !category.equals("") && !category.trim().isEmpty() && category.length()<=10;
-    }
 
     //===============================================================================================
     //===============================================================================================

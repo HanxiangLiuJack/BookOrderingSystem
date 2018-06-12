@@ -1,4 +1,5 @@
 package com.example.ding.umutos.presentation;
+import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -30,6 +31,7 @@ public class SingleBookActivity extends AppCompatActivity {
     private ImageView bookImg;
     private Book newBook;
     private AccessBooks accessBookList;
+    private AccessAccounts accessAccounts;
 
 
     @Override
@@ -42,6 +44,7 @@ public class SingleBookActivity extends AppCompatActivity {
         int bookImgArr[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
 
         accessBookList=new AccessBooks();
+        accessAccounts=new AccessAccounts();
         newBook=accessBookList.searchBook(bookID);
 
         bookTitle=(TextView)findViewById(R.id.singleBookTitle);
@@ -51,10 +54,11 @@ public class SingleBookActivity extends AppCompatActivity {
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
 
+
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
-        bookOwner.setText("Sold by "+newBook.getOwner());
+        bookOwner.setText("Sold by "+accessAccounts.getAccountByID(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(bookImgArr[newBook.getPicture()]);
 

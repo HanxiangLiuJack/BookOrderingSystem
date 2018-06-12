@@ -12,32 +12,40 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.business.AccessBooks;
+import com.example.ding.umutos.objects.Book;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SellerBookListActivity extends AppCompatActivity {
 
     private ListView bookList;
     private int bookID;
     private String bookTitle;
+    private AccessBooks accessBookList;
+    private List<Book> newBookList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seller_booklist);
-        bookList=(ListView)findViewById(R.id.friends);
-        int bookImg[]={R.mipmap.book3,R.mipmap.book3,R.mipmap.book3,R.mipmap.book3,R.mipmap.book3,R.mipmap.book3};
+        bookList=(ListView)findViewById(R.id.sellerBookList);
+        int bookImg[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
         bookID=-1;
+        accessBookList=new AccessBooks();
+        newBookList=accessBookList.getUserBooks(2);
+        int size=newBookList.size();
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 0; i < size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
-            book.put("id",""+i);
-            book.put("img",bookImg[i-1] );
-            book.put("title", "name(" + i+")");
-            book.put("price",""+ i);
+            book.put("id",""+newBookList.get(i).getBookID());
+            book.put("img",bookImg[newBookList.get(i).getPicture()] );
+            book.put("title", newBookList.get(i).getName());
+            book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
@@ -106,6 +114,7 @@ public class SellerBookListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        accessBookList.deleteBook(bookID);
                         finish();
                         Intent intent = new Intent(SellerBookListActivity.this, SellerBookListActivity.class);
                         startActivity(intent);

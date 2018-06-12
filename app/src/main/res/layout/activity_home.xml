@@ -20,35 +20,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/uofm_logo2" />
 
-
-    <TextView
-        android:id="@+id/umname"
-        android:layout_width="289dp"
-        android:layout_height="57dp"
-        android:layout_marginLeft="156dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="24dp"
-        android:inputType="text"
-        android:text="Used Textbook Ordering System"
-        android:textColor="#fffff0"
-        android:textSize="19.9dp"
+    <ImageView
+        android:id="@+id/homelogo1"
+        android:layout_width="420dp"
+        android:layout_height="220dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="28dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appname" />
-
-
-    <TextView
-        android:id="@+id/appname"
-        android:layout_width="295dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="156dp"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="96dp"
-        android:inputType="text"
-        android:text="University of Manitoba"
-        android:textColor="#fffff0"
-        android:textSize="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homelogo" />
+        app:layout_constraintTop_toBottomOf="@+id/homelogo"
+        app:srcCompat="@mipmap/umlogo" />
 
 
     <Button
@@ -57,13 +38,13 @@
         android:layout_height="60dp"
         android:layout_marginLeft="200dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/trans_button_style"
-        android:textColor="#ffffff"
         android:onClick="buttonSellOnClick"
         android:text="SELL Textbooks"
+        android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/umname" />
+        app:layout_constraintTop_toBottomOf="@+id/homelogo1" />
 
     <Button
         android:id="@+id/buttonLoginAsCustomer"
@@ -71,11 +52,11 @@
         android:layout_height="60dp"
         android:layout_marginLeft="200dp"
         android:layout_marginStart="200dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="56dp"
         android:background="@drawable/trans_button_style"
-        android:textColor="#ffffff"
         android:onClick="buttonBuyOnClick"
         android:text="BUY Textbooks"
+        android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsSeller" />
 

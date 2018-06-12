@@ -42,7 +42,7 @@
             <TextView
                 android:id="@+id/cusBookListTitle"
                 android:layout_width="300dp"
-                android:layout_height="46dp"
+                android:layout_height="100dp"
                 android:layout_marginEnd="68dp"
                 android:layout_marginRight="68dp"
                 android:layout_marginTop="32dp"
@@ -57,7 +57,7 @@
                 android:layout_height="46dp"
                 android:layout_marginEnd="68dp"
                 android:layout_marginRight="68dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="10dp"
                 android:text="$25.6"
                 android:textColor="#b92646"
                 android:textSize="22dp"

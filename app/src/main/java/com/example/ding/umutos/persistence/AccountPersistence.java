@@ -12,4 +12,6 @@ public interface AccountPersistence{
     Account updateAccount(Account currentAccount);
 
     void deleteAccount(Account currentAccount);
+
+
 }

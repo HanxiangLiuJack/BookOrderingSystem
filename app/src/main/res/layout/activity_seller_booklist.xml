@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"   >
+
+
+        <LinearLayout android:id="@+id/center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_above="@id/bottom"
+             >
+
+            <ListView android:id="@+id/friends"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dip"/>
+        </LinearLayout>
+        <LinearLayout android:id="@+id/bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="#eeeeee"
+            android:layout_alignParentBottom="true"  >
+
+            <Button android:id="@+id/addNewBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buy_button_style"
+                android:onClick="buttonAddNewBook"
+                android:text="ADD"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/editPostedBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_style"
+                android:onClick="buttonEditPostedBook"
+                android:text="Edit"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/deletePostedBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_style"
+                android:onClick="buttonDeletePostedBook"
+                android:text="Delete"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

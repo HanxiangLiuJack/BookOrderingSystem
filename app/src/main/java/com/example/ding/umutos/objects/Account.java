@@ -11,12 +11,17 @@ public class Account
         this.userName = userName;
     }
     
-    public int getUserID(){return userID;}
-    public String getUserName(){return userName;}
+    public int getUserID()
+    {
+        return userID;
+    }
+    public String getUserName()
+    {
+        return userName;
+    }
 
-
-    public void setUserName(String newName){userName = newName;}
-
-
-    
+    public void setUserName(String newName)
+    {
+        userName = newName;
+    }
 }

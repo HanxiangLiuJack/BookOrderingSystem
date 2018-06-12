@@ -1,62 +1,91 @@
 package com.example.ding.umutos.objects;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 public class BookTest {
-        @Test
-        public void testBook()
-        {
-                Book book;
-                System.out.println("Testing book");
-                book = new Book("abc","Amy",123,"a good book","CS",24.99,12345);
 
-                assertNotNull(book);
+    private Book templateBook;
 
-                assertTrue("abc".equals(book.getName()));
-                assertTrue("Amy".equals(book.getAuthor()));
-                assertTrue(123 == book.getPicture());
-                assertTrue("a good book".equals(book.getDescription()));
-                assertTrue("CS".equals(book.getCategory()));
-                assertTrue(24.99 == book.getPrice());
-                assertTrue(12345 == book.getOwner());
-                System.out.println("Getter cases passed ~");
+    @Before
+    public void setup()
+    {
+        templateBook = new Book("abc","Amy",123,"a good book","CS",24.99,12345);
+    }
 
-                book.setName("cde");
-                assertTrue("cde".equals(book.getName()));
-                book.setAuthor("Bob");
-                assertTrue("Bob".equals(book.getAuthor()));
-                book.setPicture(222);
-                assertTrue(222 == (book.getPicture()));
-                book.setDescription("a bad book");
-                assertTrue("a bad book".equals(book.getDescription()));
-                book.setCategory("Math");
-                assertTrue("Math".equals(book.getCategory()));
-                book.setPrice(28.99);
-                assertTrue(28.99 == book.getPrice());
-                System.out.println("Setter cases passed ~");
+    @After
+    public void tearDown()
+    {
+        templateBook = null;
+    }
 
-                book.setPicture(0);
-                assertTrue(0==(book.getPicture()));
-                book.setAuthor("");
-                assertTrue("".equals(book.getAuthor()));
-                book.setName("");
-                assertTrue("".equals(book.getName()));
-                book.setDescription("");
-                assertTrue("".equals(book.getDescription()));
-                book.setCategory("");
-                assertTrue("".equals(book.getCategory()));
-                book.setPrice(0.0);
-                assertTrue(0.0 == book.getPrice());
-                System.out.println("Empty cases passed ~");
+    @Test
+    public void testNullBook()
+    {
+        System.out.println("Testing Null book");
+        assertNotNull(templateBook);
+        System.out.println("End Testing Null book");
+    }
 
-                System.out.println("Tests done");
-        }
+    @Test
+    public void testAccessorMethods()
+    {
+        System.out.println("Testing get methods");
+        assertTrue("abc".equals(templateBook.getName()));
+        assertTrue("Amy".equals(templateBook.getAuthor()));
+        assertTrue(123 == templateBook.getPicture());
+        assertTrue("a good book".equals(templateBook.getDescription()));
+        assertTrue("CS".equals(templateBook.getCategory()));
+        assertTrue(24.99 == templateBook.getPrice());
+        assertTrue(12345 == templateBook.getOwner());
+        System.out.println("End Testing get methods");
+    }
+
+    @Test
+    public void testMutatorMethods()
+    {
+        System.out.println("Testing set methods");
+        templateBook.setName("cde");
+        assertTrue("cde".equals(templateBook.getName()));
+
+        templateBook.setAuthor("Bob");
+        assertTrue("Bob".equals(templateBook.getAuthor()));
+
+        templateBook.setPicture(222);
+        assertTrue(222 == (templateBook.getPicture()));
+
+        templateBook.setDescription("a bad book");
+        assertTrue("a bad book".equals(templateBook.getDescription()));
+
+        templateBook.setCategory("Math");
+        assertTrue("Math".equals(templateBook.getCategory()));
+
+        templateBook.setPrice(28.99);
+        assertTrue(28.99 == templateBook.getPrice());
+
+        System.out.println("End testing set methods");
+    }
+
+    @Test
+    public void testEmptyCases()
+    {
+        System.out.println("start Testing empty cases");
+        templateBook.setPicture(0);
+        assertTrue(0==(templateBook.getPicture()));
+        templateBook.setAuthor("");
+        assertTrue("".equals(templateBook.getAuthor()));
+        templateBook.setName("");
+        assertTrue("".equals(templateBook.getName()));
+        templateBook.setDescription("");
+        assertTrue("".equals(templateBook.getDescription()));
+        templateBook.setCategory("");
+        assertTrue("".equals(templateBook.getCategory()));
+        templateBook.setPrice(0.0);
+        assertTrue(0.0 == templateBook.getPrice());
+        System.out.println("End Testing empty cases");
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.ding.umutos.business;
+
 import java.util.Collections;
 import java.util.List;
+
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.persistence.BookPersistence;
@@ -48,7 +50,7 @@ public class AccessBooks {
     private boolean validateBook(Book book)
     {
         return validateBookName(book.getName()) && validateAuthorName(book.getAuthor()) &&
-                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice()) &&validateCategory(book.getCategory());
+                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice()) && validateCategory(book.getCategory());
     }
 
     private boolean validateBookName(String bookName)

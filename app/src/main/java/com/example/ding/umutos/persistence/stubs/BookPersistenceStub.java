@@ -1,7 +1,5 @@
 package com.example.ding.umutos.persistence.stubs;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
@@ -9,11 +7,12 @@ import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.persistence.BookPersistence;
 
 public class BookPersistenceStub implements BookPersistence {
+
     private List<Book> books;
 
-    public BookPersistenceStub() {
+    public BookPersistenceStub()
+    {
         this.books = new ArrayList<>();
-
         books.add(new Book("Agile Development", "James Shore",1,"The Art of Agile Development contains practical guidance for anyone considering or applying agile development for building valuable software. Plenty of books describe what agile development is or why it helps software projects succeed, but very few combine information for developers, managers, testers, and customers into a single package that they can apply directly.","Comptuer Science",33.86,1));
         books.add(new Book("Microeconomics", "Christopher T.S. Ragan",2,"An indispensable reference for students enrolled in any business and economics program, Ragan: Economics builds on a rich legacy of success in teaching and learning. Ragan: Economics provides students with an introduction to the major issues facing the worlds economies, to the methods that economists use to study those issues, and to the policy problems that those issues create."," Economic",34.95,1));
         books.add(new Book("The Civil Engineering ", " W.F. Chen J.Y. Richard Liew",3,"The Civil Engineering Handbook provides extensive coverage of the major areas of civil engineering. Divided into eight comprehensive sections, the handbook covers:Construction. Environmental Engineering; Geotechnical Engineering; Hydraulics; Materials Engineering; Structural Engineering; Surveying Engineering; Transportation Engineering.","Engineer",163.34,2));
@@ -29,18 +28,21 @@ public class BookPersistenceStub implements BookPersistence {
     
     //Print Book List
     @Override
-    public List<Book> getBookSequential() {
+    public List<Book> getBookSequential()
+    {
         return Collections.unmodifiableList(books);
     }
 
     @Override
-    public Book insertBook(Book currentBook){
-      books.add(currentBook);
-      return currentBook; 
+    public Book insertBook(Book currentBook)
+    {
+        books.add(currentBook);
+        return currentBook;
     }
     
     @Override
-    public Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price ) {
+    public Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price )
+    {
         int index;
 
         index = books.indexOf(currentBook);
@@ -58,19 +60,20 @@ public class BookPersistenceStub implements BookPersistence {
     }
     
     @Override
-    public Book searchBook(int id) {
-        Book searchbook = null;
+    public Book searchBook(int id)
+    {
+        Book searchBook = null;
 
         for (int i = 0; i < books.size()&&id>=0; i++) {
-            if(books.get(i).getBookID()==id) {
-                searchbook = books.get(i);
-            }
+            if(books.get(i).getBookID()==id)
+                searchBook = books.get(i);
         }
-        return searchbook;
+        return searchBook;
     }
     
     @Override
-    public List<Book> getUserBookSequential(int userID){
+    public List<Book> getUserBookSequential(int userID)
+    {
         List<Book> newBooks = new ArrayList<>();
         for (int i = 0; i < books.size();i++){
             if(books.get(i).getOwner() == userID){
@@ -82,14 +85,13 @@ public class BookPersistenceStub implements BookPersistence {
 
 
     @Override
-    public void deleteBook(int id) {
+    public void deleteBook(int id)
+    {
         int index;
         
         index=books.indexOf(searchBook(id));
-        if(index>=0){
+        if(index>=0)
             books.remove(index);
-        }
-       
     }
 
 }

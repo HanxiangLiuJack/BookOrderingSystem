@@ -58,9 +58,9 @@ public class AccessBooksTest {
     {
         System.out.println("\nStarting test testGetUserBookList\n");
         accessBooks = new AccessBooks();
-        testUserBookList = accessBooks.getUserBooks(1);
+        testUserBookList = accessBooks.getUserBooks(2);
         numOfBooks = testUserBookList.size();
-        assertTrue(numOfBooks == 2);//account 1 has 2 books
+        assertTrue(numOfBooks == 5);//account 1 has 2 books
         System.out.println("\nFinished testing testGetUserBookList\n");
     }
 
@@ -87,10 +87,6 @@ public class AccessBooksTest {
         testLongAuthorName();
         testNegativeBookPictureIndex();
         testNegativeInvalidPrice();
-        testHighInvalidPrice();
-        testNullCategory();
-        testEmptyCategory();
-        testLongCategory();
     }
 
     private void testInsertValidBook()
@@ -154,30 +150,6 @@ public class AccessBooksTest {
         assertTrue(accessBooks.insertBook(templateBook) == null);
     }
 
-    private void testHighInvalidPrice()
-    {
-        templateBook = new Book( "name", "author", 5, "info", "COMP", 100000, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
-    }
-
-    private void testNullCategory()
-    {
-        templateBook = new Book( "name", "author", 5, "info", null, 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
-    }
-
-    private void testEmptyCategory()  //should return false
-    {
-        templateBook = new Book( "name", "author", 5, "info", "", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
-    }
-
-    private void testLongCategory()  //should return false
-    {
-        templateBook = new Book( "name", "author", 5, "info", "thiscategoryislongerthan10chars", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
-    }
-
     @Test
     public void testUpdateBook()
     {
@@ -186,6 +158,7 @@ public class AccessBooksTest {
         templateBook = new Book("name", "author", 5, "info", "COMP", 100, 1);
         accessBooks.insertBook(templateBook);
 
+        //test update valid message
         String newName = "name1";
         String newAuthor = "author1";
         int newPic = 9;
@@ -202,8 +175,18 @@ public class AccessBooksTest {
         assertTrue(newBook.getDescription().equals("info1"));
         assertTrue(newBook.getCategory().equals("COMP1"));
         assertTrue(newBook.getPrice() == 200);
+
+        //test update invalid message
+        newName = "";
+        newAuthor = "";
+        newPic = -1;
+        newPrice = -100;
+
+        newBook = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
+        assertNull(newBook);
+
         accessBooks.deleteBook(templateBook.getBookID());
-        System.out.println("\nStarting test testUpdateBook\n");
+        System.out.println("\nEnd testing testUpdateBook\n");
     }
 
     @Test

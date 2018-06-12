@@ -46,7 +46,7 @@ public class AccessBooks {
                 return bookPersistence.insertBook(currentBook);
         }
 
-        return currentBook;
+        return null;
     }
 
     private boolean validateBook(Book book)
@@ -89,11 +89,14 @@ public class AccessBooks {
 
     public Book updateBook(Book currentBook, String bookName, String authorName, int bookPic, String bookDescription, String category, double price)
     {
-        return bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
+        if(validateBookName(bookName)&&validateAuthorName(authorName)&&validateBookPictureIndex(bookPic)&&validatePrice(price))
+          return bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
+        return null;
     }
 
     public void deleteBook(int bookID)
     {
-        bookPersistence.deleteBook(bookID);
+        if(searchBook(bookID) != null)
+          bookPersistence.deleteBook(bookID);
     }
 }

@@ -47,6 +47,17 @@ public class AccessAccountsTest {
     }
 
     @Test
+    public void testGetAccountByID()
+    {
+        System.out.println("\nStart testing GetAccountByID.\n");
+        //test get a exist user
+        assertTrue(accessAccounts.getAccountByID(1).getUserID() == 1);
+        //test a user does not exist
+        assertNull(accessAccounts.getAccountByID(100));
+        System.out.println("\nEnd testing GetAccountByID.\n");
+    }
+
+    @Test
     public void testInsertAccount()
     {
         System.out.println("\nStart testing testInsertAccount.\n");

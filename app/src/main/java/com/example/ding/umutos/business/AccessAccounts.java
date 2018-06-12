@@ -23,6 +23,11 @@ public class AccessAccounts {
         return Collections.unmodifiableList(accounts);
     }
 
+    public Account getAccountByID(int userID)
+    {
+        return accountPersistence.getAccountByID(userID);
+    }
+
     public Account insertAccount(Account currentAccount)
     {
         if(currentAccount != null)

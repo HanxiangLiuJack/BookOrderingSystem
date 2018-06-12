@@ -13,15 +13,16 @@ public class Book
 
     private static int index = 0;
 
-    public Book(String bookName , String authorName , int bookPicture, String bookDiscription, String bookCategory, double price, int ownerID)
+    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
     {
+        //book id automated created
         bookID = index;
         index++;
 
         this.bookName = bookName;
         this.authorName = authorName;
         this.bookPicture = bookPicture;
-        this.bookDescription = bookDiscription;
+        this.bookDescription = bookDescription;
         this.bookCategory = bookCategory;
         this.price = price;
         this.ownerID = ownerID;
@@ -31,46 +32,68 @@ public class Book
     {
         this.bookPicture = pic;
     }
+
     public int getPicture()
     {
         return bookPicture;
     }
 
-    public String getDescription(){return bookDescription;}
-    public void setDescription(String d){this.bookDescription = d; }
+    public String getDescription()
+    {
+        return bookDescription;
+    }
 
-    public String getCategory(){ return this.bookCategory;}
-    public void setCategory(String c ){ this.bookCategory = c;}
+    public void setDescription(String info)
+    {
+        this.bookDescription = info;
+    }
 
-    public void setName(String name )
+    public String getCategory()
+    {
+        return this.bookCategory;
+    }
+
+    public void setCategory(String c)
+    {
+        this.bookCategory = c;
+    }
+
+    public void setName(String name)
     {
         this.bookName = name;
     }
+
     public String getName()
     {
         return bookName;
     }
 
-    public void setAuthor( String author )
+    public void setAuthor(String author)
     {
         this.authorName = author;
     }
+
     public String getAuthor()
     {
         return authorName;
     }
 
-    public void setPrice( double p )
+    public void setPrice(double p)
     {
         this.price = p;
     }
+
     public double getPrice()
     {
         return price;
     }
 
+    public int getBookID()
+    {
+        return bookID;
+    }
 
-    public int getBookID(){return bookID;}
-
-    public int getOwner(){return ownerID;}
+    public int getOwner(){
+        return ownerID;
+    }
 }

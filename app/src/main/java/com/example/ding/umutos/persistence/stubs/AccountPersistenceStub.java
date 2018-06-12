@@ -8,11 +8,12 @@ import com.example.ding.umutos.persistence.AccountPersistence;
 import com.example.ding.umutos.objects.Account;
 
 public class AccountPersistenceStub implements AccountPersistence{
+
     private List<Account> Accounts;
 
-    public AccountPersistenceStub(){
-        this.Accounts = new ArrayList<Account>();
-
+    public AccountPersistenceStub()
+    {
+        this.Accounts = new ArrayList<>();
         Accounts.add(new Account(1,"Yunlong Liu"));
         Accounts.add(new Account(2,"Yu Gu"));
         Accounts.add(new Account(3,"Hanxiang Liu"));
@@ -20,36 +21,50 @@ public class AccountPersistenceStub implements AccountPersistence{
         Accounts.add(new Account(5,"Zitao Zheng"));
         Accounts.add(new Account(6,"Xiao Peng"));
     }
+
     @Override
-    public List<Account> getAccountSequential(){
+    public List<Account> getAccountSequential()
+    {
         return Collections.unmodifiableList(Accounts);
     }
 
     @Override
-    public Account insertAccount(Account currentAccount){
+    public Account getAccountByID(int userID)
+    {
+        for(int i = 0; i < Accounts.size(); i++)
+        {
+            if(Accounts.get(i).getUserID() == userID)
+                return Accounts.get(i);
+        }
+        return null;
+    }
+
+    @Override
+    public Account insertAccount(Account currentAccount)
+    {
         Accounts.add(currentAccount);
         return currentAccount;
     }
 
     @Override
-    public Account updateAccount(Account currentAccount){
+    public Account updateAccount(Account currentAccount)
+    {
         int index;
 
         index = Accounts.indexOf(currentAccount);
-        if(index >= 0){
+        if(index >= 0)
             Accounts.set(index, currentAccount);
-        }
         return currentAccount;
     }
 
     @Override
-    public void deleteAccount(Account currentAccount){
+    public void deleteAccount(Account currentAccount)
+    {
         int index;
 
         index = Accounts.indexOf(currentAccount);
-        if(index >= 0){
+        if(index >= 0)
             Accounts.remove(index);
-        }
     }
 
 

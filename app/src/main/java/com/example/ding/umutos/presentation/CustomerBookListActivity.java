@@ -1,26 +1,27 @@
 package com.example.ding.umutos.presentation;
+import com.example.ding.umutos.business.AccessBooks;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
-
-
 import android.view.View;
 import android.widget.AdapterView;
-
-
-
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.objects.Book;
 
 public class CustomerBookListActivity extends AppCompatActivity {
 
     private ListView bookList;
     private int bookID;
+    private AccessBooks accessBookList;
+    private List<Book> newBookList;
 
 
     @Override
@@ -28,15 +29,21 @@ public class CustomerBookListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_booklist);
         bookList=(ListView)findViewById(R.id.cusListView);
-        int bookImg[]={R.mipmap.book1,R.mipmap.book2,R.mipmap.book3};
+
+        accessBookList=new AccessBooks();
+        newBookList=accessBookList.getBooks();
+
+        int size=newBookList.size();
+
+        int bookImg[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
-            book.put("id",""+i);
-            book.put("img",bookImg[i-1] );
-            book.put("title", "name(" + i+")");
-            book.put("price",""+ i);
+            book.put("id",""+newBookList.get(i).getBookID());
+            book.put("img",bookImg[newBookList.get(i).getPicture()] );
+            book.put("title", newBookList.get(i).getName());
+            book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,

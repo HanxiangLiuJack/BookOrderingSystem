@@ -84,7 +84,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     public void buttonBookCancel(View view) {
-
+        finish();
     }
 
 

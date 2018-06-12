@@ -41,7 +41,7 @@ public class CustomerBookListActivity extends AppCompatActivity {
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,
-                R.layout.activity_customer_book_row,//每一个user xml 相当ListView的一个组件
+                R.layout.activity_book_row,//每一个user xml 相当ListView的一个组件
                 new String[] {"img", "title", "price","id" },
                 // 分别对应view 的id
                 new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID});

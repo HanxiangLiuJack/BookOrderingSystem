@@ -5,5 +5,6 @@
     <!-- 这个是默认的item背景色，设为了透明 -->
     <item android:drawable="@android:color/transparent" android:state_pressed="false"></item>
     <item android:drawable="@android:color/background_light" android:state_active="true"></item>
+    <item android:drawable="@android:color/background_light" android:state_accelerated="true"></item>
 
 </selector>

@@ -67,19 +67,13 @@ public class EditBookActivity extends AppCompatActivity {
         detail=editBookDetail.getText().toString();
 
 
-
         if (title.length()<1 || author.length()<1 || price.length()<1 )
             showDialog();
         else {
-            if (bookID==-1){
-                showDialog("\n"+title+" has been added.");
-            }
-            else {
-                showDialog("\n"+title+" has been modified.");
-            }
-
-
-            finish();
+            if (bookID==-1)
+                showNewDialog();
+            else
+                showEditDialog();
         }
 
     }
@@ -96,14 +90,35 @@ public class EditBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
-    private void showDialog(String msgs){
+    private void showNewDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage(msgs)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                .setMessage("\n"+"Sure to add "+title+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+                .show();
+    }
+
+    private void showEditDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to update "+title+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        finish();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

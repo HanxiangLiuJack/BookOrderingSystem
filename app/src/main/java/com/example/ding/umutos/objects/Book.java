@@ -6,7 +6,7 @@ public class Book
     private String bookName;
     private String authorName;
     private int bookPicture;
-    private String bookDiscription;
+    private String bookDescription;
     private String bookCategory;
     private int ownerID;
     private  double price;
@@ -21,7 +21,7 @@ public class Book
         this.bookName = bookName;
         this.authorName = authorName;
         this.bookPicture = bookPicture;
-        this.bookDiscription = bookDiscription;
+        this.bookDescription = bookDiscription;
         this.bookCategory = bookCategory;
         this.price = price;
         this.ownerID = ownerID;
@@ -36,8 +36,8 @@ public class Book
         return bookPicture;
     }
 
-    public String getDescription(){return bookDiscription;}
-    public void setDescription(String d){this.bookDiscription = d; }
+    public String getDescription(){return bookDescription;}
+    public void setDescription(String d){this.bookDescription = d; }
 
     public String getCategory(){ return this.bookCategory;}
     public void setCategory(String c ){ this.bookCategory = c;}

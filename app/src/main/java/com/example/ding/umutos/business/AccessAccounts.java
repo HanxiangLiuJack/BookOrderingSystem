@@ -28,16 +28,18 @@ public class AccessAccounts {
         return accountPersistence.getAccountByID(userID);
     }
 
-    public Account insertAccount(Account currentAccount)
+    public boolean insertAccount(Account currentAccount)
     {
-        if(currentAccount != null)
-            return accountPersistence.insertAccount(currentAccount);
-        return null;
+        if(currentAccount != null) {
+            accountPersistence.insertAccount(currentAccount);
+            return true;
+        }
+        return false;
     }
 
-    public Account updateAccount(Account currentAccount)
+    public boolean updateAccount(Account currentAccount)
     {
-        return accountPersistence.updateAccount(currentAccount);
+        return accountPersistence.updateAccount(currentAccount) != null;
     }
 
     public void deleteAccount(Account currentAccount)

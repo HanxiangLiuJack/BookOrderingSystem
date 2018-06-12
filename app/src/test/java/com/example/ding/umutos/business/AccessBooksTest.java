@@ -92,62 +92,62 @@ public class AccessBooksTest {
     private void testInsertValidBook()
     {
         templateBook = new Book( "name", "Author", 1, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) != null);
+        assertTrue(accessBooks.insertBook(templateBook));
     }
 
     private void testNullBook()
     {
         templateBook = null;
-        assertNull(accessBooks.insertBook(templateBook));
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testNullBookName()
     {
         templateBook = new Book( null, "Author", 2, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testEmptyBookName()
     {
         templateBook = new Book( "", "Author", 2, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testLongBookName()
     {
         templateBook = new Book( "thisbook'snameislongerthanfiftycharactersaaaaaaaaaaaa",
                                  "Author", 2, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testNullAuthorName()
     {
         templateBook = new Book( "name", null, 3, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testEmptyAuthorName()
     {
         templateBook = new Book( "name", "", 3, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testLongAuthorName()
     {
         templateBook = new Book( "name", "thisauthor'snameislongerthan20chars", 4, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testNegativeBookPictureIndex()
     {
         templateBook = new Book( "name", "Author", -1, "info", "COMP", 100, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     private void testNegativeInvalidPrice()
     {
         templateBook = new Book( "name", "author", 5, "info", "COMP", -10, 1 );
-        assertTrue(accessBooks.insertBook(templateBook) == null);
+        assertTrue(!accessBooks.insertBook(templateBook));
     }
 
     @Test
@@ -166,15 +166,15 @@ public class AccessBooksTest {
         String newCategory = "COMP1";
         double newPrice = 200;
 
-        Book newBook;
-        newBook = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
+        boolean updatedOrNot = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
 
-        assertTrue(newBook.getName().equals("name1"));
-        assertTrue(newBook.getAuthor().equals("author1"));
-        assertTrue(newBook.getPicture()==9);
-        assertTrue(newBook.getDescription().equals("info1"));
-        assertTrue(newBook.getCategory().equals("COMP1"));
-        assertTrue(newBook.getPrice() == 200);
+        assertTrue(updatedOrNot);
+        assertTrue(templateBook.getName().equals("name1"));
+        assertTrue(templateBook.getAuthor().equals("author1"));
+        assertTrue(templateBook.getPicture()==9);
+        assertTrue(templateBook.getDescription().equals("info1"));
+        assertTrue(templateBook.getCategory().equals("COMP1"));
+        assertTrue(templateBook.getPrice() == 200);
 
         //test update invalid message
         newName = "";
@@ -182,8 +182,8 @@ public class AccessBooksTest {
         newPic = -1;
         newPrice = -100;
 
-        newBook = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
-        assertNull(newBook);
+        updatedOrNot = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
+        assertTrue(!updatedOrNot);
 
         accessBooks.deleteBook(templateBook.getBookID());
         System.out.println("\nEnd testing testUpdateBook\n");
@@ -196,8 +196,13 @@ public class AccessBooksTest {
         accessBooks = new AccessBooks();
         templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
         accessBooks.insertBook(templateBook);
+
+        //search a book exist in the list
         assertTrue(accessBooks.searchBook(templateBook.getBookID()).getBookID() == templateBook.getBookID());
         accessBooks.deleteBook(templateBook.getBookID());
+
+        //search a book not exist
+        assertNull(accessBooks.searchBook(100));
         System.out.println("\nStarting test testSearchBook\n");
     }
 

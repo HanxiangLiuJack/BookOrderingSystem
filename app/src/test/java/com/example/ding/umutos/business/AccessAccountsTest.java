@@ -62,11 +62,16 @@ public class AccessAccountsTest {
     {
         System.out.println("\nStart testing testInsertAccount.\n");
         templateAccount = new Account(7, "huahua");//insert a new account
+
         //before inserting, the account list should exist 6 accounts
         assertTrue(accessAccounts.getAccounts().size() == 6);
-        accessAccounts.insertAccount(templateAccount);
+
+        boolean insertOrNot = accessAccounts.insertAccount(templateAccount);
+        assertTrue(insertOrNot);
+
         //after inserting, the account list should exist 7 accounts
         assertTrue(accessAccounts.getAccounts().size() == 7);
+
         //delete the added account
         accessAccounts.deleteAccount(templateAccount);
         System.out.println("\nfinished testing testInsertAccount.\n");
@@ -79,8 +84,8 @@ public class AccessAccountsTest {
         templateAccount = new Account(7, "huahua");//insert a new account
         accessAccounts.insertAccount(templateAccount);
         templateAccount.setUserName("newName");
-        assertTrue(accessAccounts.updateAccount(templateAccount).getUserID() == 7 &&
-                accessAccounts.updateAccount(templateAccount).getUserName().equals("newName"));
+        assertTrue(accessAccounts.updateAccount(templateAccount));
+        assertTrue(templateAccount.getUserID() == 7 && templateAccount.getUserName().equals("newName"));
         accessAccounts.deleteAccount(templateAccount);
         System.out.println("\nfinished testing testUpdateAccount.\n");
     }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/uofm_bkgd"
+    tools:context=".presentation.HomeActivity">
+
+
+    <ImageView
+        android:id="@+id/homelogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/uofm_logo2" />
+
+    <ImageView
+        android:id="@+id/homelogo1"
+        android:layout_width="420dp"
+        android:layout_height="220dp"
+        android:layout_marginLeft="96dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homelogo"
+        app:srcCompat="@mipmap/umlogo" />
+
+
+    <Button
+        android:id="@+id/buttonLoginAsSeller"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/trans_button_style"
+        android:onClick="buttonSellOnClick"
+        android:text="SELL Textbooks"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homelogo1" />
+
+    <Button
+        android:id="@+id/buttonLoginAsCustomer"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/trans_button_style"
+        android:onClick="buttonBuyOnClick"
+        android:text="BUY Textbooks"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsSeller" />
+
+</android.support.constraint.ConstraintLayout>

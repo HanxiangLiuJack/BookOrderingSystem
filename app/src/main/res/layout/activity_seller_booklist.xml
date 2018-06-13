@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"   >
+        <LinearLayout android:id="@+id/top"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="#eeeeee"
+            android:layout_alignParentTop="true"  >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:id="@+id/sellListInfoBar"
+                android:layout_marginTop="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/top"
+            android:layout_above="@id/bottom"
+             >
+
+            <ListView android:id="@+id/sellerBookList"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dip"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/bottom"
+            android:layout_width="fill_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="#eeeeee"
+            android:layout_alignParentBottom="true"  >
+
+            <Button android:id="@+id/addNewBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/buy_button_style"
+                android:onClick="buttonAddNewBook"
+                android:text="ADD"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/editPostedBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_style"
+                android:onClick="buttonEditPostedBook"
+                android:text="Edit"
+                android:layout_weight="1"/>
+            <Button android:id="@+id/deletePostedBook"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button_style"
+                android:onClick="buttonDeletePostedBook"
+                android:text="Delete"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context=".presentation.EditBookActivity">
+
+    <TextView
+        android:id="@+id/bookTitle"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Title"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/bookAuthor"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="40dp"
+        android:text="Author"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editBookTitle"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:maxLength="60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
+
+    <EditText
+        android:id="@+id/editBookAuthor"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:maxLength="30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
+
+    <TextView
+        android:id="@+id/bookPrice"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+        android:text="Price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBookTitle" />
+
+    <TextView
+        android:id="@+id/bookCategory"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+        android:text="Category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBookAuthor" />
+
+    <EditText
+        android:id="@+id/editBookPrice"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookPrice" />
+
+    <Spinner
+
+        android:id="@+id/editBookCategory"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/text_style"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookCategory" />
+
+    <TextView
+        android:id="@+id/bookDetail"
+        android:layout_width="540dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:text="Description"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editBookPrice" />
+
+    <EditText
+        android:id="@+id/editBookDetail"
+        android:layout_width="540dp"
+        android:layout_height="300dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookDetail" />
+
+    <Button
+        android:id="@+id/editCancel"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonEditBookCancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/editSubmit"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonBookSubmit"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+
+</android.support.constraint.ConstraintLayout>

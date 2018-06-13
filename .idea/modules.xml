@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UMUTOS.iml" filepath="$PROJECT_DIR$/UMUTOS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iOS.iml" filepath="$PROJECT_DIR$/iOS.iml" />
     </modules>
   </component>
 </project>

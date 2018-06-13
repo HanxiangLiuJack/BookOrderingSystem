@@ -1,5 +1,17 @@
 package com.example.ding.umutos.objects;
 
+/*
+  Book object:
+  1. bookID, an int indicates the book's ID
+  2. bookName, book's name
+  3. authorName, book author's name 
+  4. bookPicture, book's picture
+  5. bookDescription, description of a book
+  6. bookCategory, book's category.
+  7. ownerID, book's owner's userID
+  8. price, the price of the book.
+*/
+
 public class Book
 {
     private int bookID;

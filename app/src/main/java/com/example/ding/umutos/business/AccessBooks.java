@@ -60,13 +60,13 @@ public class AccessBooks {
     private boolean validateBookName(String bookName)
     {
         //book name shouldn't be null, empty string, spaces or longer than 30 chars
-        return bookName != null && !bookName.equals("") && !bookName.trim().isEmpty() && bookName.length()<=30;
+        return bookName != null && !bookName.equals("") && !bookName.trim().isEmpty() && bookName.length()<=60;
     }
 
     private boolean validateAuthorName(String authorName)
     {
         //same standard as book name
-        return authorName != null && !authorName.equals("") && !authorName.trim().isEmpty() && authorName.length()<=20;
+        return authorName != null && !authorName.equals("") && !authorName.trim().isEmpty() && authorName.length()<=30;
     }
 
     private boolean validateBookPictureIndex(int index)

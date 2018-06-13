@@ -1,5 +1,11 @@
 package com.example.ding.umutos.objects;
 
+/*
+   Account object:
+   1. userID, which is a final int cannot be changed or setted.
+   2. userName, the user's name.
+*/
+
 public class Account
 {
     private final int userID;

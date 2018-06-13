@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class SellerBookListActivity extends AppCompatActivity {
     private int bookID;
     private String bookTitle;
     private AccessBooks accessBookList;
+    private AccessAccounts accessAccounts;
     private List<Book> newBookList;
     private TextView infoBar;
 
@@ -34,8 +36,10 @@ public class SellerBookListActivity extends AppCompatActivity {
         int bookImg[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
         bookID=-1;
         accessBookList=new AccessBooks();
+        accessAccounts=new AccessAccounts();
         newBookList=accessBookList.getUserBooks(2);
         infoBar=(TextView)findViewById(R.id.sellListInfoBar);
+        infoBar.setText("Hi "+accessAccounts.getAccountByID(2).getUserName()+".");
         int size=newBookList.size();
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();

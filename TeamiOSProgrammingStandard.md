@@ -74,3 +74,4 @@ Avoid long lines; where needed, continuations of a statement on a new line shoul
 * Do not use break or continue statements (unless you are using a switch control structure) without the explicit permission.
 * Use one return statement per method. Do not use multiple return statements in the same method without the explicit permission.
 * Use appropriate language-specfic naming standards for Java. Class names must start with InitialCapitalLetters, constants are ALL_UPPER_CASE, and all other identfiers use initialLowerCase.  
+* Make your access specifiers as restrictive as possible. Private things should be private, including all data members.

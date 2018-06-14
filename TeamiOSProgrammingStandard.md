@@ -1,7 +1,5 @@
 # Programming standard for team iOS
 
-## Tianhua Xu
-
 * Group the contents of your class consistently. Always place data before behaviours. The following order is recommended:  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class Something {  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Instance variables  
@@ -68,3 +66,11 @@ or:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;statement;  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}  
+  
+Avoid long lines; where needed, continuations of a statement on a new line should be indented too. Any readable and consistent style is acceptable. The essential features are that all statements that are nested within another statement must be indented, and that the braces{} must be in predictable andconsistent positions.  
+  
+* Declare variables with as small a scope as possible. Use instance variables for object properties, local variables for method-specfic data, and variables declared in for loops for loop indexes. Use static variables only where absolutely necessary.  
+* Values of type float or double should not normally be compared with == or != .  
+* Do not use break or continue statements (unless you are using a switch control structure) without the explicit permission.
+* Use one return statement per method. Do not use multiple return statements in the same method without the explicit permission.
+* Use appropriate language-specfic naming standards for Java. Class names must start with InitialCapitalLetters, constants are ALL_UPPER_CASE, and all other identfiers use initialLowerCase.  

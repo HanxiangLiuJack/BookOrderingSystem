@@ -115,7 +115,7 @@ public class AccessBooksTest {
 
     private void testLongBookName()
     {
-        templateBook = new Book( "thisbook'snameislongerthanfiftycharactersaaaaaaaaaaaa",
+        templateBook = new Book( "thisbook'snameisladusahodansiancisoaudfgaoudcbadouaboudcbaodubapefhuacboaducbaodubavodudongerthanfiftycharactersaaaaaaaaaaaa",
                                  "Author", 2, "info", "COMP", 100, 1 );
         assertTrue(!accessBooks.insertBook(templateBook));
     }

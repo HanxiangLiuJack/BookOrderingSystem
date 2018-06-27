@@ -116,6 +116,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/text_style"
         android:ems="10"
+        android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM"
         android:inputType="textPostalAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postCode" />

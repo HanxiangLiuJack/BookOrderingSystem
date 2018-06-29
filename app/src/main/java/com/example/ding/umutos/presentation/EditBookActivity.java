@@ -139,7 +139,12 @@ public class EditBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Book aBook=accessBookList.searchBook(bookID);
-                        accessBookList.updateBook(aBook,title,author,aBook.getPicture(),detail,category,Double.parseDouble(price));
+                        aBook.setName(title);
+                        aBook.setAuthor(author);
+                        aBook.setDescription(detail);
+                        aBook.setCategory(category);
+                        aBook.setPrice(Double.parseDouble(price));
+                        accessBookList.updateBook(aBook);
                         Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

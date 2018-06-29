@@ -49,6 +49,7 @@ public class AccessBooksTest {
         accessBooks = new AccessBooks();
         testBookList = accessBooks.getBooks();
         numOfBooks = testBookList.size();
+        System.out.println(numOfBooks);
         assertTrue(numOfBooks == 10); //there are 10 books in the stub database
         System.out.println("\nFinished testing testGetBookList\n");
     }
@@ -93,6 +94,7 @@ public class AccessBooksTest {
     {
         templateBook = new Book( "name", "Author", 1, "info", "COMP", 100, 1 );
         assertTrue(accessBooks.insertBook(templateBook));
+        accessBooks.deleteBook(templateBook.getBookID());
     }
 
     private void testNullBook()
@@ -159,14 +161,14 @@ public class AccessBooksTest {
         accessBooks.insertBook(templateBook);
 
         //test update valid message
-        String newName = "name1";
-        String newAuthor = "author1";
-        int newPic = 9;
-        String newInfo = "info1";
-        String newCategory = "COMP1";
-        double newPrice = 200;
+        templateBook.setName("name1");
+        templateBook.setAuthor("author1");
+        templateBook.setPicture(9);
+        templateBook.setDescription("info1");
+        templateBook.setCategory("COMP1");
+        templateBook.setPrice(200);
 
-        boolean updatedOrNot = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
+        boolean updatedOrNot = accessBooks.updateBook(templateBook);
 
         assertTrue(updatedOrNot);
         assertTrue(templateBook.getName().equals("name1"));
@@ -177,12 +179,12 @@ public class AccessBooksTest {
         assertTrue(templateBook.getPrice() == 200);
 
         //test update invalid message
-        newName = "";
-        newAuthor = "";
-        newPic = -1;
-        newPrice = -100;
+        templateBook.setName("");
+        templateBook.setAuthor("");
+        templateBook.setPicture(-1);
+        templateBook.setPrice(-100);
 
-        updatedOrNot = accessBooks.updateBook(templateBook, newName, newAuthor, newPic, newInfo, newCategory, newPrice);
+        updatedOrNot = accessBooks.updateBook(templateBook);
         assertTrue(!updatedOrNot);
 
         accessBooks.deleteBook(templateBook.getBookID());

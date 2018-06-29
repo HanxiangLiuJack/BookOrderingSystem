@@ -41,19 +41,19 @@ public class BookPersistenceStub implements BookPersistence {
     }
     
     @Override
-    public Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price )
+    public Book updateBook(Book currentBook)
     {
         int index;
 
         index = books.indexOf(currentBook);
         if (index >= 0)
         {
-            books.get(index).setName(book_Name);
-            books.get(index).setAuthor(author_Name);
-            books.get(index).setPicture(book_Picture);
-            books.get(index).setDescription(book_Description);
-            books.get(index).setCategory(book_Category);
-            books.get(index).setPrice(price);
+            books.get(index).setName(currentBook.getName());
+            books.get(index).setAuthor(currentBook.getAuthor());
+            books.get(index).setPicture(currentBook.getPicture());
+            books.get(index).setDescription(currentBook.getDescription());
+            books.get(index).setCategory(currentBook.getCategory());
+            books.get(index).setPrice(currentBook.getPrice());
         
         }
         return currentBook;

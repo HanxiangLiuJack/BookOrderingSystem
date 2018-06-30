@@ -23,7 +23,7 @@ public class Book
     private int ownerID;
     private  double price;
 
-    // an int static varibale that automatically incremented by creating new books.
+    // an int static variable that automatically incremented by creating new books.
     private static int index = 0;
 
     public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)

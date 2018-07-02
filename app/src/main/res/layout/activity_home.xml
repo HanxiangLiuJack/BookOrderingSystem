@@ -20,16 +20,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/uofm_logo2" />
 
-    <ImageView
-        android:id="@+id/homelogo1"
-        android:layout_width="420dp"
-        android:layout_height="220dp"
-        android:layout_marginLeft="96dp"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="28dp"
+    <TextView
+        android:id="@+id/welcomeMessage"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+
+        android:layout_marginTop="60dp"
+        android:text="Hi, Xiao"
+        android:textColor="#fff"
+        android:textSize="50dp"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homelogo"
-        app:srcCompat="@mipmap/umlogo" />
+        app:layout_constraintTop_toBottomOf="@+id/homelogo" />
 
 
     <Button
@@ -44,7 +48,7 @@
         android:text="SELL Textbooks"
         android:textColor="#ffffff"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homelogo1" />
+        app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
 
     <Button
         android:id="@+id/buttonLoginAsCustomer"

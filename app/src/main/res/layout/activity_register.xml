@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context=".presentation.EditBookActivity">
+
+    <TextView
+        android:id="@+id/registerNameTitle"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+
+        android:layout_marginTop="50dp"
+        android:text="Input your username"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        android:maxLength="60"
+        android:text=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerNameTitle" />
+
+
+    <TextView
+        android:id="@+id/registerPswTitle1"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+
+        android:layout_marginTop="60dp"
+        android:text="Input your password"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerName" />
+
+
+    <EditText
+        android:id="@+id/registerPsw1"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPswTitle1" />
+
+
+    <TextView
+        android:id="@+id/registerPswTitle2"
+        android:layout_width="240dp"
+        android:layout_height="28dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="60dp"
+        android:text="Input your password again:"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPsw1" />
+
+    <EditText
+        android:id="@+id/registerPsw2"
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="188dp"
+
+        android:layout_marginTop="10dp"
+        android:background="@drawable/text_style"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerPswTitle2" />
+
+    <Button
+        android:id="@+id/registerCancel"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonEditBookCancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/registerSubmit"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonBookSubmit"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+
+</android.support.constraint.ConstraintLayout>

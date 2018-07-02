@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"   >
         <LinearLayout android:id="@+id/top"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="#eeeeee"
             android:layout_alignParentTop="true"  >
@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
-                android:id="@+id/sellListInfoBar"
+                android:id="@+id/historyBar"
                 android:layout_marginTop="10dp"
                 />
 
@@ -49,44 +49,17 @@
             android:background="#eeeeee"
             android:layout_alignParentBottom="true"  >
 
-            <Button android:id="@+id/addNewBook"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
-                android:background="@drawable/buy_button_style"
-                android:onClick="buttonAddNewBook"
-                android:text="ADD"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/editPostedBook"
+            <Button android:id="@+id/historyBack"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_style"
                 android:onClick="buttonEditPostedBook"
-                android:text="Edit"
+                android:text="<Back"
                 android:layout_weight="1"/>
-            <Button android:id="@+id/deletePostedBook"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/button_style"
-                android:onClick="buttonDeletePostedBook"
-                android:text="Delete"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/viewSellerHistory"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/button_style"
-                android:text="HISTORY"
-                android:layout_weight="1"/>
+
+
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

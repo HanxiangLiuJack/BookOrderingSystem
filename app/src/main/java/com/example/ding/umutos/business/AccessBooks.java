@@ -47,6 +47,18 @@ public class AccessBooks {
     }
 
 
+    public List<Book> ascentSort(){
+        BookSorter sorter = new BookSorter();
+        books=sorter.LowPrice(getBooks());
+        return books;
+    }
+
+    public List<Book> declineSort(){
+        BookSorter sorter=new BookSorter();
+        books=sorter.HighPrice(getBooks());
+        return books;
+    }
+
     public Book searchBook(int id)
     {
         return bookPersistence.searchBook(id);

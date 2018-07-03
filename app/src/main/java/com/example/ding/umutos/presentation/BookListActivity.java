@@ -50,15 +50,9 @@ public class BookListActivity extends AppCompatActivity {
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
             infoBar.setText("Hi "+accessAccounts.getAccountByID(2).getUserName()+".");
         }
-        else if (userType==1){
+        else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
-            accessBookList=new AccessBooks();
-            newBookList=accessBookList.getBooks();
-        }
-        else{
-            setContentView(R.layout.activity_history_booklist);
-            bookList=(ListView)findViewById(R.id.historyBookList);
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
         }
@@ -93,14 +87,10 @@ public class BookListActivity extends AppCompatActivity {
                     bookTitle=map.get("title");
                     infoBar.setText("You selected book: "+bookTitle);
                 }
-                if (userType==1){
+                else{
                     Intent intent = new Intent(BookListActivity.this,SingleBookActivity.class);
                     intent.putExtra("bookID", bookID);
                     BookListActivity.this.startActivity(intent);
-                }
-                if (userType==2){
-                    TextView historyBar=(TextView)findViewById(R.id.historyBar);
-                    historyBar.setText("Order history");
                 }
             }
         });

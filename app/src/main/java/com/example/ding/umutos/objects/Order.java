@@ -23,10 +23,7 @@ public class Order {
         address = orderInfo[4];
     }
 
-    public Book getOrderBook()
-    {
-        return orderBook;
-    }
+
 
     public Account getBuyer()
     {

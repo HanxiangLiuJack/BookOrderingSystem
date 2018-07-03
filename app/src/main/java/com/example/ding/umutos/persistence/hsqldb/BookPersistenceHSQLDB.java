@@ -108,13 +108,16 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book searchBook(int id){
+        Book book = null;
         try {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookID = ?");
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
 
-            Book book = fromResultSet(rs);
+            if(rs.next()) {
+                book = fromResultSet(rs);
+            }
 
             rs.close();
             st.close();

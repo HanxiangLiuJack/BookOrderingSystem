@@ -28,14 +28,24 @@ public class Account
     {
         return userName;
     }
-    public String getPassword() { return password; }
+    public String getPassword() 
+    {
+        return password;
+    }
 
-    public void setUserID(int newUserID){ userID = newUserID; }
+    public void setUserID(int newUserID)
+    {
+        userID = newUserID;
+    }
     public void setUserName(String newName)
     {
         userName = newName;
     }
 
-    public void setPassWord(String newPassword){password = newPassword;}
+    public void setPassWord(String newPassword)
+    {
+        password = newPassword;
+        
+    }
 
 }

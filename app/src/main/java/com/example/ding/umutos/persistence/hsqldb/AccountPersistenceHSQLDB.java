@@ -56,11 +56,16 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     @Override
     public Account getAccountByID(int userID)
     {
+        Account account = null;
         try{
             final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE userID = ?");
             st.setInt(1, userID);
             final ResultSet rs = st.executeQuery();
-            return fromResultSet(rs);
+            if(rs.next()){
+                account = fromResultSet(rs);
+            }
+
+            return account;
 
         } catch (final SQLException e){
             throw new PersistenceException(e);

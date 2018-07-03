@@ -21,6 +21,12 @@ public class AccessBooks {
         books = null;
     }
 
+    public AccessBooks(final BookPersistence bookPersistence)
+    {
+        this();
+        this.bookPersistence = bookPersistence;
+    }
+
     public List<Book> getBooks()
     {
         books = bookPersistence.getBookSequential();
@@ -64,10 +70,10 @@ public class AccessBooks {
         return bookPersistence.searchBook(id);
     }
 
-//    public List<Book> searchBooksByKeyWord(String key)
-//    {
-//        return bookPersistence.searchBooksByKeyWord(key);
-//    }
+    public List<Book> searchBooksByKeyWord(String key)
+    {
+        return bookPersistence.searchBooksByKeyWord(key);
+    }
 
     public boolean updateBook(Book currentBook)
     {

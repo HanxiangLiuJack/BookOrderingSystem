@@ -1,41 +1,40 @@
 package com.example.ding.umutos.objects;
 
 public class Order {
-    private Book orderedBook;
+
+    private Book orderBook;
     private Account buyer;
     private Account seller;
     private String buyerFirstName;
     private String buyerLastName;
-    private String postalCode;
-    private String buyerPhoneNumber;
+    private String postCode;
+    private String phoneNumber;
     private String address;
 
-    public Order( Book orderedBook,
-                  Account buyer,
-                  Account seller,
-                  String buyerFirstName,
-                  String buyerLastName,
-                  String postalCode,
-                  String buyerPhoneNumber,
-                  String address)
+    public Order(Book orderBook, Account buyer, Account seller, String[] orderInfo)
     {
-      this.orderedBook = orderedBook;
-      this.buyer = buyer;
-      this.seller = seller;
-      this.buyerFirstName = buyerFirstName;
-      this.buyerLastName  = buyerLastName;
-      this.postalCode = postalCode;
-      this.buyerPhoneNumber = buyerPhoneNumber;
-      this.address = address;
-
+        this.orderBook = orderBook;
+        this.buyer = buyer;
+        this.seller = seller;
+        buyerFirstName = orderInfo[0];
+        buyerLastName = orderInfo[1];
+        postCode = orderInfo[2];
+        phoneNumber = orderInfo[3];
+        address = orderInfo[4];
     }
 
+    public Book getOrderBook()
+    {
+        return orderBook;
+    }
 
-    public Account getBuyer() {
+    public Account getBuyer()
+    {
         return buyer;
     }
 
-    public Account getSeller() {
+    public Account getSeller()
+    {
         return seller;
     }
 
@@ -47,51 +46,15 @@ public class Order {
         return buyerLastName;
     }
 
-    public String getBuyerPhoneNumber() {
-        return buyerPhoneNumber;
+    public String getPostCode() {
+        return postCode;
     }
 
-    public void setBuyerPhoneNumber(String buyerPhoneNumber) {
-        this.buyerPhoneNumber = buyerPhoneNumber;
-    }
-
-    public Book getOrderedBook() {
-        return orderedBook;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getAddress() {
         return address;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-   //setters
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setBuyer(Account buyer) {
-        this.buyer = buyer;
-    }
-
-    public void setBuyerFirstName(String buyerFirstName) {
-        this.buyerFirstName = buyerFirstName;
-    }
-
-    public void setBuyerLastName(String buyerLastName) {
-        this.buyerLastName = buyerLastName;
-    }
-
-    public void setOrderedBook(Book orderedBook) {
-        this.orderedBook = orderedBook;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setSeller(Account seller) {
-        this.seller = seller;
     }
 }

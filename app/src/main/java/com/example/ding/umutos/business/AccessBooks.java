@@ -64,6 +64,11 @@ public class AccessBooks {
         return bookPersistence.searchBook(id);
     }
 
+//    public List<Book> searchBooksByKeyWord(String key)
+//    {
+//        return bookPersistence.searchBooksByKeyWord(key);
+//    }
+
     public boolean updateBook(Book currentBook)
     {
         BookValidator validator = new BookValidator();

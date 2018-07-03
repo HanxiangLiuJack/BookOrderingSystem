@@ -1,7 +1,7 @@
 package com.example.ding.umutos.application;
 
 public class Main {
-    private static String dbName="DB";
+    private static String dbName="SC";
 
     public static void main(String[] args){
 

@@ -2,6 +2,7 @@ package com.example.ding.umutos.business;
 
 
 import com.example.ding.umutos.application.Service;
+import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.objects.Account;
@@ -13,7 +14,6 @@ public class AccessOrders {
 
     private OrderPersistence orderPersistence;
 
-
     public AccessOrders() {
         orderPersistence = Service.getOrderPersistence();
     }
@@ -24,17 +24,7 @@ public class AccessOrders {
         this.orderPersistence = orderPersistence;
     }
 
-    public boolean insertOrder(Order currentOrder)
-    {
-//        if(currentOrder != null) {
-//            if(validateOrder(currentOrder)) {
-//                orderPersistence.insertOrder(currentOrder);
-//                return true;
-//            }
-//        }
 
-        return false;
-    }
     //need to test
     public List<Order> orderHistory(Account user, int number) {
         List<Order> history;
@@ -47,6 +37,17 @@ public class AccessOrders {
         return history;
     }
 
+
+    public boolean insertOrder(Order currentOrder){
+        OrderValidator validator = new OrderValidator();
+        if(currentOrder != null) {
+            if(validator.validateOrder(currentOrder)) {
+                orderPersistence.insertOrder(currentOrder);
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 

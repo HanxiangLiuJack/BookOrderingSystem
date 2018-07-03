@@ -1,7 +1,6 @@
 package com.example.ding.umutos.objects;
 
 public class Order {
-
     private String bookName;
     private String buyerUserName;
     private String sellerUserName;

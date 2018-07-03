@@ -21,6 +21,12 @@ public class AccessBooks {
         books = null;
     }
 
+    public AccessBooks(final BookPersistence bookPersistence)
+    {
+        this();
+        this.bookPersistence = bookPersistence;
+    }
+
     public List<Book> getBooks()
     {
         books = bookPersistence.getBookSequential();
@@ -33,16 +39,11 @@ public class AccessBooks {
         return Collections.unmodifiableList(userBooks);
     }
 
-
-
-    //===============================================================================================
-    //===================================book insertion part=========================================
-    //===============================================================================================
-
     public boolean insertBook(Book currentBook)
     {
+        BookValidator validator = new BookValidator();
         if(currentBook != null) {
-            if(validateBook(currentBook)) {
+            if(validator.validateBook(currentBook)) {
                 bookPersistence.insertBook(currentBook);
                 return true;
             }
@@ -51,49 +52,47 @@ public class AccessBooks {
         return false;
     }
 
-    private boolean validateBook(Book book)
-    {
-        return validateBookName(book.getName()) && validateAuthorName(book.getAuthor()) &&
-                validateBookPictureIndex(book.getPicture()) && validatePrice(book.getPrice());
-    }
 
-    private boolean validateBookName(String bookName)
-    {
-        //book name shouldn't be null, empty string, spaces or longer than 30 chars
-        return bookName != null && !bookName.equals("") && !bookName.trim().isEmpty() && bookName.length()<=60;
-    }
+    public List<Book> CategoryList(String category){
+        List<Book> cBook;
+        cBook=bookPersistence.getBookCategorySequential(category);
+        return cBook;
 
-    private boolean validateAuthorName(String authorName)
-    {
-        //same standard as book name
-        return authorName != null && !authorName.equals("") && !authorName.trim().isEmpty() && authorName.length()<=30;
-    }
-
-    private boolean validateBookPictureIndex(int index)
-    {
-        return index>=0;
-    }
-
-    private boolean validatePrice(double price)
-    {
-        return price >= 0;
     }
 
 
-    //===============================================================================================
-    //===============================================================================================
-    //===============================================================================================
+    public List<Book> ascentSort(){
+        List<Book> sortBook;
+        BookSorter sorter = new BookSorter();
+        sortBook=sorter.LowPrice(getBooks());
+        return sortBook;
+    }
+
+    public List<Book> declineSort(){
+        List<Book> sortBook;
+        BookSorter sorter=new BookSorter();
+        sortBook=sorter.HighPrice(getBooks());
+        return sortBook;
+    }
 
     public Book searchBook(int id)
     {
         return bookPersistence.searchBook(id);
     }
 
-    public boolean updateBook(Book currentBook, String bookName, String authorName, int bookPic, String bookDescription, String category, double price)
+    public List<Book> searchBooksByKeyWord(String key)
     {
-        if(validateBookName(bookName)&&validateAuthorName(authorName)&&validateBookPictureIndex(bookPic)&&validatePrice(price)) {
-            bookPersistence.updateBook(currentBook, bookName, authorName, bookPic, bookDescription, category, price);
-            return true;
+        return bookPersistence.searchKeyword(key);
+    }
+
+    public boolean updateBook(Book currentBook)
+    {
+        BookValidator validator = new BookValidator();
+        if(currentBook != null) {
+            if(validator.validateBook(currentBook)) {
+                bookPersistence.updateBook(currentBook);
+                return true;
+            }
         }
         return false;
     }

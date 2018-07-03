@@ -4,6 +4,7 @@ package com.example.ding.umutos.objects;
    Account object:
    1. userID, which is a final int cannot be changed or setted.
    2. userName, the user's name.
+   3. passWord.
 */
 
 public class Account
@@ -12,7 +13,7 @@ public class Account
     private String userName;
     private String password;
    
-    public Account( String userName, String password )
+    public Account( String userName ,String passWord)
     {
         this.userName = userName;
         this.password = password;
@@ -22,6 +23,7 @@ public class Account
     {
         return userID;
     }
+
     public String getUserName()
     {
         return userName;
@@ -33,6 +35,7 @@ public class Account
     {
         userName = newName;
     }
-    public void setPassword(String newpassword) { password = newpassword; }
+
+    public void setPassWord(String p){password = p;}
 
 }

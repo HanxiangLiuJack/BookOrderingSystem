@@ -19,4 +19,6 @@ public interface  BookPersistence {
 
     List<Book> getBookCategorySequential(String category);
 
+    List<Book> searchKeyword(String keyword);
+
 }

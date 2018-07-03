@@ -16,6 +16,7 @@ import com.example.ding.umutos.persistence.BookPersistence;
 public class BookPersistenceHSQLDB implements BookPersistence {
 
     private final Connection c;
+    private static int countBook = 0;
 
     public BookPersistenceHSQLDB(final String dbPath) {
         try {
@@ -65,16 +66,19 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public Book insertBook(Book currentBook) {
         try {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
-            st.setString(1, currentBook.getName());
-            st.setString(2, currentBook.getAuthor());
-            st.setInt(3, currentBook.getPicture());
-            st.setString(4, currentBook.getDescription());
-            st.setString(5, currentBook.getCategory());
-            st.setDouble(6, currentBook.getPrice());
-            st.setInt(7, currentBook.getOwner());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            st.setInt(1, countBook);
+            st.setString(2, currentBook.getName());
+            st.setString(3, currentBook.getAuthor());
+            st.setInt(4, currentBook.getPicture());
+            st.setString(5, currentBook.getDescription());
+            st.setString(6, currentBook.getCategory());
+            st.setDouble(7, currentBook.getPrice());
+            st.setInt(8, currentBook.getOwner());
 
             st.executeUpdate();
+
+            countBook++;
 
             return currentBook;
         } catch (final SQLException e) {
@@ -161,6 +165,30 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         try {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookCategory = ?");
             st.setString(1, category);
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                final Book book = fromResultSet(rs);
+                books.add(book);
+            }
+
+            rs.close();
+            st.close();
+
+            return books;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<Book> searchKeyword(String keyword){
+        final List<Book> books = new ArrayList<>();
+        try {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookName = ? OR authorName = ? OR bookCategory = ?");
+            st.setString(1, keyword);
+            st.setString(2, keyword);
+            st.setString(3, keyword);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {

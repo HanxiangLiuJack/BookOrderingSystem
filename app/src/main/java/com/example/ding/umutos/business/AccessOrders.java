@@ -43,6 +43,17 @@ public class AccessOrders {
     }
 
 
+    public boolean insertOrder(Order currentOrder){
+        OrderValidator validator = new OrderValidator();
+        if(currentOrder != null) {
+            if(validator.validateOrder(currentOrder)) {
+                orderPersistence.insertOrder(currentOrder);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
 
 

@@ -48,15 +48,17 @@ public class AccessBooks {
 
 
     public List<Book> ascentSort(){
+        List<Book> sortBook;
         BookSorter sorter = new BookSorter();
-        books=sorter.LowPrice(getBooks());
-        return books;
+        sortBook=sorter.LowPrice(getBooks());
+        return sortBook;
     }
 
     public List<Book> declineSort(){
+        List<Book> sortBook;
         BookSorter sorter=new BookSorter();
-        books=sorter.HighPrice(getBooks());
-        return books;
+        sortBook=sorter.HighPrice(getBooks());
+        return sortBook;
     }
 
     public Book searchBook(int id)

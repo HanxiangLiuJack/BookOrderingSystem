@@ -20,7 +20,7 @@ public class AccessOrders {
 
     public AccessOrders() {
         orderPersistence = Service.getOrderPersistence();
-        history = null;
+        order = null;
     }
 
 

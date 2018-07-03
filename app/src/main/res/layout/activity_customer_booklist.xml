@@ -25,27 +25,16 @@ android:orientation="vertical">
                 android:layout_width="fill_parent"
                 android:layout_height="60dp"
                 android:orientation="horizontal">
-                <EditText
-                    android:id="@+id/textView"
-                    android:layout_width="200dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/text_style"
-                    android:inputType="text"
-                    android:text="" />
 
-                <Button
-                    android:id="@+id/btnSearch"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
+                <SearchView
+                    android:hint="Search you book here"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="@drawable/button_style"
-                    android:text="Search" />
+                    android:background="@drawable/text_style"/>
+
+
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -59,16 +48,36 @@ android:orientation="vertical">
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/text_style" />
+                    android:spinnerMode="dialog"
+                     />
+                <View
+                    android:layout_width="1.5dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#eeeeee"/>
 
-                <Spinner
-                    android:id="@+id/sortByPrice"
-                    android:layout_width="250dp"
+                <Button
+                    android:id="@+id/priceLowToHigh"
+                    android:layout_width="60dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:text="Price ↑" />
 
-                    android:background="@drawable/text_style" />
+                <Button
+                    android:id="@+id/priceHighToLow"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:text="Price ↓" />
+
             </LinearLayout>
 
 
@@ -117,7 +126,7 @@ android:orientation="vertical">
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
-                android:onClick="buttonDeletePostedBook"
+                android:onClick="buttonOpenHistory"
                 android:text="HISTORY" />
         </LinearLayout>
     </RelativeLayout>

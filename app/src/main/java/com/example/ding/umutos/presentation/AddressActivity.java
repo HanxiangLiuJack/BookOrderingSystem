@@ -65,7 +65,9 @@ public class AddressActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         accessBookList.deleteBook(bookID);
-                        Intent intent = new Intent(AddressActivity.this, CustomerBookListActivity.class);
+                        int userType=1;
+                        Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }

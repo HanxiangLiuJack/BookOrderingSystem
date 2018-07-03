@@ -114,7 +114,9 @@ public class EditBookActivity extends AppCompatActivity {
                                         int which) {
                         Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),2);
                         accessBookList.insertBook(aBook);
-                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
+                        int userType = 0;
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
@@ -140,7 +142,9 @@ public class EditBookActivity extends AppCompatActivity {
                                         int which) {
                         Book aBook=accessBookList.searchBook(bookID);
                         accessBookList.updateBook(aBook,title,author,aBook.getPicture(),detail,category,Double.parseDouble(price));
-                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
+                        int userType = 0;
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }

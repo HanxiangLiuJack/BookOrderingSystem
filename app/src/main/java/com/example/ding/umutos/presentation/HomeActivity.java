@@ -15,12 +15,16 @@ public class HomeActivity extends AppCompatActivity {
 
 
     public void buttonSellOnClick(View v) {
-        Intent sellIntent = new Intent(HomeActivity.this, SellerBookListActivity.class);
+        int userType=0;
+        Intent sellIntent = new Intent(HomeActivity.this, BookListActivity.class);
+        sellIntent.putExtra("userType", userType);
         HomeActivity.this.startActivity(sellIntent);
     }
 
     public void buttonBuyOnClick(View v) {
-        Intent buyIntent = new Intent(HomeActivity.this, CustomerBookListActivity.class);
+        int userType=1;
+        Intent buyIntent = new Intent(HomeActivity.this, BookListActivity.class);
+        buyIntent.putExtra("userType", userType);
         HomeActivity.this.startActivity(buyIntent);
     }
 }

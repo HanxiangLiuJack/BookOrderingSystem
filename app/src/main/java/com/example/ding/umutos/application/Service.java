@@ -4,6 +4,7 @@ import com.example.ding.umutos.persistence.BookPersistence;
 import com.example.ding.umutos.persistence.AccountPersistence;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.persistence.hsqldb.AccountPersistenceHSQLDB;
+import com.example.ding.umutos.persistence.hsqldb.BookPersistenceHSQLDB;
 import com.example.ding.umutos.persistence.hsqldb.OrderPersistenceHSQLDB;
 
 public class Service {
@@ -16,7 +17,7 @@ public class Service {
     {
         if (bookPersistence == null)
         {
-//            bookPersistence = new BookPersistenceStub();
+            bookPersistence = new BookPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return bookPersistence;

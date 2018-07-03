@@ -109,7 +109,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
-            
+
             Book book = fromResultSet(rs);
 
             rs.close();
@@ -150,6 +150,28 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             final PreparedStatement st = c.prepareStatement("DELETE FROM books WHERE bookID = ?");
             st.setInt(1, id);
             st.executeUpdate();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<Book> getBookCategorySequential(String category) {
+        final List<Book> books = new ArrayList<>();
+        try {
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookCategory = ?");
+            st.setString(1, category);
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                final Book book = fromResultSet(rs);
+                books.add(book);
+            }
+
+            rs.close();
+            st.close();
+
+            return books;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

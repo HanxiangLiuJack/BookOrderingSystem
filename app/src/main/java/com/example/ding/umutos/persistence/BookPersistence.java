@@ -16,5 +16,7 @@ public interface  BookPersistence {
     List<Book> getUserBookSequential(int userID);
     
     void deleteBook(int id);
-   
+
+    List<Book> getBookCategorySequential(String category);
+
 }

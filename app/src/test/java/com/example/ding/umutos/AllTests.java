@@ -14,7 +14,8 @@ import com.example.ding.umutos.business.*;
         AccessAccountsTest.class,
         AccessBooksTest.class,
         BookTest.class,
-        AccountTest.class
+        AccountTest.class,
+        BookSorterTest.class
 })
 
 public class AllTests {

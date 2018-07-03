@@ -19,7 +19,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     public OrderPersistenceHSQLDB(final String dbPath)
     {
         try{
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
+            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

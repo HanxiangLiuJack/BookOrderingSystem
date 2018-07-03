@@ -20,7 +20,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public AccountPersistenceHSQLDB(final String dbPath)
     {
         try{
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
+            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

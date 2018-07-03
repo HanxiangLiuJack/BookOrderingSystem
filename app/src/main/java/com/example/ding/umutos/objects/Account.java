@@ -13,7 +13,7 @@ public class Account
     private String userName;
     private String password;
    
-    public Account( String userName ,String passWord)
+    public Account( String userName ,String password)
     {
         this.userName = userName;
         this.password = password;
@@ -36,6 +36,6 @@ public class Account
         userName = newName;
     }
 
-    public void setPassWord(String p){password = p;}
+    public void setPassWord(String newPassword){password = newPassword;}
 
 }

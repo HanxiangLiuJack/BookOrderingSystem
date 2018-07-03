@@ -1,6 +1,5 @@
 package com.example.ding.umutos.business;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.example.ding.umutos.application.Service;
@@ -27,7 +26,7 @@ public class AccessAccounts {
     public List<Account> getAccounts()
     {
         accounts = accountPersistence.getAccountSequential();
-        return Collections.unmodifiableList(accounts);
+        return accounts;
     }
 
     public Account getAccountByID(int userID)

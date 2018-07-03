@@ -16,11 +16,13 @@ import com.example.ding.umutos.persistence.BookPersistence;
 public class BookPersistenceHSQLDB implements BookPersistence {
 
     private final Connection c;
-    private static int countBook = 0;
+
+    private static int bookID = 0;
+
 
     public BookPersistenceHSQLDB(final String dbPath) {
         try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
+            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
@@ -67,7 +69,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     public Book insertBook(Book currentBook) {
         try {
             final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1, countBook);
+            st.setInt(1, bookID);
             st.setString(2, currentBook.getName());
             st.setString(3, currentBook.getAuthor());
             st.setInt(4, currentBook.getPicture());
@@ -77,8 +79,8 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             st.setInt(8, currentBook.getOwner());
 
             st.executeUpdate();
-
-            countBook++;
+            currentBook.setBookID(bookID);
+            bookID++;
 
             return currentBook;
         } catch (final SQLException e) {
@@ -87,6 +89,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     }
 
     @Override
+
     public Book updateBook(Book currentBook) {
         try {
             final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ? WHERE bookID = ?");

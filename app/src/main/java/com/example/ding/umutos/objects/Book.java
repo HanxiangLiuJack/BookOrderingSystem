@@ -23,15 +23,9 @@ public class Book
     private int ownerID;
     private  double price;
 
-    // an int static variable that automatically incremented by creating new books.
-    private static int index = 0;
 
     public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
     {
-        //book id automated created
-        bookID = index;
-        index++;
-
         this.bookName = bookName;
         this.authorName = authorName;
         this.bookPicture = bookPicture;
@@ -104,6 +98,11 @@ public class Book
     public int getBookID()
     {
         return bookID;
+    }
+
+    public void setBookID(int bookID)
+    {
+        this.bookID = bookID;
     }
 
     public int getOwner(){

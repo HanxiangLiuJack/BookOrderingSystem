@@ -87,15 +87,15 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     }
 
     @Override
-    public Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price ) {
+    public Book updateBook(Book currentBook) {
         try {
             final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ? WHERE bookID = ?");
-            st.setString(1, book_Name);
-            st.setString(2, author_Name);
-            st.setInt(3, book_Picture);
-            st.setString(4, book_Description);
-            st.setString(5, book_Category);
-            st.setDouble(6, price);
+            st.setString(1, currentBook.getName());
+            st.setString(2, currentBook.getAuthor());
+            st.setInt(3, currentBook.getPicture());
+            st.setString(4, currentBook.getDescription());
+            st.setString(5, currentBook.getCategory());
+            st.setDouble(6, currentBook.getPrice());
             st.setInt(7, currentBook.getBookID());
 
             st.executeUpdate();

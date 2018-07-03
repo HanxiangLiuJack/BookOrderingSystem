@@ -9,12 +9,16 @@ public interface  BookPersistence {
 
     Book insertBook(Book currentBook);
 
-    Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price);
+    Book updateBook(Book currentBook);
     
     Book searchBook(int id);
     
     List<Book> getUserBookSequential(int userID);
     
     void deleteBook(int id);
-   
+
+    List<Book> getBookCategorySequential(String category);
+
+    List<Book> searchKeyword(String keyword);
+
 }

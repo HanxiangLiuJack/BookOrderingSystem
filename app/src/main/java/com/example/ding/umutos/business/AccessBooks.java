@@ -47,6 +47,14 @@ public class AccessBooks {
     }
 
 
+    public List<Book> CategoryList(String category){
+        List<Book> cBook;
+        cBook=bookPersistence.getCategoryList(category);
+        return cBook;
+
+    }
+
+
     public List<Book> ascentSort(){
         List<Book> sortBook;
         BookSorter sorter = new BookSorter();

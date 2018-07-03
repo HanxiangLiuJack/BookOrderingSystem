@@ -15,7 +15,7 @@ public class AccessOrders {
 
 
     private OrderPersistence orderPersistence;
-    private List<Order> order;
+    private List<Order> orders;
 
 
     public AccessOrders() {
@@ -27,6 +27,13 @@ public class AccessOrders {
     public AccessOrders(final OrderPersistence orderPersistence) {
         this();
         this.orderPersistence = orderPersistence;
+    }
+
+
+    public List<Book> getOrders()
+    {
+        orders = orderPersistence.getOrderSequential();
+        return Collections.unmodifiableList(orders);
     }
 
 

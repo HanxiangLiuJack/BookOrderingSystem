@@ -15,7 +15,6 @@ import com.example.ding.umutos.objects.Account;
 public class AccountPersistenceHSQLDB implements AccountPersistence{
 
     private final Connection c;
-    private static int userID = 0;
 
     public AccountPersistenceHSQLDB(final String dbPath)
     {
@@ -27,10 +26,13 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     private Account fromResultSet(final ResultSet rs) throws SQLException {
+        final int userID = rs.getInt("userID");
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
 
-        return new Account(userName,password);
+        Account account =  new Account(userName,password);
+        account.setUserID(userID);
+        return account;
     }
 
     @Override
@@ -76,16 +78,11 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public Account insertAccount(Account currentAccount)
     {
         try{
-            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?)");
-            st.setInt(1,userID);
-            st.setString(2,currentAccount.getUserName());
-            st.setString(3,currentAccount.getPassword());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?)");
+            st.setString(1,currentAccount.getUserName());
+            st.setString(2,currentAccount.getPassword());
 
             st.executeUpdate();
-
-            currentAccount.setUserID(userID);
-
-            userID++;
 
             return currentAccount;
         } catch (final SQLException e){

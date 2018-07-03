@@ -2,8 +2,8 @@ CREATE SCHEMA PUBLIC AUTHORIZATION DBA
 
 
 
-CREATE MEMORY TABLE PUBLIC.ACCOUNTS(ACCOUNTID INTEGER NOT NULL PRIMARY KEY,USERNAME VARCHAR(20),PASSWORD VARCHAR(20))
-CREATE MEMORY TABLE PUBLIC.BOOKS(BOOKID INTEGER NOT NULL PRIMARY KEY,BOOKNAME VARCHAR(20),AUTHORNAME VARCHAR(20),INTEGER BOOKPICTURE,BOOKDESCRIPTION VARCHAR(20),BOOKCATEGORY VARCHAR(20),DOUBLE PRICE,INTEGER OWNERID)
+CREATE MEMORY TABLE PUBLIC.ACCOUNTS(ACCOUNTID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,USERNAME VARCHAR(20),PASSWORD VARCHAR(20))
+CREATE MEMORY TABLE PUBLIC.BOOKS(BOOKID INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY, BOOKNAME VARCHAR(20),AUTHORNAME VARCHAR(20),INTEGER BOOKPICTURE,BOOKDESCRIPTION VARCHAR(20),BOOKCATEGORY VARCHAR(20),DOUBLE PRICE,INTEGER OWNERID)
 CREATE MEMORY TABLE PUBLIC.ORDERS(BOOKNAME VARCHAR(20),BUYERUSERNAME VARCHAR(20),SELLERUSERNAME VARCHAR(20),PRICE DOUBLE,BUYERFIRSTNAME VARCHAR(20),BUYERLASTNAME VARCHAR(20),POSTCODE VARCHAR(20),PHONENUMBER VARCHAR(20),ADDRESS VARCHAR(20))
 
 
@@ -28,3 +28,8 @@ INSERT INTO BOOKS VALUES("The Middle Ages","Jeffrey L. Singman",7,"We consider t
 INSERT INTO BOOKS VALUES("The Guilty Wife","Elle Croft",8,"When Bethany's lover is brutally murdered, she has to hide her grief from everyone.But someone knows her secret. And then one day the threats begin.With an ever-growing pile of evidence pointing to her as the murderer, the only way she can protect her secrets is to prove her innocence. And that means tracking down a killer.An unbelievably gripping game of cat and mouse - with a twist you'll never see coming. Fans of The Child by Fiona Barton, Close to Home by Cara Hunter, Come a Little Closer by Rachel Abbott and I Am Watching You by Tessa Driscoll will love The Guilty Wife.","Human physical performance and recreation",22.45,5)
 INSERT INTO BOOKS VALUES("One Way","S. J. Morden",9,"Frank Kittridge is serving life for murdering his son's drug dealer, so when he's offered a deal by Xenosystems Operations - the corporation that owns the prison - he takes it. He's been selected to help build the first permanent base on Mars. Unfortunately, his crewmates are just as guilty of their crimes as he is. ","Human physical performance and recreation",33.22,2)
 INSERT INTO BOOKS VALUES("The Arrangement","Sarah Dunn",10,"Lucy and Owen, ambitious, thoroughly-therapized New Yorkers, have taken the plunge, trading in their crazy life in a cramped apartment for Beekman, a bucolic Hudson Valley exurb. They've got a two hundred year-old house, an autistic son obsessed with the Titanic, and 17 chickens, at last count. It's the kind of paradise where stay-at-home moms team up to cook the school's hot lunch, dads grill grass-fed burgers, and, as Lucy observes.","Human physical performance and recreation",22.55,6)
+
+INSERT INTO ACCOUNTS VALUES("Yunlong Liu","7795537")
+INSERT INTO ACCOUNTS VALUES("Tianhua Xu","7797047")
+INSERT INTO ACCOUNTS VALUES("Zitao Zheng","7763424")
+

@@ -17,8 +17,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     private final Connection c;
 
-    private static int bookID = 0;
-
 
     public BookPersistenceHSQLDB(final String dbPath) {
         try {
@@ -38,7 +36,9 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         double price = rs.getDouble("price");
         int ownerID = rs.getInt("ownerID");
 
-        return new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        book.setBookID(bookID);
+        return book;
     }
 
     @Override
@@ -68,19 +68,16 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public Book insertBook(Book currentBook) {
         try {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1, bookID);
-            st.setString(2, currentBook.getName());
-            st.setString(3, currentBook.getAuthor());
-            st.setInt(4, currentBook.getPicture());
-            st.setString(5, currentBook.getDescription());
-            st.setString(6, currentBook.getCategory());
-            st.setDouble(7, currentBook.getPrice());
-            st.setInt(8, currentBook.getOwner());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
+            st.setString(1, currentBook.getName());
+            st.setString(2, currentBook.getAuthor());
+            st.setInt(3, currentBook.getPicture());
+            st.setString(4, currentBook.getDescription());
+            st.setString(5, currentBook.getCategory());
+            st.setDouble(6, currentBook.getPrice());
+            st.setInt(7, currentBook.getOwner());
 
             st.executeUpdate();
-            currentBook.setBookID(bookID);
-            bookID++;
 
             return currentBook;
         } catch (final SQLException e) {
@@ -92,14 +89,15 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     public Book updateBook(Book currentBook) {
         try {
-            final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ? WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ?, ownerID = ? WHERE bookID = ?");
             st.setString(1, currentBook.getName());
             st.setString(2, currentBook.getAuthor());
             st.setInt(3, currentBook.getPicture());
             st.setString(4, currentBook.getDescription());
             st.setString(5, currentBook.getCategory());
             st.setDouble(6, currentBook.getPrice());
-            st.setInt(7, currentBook.getBookID());
+            st.setInt(7,currentBook.getOwner());
+            st.setInt(8, currentBook.getBookID());
 
             st.executeUpdate();
 

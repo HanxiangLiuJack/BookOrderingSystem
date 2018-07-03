@@ -15,18 +15,25 @@ public class AccessOrders {
 
 
     private OrderPersistence orderPersistence;
-    private List<Order> order;
+    private List<Order> orders;
 
 
     public AccessOrders() {
         orderPersistence = Service.getOrderPersistence();
-        history = null;
+        order = null;
     }
 
 
     public AccessOrders(final OrderPersistence orderPersistence) {
         this();
         this.orderPersistence = orderPersistence;
+    }
+
+
+    public List<Book> getOrders()
+    {
+        orders = orderPersistence.getOrderSequential();
+        return Collections.unmodifiableList(orders);
     }
 
 
@@ -42,6 +49,17 @@ public class AccessOrders {
         return history;
     }
 
+
+    public boolean insertOrder(Order currentOrder){
+        OrderValidator validator = new OrderValidator();
+        if(currentOrder != null) {
+            if(validator.validateOrder(currentOrder)) {
+                orderPersistence.insertOrder(currentOrder);
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 

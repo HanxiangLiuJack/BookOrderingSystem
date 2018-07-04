@@ -9,11 +9,9 @@ import org.junit.Test;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.persistence.AccountPersistence;
-<<<<<<< HEAD
-import com.example.ding.umutos.persistence.AccountPersistenceStub;
-=======
 
->>>>>>> ca1ddb0e32133609d82fe4e4a26eb9fe3b5a4888
+import com.example.ding.umutos.persistence.AccountPersistenceStub;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

@@ -20,7 +20,7 @@ public class AccessOrders {
 
     public AccessOrders() {
         orderPersistence = Service.getOrderPersistence();
-        order = null;
+        orders = null;
     }
 
 
@@ -30,7 +30,7 @@ public class AccessOrders {
     }
 
 
-    public List<Book> getOrders()
+    public List<Order> getOrders()
     {
         orders = orderPersistence.getOrderSequential();
         return Collections.unmodifiableList(orders);

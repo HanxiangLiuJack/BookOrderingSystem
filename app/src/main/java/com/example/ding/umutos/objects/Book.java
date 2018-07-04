@@ -12,6 +12,8 @@ package com.example.ding.umutos.objects;
   8. price, the price of the book.
 */
 
+import com.example.ding.umutos.R;
+
 public class Book
 {
     private int bookID;
@@ -22,16 +24,11 @@ public class Book
     private String bookCategory;
     private int ownerID;
     private  double price;
-
-    // an int static varibale that automatically incremented by creating new books.
-    private static int index = 0;
+    private int bookImg[];
+    private String[] bookCategoryArr;
 
     public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
     {
-        //book id automated created
-        bookID = index;
-        index++;
-
         this.bookName = bookName;
         this.authorName = authorName;
         this.bookPicture = bookPicture;
@@ -39,6 +36,9 @@ public class Book
         this.bookCategory = bookCategory;
         this.price = price;
         this.ownerID = ownerID;
+        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
+        bookCategoryArr = new String[]{"Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
+
     }
 
     public void setPicture(int pic)
@@ -49,6 +49,11 @@ public class Book
     public int getPicture()
     {
         return bookPicture;
+    }
+
+    public int getPicResource()
+    {
+        return bookImg[bookID];
     }
 
     public String getDescription()
@@ -106,7 +111,16 @@ public class Book
         return bookID;
     }
 
+    public void setBookID(int bookID)
+    {
+        this.bookID = bookID;
+    }
+
     public int getOwner(){
         return ownerID;
+    }
+
+    public String[] getBookCategoryArr(){
+        return bookCategoryArr;
     }
 }

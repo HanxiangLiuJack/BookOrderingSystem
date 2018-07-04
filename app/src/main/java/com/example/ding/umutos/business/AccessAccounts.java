@@ -1,7 +1,7 @@
 package com.example.ding.umutos.business;
 
-import java.util.Collections;
 import java.util.List;
+
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.persistence.AccountPersistence;
@@ -17,10 +17,16 @@ public class AccessAccounts {
         accounts = null;
     }
 
+    public AccessAccounts(final AccountPersistence accountPersistence)
+    {
+        this();
+        this.accountPersistence = accountPersistence;
+    }
+
     public List<Account> getAccounts()
     {
         accounts = accountPersistence.getAccountSequential();
-        return Collections.unmodifiableList(accounts);
+        return accounts;
     }
 
     public Account getAccountByID(int userID)
@@ -47,4 +53,30 @@ public class AccessAccounts {
         accountPersistence.deleteAccount(currentAccount);
     }
 
+    public Account Login(String userName, String password)
+    {
+        Account targetAccount = null;
+        getAccounts();
+        for(int i = 0; i < accounts.size(); i++)
+        {
+            boolean sameUserName = accounts.get(i).getUserName().equals(userName);
+            boolean samePassword = Integer.parseInt(accounts.get(i).getPassword()) == password.hashCode();
+            if(samePassword && sameUserName)
+                targetAccount = accounts.get(i);
+        }
+        return targetAccount;
+    }
+
+    public Account register(String userName, String passWord)
+    {
+        Account targetAccount = null;
+        AccountValidator validator = new AccountValidator();
+        getAccounts();
+        if(validator.validateUserName(userName, accounts) && validator.validatePassword(passWord))
+        {
+            targetAccount = new Account(userName, Integer.toString(passWord.hashCode()));
+            this.insertAccount(targetAccount);
+        }
+        return targetAccount;
+    }
 }

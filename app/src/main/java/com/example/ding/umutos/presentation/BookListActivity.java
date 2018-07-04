@@ -31,14 +31,14 @@ public class BookListActivity extends AppCompatActivity {
     private AccessAccounts accessAccounts;
     private List<Book> newBookList;
     private TextView infoBar;
-    int userType;
+    private int userType, userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         userType = getIntent().getIntExtra("userType",-1);
-        Log.d("aa", String.valueOf(userType));
+        userID = getIntent().getIntExtra("userID",-1);
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -46,31 +46,26 @@ public class BookListActivity extends AppCompatActivity {
             bookID=-1;
             accessBookList=new AccessBooks();
             accessAccounts=new AccessAccounts();
-            newBookList=accessBookList.getUserBooks(2);
+            newBookList=accessBookList.getUserBooks(userID);
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
-            infoBar.setText("Hi "+accessAccounts.getAccountByID(2).getUserName()+".");
+            infoBar.setText("Hi "+accessAccounts.getAccountByID(userID).getUserName()+".");
         }
-        else if (userType==1){
+        else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
             accessBookList=new AccessBooks();
-            newBookList=accessBookList.getBooks();
-        }
-        else{
-            setContentView(R.layout.activity_history_booklist);
-            bookList=(ListView)findViewById(R.id.historyBookList);
-            accessBookList=new AccessBooks();
+            Log.d("bb", String.valueOf(userType));
             newBookList=accessBookList.getBooks();
         }
 
         int size=newBookList.size();
-        int bookImg[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
+
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",bookImg[newBookList.get(i).getPicture()] );
+            book.put("img",newBookList.get(i).getPicResource() );
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);
@@ -93,14 +88,10 @@ public class BookListActivity extends AppCompatActivity {
                     bookTitle=map.get("title");
                     infoBar.setText("You selected book: "+bookTitle);
                 }
-                if (userType==1){
+                else{
                     Intent intent = new Intent(BookListActivity.this,SingleBookActivity.class);
                     intent.putExtra("bookID", bookID);
                     BookListActivity.this.startActivity(intent);
-                }
-                if (userType==2){
-                    TextView historyBar=(TextView)findViewById(R.id.historyBar);
-                    historyBar.setText("Order history");
                 }
             }
         });
@@ -185,9 +176,9 @@ public class BookListActivity extends AppCompatActivity {
     }
 
     public void buttonOpenHistory(View view){
-        int userType=2;
         Intent intent = new Intent(BookListActivity.this,BookListActivity.class);
         intent.putExtra("userType", userType);
+        intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);
     }
 

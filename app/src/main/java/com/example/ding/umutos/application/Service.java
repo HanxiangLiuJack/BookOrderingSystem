@@ -1,20 +1,26 @@
 package com.example.ding.umutos.application;
 
+import android.util.Log;
+
 import com.example.ding.umutos.persistence.BookPersistence;
 import com.example.ding.umutos.persistence.AccountPersistence;
-import com.example.ding.umutos.persistence.stubs.BookPersistenceStub;
-import com.example.ding.umutos.persistence.stubs.AccountPersistenceStub;
+import com.example.ding.umutos.persistence.OrderPersistence;
+import com.example.ding.umutos.persistence.hsqldb.AccountPersistenceHSQLDB;
+import com.example.ding.umutos.persistence.hsqldb.BookPersistenceHSQLDB;
+import com.example.ding.umutos.persistence.hsqldb.OrderPersistenceHSQLDB;
 
 public class Service {
 
-    private static BookPersistence bookPersistence;
-    private static AccountPersistence accountPersistence;
+    private static BookPersistence bookPersistence = null;
+    private static AccountPersistence accountPersistence = null;
+    private static OrderPersistence orderPersistence = null;
 
     public static synchronized BookPersistence getBookPersistence()
     {
         if (bookPersistence == null)
         {
-            bookPersistence = new BookPersistenceStub();
+            bookPersistence = new BookPersistenceHSQLDB(Main.getDBPathName());
+
         }
 
         return bookPersistence;
@@ -24,9 +30,19 @@ public class Service {
     {
         if (accountPersistence == null)
         {
-            accountPersistence = new AccountPersistenceStub();
+            accountPersistence = new AccountPersistenceHSQLDB(Main.getDBPathName());
         }
 
         return accountPersistence;
+    }
+
+    public static synchronized  OrderPersistence getOrderPersistence()
+    {
+        if(orderPersistence == null)
+        {
+            orderPersistence = new OrderPersistenceHSQLDB(Main.getDBPathName());
+        }
+
+        return orderPersistence;
     }
 }

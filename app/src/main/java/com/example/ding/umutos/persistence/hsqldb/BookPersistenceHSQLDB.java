@@ -52,7 +52,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
-        Log.v("Connect","begin！！！");
+
         try(final Connection c = connection())
         {
             final Statement st = c.createStatement();

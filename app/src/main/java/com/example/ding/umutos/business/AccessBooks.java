@@ -29,9 +29,8 @@ public class AccessBooks {
 
     public List<Book> getBooks()
     {
-        Log.v("Get Book","begin！！！");
         books = bookPersistence.getBookSequential();
-        Log.v("Get Book","done！！！");
+
         return books;
     }
 

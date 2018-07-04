@@ -8,17 +8,30 @@
     tools:context=".presentation.EditBookActivity">
 
     <TextView
+        android:id="@+id/registerTitle"
+        android:layout_width="440dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:text="Register a new account"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/registerNameTitle"
         android:layout_width="240dp"
         android:layout_height="28dp"
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
-
+        android:textSize="20dp"
         android:layout_marginTop="50dp"
         android:text="Input your username"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle"  />
 
 
     <EditText
@@ -44,7 +57,7 @@
         android:layout_height="28dp"
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
-
+        android:textSize="20dp"
         android:layout_marginTop="60dp"
         android:text="Input your password"
         android:textAlignment="center"
@@ -66,32 +79,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerPswTitle1" />
 
-
-    <TextView
-        android:id="@+id/registerPswTitle2"
-        android:layout_width="240dp"
-        android:layout_height="28dp"
-        android:layout_marginLeft="180dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="60dp"
-        android:text="Input your password again:"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPsw1" />
-
-    <EditText
-        android:id="@+id/registerPsw2"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="180dp"
-        android:layout_marginLeft="188dp"
-
-        android:layout_marginTop="10dp"
-        android:background="@drawable/text_style"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPswTitle2" />
 
     <Button
         android:id="@+id/registerCancel"

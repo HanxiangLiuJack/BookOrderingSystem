@@ -13,6 +13,7 @@ import com.example.ding.umutos.persistence.AccountPersistence;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 
 
 import static junit.framework.Assert.*;
@@ -197,17 +198,14 @@ public class AccessAccountsTest {
         System.out.println("\nStart testing testDeleteAccount.\n");
 
         List<Account> temp = new ArrayList<>();
-        temp.add(new Account(1,"Yunlong Liu","1234"));
-        temp.add(new Account(2,"Yu Gu","2234"));
-        temp.add(new Account(3,"Hanxiang Liu","3234"));
-        temp.add(new Account(4,"Tianhua Xu","4234"));
-        temp.add(new Account(5,"Zitao Zheng","5678"));
+        temp.add(new Account(6,"Xiao Peng","2234"));
+        when(accountPersistence.getAccountSequential()).thenReturn(temp);
 
         final Account account = new Account(6,"Xiao Peng","2234");
-        
+
+        doNothing().when(accountPersistence).deleteAccount(account);
+
         accessAccounts.deleteAccount(account);
-        
-        assertTrue(accessAccounts.getAccounts().equals(temp));
 
         verify(accountPersistence).deleteAccount(account);
 

@@ -19,7 +19,8 @@ import com.example.ding.umutos.business.*;
         OrderTest.class,
         BookSorterTest.class,
         BookValidatorTest.class,
-        AccountValidatorTest.class
+        AccountValidatorTest.class,
+        OrderValidatorTest.class
 })
 
 public class AllTests {

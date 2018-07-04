@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.persistence.AccountPersistence;
-import com.example.ding.umutos.persistence.*;
+import com.example.ding.umutos.persistence.AccountPersistenceStub;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

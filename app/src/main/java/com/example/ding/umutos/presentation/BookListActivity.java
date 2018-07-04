@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ding.umutos.R;
@@ -26,12 +28,14 @@ public class BookListActivity extends AppCompatActivity {
 
     private ListView bookList;
     private int bookID;
-    private String bookTitle;
+    private String bookTitle,category;
     private AccessBooks accessBookList;
     private AccessAccounts accessAccounts;
     private List<Book> newBookList;
     private TextView infoBar;
     private int userType, userID;
+    private ArrayAdapter<String> adapter;
+    private Book newBook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +53,41 @@ public class BookListActivity extends AppCompatActivity {
             newBookList=accessBookList.getUserBooks(userID);
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
             infoBar.setText("Hi "+accessAccounts.getAccountByID(userID).getUserName()+".");
+            loadBookList(newBookList);
         }
         else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
             accessBookList=new AccessBooks();
-            Log.d("bb", String.valueOf(userType));
             newBookList=accessBookList.getBooks();
+            newBook=newBookList.get(2);
+            loadBookList(newBookList);
+            Spinner searchByCategory;
+            searchByCategory=(Spinner) findViewById(R.id.searchByCategory);
+            adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
+            searchByCategory.setAdapter(adapter);
+            searchByCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
         }
 
+
+
+    }
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+            category=newBook.getBookCategoryArr()[arg2];
+            newBookList=accessBookList.CategoryList(category);
+            loadBookList(newBookList);
+
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
+    }
+
+
+    public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
 
 
@@ -95,8 +125,6 @@ public class BookListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     public void buttonAddNewBook(View view) {

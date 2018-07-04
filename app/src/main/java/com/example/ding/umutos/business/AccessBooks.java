@@ -56,9 +56,13 @@ public class AccessBooks {
 
     public List<Book> CategoryList(String category){
         List<Book> cBook;
-        cBook=bookPersistence.getBookCategorySequential(category);
+        if (category.equals("ALL")){
+            cBook=getBooks();
+        }
+        else {
+            cBook=bookPersistence.getBookCategorySequential(category);
+        }
         return cBook;
-
     }
 
 

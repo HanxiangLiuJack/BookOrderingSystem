@@ -55,7 +55,7 @@ public class EditBookActivity extends AppCompatActivity {
 
             editBookTitle.setText(newBook.getName());
             editBookAuthor.setText(newBook.getAuthor());
-            editBookPrice.setText(""+newBook.getPrice());
+            editBookPrice.setText(newBook.getPrice());
             editBookDetail.setText(newBook.getDescription());
 
         }
@@ -112,7 +112,7 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),2);
+                        Book aBook= new Book(title,author,0,detail,category,price,1);
                         accessBookList.insertBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);

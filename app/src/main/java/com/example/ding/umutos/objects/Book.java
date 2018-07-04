@@ -21,10 +21,10 @@ public class Book
     private String bookDescription;
     private String bookCategory;
     private int ownerID;
-    private  double price;
+    private String price;
 
 
-    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
+    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, String price, int ownerID)
     {
         this.bookName = bookName;
         this.authorName = authorName;
@@ -85,12 +85,12 @@ public class Book
         return authorName;
     }
 
-    public void setPrice(double p)
+    public void setPrice(String p)
     {
         this.price = p;
     }
 
-    public double getPrice()
+    public String getPrice()
     {
         return price;
     }

@@ -16,10 +16,10 @@ public class BookSorter {
         }
 
         for(int i=0;i<book1.size();i++){
-            double price=book1.get(i).getPrice();
+            String price = book1.get(i).getPrice();
             Book key=book1.get(i);
             int j=i-1;
-            while(j>=0 && book1.get(j).getPrice()>price){
+            while(j>=0 && Double.parseDouble(book1.get(j).getPrice())>Double.parseDouble(price)){
                 book1.set(j+1,book1.get(j));
                 j=j-1;
             }
@@ -35,10 +35,10 @@ public class BookSorter {
         }
 
         for(int i=0;i<book1.size();i++){
-            double price=book1.get(i).getPrice();
+            String price=book1.get(i).getPrice();
             Book key=book1.get(i);
             int j=i-1;
-            while(j>=0 && book1.get(j).getPrice()<price){
+            while(j>=0 && Double.parseDouble(book1.get(j).getPrice())<Double.parseDouble(price)){
                 book1.set(j+1,book1.get(j));
                 j=j-1;
             }

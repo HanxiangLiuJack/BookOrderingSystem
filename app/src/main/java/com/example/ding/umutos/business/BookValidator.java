@@ -27,8 +27,8 @@ public class BookValidator {
         return index>=0;
     }
 
-    private boolean validatePrice(double price)
+    private boolean validatePrice(String price)
     {
-        return price >= 0;
+        return price  != null && !price.equals("") && !price.trim().isEmpty() && price.length()<=10;
     }
 }

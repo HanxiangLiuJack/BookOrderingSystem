@@ -46,9 +46,9 @@ public class BookListActivity extends AppCompatActivity {
             bookID=-1;
             accessBookList=new AccessBooks();
             accessAccounts=new AccessAccounts();
-            newBookList=accessBookList.getUserBooks(2);
+            newBookList=accessBookList.getUserBooks(1);
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
-            infoBar.setText("Hi "+accessAccounts.getAccountByID(2).getUserName()+".");
+            infoBar.setText("Hi "+accessAccounts.getAccountByID(1).getUserName()+".");
         }
         else {
             setContentView(R.layout.activity_customer_booklist);

@@ -1,6 +1,5 @@
 package com.example.ding.umutos.business;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.example.ding.umutos.application.Service;
@@ -27,7 +26,7 @@ public class AccessAccounts {
     public List<Account> getAccounts()
     {
         accounts = accountPersistence.getAccountSequential();
-        return Collections.unmodifiableList(accounts);
+        return accounts;
     }
 
     public Account getAccountByID(int userID)
@@ -61,22 +60,20 @@ public class AccessAccounts {
         for(int i = 0; i < accounts.size(); i++)
         {
             boolean sameUserName = accounts.get(i).getUserName().equals(userName);
-            boolean samePassword = Integer.parseInt(accounts.get(i).getPassWord()) == password.hashCode();
+            boolean samePassword = Integer.parseInt(accounts.get(i).getPassword()) == password.hashCode();
             if(samePassword && sameUserName)
                 targetAccount = accounts.get(i);
         }
         return targetAccount;
     }
 
-    public Account register(String userName, String passWord)
+    public void register(String userName, String passWord)
     {
-        Account newAccount = null;
         AccountValidator validator = new AccountValidator();
         if(validator.validateUserName(userName, accounts) && validator.validatePassword(passWord))
         {
-            newAccount = new Account(userName, Integer.toString(passWord.hashCode()));
-            this.insertAccount(newAccount);
+            Account a = new Account(userName, Integer.toString(passWord.hashCode()));
+            this.insertAccount(a);
         }
-        return newAccount;
     }
 }

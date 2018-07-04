@@ -15,14 +15,15 @@ import com.example.ding.umutos.persistence.BookPersistence;
 
 public class BookPersistenceHSQLDB implements BookPersistence {
 
-    private final Connection c;
+    private final String dbPath;
 
-    public BookPersistenceHSQLDB(final String dbPath) {
-        try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath, "SA", "");
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
+    public BookPersistenceHSQLDB(final String dbPath){
+        this.dbPath = dbPath;
+    }
+
+
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {
@@ -35,14 +36,16 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         double price = rs.getDouble("price");
         int ownerID = rs.getInt("ownerID");
 
-        return new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        book.setBookID(bookID);
+        return book;
     }
 
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
 
-        try
+        try(final Connection c = connection())
         {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM books");
@@ -64,7 +67,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book insertBook(Book currentBook) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, currentBook.getName());
             st.setString(2, currentBook.getAuthor());
@@ -83,16 +86,18 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     }
 
     @Override
-    public Book updateBook(Book currentBook, String book_Name, String author_Name, int book_Picture, String book_Description, String book_Category, double price ) {
-        try {
-            final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ? WHERE bookID = ?");
-            st.setString(1, book_Name);
-            st.setString(2, author_Name);
-            st.setInt(3, book_Picture);
-            st.setString(4, book_Description);
-            st.setString(5, book_Category);
-            st.setDouble(6, price);
-            st.setInt(7, currentBook.getBookID());
+
+    public Book updateBook(Book currentBook) {
+        try (final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ?, ownerID = ? WHERE bookID = ?");
+            st.setString(1, currentBook.getName());
+            st.setString(2, currentBook.getAuthor());
+            st.setInt(3, currentBook.getPicture());
+            st.setString(4, currentBook.getDescription());
+            st.setString(5, currentBook.getCategory());
+            st.setDouble(6, currentBook.getPrice());
+            st.setInt(7,currentBook.getOwner());
+            st.setInt(8, currentBook.getBookID());
 
             st.executeUpdate();
 
@@ -104,13 +109,16 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book searchBook(int id){
-        try {
+        Book book = null;
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookID = ?");
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
-            
-            Book book = fromResultSet(rs);
+
+            if(rs.next()) {
+                book = fromResultSet(rs);
+            }
 
             rs.close();
             st.close();
@@ -125,7 +133,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> getUserBookSequential(int userID) {
         final List<Book> books = new ArrayList<>();
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerID = ?");
             st.setInt(1, userID);
 
@@ -146,10 +154,56 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public void deleteBook(int id) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM books WHERE bookID = ?");
             st.setInt(1, id);
             st.executeUpdate();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<Book> getBookCategorySequential(String category) {
+        final List<Book> books = new ArrayList<>();
+        try (final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookCategory = ?");
+            st.setString(1, category);
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                final Book book = fromResultSet(rs);
+                books.add(book);
+            }
+
+            rs.close();
+            st.close();
+
+            return books;
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+    @Override
+    public List<Book> searchKeyword(String keyword){
+        final List<Book> books = new ArrayList<>();
+        try (final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookName = ? OR authorName = ? OR bookCategory = ?");
+            st.setString(1, keyword);
+            st.setString(2, keyword);
+            st.setString(3, keyword);
+
+            final ResultSet rs = st.executeQuery();
+            while(rs.next()) {
+                final Book book = fromResultSet(rs);
+                books.add(book);
+            }
+
+            rs.close();
+            st.close();
+
+            return books;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

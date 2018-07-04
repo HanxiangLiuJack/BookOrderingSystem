@@ -42,7 +42,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         int bookPicture = rs.getInt("bookPicture");
         String bookDescription = rs.getString("bookDescription");
         String bookCategory = rs.getString("bookCategory");
-        String price = rs.getString("price");
+        Double price = rs.getDouble("price");
         int ownerID = rs.getInt("ownerID");
 
         Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
@@ -91,7 +91,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             st.setInt(4, currentBook.getPicture());
             st.setString(5, currentBook.getDescription());
             st.setString(6, currentBook.getCategory());
-            st.setString(7, currentBook.getPrice());
+            st.setDouble(7, currentBook.getPrice());
             st.setInt(8, currentBook.getOwner());
 
             st.executeUpdate();
@@ -114,7 +114,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             st.setInt(3, currentBook.getPicture());
             st.setString(4, currentBook.getDescription());
             st.setString(5, currentBook.getCategory());
-            st.setString(6, currentBook.getPrice());
+            st.setDouble(6, currentBook.getPrice());
             st.setInt(7,currentBook.getOwner());
             st.setInt(8, currentBook.getBookID());
 

@@ -9,8 +9,6 @@ public interface AccountPersistence{
 
     Account getAccountByID(int userID);
 
-    public int currentAccountNumber();
-
     Account insertAccount(Account currentAccount);
 
     Account updateAccount(Account currentAccount);

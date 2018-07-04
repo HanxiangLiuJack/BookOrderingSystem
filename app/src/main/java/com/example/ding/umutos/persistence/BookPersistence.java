@@ -7,8 +7,6 @@ public interface  BookPersistence {
   
     List<Book> getBookSequential();
 
-    public int currentBookNumber();
-
     Book insertBook(Book currentBook);
 
     Book updateBook(Book currentBook);

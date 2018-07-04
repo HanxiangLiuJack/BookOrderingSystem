@@ -39,7 +39,6 @@ public class BookListActivity extends AppCompatActivity {
 
         userType = getIntent().getIntExtra("userType",-1);
         userID = getIntent().getIntExtra("userID",-1);
-        System.out.println(userType+"      "+userID);
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -60,13 +59,13 @@ public class BookListActivity extends AppCompatActivity {
         }
 
         int size=newBookList.size();
-        int bookImg[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
+
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",bookImg[newBookList.get(i).getPicture()] );
+            book.put("img",newBookList.get(i).getPicResource() );
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);

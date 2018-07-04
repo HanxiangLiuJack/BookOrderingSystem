@@ -16,7 +16,7 @@ public class OrderTest {
     public void setup()
     {
         String [] orderInfo = {"Hanxiang","Liu","R3T","12345678","101 abcRoad"} ;
-        order = new Order("book1", "user1", "seller1", 100, orderInfo);
+        order = new Order("book1", 1, 2, 100, orderInfo);
     }
     @After
     public void tearDown(){order = null;}
@@ -26,7 +26,7 @@ public class OrderTest {
     {
         System.out.println("Test getBuyer() :");
 
-        assertTrue(order.getBuyerUserName().equals("user1"));
+        assertTrue(order.getBuyerUserName() == 1);
 
         System.out.println("Finish getBuyer() :");
     }
@@ -36,7 +36,7 @@ public class OrderTest {
     {
         System.out.println("Test getSeller() :");
 
-        assertTrue(order.getSellerUserName().equals("seller1"));
+        assertTrue(order.getSellerUserName() == 2);
 
         System.out.println("Finish getSeller() :");
     }

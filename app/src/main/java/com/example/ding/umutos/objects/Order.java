@@ -2,8 +2,8 @@ package com.example.ding.umutos.objects;
 
 public class Order {
     private String bookName;
-    private String buyerUserName;
-    private String sellerUserName;
+    private int buyerID;
+    private int sellerID;
     private double price;
     private String buyerFirstName;
     private String buyerLastName;
@@ -11,11 +11,11 @@ public class Order {
     private String phoneNumber;
     private String address;
 
-    public Order(String bookName, String buyerUserName, String sellerUserName, double price,  String[] orderInfo)
+    public Order(String bookName, int buyerID, int sellerID, double price,  String[] orderInfo)
     {
         this.bookName = bookName;
-        this.buyerUserName = buyerUserName;
-        this.sellerUserName = sellerUserName;
+        this.buyerID = buyerID;
+        this.sellerID = sellerID;
         this.price = price;
         buyerFirstName = orderInfo[0];
         buyerLastName = orderInfo[1];
@@ -29,12 +29,12 @@ public class Order {
         return bookName;
     }
 
-    public String getBuyerUserName()
+    public int getBuyerUserName()
     {
-        return buyerUserName;
+        return buyerID;
     }
 
-    public String getSellerUserName() { return sellerUserName; }
+    public int getSellerUserName() { return sellerID; }
 
     public double getPrice(){ return price; }
 

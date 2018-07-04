@@ -210,6 +210,18 @@ public class BookListActivity extends AppCompatActivity {
         BookListActivity.this.startActivity(intent);
     }
 
+    public void buttonPriceHighToLow(View view){
+        List<Book> aList=accessBookList.declineSort(newBookList);
+        loadBookList(aList);
+
+    }
+
+    public void buttonPriceLowToHigh(View view){
+        List<Book> aList=accessBookList.ascentSort(newBookList);
+        loadBookList(aList);
+
+    }
+
 
 
 }

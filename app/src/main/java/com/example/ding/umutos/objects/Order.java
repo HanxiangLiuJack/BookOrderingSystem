@@ -29,12 +29,12 @@ public class Order {
         return bookName;
     }
 
-    public int getBuyerUserName()
+    public int getBuyerID()
     {
         return buyerID;
     }
 
-    public int getSellerUserName() { return sellerID; }
+    public int getSellerID() { return sellerID; }
 
     public double getPrice(){ return price; }
 

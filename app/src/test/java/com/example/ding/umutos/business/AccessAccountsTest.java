@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 import com.example.ding.umutos.objects.Account;
-import com.example.ding.umutos.business.AccessAccounts;
+
 import com.example.ding.umutos.persistence.AccountPersistence;
 
 import com.example.ding.umutos.persistence.AccountPersistenceStub;
@@ -60,6 +60,12 @@ public class AccessAccountsTest {
         assertTrue(temp.equals(accounts));
 
         verify(accountPersistence).getAccountSequential();
+
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        List<Account> testAccountList = accessAccounts.getAccounts();
+        int numOfAccounts = testAccountList.size();
+        assertTrue(numOfAccounts == 6);
         System.out.println("\nfinished testing get account.\n");
     }
 

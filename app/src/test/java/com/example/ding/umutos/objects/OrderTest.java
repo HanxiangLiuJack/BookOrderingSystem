@@ -26,7 +26,7 @@ public class OrderTest {
     {
         System.out.println("Test getBuyer() :");
 
-        assertTrue(order.getBuyerUserName() == 1);
+        assertTrue(order.getBuyerID() == 1);
 
         System.out.println("Finish getBuyer() :");
     }
@@ -36,7 +36,7 @@ public class OrderTest {
     {
         System.out.println("Test getSeller() :");
 
-        assertTrue(order.getSellerUserName() == 2);
+        assertTrue(order.getSellerID() == 2);
 
         System.out.println("Finish getSeller() :");
     }

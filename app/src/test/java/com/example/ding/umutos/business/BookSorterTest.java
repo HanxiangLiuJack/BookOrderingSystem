@@ -1,6 +1,7 @@
 package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.persistence.BookPersistenceStub;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +19,7 @@ public class BookSorterTest {
     @Before
     public void setup()
     {
-        accessBooks = new AccessBooks();
+        accessBooks = new AccessBooks(new BookPersistenceStub());
     }
 
     @After

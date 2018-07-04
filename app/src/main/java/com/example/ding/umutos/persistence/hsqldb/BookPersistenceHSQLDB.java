@@ -15,15 +15,15 @@ import com.example.ding.umutos.persistence.BookPersistence;
 
 public class BookPersistenceHSQLDB implements BookPersistence {
 
-    private final Connection c;
+    private final String dbPath;
+
+    public BookPersistenceHSQLDB(final String dbPath){
+        this.dbPath = dbPath;
+    }
 
 
-    public BookPersistenceHSQLDB(final String dbPath) {
-        try {
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {
@@ -45,7 +45,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
 
-        try
+        try(final Connection c = connection())
         {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM books");
@@ -67,7 +67,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book insertBook(Book currentBook) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, currentBook.getName());
             st.setString(2, currentBook.getAuthor());
@@ -88,7 +88,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
 
     public Book updateBook(Book currentBook) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("UPDATE books SET bookName = ?, authorName = ?, bookPicture = ?, bookDescription = ?, bookCategory = ?, price = ?, ownerID = ? WHERE bookID = ?");
             st.setString(1, currentBook.getName());
             st.setString(2, currentBook.getAuthor());
@@ -110,7 +110,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public Book searchBook(int id){
         Book book = null;
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookID = ?");
             st.setInt(1, id);
 
@@ -133,7 +133,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> getUserBookSequential(int userID) {
         final List<Book> books = new ArrayList<>();
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerID = ?");
             st.setInt(1, userID);
 
@@ -154,7 +154,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public void deleteBook(int id) {
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM books WHERE bookID = ?");
             st.setInt(1, id);
             st.executeUpdate();
@@ -166,7 +166,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> getBookCategorySequential(String category) {
         final List<Book> books = new ArrayList<>();
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookCategory = ?");
             st.setString(1, category);
 
@@ -188,7 +188,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> searchKeyword(String keyword){
         final List<Book> books = new ArrayList<>();
-        try {
+        try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookName = ? OR authorName = ? OR bookCategory = ?");
             st.setString(1, keyword);
             st.setString(2, keyword);

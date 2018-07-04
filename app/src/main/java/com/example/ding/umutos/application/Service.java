@@ -9,9 +9,9 @@ import com.example.ding.umutos.persistence.hsqldb.OrderPersistenceHSQLDB;
 
 public class Service {
 
-    private static BookPersistence bookPersistence;
-    private static AccountPersistence accountPersistence;
-    private static OrderPersistence orderPersistence;
+    private static BookPersistence bookPersistence = null;
+    private static AccountPersistence accountPersistence = null;
+    private static OrderPersistence orderPersistence = null;
 
     public static synchronized BookPersistence getBookPersistence()
     {

@@ -14,15 +14,15 @@ import com.example.ding.umutos.objects.*;
 
 public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
-    private final Connection c;
+    private final String dbPath;
 
     public OrderPersistenceHSQLDB(final String dbPath)
     {
-        try{
-            this.c = DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
-        } catch (final SQLException e) {
-            throw new PersistenceException(e);
-        }
+        this.dbPath = dbPath;
+    }
+
+    private Connection connection() throws SQLException {
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
     }
 
     private Order fromResultSet(final ResultSet rs) throws SQLException {
@@ -44,7 +44,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     @Override
     public Order insertOrder(Order currentOrder)
     {
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO orders VALUES(?,?,?,?,?,?,?,?,?)");
             st.setString(1,currentOrder.getBookName());
             st.setString(2,currentOrder.getBuyerUserName());
@@ -68,7 +68,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     public List<Order> getBuyerOrders(int userID)
     {
         final List<Order> orders = new ArrayList<>();
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE buyerID = ?");
             st.setInt(1, userID);
             final ResultSet rs = st.executeQuery();
@@ -90,7 +90,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     public List<Order> getSellerOrders(int userID)
     {
         final List<Order> orders = new ArrayList<>();
-        try{
+        try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE sellerID = ?");
             st.setInt(1, userID);
             final ResultSet rs = st.executeQuery();

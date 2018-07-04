@@ -16,11 +16,12 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
 
     private final String dbPath;
 
-    private int userID;
+    private int maxUserID;
 
     public AccountPersistenceHSQLDB(final String dbPath)
     {
         this.dbPath = dbPath;
+        maxUserID = 0;
     }
 
     private Connection connection() throws SQLException {
@@ -31,6 +32,10 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
         final int userID = rs.getInt("ACCOUNTID");
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
+
+        if(userID>maxUserID){
+            maxUserID = userID;
+        }
 
         Account account =  new Account(userName,password);
         account.setUserID(userID);
@@ -76,24 +81,20 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
         }
     }
 
-    @Override
-    public int currentAccountNumber(){
-        List<Account> accounts = getAccountSequential();
-        return accounts.size();
-    }
 
     @Override
     public Account insertAccount(Account currentAccount)
     {
+        getAccountSequential();
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?)");
-            st.setInt(1, currentAccountNumber()+1);
+            st.setInt(1, maxUserID+1);
             st.setString(2,currentAccount.getUserName());
             st.setString(3,currentAccount.getPassword());
 
             st.executeUpdate();
 
-            currentAccount.setUserID(currentAccountNumber()+1);
+            currentAccount.setUserID(maxUserID+1);
 
             return currentAccount;
         } catch (final SQLException e){

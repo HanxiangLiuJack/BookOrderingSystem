@@ -21,10 +21,12 @@ import com.example.ding.umutos.persistence.BookPersistence;
 public class BookPersistenceHSQLDB implements BookPersistence {
 
     private final String dbPath;
+    private int maxBookID;
 
     public BookPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
         String newS=dbPath;
+        maxBookID = 0;
         Log.e("DB PATH",newS);
     }
 
@@ -44,6 +46,10 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         String bookCategory = rs.getString("bookCategory");
         Double price = rs.getDouble("price");
         int ownerID = rs.getInt("ownerID");
+
+        if(bookID>maxBookID){
+            maxBookID = bookID;
+        }
 
         Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
         book.setBookID(bookID);
@@ -74,18 +80,13 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @Override
-    public int currentBookNumber(){
-        List<Book> books = getBookSequential();
-        return books.size();
-    }
 
     @Override
     public Book insertBook(Book currentBook) {
-
+        getBookSequential();
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1,currentBookNumber()+1);
+            st.setInt(1,maxBookID+1);
             st.setString(2, currentBook.getName());
             st.setString(3, currentBook.getAuthor());
             st.setInt(4, currentBook.getPicture());
@@ -96,7 +97,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
             st.executeUpdate();
 
-            currentBook.setBookID(currentBookNumber()+1);
+            currentBook.setBookID(maxBookID+1);
 
             return currentBook;
         } catch (final SQLException e) {

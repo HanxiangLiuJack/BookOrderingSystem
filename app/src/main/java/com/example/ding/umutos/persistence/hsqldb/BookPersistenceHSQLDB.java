@@ -1,6 +1,11 @@
 package com.example.ding.umutos.persistence.hsqldb;
 
 
+import android.annotation.SuppressLint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,11 +24,15 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     public BookPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
+        String newS=dbPath;
+        Log.e("DB PATH",newS);
     }
 
 
     private Connection connection() throws SQLException {
+
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
+
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {
@@ -41,10 +50,11 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         return book;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
-
+        Log.v("Connect","begin！！！");
         try(final Connection c = connection())
         {
             final Statement st = c.createStatement();
@@ -65,8 +75,10 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public Book insertBook(Book currentBook) {
+
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, currentBook.getName());
@@ -85,6 +97,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
 
     public Book updateBook(Book currentBook) {
@@ -107,6 +120,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public Book searchBook(int id){
         Book book = null;
@@ -130,6 +144,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getUserBookSequential(int userID) {
         final List<Book> books = new ArrayList<>();
@@ -152,6 +167,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void deleteBook(int id) {
         try (final Connection c = connection()){
@@ -163,6 +179,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getBookCategorySequential(String category) {
         final List<Book> books = new ArrayList<>();
@@ -185,6 +202,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> searchKeyword(String keyword){
         final List<Book> books = new ArrayList<>();

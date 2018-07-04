@@ -1,5 +1,7 @@
 package com.example.ding.umutos.application;
 
+import android.util.Log;
+
 import com.example.ding.umutos.persistence.BookPersistence;
 import com.example.ding.umutos.persistence.AccountPersistence;
 import com.example.ding.umutos.persistence.OrderPersistence;
@@ -18,6 +20,7 @@ public class Service {
         if (bookPersistence == null)
         {
             bookPersistence = new BookPersistenceHSQLDB(Main.getDBPathName());
+
         }
 
         return bookPersistence;

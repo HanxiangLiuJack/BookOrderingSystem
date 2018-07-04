@@ -54,6 +54,7 @@ public class BookListActivity extends AppCompatActivity {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
             accessBookList=new AccessBooks();
+            Log.d("bb", String.valueOf(userType));
             newBookList=accessBookList.getBooks();
         }
 

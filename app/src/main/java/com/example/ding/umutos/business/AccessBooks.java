@@ -1,6 +1,8 @@
 package com.example.ding.umutos.business;
 
 
+import android.util.Log;
+
 import java.util.List;
 
 import com.example.ding.umutos.application.Service;
@@ -27,7 +29,9 @@ public class AccessBooks {
 
     public List<Book> getBooks()
     {
+        Log.v("Get Book","begin！！！");
         books = bookPersistence.getBookSequential();
+        Log.v("Get Book","done！！！");
         return books;
     }
 

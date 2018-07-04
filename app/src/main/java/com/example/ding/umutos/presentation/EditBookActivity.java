@@ -141,7 +141,7 @@ public class EditBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Book aBook=accessBookList.searchBook(bookID);
-                        accessBookList.updateBook(aBook,title,author,aBook.getPicture(),detail,category,Double.parseDouble(price));
+                        accessBookList.updateBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);

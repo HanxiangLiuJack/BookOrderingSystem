@@ -11,7 +11,7 @@ public class AccountValidator {
     {
         for(int i = 0; i < db.size(); i++)
         {
-            if(db.get(i).equals(userName))
+            if(db.get(i).getUserName().equals(userName))
                 return false;
         }
         return true;

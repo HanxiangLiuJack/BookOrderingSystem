@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 import com.example.ding.umutos.objects.Account;
-import com.example.ding.umutos.business.AccessAccounts;
+
 import com.example.ding.umutos.persistence.AccountPersistence;
 
 import com.example.ding.umutos.persistence.AccountPersistenceStub;
@@ -60,6 +60,12 @@ public class AccessAccountsTest {
         assertTrue(temp.equals(accounts));
 
         verify(accountPersistence).getAccountSequential();
+
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        List<Account> testAccountList = accessAccounts.getAccounts();
+        int numOfAccounts = testAccountList.size();
+        assertTrue(numOfAccounts == 6);
         System.out.println("\nfinished testing get account.\n");
     }
 
@@ -73,6 +79,13 @@ public class AccessAccountsTest {
         Account result = accessAccounts.getAccountByID(3);
         assertTrue(result.equals(account));
         verify(accountPersistence).getAccountByID(3);
+
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+
+        assertTrue(accessAccounts.getAccountByID(1).getUserID() == 1);
+
+        assertNull(accessAccounts.getAccountByID(100));
         System.out.println("\nEnd testing GetAccountByID.\n");
 
     }
@@ -91,6 +104,22 @@ public class AccessAccountsTest {
 
         verify(accountPersistence).insertAccount(account);
 
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+
+        Account templateAccount = new Account( "huahua", "123");//insert a new account
+
+        //before inserting, the account list should exist 6 accounts
+        assertTrue(accessAccounts.getAccounts().size() == 6);
+
+        boolean insertOrNot = accessAccounts.insertAccount(templateAccount);
+        assertTrue(insertOrNot);
+
+        //after inserting, the account list should exist 7 accounts
+        assertTrue(accessAccounts.getAccounts().size() == 7);
+
+        //delete the added account
+        accessAccounts.deleteAccount(templateAccount);
         System.out.println("\nfinished testing testInsertAccount.\n");
 
     }
@@ -108,6 +137,16 @@ public class AccessAccountsTest {
         assertTrue(result.equals(true));
 
         verify(accountPersistence).updateAccount(account);
+
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+
+        Account templateAccount = new Account("huahua", "11234");//insert a new account
+        accessAccounts.insertAccount(templateAccount);
+        templateAccount.setUserName("newName");
+        assertTrue(accessAccounts.updateAccount(templateAccount));
+        assertTrue(templateAccount.getUserName().equals("newName"));
+        accessAccounts.deleteAccount(templateAccount);
         System.out.println("\nfinished testing testUpdateAccount.\n");
     }
 
@@ -125,6 +164,14 @@ public class AccessAccountsTest {
 
         verify(accountPersistence).deleteAccount(account);
 
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+
+        Account templateAccount = new Account("huahua", "12312");//insert a new account
+        accessAccounts.insertAccount(templateAccount);
+        assertTrue(accessAccounts.getAccounts().size() == 7);
+        accessAccounts.deleteAccount(templateAccount);
+        assertTrue(accessAccounts.getAccounts().size() == 6);
         System.out.println("\nfinished testing testDeleteAccount.\n");
     }
 }

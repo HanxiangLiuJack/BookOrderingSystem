@@ -27,8 +27,8 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
     private Order fromResultSet(final ResultSet rs) throws SQLException {
         final String bookName = rs.getString("bookName");
-        final String buyerUserName = rs.getString("buyerUserName");
-        final String sellerUserName = rs.getString("sellerUserName");
+        final int buyerID = rs.getInt("buyerID");
+        final int sellerID = rs.getInt("sellerID");
         final double price = rs.getDouble("price");
         final String buyerFirstName = rs.getString("buyerFirstName");
         final String buyerLastName = rs.getString("buyerLastName");
@@ -37,7 +37,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         final String address = rs.getString("address");
         final String[] orderInfo = {buyerFirstName,buyerLastName,postCode,phoneNumber,address};
 
-        return new Order(bookName,buyerUserName,sellerUserName,price,orderInfo);
+        return new Order(bookName,buyerID,sellerID,price,orderInfo);
     }
 
 
@@ -47,8 +47,8 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO orders VALUES(?,?,?,?,?,?,?,?,?)");
             st.setString(1,currentOrder.getBookName());
-            st.setString(2,currentOrder.getBuyerUserName());
-            st.setString(3,currentOrder.getSellerUserName());
+            st.setInt(2,currentOrder.getBuyerID());
+            st.setInt(3,currentOrder.getSellerID());
             st.setDouble(4,currentOrder.getPrice());
             st.setString(5,currentOrder.getBuyerFirstName());
             st.setString(6,currentOrder.getBuyerLastName());

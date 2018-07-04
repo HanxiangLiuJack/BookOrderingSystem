@@ -3,6 +3,7 @@ package com.example.ding.umutos.business;
 import com.example.ding.umutos.objects.Book;
 
 import com.example.ding.umutos.persistence.BookPersistence;
+import com.example.ding.umutos.persistence.BookPersistenceStub;
 
 
 import org.junit.After;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -64,6 +66,13 @@ public class AccessBooksTest {
         assertTrue(list.equals(books));
 
         verify(bookPersistence).getBookSequential();
+
+        bookPersistence = new BookPersistenceStub();
+        accessBooks = new AccessBooks(bookPersistence);
+
+        List<Book> testBookList = accessBooks.getBooks();
+        int numOfBooks = testBookList.size();
+        assertTrue(numOfBooks == 10);
         System.out.println("\nFinished testing testGetBookList\n");
 
     }
@@ -85,6 +94,12 @@ public class AccessBooksTest {
 
         verify(bookPersistence).getUserBookSequential(1);
 
+        bookPersistence = new BookPersistenceStub();
+        accessBooks = new AccessBooks(bookPersistence);
+
+        List<Book> testUserBookList = accessBooks.getUserBooks(1);
+        int numOfBooks = testUserBookList.size();
+        assertTrue(numOfBooks == 1);//account 1 has 1 books
         System.out.println("\nFinished testing testGetUserBookList\n");
 
     }
@@ -106,6 +121,15 @@ public class AccessBooksTest {
 
         verify(bookPersistence).insertBook(book);
 
+        bookPersistence = new BookPersistenceStub();
+        accessBooks = new AccessBooks(bookPersistence);
+
+        Book templateBook = new Book( "name", "Author", 1, "info", "COMP", 100, 1 );
+        assertTrue(accessBooks.insertBook(templateBook));
+
+        templateBook = null;
+        assertTrue(!accessBooks.insertBook(templateBook));
+
         System.out.println("\nStarting test testInsertBook\n");
     }
 
@@ -123,6 +147,18 @@ public class AccessBooksTest {
 
         verify(bookPersistence).searchBook(1);
 
+        bookPersistence = new BookPersistenceStub();
+        accessBooks = new AccessBooks(bookPersistence);
+        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
+        templateBook.setBookID(100);
+        accessBooks.insertBook(templateBook);
+
+        //search a book exist in the list
+        assertTrue(accessBooks.searchBook(templateBook.getBookID()).getBookID() == templateBook.getBookID());
+        accessBooks.deleteBook(templateBook.getBookID());
+
+        //search a book not exist
+        assertNull(accessBooks.searchBook(100));
         System.out.println("\nStarting test testSearchBook\n");
     }
 
@@ -137,6 +173,7 @@ public class AccessBooksTest {
         List <Book> temp = accessBooks.searchBooksByKeyWord(key);
         assertTrue(temp.equals(bookList));
         verify(bookPersistence).searchKeyword(key);
+
         System.out.println("\nFinishing test testSearchBookByKeyWord\n");
     }
 
@@ -154,6 +191,14 @@ public class AccessBooksTest {
 
         verify(bookPersistence).searchBook(1);
         verify(bookPersistence).deleteBook(1);
+
+        bookPersistence = new BookPersistenceStub();
+        accessBooks = new AccessBooks(bookPersistence);
+        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
+        templateBook.setBookID(20);
+        accessBooks.insertBook(templateBook);
+        accessBooks.deleteBook(templateBook.getBookID());
+        assertNull(accessBooks.searchBook(templateBook.getBookID()));
         System.out.println("\nFinishing test testDeleteBook\n");
     }
 

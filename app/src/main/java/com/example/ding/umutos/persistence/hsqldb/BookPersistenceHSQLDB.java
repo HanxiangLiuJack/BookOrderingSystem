@@ -49,6 +49,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
         if(bookID>maxBookID){
             maxBookID = bookID;
+            System.out.println(maxBookID);
         }
 
         Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);

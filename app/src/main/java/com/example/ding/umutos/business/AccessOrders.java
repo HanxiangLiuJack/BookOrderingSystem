@@ -25,17 +25,21 @@ public class AccessOrders {
 
 
     //need to test
-    public List<Order> orderHistory(Account user, int number) {
+    public List<Order> orderHistory(int id, int number) {
         List<Order> history;
 
         if (number == 0) {
-            history = orderPersistence.getBuyerOrders(user.getUserID());
+            history = orderPersistence.getBuyerOrders(id);
         } else {
-            history = orderPersistence.getSellerOrders(user.getUserID());
+            history = orderPersistence.getSellerOrders(id);
         }
         return history;
     }
 
+    public List<Order> getOrder()
+    {
+        return orderPersistence.getOrders();
+    }
 
     public boolean insertOrder(Order currentOrder){
         OrderValidator validator = new OrderValidator();

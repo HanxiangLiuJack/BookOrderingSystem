@@ -108,4 +108,9 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         }
     }
 
+    @Override
+    public List<Order> getOrders() {
+        return null;
+    }
+
 }

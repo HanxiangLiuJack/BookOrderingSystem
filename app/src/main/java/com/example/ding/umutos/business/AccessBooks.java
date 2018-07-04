@@ -68,7 +68,7 @@ public class AccessBooks {
         return sortBook;
     }
 
-    public List<Book> declineSort(){
+    public List<Book> descentSort(){
         List<Book> sortBook;
         BookSorter sorter=new BookSorter();
         sortBook=sorter.HighPrice(getBooks());

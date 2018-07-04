@@ -9,13 +9,12 @@ package com.example.ding.umutos.objects;
 
 public class Account
 {
-    private final int userID;
+    private int userID;
     private String userName;
     private String passWord;
    
-    public Account( int userID , String userName ,String passWord)
+    public Account(String userName ,String passWord)
     {
-        this.userID = userID;
         this.userName = userName;
         this.passWord = passWord;
     }
@@ -28,6 +27,11 @@ public class Account
     public String getUserName()
     {
         return userName;
+    }
+
+    public void setUserID(int id)
+    {
+        userID = id;
     }
 
     public void setUserName(String newName)

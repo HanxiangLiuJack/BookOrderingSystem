@@ -126,7 +126,19 @@ public class AccessBooksTest {
         System.out.println("\nStarting test testSearchBook\n");
     }
 
-    
+    @Test
+    public void testSearchBookByKeyWord()
+    {
+        System.out.println("\nStarting test testSearchBookByKeyWord\n");
+        final List <Book> bookList = new ArrayList<>();
+        bookList.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
+        String key = "aaa";
+        when(bookPersistence.searchKeyword(key)).thenReturn(bookList);
+        List <Book> temp = accessBooks.searchBooksByKeyWord(key);
+        assertTrue(temp.equals(bookList));
+        verify(bookPersistence).searchKeyword(key);
+        System.out.println("\nFinishing test testSearchBookByKeyWord\n");
+    }
 
     @Test
     public void testDeleteBook()
@@ -142,7 +154,7 @@ public class AccessBooksTest {
 
         verify(bookPersistence).searchBook(1);
         verify(bookPersistence).deleteBook(1);
-        System.out.println("\nStarting test testDeleteBook\n");
+        System.out.println("\nFinishing test testDeleteBook\n");
     }
 
 }

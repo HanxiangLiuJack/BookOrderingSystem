@@ -3,7 +3,6 @@ package com.example.ding.umutos.business;
 import com.example.ding.umutos.objects.Book;
 
 import com.example.ding.umutos.persistence.BookPersistence;
-import com.example.ding.umutos.persistence.BookPersistenceStub;
 
 
 import org.junit.After;
@@ -14,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 
 
 
@@ -30,8 +29,6 @@ public class AccessBooksTest {
     @Before
     public void setup()
     {
-
-        accessBooks = new AccessBooks();
         bookPersistence = mock(BookPersistence.class);
         accessBooks = new AccessBooks(bookPersistence);
     }
@@ -58,14 +55,13 @@ public class AccessBooksTest {
         System.out.println("\nStarting test testGetBookList\n");
         final List<Book> books = new ArrayList<>();
         books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
-        List <Book> list;
+
         when(bookPersistence.getBookSequential()).thenReturn(books);
 
 
-        list = accessBooks.getBooks();
+        List<Book> list = accessBooks.getBooks();
 
         assertTrue(list.equals(books));
-
 
         verify(bookPersistence).getBookSequential();
         System.out.println("\nFinished testing testGetBookList\n");
@@ -81,10 +77,9 @@ public class AccessBooksTest {
         books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
         books.add(new Book("bbb","ccc",2,"eee","fff",5.99,1));
 
-        List<Book>temp;
         when(bookPersistence.getUserBookSequential(1)).thenReturn(books);
 
-        temp = accessBooks.getUserBooks(1);
+        List<Book> temp = accessBooks.getUserBooks(1);
 
         assertTrue(temp.equals(books));
 
@@ -109,8 +104,7 @@ public class AccessBooksTest {
         result = accessBooks.insertBook(book);
         assertTrue(result.equals(true));
 
-        verify(bookPersistence).getUserBookSequential(1);
-        verify(bookPersistence).getBookSequential();
+        verify(bookPersistence).insertBook(book);
 
         System.out.println("\nStarting test testInsertBook\n");
     }
@@ -119,17 +113,11 @@ public class AccessBooksTest {
     @Test
     public void testSearchBook()
     {
-
         System.out.println("\nStarting test testSearchBook\n");
-
-
-        final List<Book> books = new ArrayList<>();
-        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
         final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99,1);
-        Book temp;
         when(bookPersistence.searchBook(1)).thenReturn(book);
 
-        temp = accessBooks.searchBook(1);
+        Book temp = accessBooks.searchBook(1);
 
         assertTrue(temp.equals(book));
 
@@ -143,30 +131,17 @@ public class AccessBooksTest {
     @Test
     public void testDeleteBook()
     {
-        /*
         System.out.println("\nStarting test testDeleteBook\n");
-        templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
-        accessBooks.insertBook(templateBook);
-        accessBooks.deleteBook(templateBook.getBookID());
-        assertTrue(accessBooks.searchBook(templateBook.getBookID()) == null);
-        System.out.println("\nStarting test testDeleteBook\n");
-        */
-        System.out.println("\nStarting test testDeleteBook\n");
+        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99, 1);
 
-        final List<Book> books = new ArrayList<>();
-        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
-        books.add(new Book("bbb","eee",2, "fff","ggg",5.99,2));
-        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99,1);
+        when(bookPersistence.searchBook(1)).thenReturn(book);
 
-        Boolean result ;
-        when(bookPersistence.getBookSequential()).thenReturn(books);
+        doNothing().when(bookPersistence).deleteBook(1);
 
         accessBooks.deleteBook(1);
 
-        assertTrue(accessBooks.searchBook(1).equals(false));
-
-        verify(bookPersistence).getBookSequential();
-
+        verify(bookPersistence).searchBook(1);
+        verify(bookPersistence).deleteBook(1);
         System.out.println("\nStarting test testDeleteBook\n");
     }
 

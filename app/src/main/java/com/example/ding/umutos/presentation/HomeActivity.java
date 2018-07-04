@@ -21,15 +21,14 @@ public class HomeActivity extends AppCompatActivity {
         TextView welcome =(TextView)findViewById(R.id.welcomeMessage);
         String name=newAcc.getUserName().split(" ")[0];
         welcome.setText("Hi, "+name);
-
-
     }
-
 
     public void buttonSellOnClick(View v) {
         int userType=0;
         Intent sellIntent = new Intent(HomeActivity.this, BookListActivity.class);
         sellIntent.putExtra("userType", userType);
+        sellIntent.putExtra("userID", userID);
+        System.out.println(userType+"      "+userID);
         HomeActivity.this.startActivity(sellIntent);
     }
 
@@ -37,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
         int userType=1;
         Intent buyIntent = new Intent(HomeActivity.this, BookListActivity.class);
         buyIntent.putExtra("userType", userType);
+        buyIntent.putExtra("userID", userID);
         HomeActivity.this.startActivity(buyIntent);
     }
 }

@@ -31,14 +31,15 @@ public class BookListActivity extends AppCompatActivity {
     private AccessAccounts accessAccounts;
     private List<Book> newBookList;
     private TextView infoBar;
-    int userType;
+    private int userType, userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         userType = getIntent().getIntExtra("userType",-1);
-        Log.d("aa", String.valueOf(userType));
+        userID = getIntent().getIntExtra("userID",-1);
+        System.out.println(userType+"      "+userID);
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -46,9 +47,9 @@ public class BookListActivity extends AppCompatActivity {
             bookID=-1;
             accessBookList=new AccessBooks();
             accessAccounts=new AccessAccounts();
-            newBookList=accessBookList.getUserBooks(2);
+            newBookList=accessBookList.getUserBooks(userID);
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
-            infoBar.setText("Hi "+accessAccounts.getAccountByID(2).getUserName()+".");
+            infoBar.setText("Hi "+accessAccounts.getAccountByID(userID).getUserName()+".");
         }
         else {
             setContentView(R.layout.activity_customer_booklist);
@@ -176,9 +177,9 @@ public class BookListActivity extends AppCompatActivity {
     }
 
     public void buttonOpenHistory(View view){
-        int userType=2;
         Intent intent = new Intent(BookListActivity.this,BookListActivity.class);
         intent.putExtra("userType", userType);
+        intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);
     }
 

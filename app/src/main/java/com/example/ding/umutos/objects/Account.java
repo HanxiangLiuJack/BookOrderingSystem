@@ -28,7 +28,7 @@ public class Account
     {
         return userName;
     }
-    public String getPassword() 
+    public String getPassword()
     {
         return password;
     }

@@ -28,7 +28,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     private Account fromResultSet(final ResultSet rs) throws SQLException {
-        final int userID = rs.getInt("userID");
+        final int userID = rs.getInt("ACCOUNTID");
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
 
@@ -62,7 +62,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     {
         Account account = null;
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE userID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE ACCOUNTID = ?");
             st.setInt(1, userID);
             final ResultSet rs = st.executeQuery();
             if(rs.next()){

@@ -16,6 +16,8 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
 
     private final String dbPath;
 
+    private int userID;
+
     public AccountPersistenceHSQLDB(final String dbPath)
     {
         this.dbPath = dbPath;
@@ -75,14 +77,23 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
+    public int currentAccountNumber(){
+        List<Account> accounts = getAccountSequential();
+        return accounts.size();
+    }
+
+    @Override
     public Account insertAccount(Account currentAccount)
     {
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?)");
-            st.setString(1,currentAccount.getUserName());
-            st.setString(2,currentAccount.getPassword());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?)");
+            st.setInt(1, currentAccountNumber()+1);
+            st.setString(2,currentAccount.getUserName());
+            st.setString(3,currentAccount.getPassword());
 
             st.executeUpdate();
+
+            currentAccount.setUserID(currentAccountNumber()+1);
 
             return currentAccount;
         } catch (final SQLException e){
@@ -94,9 +105,10 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public Account updateAccount(Account currentAccount)
     {
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("UPDATE accounts SET userName = ? WHERE userID = ?");
+            final PreparedStatement st = c.prepareStatement("UPDATE accounts SET userName = ?, passWord = ? WHERE userID = ?");
             st.setString(1, currentAccount.getUserName());
-            st.setInt(2, currentAccount.getUserID());
+            st.setString(2, currentAccount.getPassword());
+            st.setInt(3,currentAccount.getUserID());
 
             st.executeUpdate();
 

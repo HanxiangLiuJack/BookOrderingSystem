@@ -50,7 +50,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         return book;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
@@ -75,21 +74,29 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public int currentBookNumber(){
+        List<Book> books = getBookSequential();
+        return books.size();
+    }
+
     @Override
     public Book insertBook(Book currentBook) {
 
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?)");
-            st.setString(1, currentBook.getName());
-            st.setString(2, currentBook.getAuthor());
-            st.setInt(3, currentBook.getPicture());
-            st.setString(4, currentBook.getDescription());
-            st.setString(5, currentBook.getCategory());
-            st.setDouble(6, currentBook.getPrice());
-            st.setInt(7, currentBook.getOwner());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+            st.setInt(1,currentBookNumber()+1);
+            st.setString(2, currentBook.getName());
+            st.setString(3, currentBook.getAuthor());
+            st.setInt(4, currentBook.getPicture());
+            st.setString(5, currentBook.getDescription());
+            st.setString(6, currentBook.getCategory());
+            st.setDouble(7, currentBook.getPrice());
+            st.setInt(8, currentBook.getOwner());
 
             st.executeUpdate();
+
+            currentBook.setBookID(currentBookNumber()+1);
 
             return currentBook;
         } catch (final SQLException e) {
@@ -97,7 +104,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
 
     public Book updateBook(Book currentBook) {
@@ -120,7 +126,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public Book searchBook(int id){
         Book book = null;
@@ -144,7 +149,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getUserBookSequential(int userID) {
         final List<Book> books = new ArrayList<>();
@@ -167,7 +171,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void deleteBook(int id) {
         try (final Connection c = connection()){
@@ -179,7 +182,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getBookCategorySequential(String category) {
         final List<Book> books = new ArrayList<>();
@@ -202,7 +204,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> searchKeyword(String keyword){
         final List<Book> books = new ArrayList<>();

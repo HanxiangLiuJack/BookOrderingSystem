@@ -67,13 +67,16 @@ public class AccessAccounts {
         return targetAccount;
     }
 
-    public void register(String userName, String passWord)
+    public Account register(String userName, String passWord)
     {
+        Account targetAccount = null;
         AccountValidator validator = new AccountValidator();
+        getAccounts();
         if(validator.validateUserName(userName, accounts) && validator.validatePassword(passWord))
         {
-            Account a = new Account(userName, Integer.toString(passWord.hashCode()));
-            this.insertAccount(a);
+            targetAccount = new Account(userName, Integer.toString(passWord.hashCode()));
+            this.insertAccount(targetAccount);
         }
+        return targetAccount;
     }
 }

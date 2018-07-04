@@ -40,7 +40,6 @@
         android:layout_height="40dp"
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
-
         android:layout_marginTop="10dp"
         android:background="@drawable/text_style"
         android:ems="10"
@@ -52,7 +51,7 @@
 
 
     <TextView
-        android:id="@+id/registerPswTitle1"
+        android:id="@+id/registerPswTitle"
         android:layout_width="240dp"
         android:layout_height="28dp"
         android:layout_marginStart="180dp"
@@ -66,18 +65,17 @@
 
 
     <EditText
-        android:id="@+id/registerPsw1"
+        android:id="@+id/registerPsw"
         android:layout_width="240dp"
         android:layout_height="40dp"
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
-
         android:layout_marginTop="10dp"
         android:background="@drawable/text_style"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerPswTitle1" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPswTitle" />
 
 
     <Button
@@ -88,7 +86,6 @@
         android:layout_marginLeft="40dp"
         android:layout_marginStart="40dp"
         android:background="@drawable/button_style"
-
         android:onClick="buttonRegCancel"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -102,7 +99,6 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/button_style"
-
         android:onClick="buttonRegSubmit"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"

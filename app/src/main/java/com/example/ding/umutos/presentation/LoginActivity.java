@@ -56,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             homeIntent.putExtra("userID", userID);
             LoginActivity.this.startActivity(homeIntent);
         }
-
-
     }
 
     public void buttonRegisterOnClick(View v) {
@@ -73,10 +71,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-
                     }
                 })
-
                 .show();
     }
 
@@ -88,20 +84,12 @@ public class LoginActivity extends AppCompatActivity {
         File dataDirectory = context.getDir(DB_PATH, Context.MODE_PRIVATE);
         AssetManager assetManager = getAssets();
         try {
-
             assetNames = assetManager.list(DB_PATH);
             for (int i = 0; i < assetNames.length; i++) {
                 assetNames[i] = DB_PATH + "/" + assetNames[i];
             }
-
             copyAssetsToDirectory(assetNames, dataDirectory);
-
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
-            AccessBooks books = new AccessBooks();
-            List<Book> bookList = books.getBooks();
-            for (int i=0;i<bookList.size();i++){
-                System.out.println(bookList.get(i).getName());
-            }
 
         } catch (final IOException ioe) {
             Log.v("GAGAGA", "Unable to access application data: " + ioe.getMessage());

@@ -27,7 +27,7 @@ android:orientation="vertical">
                 android:orientation="horizontal">
 
                 <SearchView
-                    android:hint="Search you book here"
+                    android:id="@+id/searchByKeyword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

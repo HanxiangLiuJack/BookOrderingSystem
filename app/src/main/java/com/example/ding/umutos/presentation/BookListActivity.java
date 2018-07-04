@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.TextUtils;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -14,6 +15,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.SearchView;
+import android.widget.Toast;
+
 
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BookListActivity extends AppCompatActivity {
+public class BookListActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     private ListView bookList;
     private int bookID;
@@ -67,11 +71,19 @@ public class BookListActivity extends AppCompatActivity {
             adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
             searchByCategory.setAdapter(adapter);
             searchByCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+            SearchView sv=(SearchView)findViewById(R.id.searchByKeyword);
+            sv.setIconifiedByDefault(false);
+            sv.setOnQueryTextListener(this);
+            sv.setSubmitButtonEnabled(true);
+            sv.setQueryHint("Search book here");
+
+
         }
 
 
 
     }
+
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
@@ -85,6 +97,29 @@ public class BookListActivity extends AppCompatActivity {
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        // TODO Auto-generated method stub
+        if(TextUtils.isEmpty(newText))
+        {
+            bookList.clearTextFilter();
+        }
+        else
+        {
+            bookList.setFilterText(newText);
+        }
+        return true;
+    }
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        // TODO Auto-generated method stub
+        newBookList=accessBookList.searchBooksByKeyWord( query );
+        loadBookList( newBookList );
+        return true;
+    }
+
 
 
     public void loadBookList( List<Book> newBookList ){
@@ -121,6 +156,7 @@ public class BookListActivity extends AppCompatActivity {
                 else{
                     Intent intent = new Intent(BookListActivity.this,SingleBookActivity.class);
                     intent.putExtra("bookID", bookID);
+                    intent.putExtra("userID", userID);
                     BookListActivity.this.startActivity(intent);
                 }
             }
@@ -165,8 +201,10 @@ public class BookListActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         accessBookList.deleteBook(bookID);
-                        finish();
+
                         Intent intent = new Intent(BookListActivity.this, BookListActivity.class);
+                        intent.putExtra("userID", userID);
+                        intent.putExtra("userType", userType);
                         startActivity(intent);
                     }
                 })
@@ -190,21 +228,20 @@ public class BookListActivity extends AppCompatActivity {
 
     private void openEditBookActivity(){
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
+        intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);
     }
 
     private void openEditBookActivity(int bookID){
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
         intent.putExtra("bookID", bookID);
+        intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);
     }
 
-    public void buttonHistoryBack(View view) {
-        finish();
-    }
 
     public void buttonOpenHistory(View view){
-        Intent intent = new Intent(BookListActivity.this,BookListActivity.class);
+        Intent intent = new Intent(BookListActivity.this,HistoryActivity.class);
         intent.putExtra("userType", userType);
         intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);

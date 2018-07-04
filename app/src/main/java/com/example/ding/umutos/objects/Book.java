@@ -41,6 +41,12 @@ public class Book
 
     }
 
+    public Book(){
+        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
+        bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
+
+    }
+
     public void setPicture(int pic)
     {
         this.bookPicture = pic;
@@ -53,7 +59,10 @@ public class Book
 
     public int getPicResource()
     {
-        return bookImg[bookID];
+        if(bookID>10)
+            return bookImg[0];
+        else
+            return bookImg[bookID];
     }
 
     public String getDescription()

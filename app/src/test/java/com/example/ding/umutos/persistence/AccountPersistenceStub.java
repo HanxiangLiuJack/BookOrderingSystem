@@ -20,6 +20,7 @@ public class AccountPersistenceStub implements AccountPersistence{
         Accounts.add(new Account("Tianhua Xu", "456"));
         Accounts.add(new Account("Zitao Zheng", "567"));
         Accounts.add(new Account("Xiao Peng", "678"));
+        Accounts.get(0).setUserID(1);
     }
 
     @Override

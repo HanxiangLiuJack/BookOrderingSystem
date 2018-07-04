@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.persistence.BookPersistence;
+
 
 public class BookPersistenceStub implements BookPersistence {
 
@@ -39,7 +39,7 @@ public class BookPersistenceStub implements BookPersistence {
         books.add(currentBook);
         return currentBook;
     }
-    
+
     @Override
     public Book updateBook(Book currentBook)
     {
@@ -92,6 +92,16 @@ public class BookPersistenceStub implements BookPersistence {
         index=books.indexOf(searchBook(id));
         if(index>=0)
             books.remove(index);
+    }
+
+    @Override
+    public List<Book> getBookCategorySequential(String category) {
+        return null;
+    }
+
+    @Override
+    public List<Book> searchKeyword(String keyword) {
+        return null;
     }
 
 }

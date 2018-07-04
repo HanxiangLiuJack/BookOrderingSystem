@@ -17,7 +17,7 @@ public interface  BookPersistence {
     
     void deleteBook(int id);
 
-    List<Book> getCategoryList(String category);
+    List<Book> getBookCategorySequential(String category);
 
-   
+    List<Book> searchKeyword(String keyword);
 }

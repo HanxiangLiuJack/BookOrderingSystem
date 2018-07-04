@@ -13,8 +13,12 @@ import com.example.ding.umutos.business.*;
 @Suite.SuiteClasses({
         AccessAccountsTest.class,
         AccessBooksTest.class,
+        AccessOrderTest.class,
         BookTest.class,
-        AccountTest.class
+        AccountTest.class,
+        OrderTest.class,
+        BookSorterTest.class,
+        BookValidatorTest.class
 })
 
 public class AllTests {

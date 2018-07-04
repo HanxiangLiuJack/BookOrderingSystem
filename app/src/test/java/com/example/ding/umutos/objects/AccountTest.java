@@ -16,7 +16,7 @@ public class AccountTest {
     @Before
     public void setup()
     {
-        templateAccount = new Account(12345, "John");
+        templateAccount = new Account("huahua", "7797047");
     }
 
     @After

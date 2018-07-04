@@ -1,8 +1,6 @@
 package com.example.ding.umutos.business;
 
-import android.util.Log;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.example.ding.umutos.application.Service;
@@ -21,16 +19,22 @@ public class AccessBooks {
         books = null;
     }
 
+    public AccessBooks(final BookPersistence bookPersistence)
+    {
+        this();
+        this.bookPersistence = bookPersistence;
+    }
+
     public List<Book> getBooks()
     {
         books = bookPersistence.getBookSequential();
-        return Collections.unmodifiableList(books);
+        return books;
     }
 
     public List<Book> getUserBooks(int userID)
     {
         userBooks = bookPersistence.getUserBookSequential(userID);
-        return Collections.unmodifiableList(userBooks);
+        return userBooks;
     }
 
     public boolean insertBook(Book currentBook)
@@ -49,7 +53,7 @@ public class AccessBooks {
 
     public List<Book> CategoryList(String category){
         List<Book> cBook;
-        cBook=bookPersistence.getCategoryList(category);
+        cBook=bookPersistence.getBookCategorySequential(category);
         return cBook;
 
     }
@@ -74,10 +78,10 @@ public class AccessBooks {
         return bookPersistence.searchBook(id);
     }
 
-//    public List<Book> searchBooksByKeyWord(String key)
-//    {
-//        return bookPersistence.searchBooksByKeyWord(key);
-//    }
+    public List<Book> searchBooksByKeyWord(String key)
+    {
+        return bookPersistence.searchKeyword(key);
+    }
 
     public boolean updateBook(Book currentBook)
     {

@@ -20,7 +20,6 @@ public class EditBookActivity extends AppCompatActivity {
 
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
-    private String[] ctg = {"Agriculture","Architecture and design","Business","Divinity","Education","Engineering and technology","Environmental studies and forestry","Family and consumer science","Human physical performance and recreation", "Journalism, media studies and communication","Law","Library and museum studies","Medicine","Military sciences","Public administration","Public policy","Social work","Transportation"};
 
     private int bookID;
     private String bookTitle;
@@ -36,35 +35,31 @@ public class EditBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
 
+        accessBookList=new AccessBooks();
+        bookID = getIntent().getIntExtra("bookID",-1);
+        newBook=accessBookList.searchBook(bookID);
         editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ctg);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
-        accessBookList=new AccessBooks();
+        editBookTitle=(EditText)findViewById(R.id.editBookTitle);
+        editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
+        editBookPrice=(EditText)findViewById(R.id.editBookPrice);
+        editBookDetail=(EditText)findViewById(R.id.editBookDetail);
 
-        bookID=-1;
-        bookID = getIntent().getIntExtra("bookID",-1);
+        editBookTitle.setText(newBook.getName());
+        editBookAuthor.setText(newBook.getAuthor());
+        editBookPrice.setText(""+newBook.getPrice());
+        editBookDetail.setText(newBook.getDescription());
 
-        if (bookID!=-1){
-            newBook=accessBookList.searchBook(bookID);
-            editBookTitle=(EditText)findViewById(R.id.editBookTitle);
-            editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
-            editBookPrice=(EditText)findViewById(R.id.editBookPrice);
-            editBookDetail=(EditText)findViewById(R.id.editBookDetail);
 
-            editBookTitle.setText(newBook.getName());
-            editBookAuthor.setText(newBook.getAuthor());
-            editBookPrice.setText(""+newBook.getPrice());
-            editBookDetail.setText(newBook.getDescription());
-
-        }
     }
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=ctg[arg2];
+            category=newBook.getBookCategoryArr()[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {

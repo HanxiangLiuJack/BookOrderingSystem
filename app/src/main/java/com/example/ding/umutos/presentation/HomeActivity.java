@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent sellIntent = new Intent(HomeActivity.this, BookListActivity.class);
         sellIntent.putExtra("userType", userType);
         sellIntent.putExtra("userID", userID);
-        System.out.println(userType+"      "+userID);
         HomeActivity.this.startActivity(sellIntent);
     }
 

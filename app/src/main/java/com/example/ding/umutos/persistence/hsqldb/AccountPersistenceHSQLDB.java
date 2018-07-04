@@ -22,7 +22,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath ,"SA","");
     }
 
     private Account fromResultSet(final ResultSet rs) throws SQLException {

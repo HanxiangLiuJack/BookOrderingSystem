@@ -1,6 +1,9 @@
 package com.example.ding.umutos.persistence.hsqldb;
 
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -23,7 +26,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
 
     private Connection connection() throws SQLException {
-        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
+        return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath ,"SA","");
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {
@@ -41,6 +44,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         return book;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();

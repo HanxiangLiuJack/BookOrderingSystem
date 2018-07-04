@@ -61,7 +61,7 @@ public class AccessAccountsTest {
     public void testInsertAccount()
     {
         System.out.println("\nStart testing testInsertAccount.\n");
-        templateAccount = new Account(7, "huahua");//insert a new account
+        templateAccount = new Account("huahua", "7797047");//insert a new account
 
         //before inserting, the account list should exist 6 accounts
         assertTrue(accessAccounts.getAccounts().size() == 6);
@@ -81,7 +81,7 @@ public class AccessAccountsTest {
     public void testUpdateAccount()
     {
         System.out.println("\nStart testing testUpdateAccount.\n");
-        templateAccount = new Account(7, "huahua");//insert a new account
+        templateAccount = new Account("huahua", "7797047");//insert a new account
         accessAccounts.insertAccount(templateAccount);
         templateAccount.setUserName("newName");
         assertTrue(accessAccounts.updateAccount(templateAccount));
@@ -94,7 +94,7 @@ public class AccessAccountsTest {
     public void testDeleteAccount()
     {
         System.out.println("\nStart testing testDeleteAccount.\n");
-        templateAccount = new Account(7, "huahua");//insert a new account
+        templateAccount = new Account("huahua", "7797047");//insert a new account
         accessAccounts.insertAccount(templateAccount);
         assertTrue(accessAccounts.getAccounts().size() == 7);
         accessAccounts.deleteAccount(templateAccount);

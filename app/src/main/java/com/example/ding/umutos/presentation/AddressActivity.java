@@ -26,8 +26,11 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
-        accessBookList=new AccessBooks();
         userID = getIntent().getIntExtra("userID",-1);
+        accessOrders=new AccessOrders(  );
+        accessBookList=new AccessBooks();
+
+
 
     }
 
@@ -76,11 +79,11 @@ public class AddressActivity extends AppCompatActivity {
                         accessBookList.deleteBook(bookID);
                         String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
                         Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
-                        System.out.println(newOrder.getBookName());
                         accessOrders.insertOrder( newOrder );
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }

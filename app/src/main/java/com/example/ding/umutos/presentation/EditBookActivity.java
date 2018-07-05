@@ -111,7 +111,6 @@ public class EditBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userID);
-                        Log.e("error",category);
                         accessBookList.insertBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);

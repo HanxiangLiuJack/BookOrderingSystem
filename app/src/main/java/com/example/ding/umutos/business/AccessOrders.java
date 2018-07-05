@@ -1,6 +1,8 @@
 package com.example.ding.umutos.business;
 
 
+import android.util.Log;
+
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
@@ -42,6 +44,7 @@ public class AccessOrders {
         if(currentOrder != null) {
             if(validator.validateOrder(currentOrder)) {
                 orderPersistence.insertOrder(currentOrder);
+                Log.e( "ADDED","Done!!!!!!!!!!!" );
                 return true;
             }
         }

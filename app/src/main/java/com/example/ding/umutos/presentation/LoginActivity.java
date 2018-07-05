@@ -107,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
             int count;
 
             File outFile = new File(copyPath);
-
             if(!outFile.exists()) {
 
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
@@ -122,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                 out.close();
                 in.close();
             }
+
 
         }
     }

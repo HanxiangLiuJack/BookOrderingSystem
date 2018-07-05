@@ -25,7 +25,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     public BookPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
-        String newS=dbPath;
         maxBookID = 0;
     }
 
@@ -58,7 +57,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     @Override
     public List<Book> getBookSequential() {
         final List<Book> books = new ArrayList<>();
-        Log.v("Connect","begin！！！");
         try(final Connection c = connection())
         {
             final Statement st = c.createStatement();

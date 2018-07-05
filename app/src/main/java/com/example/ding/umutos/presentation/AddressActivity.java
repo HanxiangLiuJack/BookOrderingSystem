@@ -12,6 +12,8 @@ import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Order;
 
+import static java.lang.Thread.sleep;
+
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
@@ -77,10 +79,14 @@ public class AddressActivity extends AppCompatActivity {
                                         int which) {
                         Book aBook=accessBookList.searchBook( bookID );
                         accessBookList.deleteBook(bookID);
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
                         Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
                         accessOrders.insertOrder( newOrder );
-
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);

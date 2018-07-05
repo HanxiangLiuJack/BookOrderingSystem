@@ -20,10 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
-    int userType,userID;
     private ListView bookList;
     private AccessOrders accessOrderList;
     private List<Order> newOrderList;
+    int userType,userID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +46,9 @@ public class HistoryActivity extends AppCompatActivity {
         int size=newOrderList.size();
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
-            AccessAccounts accounts=new AccessAccounts( );
+            AccessAccounts accounts=new AccessAccounts(  );
             HashMap<String, Object> book = new HashMap<String, Object>();
-            book.put("account","Seller: "+accounts.getAccountByID( newOrderList.get(i).getSellerID() ).getUserName()+"\nBuyer: "+accounts.getAccountByID( newOrderList.get(i).getBuyerID() ).getUserName());
+            book.put("account","Sold by: "+accounts.getAccountByID( newOrderList.get(i).getSellerID() ).getUserName()+"\nBought by: "+accounts.getAccountByID( newOrderList.get(i).getBuyerID() ).getUserName());
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());

@@ -23,8 +23,6 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.objects.BookImage;
-import com.example.ding.umutos.objects.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,8 +40,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private int userType, userID;
     private ArrayAdapter<String> adapter;
     private Book newBook;
-    private Category categories;
-    private BookImage bookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +47,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
         userType = getIntent().getIntExtra("userType",-1);
         userID = getIntent().getIntExtra("userID",-1);
-
-        categories = new Category();
-        bookImage = new BookImage();
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -75,7 +68,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             loadBookList(newBookList);
             Spinner searchByCategory;
             searchByCategory=(Spinner) findViewById(R.id.searchByCategory);
-            adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, categories.getCategory());
+            adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
             searchByCategory.setAdapter(adapter);
             searchByCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
             SearchView sv=(SearchView)findViewById(R.id.searchByKeyword);
@@ -90,6 +83,21 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
 
     }
+
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+            category=newBook.getBookCategoryArr()[arg2];
+            newBookList=accessBookList.CategoryList(category);
+            loadBookList(newBookList);
+
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
+    }
+
 
     @Override
     public boolean onQueryTextChange(String newText) {
@@ -108,7 +116,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         }
         return true;
     }
-
     @Override
     public boolean onQueryTextSubmit(String query) {
         // TODO Auto-generated method stub
@@ -117,14 +124,17 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         return true;
     }
 
+
+
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
+
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",bookImage.getImageByBookID(newBookList.get(i).getBookID()));
+            book.put("img",newBookList.get(i).getPicResource() );
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);
@@ -233,6 +243,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         BookListActivity.this.startActivity(intent);
     }
 
+
     public void buttonOpenHistory(View view){
         Intent intent = new Intent(BookListActivity.this,HistoryActivity.class);
         intent.putExtra("userType", userType);
@@ -252,17 +263,10 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     }
 
-    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=categories.getCategory()[arg2];
-            newBookList=accessBookList.CategoryList(category);
-            loadBookList(newBookList);
-
-        }
-
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
+    public void btnCusBackToMain(View view) {
+        Intent intent = new Intent(BookListActivity.this,HomeActivity.class);
+        intent.putExtra("userID", userID);
+        BookListActivity.this.startActivity(intent);
     }
 
 

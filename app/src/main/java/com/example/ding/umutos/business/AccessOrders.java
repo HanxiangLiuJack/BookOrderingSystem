@@ -25,13 +25,13 @@ public class AccessOrders {
 
 
     //need to test
-    public List<Order> orderHistory(Account user, int number) {
+    public List<Order> orderHistory(int userID, int userType) {
         List<Order> history;
 
-        if (number == 0) {
-            history = orderPersistence.getBuyerOrders(user.getUserID());
+        if (userType == 1) {
+            history = orderPersistence.getBuyerOrders(userID);
         } else {
-            history = orderPersistence.getSellerOrders(user.getUserID());
+            history = orderPersistence.getSellerOrders(userID);
         }
         return history;
     }

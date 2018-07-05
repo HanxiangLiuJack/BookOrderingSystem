@@ -15,7 +15,7 @@ import com.example.ding.umutos.objects.BookImage;
 
 public class SingleBookActivity extends AppCompatActivity {
 
-    private int bookID;
+    private int bookID, userID;
     private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription;
     private ImageView bookImg;
     private Book newBook;
@@ -31,6 +31,8 @@ public class SingleBookActivity extends AppCompatActivity {
         bookImage = new BookImage();
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
+        userID = getIntent().getIntExtra("userID",-1);
+
         accessBookList=new AccessBooks();
         accessAccounts=new AccessAccounts();
         newBook=accessBookList.searchBook(bookID);
@@ -67,6 +69,7 @@ public class SingleBookActivity extends AppCompatActivity {
                                         int which) {
                         Intent intent = new Intent(SingleBookActivity.this,AddressActivity.class);
                         intent.putExtra("bookID", bookID);
+                        intent.putExtra("userID", userID);
                         SingleBookActivity.this.startActivity(intent);
                     }
                 })

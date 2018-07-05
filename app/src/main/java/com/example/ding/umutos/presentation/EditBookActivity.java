@@ -2,6 +2,7 @@ package com.example.ding.umutos.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Spinner;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
-import com.example.ding.umutos.objects.*;
+import com.example.ding.umutos.objects.Book;
 
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
 
-    private int bookID;
-    private String bookTitle;
+    private int bookID, userID;
 
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
@@ -30,21 +30,19 @@ public class EditBookActivity extends AppCompatActivity {
     private Book newBook;
     private AccessBooks accessBookList;
 
-    private Category categories;
-    private BookImage bookImg;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
-
-        categories = new Category();
-        bookImg = new BookImage();
+        userID = getIntent().getIntExtra("userID",-1);
         accessBookList=new AccessBooks();
         bookID = getIntent().getIntExtra("bookID",-1);
         newBook=accessBookList.searchBook(bookID);
         editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories.getCategory());
+        if(newBook==null){
+            newBook=new Book(  );
+        }
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
@@ -64,7 +62,7 @@ public class EditBookActivity extends AppCompatActivity {
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=categories.getCategory()[arg2];
+            category=newBook.getBookCategoryArr()[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
@@ -112,11 +110,14 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),2);
+                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userID);
+                        Log.e("error",category);
                         accessBookList.insertBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
+
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
@@ -140,11 +141,16 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook=accessBookList.searchBook(bookID);
-                        accessBookList.updateBook(aBook);
+                        newBook.setAuthor( author );
+                        newBook.setCategory( category );
+                        newBook.setDescription( detail );
+                        newBook.setName( title );
+                        newBook.setPrice( Double.parseDouble( price ) );
+                        accessBookList.updateBook(newBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }

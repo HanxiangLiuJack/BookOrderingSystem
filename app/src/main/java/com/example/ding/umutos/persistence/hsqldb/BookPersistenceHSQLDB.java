@@ -210,10 +210,7 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     public List<Book> searchKeyword(String keyword){
         final List<Book> books = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookName = ? OR authorName = ? OR bookCategory = ?");
-            st.setString(1, keyword);
-            st.setString(2, keyword);
-            st.setString(3, keyword);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookName like '%"+keyword+"%' OR authorName like '%"+keyword+"%' OR bookCategory like '%"+keyword+"%'");
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {

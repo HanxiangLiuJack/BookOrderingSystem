@@ -194,7 +194,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         accessBookList.deleteBook(bookID);
-
                         Intent intent = new Intent(BookListActivity.this, BookListActivity.class);
                         intent.putExtra("userID", userID);
                         intent.putExtra("userType", userType);

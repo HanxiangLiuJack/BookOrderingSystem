@@ -14,7 +14,10 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.application.Main;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.objects.Account;
+
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -99,20 +102,26 @@ public class LoginActivity extends AppCompatActivity {
             int count;
 
             File outFile = new File(copyPath);
+            if (!outFile.exists()){
 
+                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
+                FileWriter out = new FileWriter(outFile);
 
-            InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-            FileWriter out = new FileWriter(outFile);
-
-            count = in.read(buffer);
-            while (count != -1) {
-                out.write(buffer, 0, count);
                 count = in.read(buffer);
+                while (count != -1) {
+                    out.write(buffer, 0, count);
+                    count = in.read(buffer);
+                }
+
+                out.close();
+                in.close();
             }
 
-            out.close();
-            in.close();
+            BufferedReader br = new BufferedReader(new FileReader(outFile));
 
+            String st;
+            while ((st = br.readLine()) != null)
+                System.out.println(st);
         }
     }
 

@@ -14,28 +14,24 @@ public class BookTest {
     private Book templateBook;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         templateBook = new Book("abc","Amy",123,"a good book","CS",24.99,12345);
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         templateBook = null;
     }
 
     @Test
-    public void testNullBook()
-    {
+    public void testNullBook() {
         System.out.println("Testing Null book");
         assertNotNull(templateBook);
         System.out.println("End Testing Null book");
     }
 
     @Test
-    public void testAccessorMethods()
-    {
+    public void testAccessorMethods() {
         System.out.println("Testing get methods");
         assertTrue("abc".equals(templateBook.getName()));
         assertTrue("Amy".equals(templateBook.getAuthor()));
@@ -48,8 +44,7 @@ public class BookTest {
     }
 
     @Test
-    public void testMutatorMethods()
-    {
+    public void testMutatorMethods() {
         System.out.println("Testing set methods");
         templateBook.setName("cde");
         assertTrue("cde".equals(templateBook.getName()));
@@ -73,8 +68,7 @@ public class BookTest {
     }
 
     @Test
-    public void testEmptyCases()
-    {
+    public void testEmptyCases() {
         System.out.println("start Testing empty cases");
         templateBook.setPicture(0);
         assertTrue(0==(templateBook.getPicture()));

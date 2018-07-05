@@ -1,10 +1,6 @@
 package com.example.ding.umutos.business;
 
-
-import android.util.Log;
-
 import java.util.List;
-
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.persistence.BookPersistence;
@@ -15,33 +11,27 @@ public class AccessBooks {
     private List<Book> books;
     private List<Book> userBooks;
 
-    public AccessBooks()
-    {
+    public AccessBooks() {
         bookPersistence = Service.getBookPersistence();
         books = null;
     }
 
-    public AccessBooks(final BookPersistence bookPersistence)
-    {
+    public AccessBooks(final BookPersistence bookPersistence) {
         this();
         this.bookPersistence = bookPersistence;
     }
 
-    public List<Book> getBooks()
-    {
+    public List<Book> getBooks() {
         books = bookPersistence.getBookSequential();
-
         return books;
     }
 
-    public List<Book> getUserBooks(int userID)
-    {
+    public List<Book> getUserBooks(int userID) {
         userBooks = bookPersistence.getUserBookSequential(userID);
         return userBooks;
     }
 
-    public boolean insertBook(Book currentBook)
-    {
+    public boolean insertBook(Book currentBook) {
         BookValidator validator = new BookValidator();
         if(currentBook != null) {
             if(validator.validateBook(currentBook)) {
@@ -49,10 +39,8 @@ public class AccessBooks {
                 return true;
             }
         }
-
         return false;
     }
-
 
     public List<Book> CategoryList(String category){
         List<Book> cBook;
@@ -64,7 +52,6 @@ public class AccessBooks {
         }
         return cBook;
     }
-
 
     public List<Book> ascentSort(List<Book> books){
         List<Book> sortBook;
@@ -80,18 +67,15 @@ public class AccessBooks {
         return sortBook;
     }
 
-    public Book searchBook(int id)
-    {
+    public Book searchBook(int id) {
         return bookPersistence.searchBook(id);
     }
 
-    public List<Book> searchBooksByKeyWord(String key)
-    {
+    public List<Book> searchBooksByKeyWord(String key) {
         return bookPersistence.searchKeyword(key);
     }
 
-    public boolean updateBook(Book currentBook)
-    {
+    public boolean updateBook(Book currentBook) {
         BookValidator validator = new BookValidator();
         if(currentBook != null) {
             if(validator.validateBook(currentBook)) {
@@ -102,8 +86,7 @@ public class AccessBooks {
         return false;
     }
 
-    public void deleteBook(int bookID)
-    {
+    public void deleteBook(int bookID) {
         if(searchBook(bookID) != null)
           bookPersistence.deleteBook(bookID);
     }

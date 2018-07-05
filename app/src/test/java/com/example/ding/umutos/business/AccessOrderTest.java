@@ -1,6 +1,5 @@
 package com.example.ding.umutos.business;
 
-import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.persistence.OrderPersistenceStub;
@@ -12,8 +11,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -24,19 +21,19 @@ public class AccessOrderTest {
   private OrderPersistence orderPersistence;
 
   @Before
-    public void setup()
-  {
+    public void setup() {
       orderPersistence = mock(OrderPersistence.class);
       accessOrders = new AccessOrders(orderPersistence);
   }
 
 
     @After
-    public void tearDown(){ accessOrders = null ; orderPersistence = null ;}
+    public void tearDown(){
+      accessOrders = null ; orderPersistence = null ;
+  }
 
     @Test
-    public void testOrderHistory()
-    {
+    public void testOrderHistory() {
       System.out.println("\nStarting test testOrderHistory\n");
       String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
       String[] orderInfo2 = {"firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven"};
@@ -54,9 +51,9 @@ public class AccessOrderTest {
 
       System.out.println("\nStarting test testInsertOrder\n");
 
-
-
     }
+
+
     @Test
     public void InsertOrder(){
       System.out.println("\nStarting test testInsertOrder\n");

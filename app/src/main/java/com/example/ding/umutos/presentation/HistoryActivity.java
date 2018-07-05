@@ -31,8 +31,10 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_booklist);
         bookList=(ListView)findViewById(R.id.historyBookList);
+
         userID = getIntent().getIntExtra("userID",-1);
         userType=getIntent().getIntExtra("userType",-1);
+
         accessOrderList=new AccessOrders(  );
         newOrderList=accessOrderList.orderHistory( userID,userType );
         loadList(newOrderList);
@@ -60,7 +62,6 @@ public class HistoryActivity extends AppCompatActivity {
                 new String[] {"account", "title", "price","address" },
                 new int[] { R.id.hisBookListByAccount, R.id.hisBookListTitle, R.id.hisBookListPrice , R.id.hisBookListAddress});
         bookList.setAdapter(sItems);
-
     }
 
     public void buttonHistoryBack(View view) {

@@ -14,29 +14,25 @@ public class AccountTest {
     private Account templateAccount;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         templateAccount = new Account("huahua", "7797047");
         templateAccount.setUserID(12345);
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         templateAccount = null;
     }
 
     @Test
-    public void testNullAccount()
-    {
+    public void testNullAccount() {
         System.out.println("Testing Null account");
         assertNotNull(templateAccount);
         System.out.println("Null Account Tests done");
     }
 
     @Test
-    public void testAccessorMethods()
-    {
+    public void testAccessorMethods() {
         System.out.println("Testing get methods");
         assertTrue(12345 == templateAccount.getUserID());
         assertTrue("huahua".equals(templateAccount.getUserName()));
@@ -44,8 +40,7 @@ public class AccountTest {
     }
 
     @Test
-    public void testMutatorMethod()
-    {
+    public void testMutatorMethod() {
         System.out.println("Testing set methods");
         templateAccount.setUserName("Amy");
         assertTrue("Amy".equals(templateAccount.getUserName()));

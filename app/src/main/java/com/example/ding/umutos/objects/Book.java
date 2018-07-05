@@ -12,8 +12,6 @@ package com.example.ding.umutos.objects;
   8. price, the price of the book.
 */
 
-import com.example.ding.umutos.R;
-
 public class Book
 {
     private int bookID;

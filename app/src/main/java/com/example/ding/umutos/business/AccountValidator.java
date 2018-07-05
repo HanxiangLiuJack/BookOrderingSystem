@@ -1,29 +1,22 @@
 package com.example.ding.umutos.business;
-
 import com.example.ding.umutos.objects.Account;
-import com.example.ding.umutos.persistence.AccountPersistence;
-
 import java.util.List;
 
 public class AccountValidator {
 
-    public boolean validateUserName(String userName, List<Account> db)
-    {
-        for(int i = 0; i < db.size(); i++)
-        {
+    public boolean validateUserName(String userName, List<Account> db) {
+        for(int i = 0; i < db.size(); i++) {
             if(db.get(i).getUserName().equals(userName))
                 return false;
         }
         return true;
     }
 
-    public boolean validatePassword(String password)
-    {
+    public boolean validatePassword(String password) {
         boolean hasUpperCaseChar = false;
         boolean hasNumericValue = false;
         boolean hasLowerCaseChar = false;
-        for(int i = 0; i < password.length(); i++)
-        {
+        for(int i = 0; i < password.length(); i++) {
             char ch = password.charAt(i);
             if( Character.isDigit(ch)) {
                 hasNumericValue = true;

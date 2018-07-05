@@ -47,7 +47,6 @@ public class Account
     public void setPassWord(String newPassword)
     {
         password = newPassword;
-        
     }
 
 }

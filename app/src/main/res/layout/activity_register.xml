@@ -72,7 +72,7 @@
         android:layout_marginStart="110dp"
         android:layout_marginLeft="180dp"
         android:layout_marginTop="10dp"
-        android:hint="At least one upper, lower letter and number"
+        android:hint="At least one upper, lower letter and a number"
         android:maxLength="20"
         android:background="@drawable/text_style"
         android:ems="10"

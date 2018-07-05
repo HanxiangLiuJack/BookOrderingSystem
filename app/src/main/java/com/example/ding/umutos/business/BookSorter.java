@@ -1,9 +1,6 @@
 package com.example.ding.umutos.business;
-
-
 import java.util.List;
 import java.util.ArrayList;
-
 import com.example.ding.umutos.objects.Book;
 
 public class BookSorter {

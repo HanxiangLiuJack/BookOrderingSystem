@@ -9,8 +9,7 @@ public class OrderPersistenceStub implements OrderPersistence {
 
     private List<Order> orders;
 
-    public OrderPersistenceStub()
-    {
+    public OrderPersistenceStub() {
         this.orders = new ArrayList<>();
         String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
         String[] orderInfo2 = {"firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven"};
@@ -25,8 +24,7 @@ public class OrderPersistenceStub implements OrderPersistence {
     }
 
 
-    public List<Order> getOrders()
-    {
+    public List<Order> getOrders() {
         return orders;
     }
 

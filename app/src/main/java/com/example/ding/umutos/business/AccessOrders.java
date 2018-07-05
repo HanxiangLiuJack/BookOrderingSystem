@@ -1,6 +1,5 @@
 package com.example.ding.umutos.business;
 
-
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
@@ -16,12 +15,10 @@ public class AccessOrders {
         orderPersistence = Service.getOrderPersistence();
     }
 
-
     public AccessOrders(final OrderPersistence orderPersistence) {
         this();
         this.orderPersistence = orderPersistence;
     }
-
 
     //need to test
     public List<Order> orderHistory(int id, int number) {

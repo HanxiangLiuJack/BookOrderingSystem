@@ -13,21 +13,18 @@ public class AccountValidatorTest {
     private AccountValidator accountValidator;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         accessAccounts = new AccessAccounts(new AccountPersistenceStub());
         accountValidator = new AccountValidator();
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         accountValidator = null;
     }
 
     @Test
-    public void testNotNull()
-    {
+    public void testNotNull() {
         System.out.println("Test Not Null case.");
         assertNotNull(accountValidator);
         System.out.println("Finish test not Null cases.");
@@ -35,20 +32,17 @@ public class AccountValidatorTest {
     }
 
     @Test
-    public void testValidateUserName()
-    {
+    public void testValidateUserName() {
         System.out.println("Test validating user name.");
         //exist user name
         assertTrue(!accountValidator.validateUserName("Yunlong Liu", accessAccounts.getAccounts()));
-
         //non exist user name
         assertTrue(accountValidator.validateUserName("zapp", accessAccounts.getAccounts()));
         System.out.println("End test validating user name.");
     }
 
     @Test
-    public void testValidatePassWord()
-    {
+    public void testValidatePassWord() {
         System.out.println("Test validating password.");
         assertTrue(!accountValidator.validatePassword("123"));
         assertTrue(!accountValidator.validatePassword("abc"));

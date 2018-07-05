@@ -34,9 +34,11 @@ public class Order {
         return buyerID;
     }
 
-    public int getSellerID() { return sellerID; }
+    public int getSellerID() {
+        return sellerID; }
 
-    public double getPrice(){ return price; }
+    public double getPrice(){
+        return price; }
 
     public String getBuyerFirstName() {
         return buyerFirstName;

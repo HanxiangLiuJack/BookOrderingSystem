@@ -28,11 +28,8 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         maxBookID = 0;
     }
 
-
     private Connection connection() throws SQLException {
-
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true","SA","");
-
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {

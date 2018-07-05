@@ -25,15 +25,13 @@ public class OrderValidatorTest {
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         validOrder = null; invalidOrder = null; orderValidator = null;
     }
 
 
     @Test
-    public void testFirstName()
-    {
+    public void testFirstName() {
         System.out.println("Test OrderInfo FirstName :");
         assertTrue(orderValidator.validateFirstName(validOrder.getBuyerFirstName()));
         assertTrue(!orderValidator.validateFirstName(invalidOrder.getBuyerFirstName()));
@@ -42,8 +40,7 @@ public class OrderValidatorTest {
 
 
     @Test
-    public void testLastName()
-    {
+    public void testLastName() {
         System.out.println("Test OrderInfo LastName :");
         assertTrue(orderValidator.validateLastName(validOrder.getBuyerLastName()));
         assertTrue(!orderValidator.validateLastName(invalidOrder.getBuyerLastName()));
@@ -59,8 +56,7 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testPhoneNum()
-    {
+    public void testPhoneNum() {
         System.out.println("Test PhoneNum");
         assertTrue(orderValidator.validatePhoneNumber(validOrder.getPhoneNumber()));
         assertTrue(!orderValidator.validatePhoneNumber(invalidOrder.getPhoneNumber()));
@@ -68,13 +64,11 @@ public class OrderValidatorTest {
     }
 
     @Test
-    public void testAddress()
-    {
+    public void testAddress() {
         System.out.println("Test Address");
         assertTrue(orderValidator.validateAddress(validOrder.getAddress()));
         assertTrue(!orderValidator.validateAddress(invalidOrder.getAddress()));
         System.out.println("Finish Address");
-
     }
 
 

@@ -13,17 +13,17 @@ public class OrderTest {
     private Order order;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         String [] orderInfo = {"Hanxiang","Liu","R3T","12345678","101 abcRoad"} ;
         order = new Order("book1", 1, 2, 100, orderInfo);
     }
     @After
-    public void tearDown(){order = null;}
+    public void tearDown(){
+        order = null;
+    }
 
     @Test
-    public void testGetBuyer()
-    {
+    public void testGetBuyer() {
         System.out.println("Test getBuyer() :");
 
         assertTrue(order.getBuyerID() == 1);
@@ -32,8 +32,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testGetSeller()
-    {
+    public void testGetSeller() {
         System.out.println("Test getSeller() :");
 
         assertTrue(order.getSellerID() == 2);
@@ -42,8 +41,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testGetBuyerFirstName()
-    {
+    public void testGetBuyerFirstName() {
         System.out.println("Test getBuyerFirstName : ");
 
         assertTrue("Hanxiang".equals(order.getBuyerFirstName()));
@@ -52,8 +50,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testGetBuyerLastName()
-    {
+    public void testGetBuyerLastName() {
         System.out.println("Test getBuyerFirstName : ");
 
         assertTrue("Liu".equals(order.getBuyerLastName()));
@@ -63,8 +60,7 @@ public class OrderTest {
 
 
     @Test
-    public void testPostCode()
-    {
+    public void testPostCode() {
         System.out.println("Test getPostCode : ");
 
         assertTrue("R3T".equals(order.getPostCode()));
@@ -74,8 +70,7 @@ public class OrderTest {
 
 
     @Test
-    public void testPhoneNum()
-    {
+    public void testPhoneNum() {
         System.out.println("Test getPhoneNumber. ");
 
         assertTrue("12345678".equals(order.getPhoneNumber()));
@@ -84,8 +79,7 @@ public class OrderTest {
     }
 
     @Test
-    public void testGetAddress()
-    {
+    public void testGetAddress() {
         System.out.println("Test getAddress ");
 
         assertTrue("101 abcRoad".equals(order.getAddress())) ;

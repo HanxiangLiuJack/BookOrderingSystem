@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.objects.Account;
@@ -17,9 +16,12 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         userID = getIntent().getIntExtra("userID",-1);
+
         AccessAccounts accounts=new AccessAccounts();
         Account newAcc=accounts.getAccountByID(userID);
+
         TextView welcome =(TextView)findViewById(R.id.welcomeMessage);
         String name=newAcc.getUserName().split(" ")[0];
         welcome.setText("Hi, "+name);

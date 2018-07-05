@@ -12,9 +12,6 @@ import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Order;
 
-import static java.lang.Thread.sleep;
-
-
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
@@ -31,9 +28,6 @@ public class AddressActivity extends AppCompatActivity {
         userID = getIntent().getIntExtra("userID",-1);
         accessOrders=new AccessOrders(  );
         accessBookList=new AccessBooks();
-
-
-
     }
 
     public void buttonAddSubmit(View view) {
@@ -103,12 +97,8 @@ public class AddressActivity extends AppCompatActivity {
                 .show();
     }
 
-
-
-
     public void buttonBookCancel(View view) {
         finish();
     }
-
 
 }

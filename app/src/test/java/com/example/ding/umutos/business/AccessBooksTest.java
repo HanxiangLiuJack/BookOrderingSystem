@@ -29,8 +29,7 @@ public class AccessBooksTest {
     private BookPersistence bookPersistence;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         bookPersistence = mock(BookPersistence.class);
         accessBooks = new AccessBooks(bookPersistence);
     }
@@ -42,8 +41,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testNullBookAccess()
-    {
+    public void testNullBookAccess() {
 
         System.out.println("\nStarting test null book access.\n");
         assertNotNull(accessBooks);
@@ -51,8 +49,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testGetBookList()
-    {
+    public void testGetBookList() {
 
         System.out.println("\nStarting test testGetBookList\n");
         final List<Book> books = new ArrayList<>();
@@ -78,8 +75,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testGetUserBookList()
-    {
+    public void testGetUserBookList() {
 
         System.out.println("\nStarting test testGetUserBookList\n");
         final List<Book> books = new ArrayList<>();
@@ -105,8 +101,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testInsertBook()
-    {
+    public void testInsertBook() {
         System.out.println("\nStarting test testInsertBook\n");
 
         final List<Book> books = new ArrayList<>();
@@ -135,8 +130,7 @@ public class AccessBooksTest {
 
 
     @Test
-    public void testSearchBook()
-    {
+    public void testSearchBook() {
         System.out.println("\nStarting test testSearchBook\n");
         final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99,1);
         when(bookPersistence.searchBook(1)).thenReturn(book);
@@ -163,8 +157,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testSearchBookByKeyWord()
-    {
+    public void testSearchBookByKeyWord() {
         System.out.println("\nStarting test testSearchBookByKeyWord\n");
         final List <Book> bookList = new ArrayList<>();
         bookList.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
@@ -178,8 +171,7 @@ public class AccessBooksTest {
     }
 
     @Test
-    public void testDeleteBook()
-    {
+    public void testDeleteBook() {
         System.out.println("\nStarting test testDeleteBook\n");
         final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99, 1);
 

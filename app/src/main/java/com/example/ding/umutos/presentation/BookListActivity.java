@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -16,16 +15,12 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.SearchView;
-import android.widget.Toast;
-
-
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.BookImage;
 import com.example.ding.umutos.objects.Category;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +36,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private TextView infoBar;
     private int userType, userID;
     private ArrayAdapter<String> adapter;
-    private Book newBook;
     private Category categories;
     private BookImage bookImage;
 
@@ -57,21 +51,24 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
             bookList=(ListView)findViewById(R.id.sellerBookList);
-            bookID=-1;
+
             accessBookList=new AccessBooks();
             accessAccounts=new AccessAccounts();
             newBookList=accessBookList.getUserBooks(userID);
+
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
             infoBar.setText("Hi "+accessAccounts.getAccountByID(userID).getUserName()+".");
+
             loadBookList(newBookList);
         }
         else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
+
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
-            newBook=new Book(  );
             loadBookList(newBookList);
+
             Spinner searchByCategory;
             searchByCategory=(Spinner) findViewById(R.id.searchByCategory);
             adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories.getCategory());
@@ -81,15 +78,9 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             sv.setIconifiedByDefault(false);
             sv.setOnQueryTextListener(this);
             sv.setSubmitButtonEnabled(true);
-            sv.setQueryHint("Search book here");
-
-
+            sv.setQueryHint("Search book title, author or category here");
         }
-
-
-
     }
-
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
@@ -97,25 +88,20 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             category=categories.getCategory()[arg2];
             newBookList=accessBookList.CategoryList(category);
             loadBookList(newBookList);
-
         }
-
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
 
-
     @Override
     public boolean onQueryTextChange(String newText) {
         // TODO Auto-generated method stub
-        if(TextUtils.isEmpty(newText))
-        {
+        if(TextUtils.isEmpty(newText)) {
             bookList.clearTextFilter();
             newBookList=accessBookList.getBooks();
             loadBookList( newBookList );
         }
-        else
-        {
+        else {
             bookList.setFilterText(newText);
             newBookList=accessBookList.searchBooksByKeyWord( newText );
             loadBookList( newBookList );
@@ -130,11 +116,8 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         return true;
     }
 
-
-
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
-
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
@@ -260,13 +243,11 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void buttonPriceHighToLow(View view){
         List<Book> aList=accessBookList.declineSort(newBookList);
         loadBookList(aList);
-
     }
 
     public void buttonPriceLowToHigh(View view){
         List<Book> aList=accessBookList.ascentSort(newBookList);
         loadBookList(aList);
-
     }
 
     public void btnCusBackToMain(View view) {
@@ -274,7 +255,4 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         intent.putExtra("userID", userID);
         BookListActivity.this.startActivity(intent);
     }
-
-
-
 }

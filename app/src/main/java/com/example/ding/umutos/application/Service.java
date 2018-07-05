@@ -1,7 +1,5 @@
 package com.example.ding.umutos.application;
 
-import android.util.Log;
-
 import com.example.ding.umutos.persistence.BookPersistence;
 import com.example.ding.umutos.persistence.AccountPersistence;
 import com.example.ding.umutos.persistence.OrderPersistence;
@@ -15,34 +13,24 @@ public class Service {
     private static AccountPersistence accountPersistence = null;
     private static OrderPersistence orderPersistence = null;
 
-    public static synchronized BookPersistence getBookPersistence()
-    {
-        if (bookPersistence == null)
-        {
+    public static synchronized BookPersistence getBookPersistence() {
+        if (bookPersistence == null) {
             bookPersistence = new BookPersistenceHSQLDB(Main.getDBPathName());
-
         }
-
         return bookPersistence;
     }
 
-    public static synchronized AccountPersistence getAccountPersistence()
-    {
-        if (accountPersistence == null)
-        {
+    public static synchronized AccountPersistence getAccountPersistence() {
+        if (accountPersistence == null) {
             accountPersistence = new AccountPersistenceHSQLDB(Main.getDBPathName());
         }
-
         return accountPersistence;
     }
 
-    public static synchronized  OrderPersistence getOrderPersistence()
-    {
-        if(orderPersistence == null)
-        {
+    public static synchronized  OrderPersistence getOrderPersistence() {
+        if(orderPersistence == null) {
             orderPersistence = new OrderPersistenceHSQLDB(Main.getDBPathName());
         }
-
         return orderPersistence;
     }
 }

@@ -18,11 +18,12 @@ public class BookValidatorTest {
        bookValidator = new BookValidator();
    }
     @After
-    public void tearDown(){ validBook = null ; invalidBook = null;bookValidator = null ; }
+    public void tearDown(){
+       validBook = null ; invalidBook = null;bookValidator = null ;
+   }
 
     @Test
-    public void testNotNull()
-    {
+    public void testNotNull() {
         System.out.println("Test Not Null case.");
         assertNotNull(validBook);
         assertNotNull(invalidBook);
@@ -30,8 +31,7 @@ public class BookValidatorTest {
 
     }
     @Test
-    public void testBookName()
-    {
+    public void testBookName() {
         System.out.println("Test BookName case.");
         assertTrue(bookValidator.validateBookName(validBook.getName()));
         assertTrue(!bookValidator.validateBookName(invalidBook.getName()));
@@ -39,8 +39,7 @@ public class BookValidatorTest {
     }
 
     @Test
-    public void testAuthorName()
-    {
+    public void testAuthorName() {
         System.out.println("Test Author Name");
         assertTrue(bookValidator.validateAuthorName(validBook.getAuthor()));
         assertTrue(!bookValidator.validateAuthorName(invalidBook.getAuthor()));
@@ -48,8 +47,7 @@ public class BookValidatorTest {
     }
 
     @Test
-    public void testBookPicture()
-    {
+    public void testBookPicture() {
         System.out.println("Test Book picture ");
         assertTrue(bookValidator.validateBookPictureIndex(validBook.getPicture()));
         assertTrue(!bookValidator.validateBookPictureIndex(invalidBook.getPicture()));
@@ -57,8 +55,7 @@ public class BookValidatorTest {
     }
 
     @Test
-    public void testBookPirce()
-    {
+    public void testBookPirce() {
         System.out.println("Test Book price ");
         assertTrue(bookValidator.validatePrice(validBook.getPrice()));
         assertTrue(!bookValidator.validatePrice(invalidBook.getPrice()));
@@ -66,8 +63,7 @@ public class BookValidatorTest {
     }
 
     @Test
-    public void testBook()
-    {
+    public void testBook() {
         System.out.println("Test Book");
         assertTrue(bookValidator.validateBook(validBook));
         assertTrue(!bookValidator.validateBook(invalidBook));

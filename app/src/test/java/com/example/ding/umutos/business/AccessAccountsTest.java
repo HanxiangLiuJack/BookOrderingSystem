@@ -26,30 +26,26 @@ public class AccessAccountsTest {
     private AccountPersistence accountPersistence;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         accountPersistence = mock(AccountPersistence.class);
         accessAccounts = new AccessAccounts(accountPersistence);
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         accessAccounts = null;
         accountPersistence = null;
     }
 
     @Test
-    public void testNullAccountAccess()
-    {
+    public void testNullAccountAccess() {
         System.out.println("\nStarting test null account access.\n");
         assertNotNull(accessAccounts);
         System.out.println("\nFinished test null account access.\n");
     }
 
     @Test
-    public void testGetAccounts()
-    {
+    public void testGetAccounts() {
         System.out.println("\nStart testing get account.\n");
         final List <Account> accounts = new ArrayList<>();
         accounts.add(new Account("Yunlong Liu","1234"));
@@ -70,8 +66,7 @@ public class AccessAccountsTest {
     }
 
     @Test
-    public void testGetAccountByID()
-    {
+    public void testGetAccountByID() {
         System.out.println("\nStart testing GetAccountByID.\n");
 
         final Account account =  new Account ("Hanxiang Liu","3234");
@@ -91,8 +86,7 @@ public class AccessAccountsTest {
     }
 
     @Test
-    public void testInsertAccount()
-    {
+    public void testInsertAccount() {
         System.out.println("\nStart testing testInsertAccount.\n");
 
         final Account account =  new Account ("Zapp","54213");
@@ -125,8 +119,7 @@ public class AccessAccountsTest {
     }
 
     @Test
-    public void testUpdateAccount()
-    {
+    public void testUpdateAccount() {
         System.out.println("\nStart testing testUpdateAccount.\n");
 
         final Account account = new Account ("Liu Hanxiang","6666");
@@ -153,8 +146,7 @@ public class AccessAccountsTest {
 
 
     @Test
-    public void testDeleteAccount()
-    {
+    public void testDeleteAccount() {
         System.out.println("\nStart testing testDeleteAccount.\n");
         final Account account = new Account("Xiao Peng","2234");
 

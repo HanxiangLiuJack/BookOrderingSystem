@@ -2,7 +2,6 @@ package com.example.ding.umutos.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,9 +13,6 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Category;
-
-import java.util.List;
-
 
 public class EditBookActivity extends AppCompatActivity {
 
@@ -36,17 +32,19 @@ public class EditBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
-        categories = new Category();
+
         userID = getIntent().getIntExtra("userID",-1);
-        accessBookList=new AccessBooks();
         bookID = getIntent().getIntExtra("bookID",-1);
+
+        categories = new Category();
+        accessBookList=new AccessBooks();
         newBook=accessBookList.searchBook(bookID);
-        if(newBook==null){
-            newBook = new Book();
-        }
+
         editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
+
         String[] subArray = new String[categories.getCategory().length-1];
         System.arraycopy( categories.getCategory(), 1, subArray, 0, subArray.length );
+
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,subArray);
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
@@ -60,8 +58,6 @@ public class EditBookActivity extends AppCompatActivity {
         editBookAuthor.setText(newBook.getAuthor());
         editBookPrice.setText(""+newBook.getPrice());
         editBookDetail.setText(newBook.getDescription());
-
-
     }
 
     public void buttonBookSubmit(View view) {
@@ -84,7 +80,6 @@ public class EditBookActivity extends AppCompatActivity {
             else
                 showEditDialog();
         }
-
     }
 
     private void showDialog(){
@@ -146,7 +141,6 @@ public class EditBookActivity extends AppCompatActivity {
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userID", userID);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 })
@@ -154,7 +148,6 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-
                         finish();
                     }
                 })

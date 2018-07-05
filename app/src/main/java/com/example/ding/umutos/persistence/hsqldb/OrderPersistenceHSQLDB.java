@@ -42,8 +42,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
 
     @Override
-    public Order insertOrder(Order currentOrder)
-    {
+    public Order insertOrder(Order currentOrder) {
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO orders VALUES(?,?,?,?,?,?,?,?,?)");
             st.setString(1,currentOrder.getBookName());
@@ -65,8 +64,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     }
 
     @Override
-    public List<Order> getBuyerOrders(int userID)
-    {
+    public List<Order> getBuyerOrders(int userID) {
         final List<Order> orders = new ArrayList<>();
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE buyerID = ?");
@@ -87,8 +85,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     }
 
     @Override
-    public List<Order> getSellerOrders(int userID)
-    {
+    public List<Order> getSellerOrders(int userID) {
         final List<Order> orders = new ArrayList<>();
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE sellerID = ?");

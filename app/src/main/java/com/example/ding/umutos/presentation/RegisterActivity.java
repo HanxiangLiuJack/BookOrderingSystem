@@ -20,7 +20,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
     }
 
-
     public void buttonRegCancel(View v) {
         finish();
     }

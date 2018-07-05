@@ -11,8 +11,7 @@ public class AccountPersistenceStub implements AccountPersistence{
 
     private List<Account> Accounts;
 
-    public AccountPersistenceStub()
-    {
+    public AccountPersistenceStub() {
         this.Accounts = new ArrayList<>();
         Accounts.add(new Account("Yunlong Liu", "123"));
         Accounts.add(new Account("Yu Gu", "234"));
@@ -24,14 +23,12 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public List<Account> getAccountSequential()
-    {
+    public List<Account> getAccountSequential() {
         return Collections.unmodifiableList(Accounts);
     }
 
     @Override
-    public Account getAccountByID(int userID)
-    {
+    public Account getAccountByID(int userID) {
         for(int i = 0; i < Accounts.size(); i++)
         {
             if(Accounts.get(i).getUserID() == userID)
@@ -41,15 +38,13 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public Account insertAccount(Account currentAccount)
-    {
+    public Account insertAccount(Account currentAccount) {
         Accounts.add(currentAccount);
         return currentAccount;
     }
 
     @Override
-    public Account updateAccount(Account currentAccount)
-    {
+    public Account updateAccount(Account currentAccount) {
         int index;
 
         index = Accounts.indexOf(currentAccount);
@@ -59,8 +54,7 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public void deleteAccount(Account currentAccount)
-    {
+    public void deleteAccount(Account currentAccount) {
         int index;
 
         index = Accounts.indexOf(currentAccount);

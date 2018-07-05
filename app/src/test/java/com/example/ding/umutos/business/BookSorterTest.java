@@ -17,20 +17,17 @@ public class BookSorterTest {
     private AccessBooks accessBooks;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         accessBooks = new AccessBooks(new BookPersistenceStub());
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
         accessBooks = null;
     }
 
     @Test
-    public void testAscendingSort()
-    {
+    public void testAscendingSort() {
         assertNotNull(accessBooks);
 
         BookSorter newSorter = new BookSorter();
@@ -45,8 +42,7 @@ public class BookSorterTest {
     }
 
     @Test
-    public void testDescendingSort()
-    {
+    public void testDescendingSort() {
         BookSorter newSorter = new BookSorter();
 
         List<Book> afterSort = newSorter.HighPrice(accessBooks.getBooks());

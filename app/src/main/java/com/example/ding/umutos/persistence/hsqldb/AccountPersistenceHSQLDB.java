@@ -18,8 +18,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
 
     private int maxUserID;
 
-    public AccountPersistenceHSQLDB(final String dbPath)
-    {
+    public AccountPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
         maxUserID = 0;
     }
@@ -43,8 +42,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
-    public List<Account> getAccountSequential()
-    {
+    public List<Account> getAccountSequential() {
         final List<Account> accounts = new ArrayList<>();
         try(final Connection c = connection()){
             final Statement st = c.createStatement();
@@ -63,8 +61,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
-    public Account getAccountByID(int userID)
-    {
+    public Account getAccountByID(int userID) {
         Account account = null;
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE accountID = ?");
@@ -73,7 +70,6 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
             if(rs.next()){
                 account = fromResultSet(rs);
             }
-
             return account;
 
         } catch (final SQLException e){
@@ -83,8 +79,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
 
 
     @Override
-    public Account insertAccount(Account currentAccount)
-    {
+    public Account insertAccount(Account currentAccount) {
         getAccountSequential();
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?)");
@@ -103,8 +98,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
-    public Account updateAccount(Account currentAccount)
-    {
+    public Account updateAccount(Account currentAccount) {
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("UPDATE accounts SET userName = ?, passWord = ? WHERE userID = ?");
             st.setString(1, currentAccount.getUserName());
@@ -120,8 +114,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
-    public void deleteAccount(Account currentAccount)
-    {
+    public void deleteAccount(Account currentAccount) {
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM accounts WHERE userID = ?");
             st.setInt(1, currentAccount.getUserID());

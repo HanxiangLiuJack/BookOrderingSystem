@@ -16,7 +16,7 @@ import com.example.ding.umutos.objects.BookImage;
 public class SingleBookActivity extends AppCompatActivity {
 
     private int bookID, userID;
-    private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription;
+    private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription, bookCategory;
     private ImageView bookImg;
     private Book newBook;
     private AccessBooks accessBookList;
@@ -43,6 +43,7 @@ public class SingleBookActivity extends AppCompatActivity {
         bookOwner=(TextView)findViewById(R.id.singleBookSellerName);
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
+        bookCategory=(TextView)findViewById(R.id.singleBookCategory);
 
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
@@ -51,6 +52,7 @@ public class SingleBookActivity extends AppCompatActivity {
         bookOwner.setText("Sold by "+accessAccounts.getAccountByID(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(bookImage.getImageByBookID(bookID));
+        bookCategory.setText("Category: "+newBook.getCategory());
 
     }
 

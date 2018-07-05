@@ -1,6 +1,5 @@
 package com.example.ding.umutos.presentation;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,20 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
-
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.application.Main;
 import com.example.ding.umutos.business.AccessAccounts;
-import com.example.ding.umutos.business.AccessBooks;
-import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Account;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -35,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         copyDatabaseToDevice();
     }
-
 
     public void buttonLoginOnClick(View v) {
         EditText userNameText = (EditText)findViewById(R.id.loginUserName);
@@ -92,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             Main.setDBPathName(dataDirectory.toString() + "/" + Main.getDBPathName());
 
         } catch (final IOException ioe) {
-            Log.v("GAGAGA", "Unable to access application data: " + ioe.getMessage());
+            System.out.println("Unable to access application data: " + ioe.getMessage());
         }
     }
 
@@ -107,22 +99,21 @@ public class LoginActivity extends AppCompatActivity {
             int count;
 
             File outFile = new File(copyPath);
-           // if(!outFile.exists()) {
 
-                InputStreamReader in = new InputStreamReader(assetManager.open(asset));
-                FileWriter out = new FileWriter(outFile);
 
+            InputStreamReader in = new InputStreamReader(assetManager.open(asset));
+            FileWriter out = new FileWriter(outFile);
+
+            count = in.read(buffer);
+            while (count != -1) {
+                out.write(buffer, 0, count);
                 count = in.read(buffer);
-                while (count != -1) {
-                    out.write(buffer, 0, count);
-                    count = in.read(buffer);
-                }
+            }
 
-                out.close();
-                in.close();
-           // }
-
+            out.close();
+            in.close();
 
         }
     }
+
 }

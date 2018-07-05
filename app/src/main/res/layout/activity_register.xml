@@ -43,8 +43,9 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/text_style"
         android:ems="10"
+        android:hint="Length no more than 20"
         android:inputType="text"
-        android:maxLength="60"
+        android:maxLength="20"
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerNameTitle" />
@@ -71,6 +72,8 @@
         android:layout_marginStart="180dp"
         android:layout_marginLeft="180dp"
         android:layout_marginTop="10dp"
+        android:hint="At least one upper, lower letter and number"
+        android:maxLength="20"
         android:background="@drawable/text_style"
         android:ems="10"
         android:inputType="text"
@@ -89,7 +92,8 @@
         android:onClick="buttonRegCancel"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/registerSubmit"
@@ -102,7 +106,8 @@
         android:onClick="buttonRegSubmit"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="OnClick" />
 
 
 </android.support.constraint.ConstraintLayout>

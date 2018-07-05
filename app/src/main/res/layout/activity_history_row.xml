@@ -59,12 +59,12 @@
             <TextView
                 android:id="@+id/hisBookListByAccount"
                 android:layout_width="186dp"
-                android:layout_height="40dp"
+                android:layout_height="80dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="10dp"
                 android:text="Sold by Xiao"
-                android:textSize="22dp"
+                android:textSize="20dp"
                 app:layout_constraintStart_toEndOf="@+id/hisBookListTitle"
                 app:layout_constraintTop_toBottomOf="@+id/hisBookListPrice" />
 

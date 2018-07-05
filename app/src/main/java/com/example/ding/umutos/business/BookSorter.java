@@ -8,7 +8,6 @@ import com.example.ding.umutos.objects.Book;
 
 public class BookSorter {
 
-
     public List<Book> LowPrice(List<Book> books){
         List<Book> book1=new ArrayList<>();
         for(int i=0;i<books.size();i++){
@@ -16,7 +15,7 @@ public class BookSorter {
         }
 
         for(int i=0;i<book1.size();i++){
-            double price=book1.get(i).getPrice();
+            Double price = book1.get(i).getPrice();
             Book key=book1.get(i);
             int j=i-1;
             while(j>=0 && book1.get(j).getPrice()>price){
@@ -35,7 +34,7 @@ public class BookSorter {
         }
 
         for(int i=0;i<book1.size();i++){
-            double price=book1.get(i).getPrice();
+            Double price=book1.get(i).getPrice();
             Book key=book1.get(i);
             int j=i-1;
             while(j>=0 && book1.get(j).getPrice()<price){

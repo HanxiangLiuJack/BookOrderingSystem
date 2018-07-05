@@ -8,19 +8,30 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
+import com.example.ding.umutos.business.AccessOrders;
+import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Order;
 
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
     private AccessBooks accessBookList;
+    private AccessOrders accessOrders;
+    private int userID;
+    private String firstName, lastName,phoneNum,postCode,addressInfo,additionInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
+        userID = getIntent().getIntExtra("userID",-1);
+        accessOrders=new AccessOrders(  );
         accessBookList=new AccessBooks();
+
+
+
     }
 
     public void buttonAddSubmit(View view) {
@@ -31,12 +42,12 @@ public class AddressActivity extends AppCompatActivity {
         editAddressInfo=(EditText)findViewById(R.id.editAddressInfo);
         editAdditionInfo=(EditText)findViewById(R.id.editAdditionInfo);
 
-        String firstName=editFirstName.getText().toString();
-        String lastName=editLastName.getText().toString();
-        String phoneNum=editPhoneNum.getText().toString();
-        String postCode=editPostCode.getText().toString();
-        String addressInfo=editAddressInfo.getText().toString();
-        String additionInfo=editAdditionInfo.getText().toString();
+        firstName=editFirstName.getText().toString();
+        lastName=editLastName.getText().toString();
+        phoneNum=editPhoneNum.getText().toString();
+        postCode=editPostCode.getText().toString();
+        addressInfo=editAddressInfo.getText().toString();
+        additionInfo=editAdditionInfo.getText().toString();
 
         if (firstName.length()<1 || lastName.length()<1 || phoneNum.length()<1 || postCode.length()<1 || addressInfo.length()<1)
             showDialog();
@@ -64,11 +75,16 @@ public class AddressActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                        Book aBook=accessBookList.searchBook( bookID );
                         accessBookList.deleteBook(bookID);
+                        String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
+                        Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
+                        accessOrders.insertOrder( newOrder );
+
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("userID", userID);
                         startActivity(intent);
                     }
                 })
@@ -80,6 +96,9 @@ public class AddressActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
+
+
 
     public void buttonBookCancel(View view) {
         finish();

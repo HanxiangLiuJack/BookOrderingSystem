@@ -56,23 +56,27 @@ public class AccessBooks {
 
     public List<Book> CategoryList(String category){
         List<Book> cBook;
-        cBook=bookPersistence.getBookCategorySequential(category);
+        if (category.equals("ALL")){
+            cBook=getBooks();
+        }
+        else {
+            cBook=bookPersistence.getBookCategorySequential(category);
+        }
         return cBook;
-
     }
 
 
-    public List<Book> ascentSort(){
+    public List<Book> ascentSort(List<Book> books){
         List<Book> sortBook;
         BookSorter sorter = new BookSorter();
-        sortBook=sorter.LowPrice(getBooks());
+        sortBook=sorter.LowPrice(books);
         return sortBook;
     }
 
-    public List<Book> declineSort(){
+    public List<Book> declineSort(List<Book> books){
         List<Book> sortBook;
         BookSorter sorter=new BookSorter();
-        sortBook=sorter.HighPrice(getBooks());
+        sortBook=sorter.HighPrice(books);
         return sortBook;
     }
 

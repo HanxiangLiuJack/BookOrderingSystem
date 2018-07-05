@@ -63,4 +63,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsSeller" />
 
+    <Button
+        android:id="@+id/buttonLoginOut"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/trans_button_style"
+        android:onClick="buttonLogoutOnClick"
+        android:text="Logout"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLoginAsCustomer" />
+
 </android.support.constraint.ConstraintLayout>

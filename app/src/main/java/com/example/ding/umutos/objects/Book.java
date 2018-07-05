@@ -34,9 +34,6 @@ public class Book
         this.ownerID = ownerID;
     }
 
-    public Book(){
-    }
-
     public int getPicture()
     {
         return bookPicture;

@@ -161,14 +161,14 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     }
 
     public void buttonEditPostedBook(View view) {
-        if (bookID<0)
+        if (bookID<1)
             showEditDialog();
         else
             openEditBookActivity(bookID);
     }
 
     public void buttonDeletePostedBook(View view) {
-        if (bookID<0)
+        if (bookID<1)
             showDeleteDialog();
         else
             showDeleteDialog(bookTitle);

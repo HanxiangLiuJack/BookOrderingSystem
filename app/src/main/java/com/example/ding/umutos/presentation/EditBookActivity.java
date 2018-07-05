@@ -35,10 +35,10 @@ public class EditBookActivity extends AppCompatActivity {
 
         userID = getIntent().getIntExtra("userID",-1);
         bookID = getIntent().getIntExtra("bookID",-1);
+        System.out.println("BookID"+bookID);
 
         categories = new Category();
         accessBookList=new AccessBooks();
-        newBook=accessBookList.searchBook(bookID);
 
         editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
 
@@ -49,7 +49,7 @@ public class EditBookActivity extends AppCompatActivity {
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
-        if (bookID!=-1){
+        if (bookID>0){
             newBook=accessBookList.searchBook(bookID);
             editBookTitle=(EditText)findViewById(R.id.editBookTitle);
             editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
@@ -165,7 +165,7 @@ public class EditBookActivity extends AppCompatActivity {
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=categories.getCategory()[arg2];
+            category=categories.getCategory()[arg2+1];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {

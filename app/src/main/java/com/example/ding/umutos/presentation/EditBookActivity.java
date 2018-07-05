@@ -49,15 +49,19 @@ public class EditBookActivity extends AppCompatActivity {
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
-        editBookTitle=(EditText)findViewById(R.id.editBookTitle);
-        editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
-        editBookPrice=(EditText)findViewById(R.id.editBookPrice);
-        editBookDetail=(EditText)findViewById(R.id.editBookDetail);
+        if (bookID!=-1){
+            newBook=accessBookList.searchBook(bookID);
+            editBookTitle=(EditText)findViewById(R.id.editBookTitle);
+            editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
+            editBookPrice=(EditText)findViewById(R.id.editBookPrice);
+            editBookDetail=(EditText)findViewById(R.id.editBookDetail);
 
-        editBookTitle.setText(newBook.getName());
-        editBookAuthor.setText(newBook.getAuthor());
-        editBookPrice.setText(""+newBook.getPrice());
-        editBookDetail.setText(newBook.getDescription());
+            editBookTitle.setText(newBook.getName());
+            editBookAuthor.setText(newBook.getAuthor());
+            editBookPrice.setText(""+newBook.getPrice());
+            editBookDetail.setText(newBook.getDescription());
+        }
+
     }
 
     public void buttonBookSubmit(View view) {

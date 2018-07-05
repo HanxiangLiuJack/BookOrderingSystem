@@ -19,8 +19,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.objects.BookImage;
-import com.example.ding.umutos.objects.Category;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,8 +35,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private TextView infoBar;
     private int userType, userID;
     private ArrayAdapter<String> adapter;
-    private Category categories;
-    private BookImage bookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +42,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
         userType = getIntent().getIntExtra("userType",-1);
         userID = getIntent().getIntExtra("userID",-1);
-        categories = new Category();
-        bookImage = new BookImage();
+
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -68,10 +64,11 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
             loadBookList(newBookList);
+            Book aBook=new Book(  );
 
             Spinner searchByCategory;
             searchByCategory=(Spinner) findViewById(R.id.searchByCategory);
-            adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories.getCategory());
+            adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,aBook.getCategoryArr());
             searchByCategory.setAdapter(adapter);
             searchByCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
             SearchView sv=(SearchView)findViewById(R.id.searchByKeyword);
@@ -85,7 +82,8 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=categories.getCategory()[arg2];
+            Book aBook=new Book(  );
+            category=aBook.getCategoryArr()[arg2];
             newBookList=accessBookList.CategoryList(category);
             loadBookList(newBookList);
         }
@@ -118,12 +116,13 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
+        Book aBook=new Book();
 
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",bookImage.getImageByBookID(newBookList.get(i).getBookID()) );
+            book.put("img",aBook.getImageByBookID(newBookList.get(i).getBookID()) );
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);

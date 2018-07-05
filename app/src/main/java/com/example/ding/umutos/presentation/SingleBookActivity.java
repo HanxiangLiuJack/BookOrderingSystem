@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.content.Intent;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.objects.BookImage;
 
 public class SingleBookActivity extends AppCompatActivity {
 
@@ -21,14 +20,14 @@ public class SingleBookActivity extends AppCompatActivity {
     private Book newBook;
     private AccessBooks accessBookList;
     private AccessAccounts accessAccounts;
-    private BookImage bookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        bookImage = new BookImage();
+        Book aBook=new Book(  );
+
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
         userID = getIntent().getIntExtra("userID",-1);
@@ -51,7 +50,7 @@ public class SingleBookActivity extends AppCompatActivity {
         System.out.println(newBook.getOwner());
         bookOwner.setText("Sold by "+accessAccounts.getAccountByID(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
-        bookImg.setImageResource(bookImage.getImageByBookID(bookID));
+        bookImg.setImageResource(aBook.getImageByBookID(bookID));
         bookCategory.setText("Category: "+newBook.getCategory());
 
     }

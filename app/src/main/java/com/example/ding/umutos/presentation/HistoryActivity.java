@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
         for (int i = 0; i <size; i++) {
             AccessAccounts accounts=new AccessAccounts(  );
             HashMap<String, Object> book = new HashMap<String, Object>();
-            book.put("account","Sell: "+accounts.getAccountByID( newOrderList.get(i).getSellerID() ).getUserName()+"\nBuyer: "+accounts.getAccountByID( newOrderList.get(i).getBuyerID() ).getUserName());
+            book.put("account","Sold by: "+accounts.getAccountByID( newOrderList.get(i).getSellerID() ).getUserName()+"\nBought by: "+accounts.getAccountByID( newOrderList.get(i).getBuyerID() ).getUserName());
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());

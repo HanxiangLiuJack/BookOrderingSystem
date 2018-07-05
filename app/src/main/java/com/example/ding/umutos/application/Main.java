@@ -7,6 +7,10 @@ public class Main {
 
     }
 
+    public static String getDBPathName() {
+        return dbName;
+    }
+
     public static void setDBPathName(final String name) {
         try {
             Class.forName("org.hsqldb.jdbcDriver").newInstance();
@@ -18,10 +22,6 @@ public class Main {
             e.printStackTrace();
         }
         dbName = name;
-    }
-
-    public static String getDBPathName() {
-        return dbName;
     }
 
 }

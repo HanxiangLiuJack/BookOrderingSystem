@@ -29,7 +29,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     private Account fromResultSet(final ResultSet rs) throws SQLException {
-        final int userID = rs.getInt("ACCOUNTID");
+        final int userID = rs.getInt("accountID");
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
 

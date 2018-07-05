@@ -91,21 +91,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     }
 
-
-    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=categories.getCategory()[arg2];
-            newBookList=accessBookList.CategoryList(category);
-            loadBookList(newBookList);
-
-        }
-
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    }
-
-
     @Override
     public boolean onQueryTextChange(String newText) {
         // TODO Auto-generated method stub
@@ -123,6 +108,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         }
         return true;
     }
+
     @Override
     public boolean onQueryTextSubmit(String query) {
         // TODO Auto-generated method stub
@@ -130,8 +116,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         loadBookList( newBookList );
         return true;
     }
-
-
 
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
@@ -249,7 +233,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         BookListActivity.this.startActivity(intent);
     }
 
-
     public void buttonOpenHistory(View view){
         Intent intent = new Intent(BookListActivity.this,HistoryActivity.class);
         intent.putExtra("userType", userType);
@@ -267,6 +250,19 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         List<Book> aList=accessBookList.ascentSort(newBookList);
         loadBookList(aList);
 
+    }
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+            category=categories.getCategory()[arg2];
+            newBookList=accessBookList.CategoryList(category);
+            loadBookList(newBookList);
+
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 
 

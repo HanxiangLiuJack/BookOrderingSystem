@@ -24,22 +24,24 @@ public class Account
         return userID;
     }
 
-    public String getUserName()
-    {
-        return userName;
-    }
-    public String getPassword()
-    {
-        return password;
-    }
-
     public void setUserID(int newUserID)
     {
         userID = newUserID;
     }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
     public void setUserName(String newName)
     {
         userName = newName;
+    }
+
+    public String getPassword()
+    {
+        return password;
     }
 
     public void setPassWord(String newPassword)

@@ -20,11 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class HistoryActivity extends AppCompatActivity {
+    int userType,userID;
     private ListView bookList;
     private AccessOrders accessOrderList;
     private List<Order> newOrderList;
-    int userType,userID;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

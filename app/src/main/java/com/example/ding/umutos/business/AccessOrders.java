@@ -44,7 +44,6 @@ public class AccessOrders {
         if(currentOrder != null) {
             if(validator.validateOrder(currentOrder)) {
                 orderPersistence.insertOrder(currentOrder);
-                Log.e( "ADDED","Done!!!!!!!!!!!" );
                 return true;
             }
         }

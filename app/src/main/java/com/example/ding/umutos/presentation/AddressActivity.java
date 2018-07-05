@@ -79,12 +79,44 @@ public class AddressActivity extends AppCompatActivity {
                         accessBookList.deleteBook(bookID);
                         String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
                         Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
+                        System.out.println( newOrder.getBookName()+", "+ newOrder.getBuyerID()+", "+newOrder.getSellerID()+", "+newOrder.getPrice());
+                        System.out.println( newOrder.getAddress()+", "+newOrder.getBuyerFirstName()+", "+newOrder.getBuyerLastName()+", "+newOrder.getPhoneNumber()+", "+newOrder.getPostCode());
+                        accessOrders.insertOrder( newOrder );
+
+                        int userType=1;
+                        Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+                .show();
+    }
+
+
+    private void showSuccessDialog(String title){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Congratulation!")
+                .setMessage("\n Order Completed!")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Book aBook=accessBookList.searchBook( bookID );
+                        accessBookList.deleteBook(bookID);
+                        String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
+                        Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
                         accessOrders.insertOrder( newOrder );
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userID", userID);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 })

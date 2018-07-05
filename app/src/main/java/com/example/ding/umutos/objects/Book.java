@@ -36,14 +36,14 @@ public class Book
         this.bookCategory = bookCategory;
         this.price = price;
         this.ownerID = ownerID;
-        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
+        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10, R.mipmap.book11, R.mipmap.book12, R.mipmap.book13, R.mipmap.book14, R.mipmap.book15, R.mipmap.book16, R.mipmap.book17, R.mipmap.book18, R.mipmap.book19, R.mipmap.book20};
         bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
 
     }
 
     public Book(){
         bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
-        bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
+        bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design","Biology", "Business", "Computer Science","Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
 
     }
 
@@ -59,7 +59,7 @@ public class Book
 
     public int getPicResource()
     {
-        if(bookID>10)
+        if(bookID>20)
             return bookImg[0];
         else
             return bookImg[bookID];

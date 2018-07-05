@@ -42,7 +42,9 @@ public class EditBookActivity extends AppCompatActivity {
         if(newBook==null){
             newBook=new Book(  );
         }
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
+        String[] subArray = new String[newBook.getBookCategoryArr().length-1];
+        System.arraycopy( newBook.getBookCategoryArr(), 1, subArray, 0, subArray.length );
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,subArray);
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 

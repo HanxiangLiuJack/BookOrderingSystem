@@ -67,7 +67,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     {
         Account account = null;
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE ACCOUNTID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE accountID = ?");
             st.setInt(1, userID);
             final ResultSet rs = st.executeQuery();
             if(rs.next()){

@@ -43,7 +43,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private ArrayAdapter<String> adapter;
     private Book newBook;
     private Category categories;
-    private BookImage bookImg;
+    private BookImage bookImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         userID = getIntent().getIntExtra("userID",-1);
 
         categories = new Category();
+        bookImage = new BookImage();
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -135,7 +136,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",bookImg.getImageByBookID(i));
+            book.put("img",bookImage.getImageByBookID(newBookList.get(i).getBookID()));
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             books.add(book);

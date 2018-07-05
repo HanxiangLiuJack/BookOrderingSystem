@@ -24,8 +24,6 @@ public class Book
     private String bookCategory;
     private int ownerID;
     private  double price;
-    private int bookImg[];
-    private String[] bookCategoryArr;
 
     public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
     {
@@ -36,15 +34,9 @@ public class Book
         this.bookCategory = bookCategory;
         this.price = price;
         this.ownerID = ownerID;
-        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
-        bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
-
     }
 
     public Book(){
-        bookImg = new int[]{R.mipmap.book0, R.mipmap.book1, R.mipmap.book2, R.mipmap.book3, R.mipmap.book4, R.mipmap.book5, R.mipmap.book6, R.mipmap.book7, R.mipmap.book8, R.mipmap.book9, R.mipmap.book10};
-        bookCategoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business", "Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
-
     }
 
     public void setPicture(int pic)
@@ -57,13 +49,6 @@ public class Book
         return bookPicture;
     }
 
-    public int getPicResource()
-    {
-        if(bookID>10)
-            return bookImg[0];
-        else
-            return bookImg[bookID];
-    }
 
     public String getDescription()
     {
@@ -129,7 +114,4 @@ public class Book
         return ownerID;
     }
 
-    public String[] getBookCategoryArr(){
-        return bookCategoryArr;
-    }
 }

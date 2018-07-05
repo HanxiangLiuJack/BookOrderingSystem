@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Category;
 
 import java.util.List;
 
@@ -29,10 +30,12 @@ public class EditBookActivity extends AppCompatActivity {
 
     private Book newBook;
     private AccessBooks accessBookList;
+    private Category categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        categories = new Category();
         setContentView(R.layout.activity_editbook);
         userID = getIntent().getIntExtra("userID",-1);
         accessBookList=new AccessBooks();
@@ -42,7 +45,7 @@ public class EditBookActivity extends AppCompatActivity {
         if(newBook==null){
             newBook=new Book(  );
         }
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,newBook.getBookCategoryArr());
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,categories.getCategory());
         editBookCategory.setAdapter(adapter);
         editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
 
@@ -62,7 +65,7 @@ public class EditBookActivity extends AppCompatActivity {
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=newBook.getBookCategoryArr()[arg2];
+            category=categories.getCategory()[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {

@@ -10,7 +10,10 @@ public class BookImage {
     }
 
     public int getImageByBookID(int bookID){
-        return bookImg[bookID];
+        if(bookID>10)
+            return bookImg[0];
+        else
+            return bookImg[bookID];
     }
 
 

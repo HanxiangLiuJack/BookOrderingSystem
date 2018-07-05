@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/uofm_bkgd"
+    tools:context=".presentation.HomeActivity">
+
+
+    <ImageView
+        android:id="@+id/homelogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginStart="240dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/uofm_logo2" />
+
+    <ImageView
+        android:id="@+id/homelogo1"
+        android:layout_width="420dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homelogo"
+        app:srcCompat="@mipmap/umlogo" />
+
+
+    <EditText
+        android:id="@+id/loginUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="192dp"
+        android:layout_marginLeft="192dp"
+        android:hint="Username"
+        android:textColorHint="#999999"
+        android:layout_marginTop="0dp"
+        android:ems="10"
+        android:maxLength="20"
+        android:inputType="textPersonName"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homelogo1" />
+
+    <EditText
+        android:id="@+id/loginPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="192dp"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="10dp"
+        android:hint="Password"
+        android:textColorHint="#999999"
+        android:ems="10"
+        android:maxLength="20"
+        android:inputType="textPassword"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginUserName" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/trans_button_style"
+        android:onClick="buttonLoginOnClick"
+        android:text="Login"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/trans_button_style"
+        android:onClick="buttonRegisterOnClick"
+        android:text="Register"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLogin"
+        tools:ignore="OnClick" />
+
+</android.support.constraint.ConstraintLayout>

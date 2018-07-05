@@ -14,8 +14,8 @@ import com.example.ding.umutos.objects.Book;
 
 public class SingleBookActivity extends AppCompatActivity {
 
-    private int bookID;
-    private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription;
+    private int bookID, userID;
+    private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription, bookCategory;
     private ImageView bookImg;
     private Book newBook;
     private AccessBooks accessBookList;
@@ -26,9 +26,11 @@ public class SingleBookActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        Book aBook=new Book(  );
+
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
-        int bookImgArr[]={R.mipmap.book0,R.mipmap.book1,R.mipmap.book2,R.mipmap.book3,R.mipmap.book4,R.mipmap.book5,R.mipmap.book6,R.mipmap.book7,R.mipmap.book8,R.mipmap.book9,R.mipmap.book10};
+        userID = getIntent().getIntExtra("userID",-1);
 
         accessBookList=new AccessBooks();
         accessAccounts=new AccessAccounts();
@@ -40,13 +42,16 @@ public class SingleBookActivity extends AppCompatActivity {
         bookOwner=(TextView)findViewById(R.id.singleBookSellerName);
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
+        bookCategory=(TextView)findViewById(R.id.singleBookCategory);
 
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
+        System.out.println(newBook.getOwner());
         bookOwner.setText("Sold by "+accessAccounts.getAccountByID(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
-        bookImg.setImageResource(bookImgArr[newBook.getPicture()]);
+        bookImg.setImageResource(aBook.getImageByBookID(bookID));
+        bookCategory.setText("Category: "+newBook.getCategory());
 
     }
 
@@ -65,6 +70,7 @@ public class SingleBookActivity extends AppCompatActivity {
                                         int which) {
                         Intent intent = new Intent(SingleBookActivity.this,AddressActivity.class);
                         intent.putExtra("bookID", bookID);
+                        intent.putExtra("userID", userID);
                         SingleBookActivity.this.startActivity(intent);
                     }
                 })

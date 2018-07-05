@@ -13,17 +13,12 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 
-import java.util.List;
-
-
 public class EditBookActivity extends AppCompatActivity {
 
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
-    private String[] ctg = {"Agriculture","Architecture and design","Business","Divinity","Education","Engineering and technology","Environmental studies and forestry","Family and consumer science","Human physical performance and recreation", "Journalism, media studies and communication","Law","Library and museum studies","Medicine","Military sciences","Public administration","Public policy","Social work","Transportation"};
 
-    private int bookID;
-    private String bookTitle;
+    private int bookID, userID;
 
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
@@ -36,17 +31,24 @@ public class EditBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
 
-        editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,ctg);
-        editBookCategory.setAdapter(adapter);
-        editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+        userID = getIntent().getIntExtra("userID",-1);
+        bookID = getIntent().getIntExtra("bookID",-1);
+        System.out.println("BookID"+bookID);
 
         accessBookList=new AccessBooks();
 
-        bookID=-1;
-        bookID = getIntent().getIntExtra("bookID",-1);
+        editBookCategory=(Spinner) findViewById(R.id.editBookCategory);
 
-        if (bookID!=-1){
+        Book aBook=new Book(  );
+
+        String[] subArray = new String[aBook.getCategoryArr().length-1];
+        System.arraycopy( aBook.getCategoryArr(), 1, subArray, 0, subArray.length );
+
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,subArray);
+        editBookCategory.setAdapter(adapter);
+        editBookCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+
+        if (bookID>0){
             newBook=accessBookList.searchBook(bookID);
             editBookTitle=(EditText)findViewById(R.id.editBookTitle);
             editBookAuthor=(EditText)findViewById(R.id.editBookAuthor);
@@ -57,18 +59,8 @@ public class EditBookActivity extends AppCompatActivity {
             editBookAuthor.setText(newBook.getAuthor());
             editBookPrice.setText(""+newBook.getPrice());
             editBookDetail.setText(newBook.getDescription());
-
-        }
-    }
-
-    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-            category=ctg[arg2];
         }
 
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
     }
 
     public void buttonBookSubmit(View view) {
@@ -91,7 +83,6 @@ public class EditBookActivity extends AppCompatActivity {
             else
                 showEditDialog();
         }
-
     }
 
     private void showDialog(){
@@ -104,6 +95,7 @@ public class EditBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
     private void showNewDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
@@ -112,9 +104,13 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),2);
+                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userID);
                         accessBookList.insertBook(aBook);
-                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
+                        int userType = 0;
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
+
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
@@ -138,10 +134,16 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook=accessBookList.searchBook(bookID);
-                        accessBookList.updateBook(aBook,title,author,aBook.getPicture(),detail,category,Double.parseDouble(price));
-                        Intent intent = new Intent(EditBookActivity.this, SellerBookListActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        newBook.setAuthor( author );
+                        newBook.setCategory( category );
+                        newBook.setDescription( detail );
+                        newBook.setName( title );
+                        newBook.setPrice( Double.parseDouble( price ) );
+                        accessBookList.updateBook(newBook);
+                        int userType = 0;
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userType", userType);
+                        intent.putExtra("userID", userID);
                         startActivity(intent);
                     }
                 })
@@ -149,7 +151,6 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-
                         finish();
                     }
                 })
@@ -158,6 +159,17 @@ public class EditBookActivity extends AppCompatActivity {
 
     public void buttonEditBookCancel(View view) {
         finish();
+    }
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+            Book aBook =new Book(  );
+            category=aBook.getCategoryArr()[arg2+1];
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 
 

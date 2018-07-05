@@ -1,7 +1,7 @@
 package com.example.ding.umutos.business;
 
-import java.util.Collections;
 import java.util.List;
+
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.persistence.AccountPersistence;
@@ -11,25 +11,26 @@ public class AccessAccounts {
     private AccountPersistence accountPersistence;
     private List<Account> accounts;
 
-    public AccessAccounts()
-    {
+    public AccessAccounts() {
         accountPersistence = Service.getAccountPersistence();
         accounts = null;
     }
 
-    public List<Account> getAccounts()
-    {
-        accounts = accountPersistence.getAccountSequential();
-        return Collections.unmodifiableList(accounts);
+    public AccessAccounts(final AccountPersistence accountPersistence) {
+        this();
+        this.accountPersistence = accountPersistence;
     }
 
-    public Account getAccountByID(int userID)
-    {
+    public List<Account> getAccounts() {
+        accounts = accountPersistence.getAccountSequential();
+        return accounts;
+    }
+
+    public Account getAccountByID(int userID) {
         return accountPersistence.getAccountByID(userID);
     }
 
-    public boolean insertAccount(Account currentAccount)
-    {
+    public boolean insertAccount(Account currentAccount) {
         if(currentAccount != null) {
             accountPersistence.insertAccount(currentAccount);
             return true;
@@ -37,14 +38,36 @@ public class AccessAccounts {
         return false;
     }
 
-    public boolean updateAccount(Account currentAccount)
-    {
+    public boolean updateAccount(Account currentAccount) {
         return accountPersistence.updateAccount(currentAccount) != null;
     }
 
-    public void deleteAccount(Account currentAccount)
-    {
+    public void deleteAccount(Account currentAccount) {
         accountPersistence.deleteAccount(currentAccount);
     }
 
+    public Account Login(String userName, String password) {
+        Account targetAccount = null;
+        getAccounts();
+        for(int i = 0; i < accounts.size(); i++)
+        {
+            boolean sameUserName = accounts.get(i).getUserName().equals(userName);
+            boolean samePassword = Integer.parseInt(accounts.get(i).getPassword()) == password.hashCode();
+            if(samePassword && sameUserName)
+                targetAccount = accounts.get(i);
+        }
+        return targetAccount;
+    }
+
+    public Account register(String userName, String passWord) {
+        Account targetAccount = null;
+        AccountValidator validator = new AccountValidator();
+        getAccounts();
+        if(validator.validateUserName(userName, accounts) && validator.validatePassword(passWord))
+        {
+            targetAccount = new Account(userName, Integer.toString(passWord.hashCode()));
+            this.insertAccount(targetAccount);
+        }
+        return targetAccount;
+    }
 }

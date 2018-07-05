@@ -1,36 +1,34 @@
-package com.example.ding.umutos.persistence.stubs;
+package com.example.ding.umutos.persistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.example.ding.umutos.persistence.AccountPersistence;
+
 import com.example.ding.umutos.objects.Account;
 
 public class AccountPersistenceStub implements AccountPersistence{
 
     private List<Account> Accounts;
 
-    public AccountPersistenceStub()
-    {
+    public AccountPersistenceStub() {
         this.Accounts = new ArrayList<>();
-        Accounts.add(new Account(1,"Yunlong Liu"));
-        Accounts.add(new Account(2,"Yu Gu"));
-        Accounts.add(new Account(3,"Hanxiang Liu"));
-        Accounts.add(new Account(4,"Tianhua Xu"));
-        Accounts.add(new Account(5,"Zitao Zheng"));
-        Accounts.add(new Account(6,"Xiao Peng"));
+        Accounts.add(new Account("Yunlong Liu", "123"));
+        Accounts.add(new Account("Yu Gu", "234"));
+        Accounts.add(new Account("Hanxiang Liu", "345"));
+        Accounts.add(new Account("Tianhua Xu", "456"));
+        Accounts.add(new Account("Zitao Zheng", "567"));
+        Accounts.add(new Account("Xiao Peng", "678"));
+        Accounts.get(0).setUserID(1);
     }
 
     @Override
-    public List<Account> getAccountSequential()
-    {
+    public List<Account> getAccountSequential() {
         return Collections.unmodifiableList(Accounts);
     }
 
     @Override
-    public Account getAccountByID(int userID)
-    {
+    public Account getAccountByID(int userID) {
         for(int i = 0; i < Accounts.size(); i++)
         {
             if(Accounts.get(i).getUserID() == userID)
@@ -40,15 +38,13 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public Account insertAccount(Account currentAccount)
-    {
+    public Account insertAccount(Account currentAccount) {
         Accounts.add(currentAccount);
         return currentAccount;
     }
 
     @Override
-    public Account updateAccount(Account currentAccount)
-    {
+    public Account updateAccount(Account currentAccount) {
         int index;
 
         index = Accounts.indexOf(currentAccount);
@@ -58,8 +54,7 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public void deleteAccount(Account currentAccount)
-    {
+    public void deleteAccount(Account currentAccount) {
         int index;
 
         index = Accounts.indexOf(currentAccount);

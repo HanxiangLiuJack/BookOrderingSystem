@@ -4,7 +4,6 @@ package com.example.ding.umutos.business;
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
-import com.example.ding.umutos.objects.Account;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class AccessOrders {
     public List<Order> orderHistory(int id, int number) {
         List<Order> history;
 
-        if (number == 0) {
+        if (number == 1) {
             history = orderPersistence.getBuyerOrders(id);
         } else {
             history = orderPersistence.getSellerOrders(id);

@@ -16,7 +16,8 @@ public class AccountTest {
     @Before
     public void setup()
     {
-        templateAccount = new Account(12345, "John");
+        templateAccount = new Account("huahua", "7797047");
+        templateAccount.setUserID(12345);
     }
 
     @After
@@ -38,7 +39,7 @@ public class AccountTest {
     {
         System.out.println("Testing get methods");
         assertTrue(12345 == templateAccount.getUserID());
-        assertTrue("John".equals(templateAccount.getUserName()));
+        assertTrue("huahua".equals(templateAccount.getUserName()));
         System.out.println("End Testing get methods");
     }
 

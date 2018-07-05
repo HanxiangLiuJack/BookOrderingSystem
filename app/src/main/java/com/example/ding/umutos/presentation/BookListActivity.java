@@ -71,7 +71,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             bookList=(ListView)findViewById(R.id.cusListView);
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
-            newBook=newBookList.get(2);
+            newBook=new Book(  );
             loadBookList(newBookList);
             Spinner searchByCategory;
             searchByCategory=(Spinner) findViewById(R.id.searchByCategory);
@@ -112,10 +112,14 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         if(TextUtils.isEmpty(newText))
         {
             bookList.clearTextFilter();
+            newBookList=accessBookList.getBooks();
+            loadBookList( newBookList );
         }
         else
         {
             bookList.setFilterText(newText);
+            newBookList=accessBookList.searchBooksByKeyWord( newText );
+            loadBookList( newBookList );
         }
         return true;
     }

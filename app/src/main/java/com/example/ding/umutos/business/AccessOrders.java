@@ -4,7 +4,6 @@ package com.example.ding.umutos.business;
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.OrderPersistence;
-import com.example.ding.umutos.objects.Account;
 
 import java.util.List;
 
@@ -25,17 +24,21 @@ public class AccessOrders {
 
 
     //need to test
-    public List<Order> orderHistory(int userID, int userType) {
+    public List<Order> orderHistory(int id, int number) {
         List<Order> history;
 
-        if (userType == 1) {
-            history = orderPersistence.getBuyerOrders(userID);
+        if (number == 1) {
+            history = orderPersistence.getBuyerOrders(id);
         } else {
-            history = orderPersistence.getSellerOrders(userID);
+            history = orderPersistence.getSellerOrders(id);
         }
         return history;
     }
 
+    public List<Order> getOrder()
+    {
+        return orderPersistence.getOrders();
+    }
 
     public boolean insertOrder(Order currentOrder){
         OrderValidator validator = new OrderValidator();

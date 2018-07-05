@@ -56,6 +56,16 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
             st.setString(8,currentOrder.getPhoneNumber());
             st.setString(9,currentOrder.getAddress());
 
+            System.out.println(currentOrder.getBookName());
+            System.out.println(currentOrder.getBuyerID());
+            System.out.println(currentOrder.getSellerID());
+            System.out.println(currentOrder.getPrice());
+            System.out.println(currentOrder.getBuyerFirstName());
+            System.out.println(currentOrder.getBuyerLastName());
+            System.out.println(currentOrder.getPostCode());
+            System.out.println(currentOrder.getPhoneNumber());
+            System.out.println(currentOrder.getAddress());
+
             st.executeUpdate();
 
             return currentOrder;
@@ -106,6 +116,11 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         } catch (final SQLException e){
             throw new PersistenceException(e);
         }
+    }
+
+    @Override
+    public List<Order> getOrders() {
+        return null;
     }
 
 }

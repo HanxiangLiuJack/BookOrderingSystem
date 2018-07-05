@@ -27,7 +27,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
         this.dbPath = dbPath;
         String newS=dbPath;
         maxBookID = 0;
-        Log.e("DB PATH",newS);
     }
 
 

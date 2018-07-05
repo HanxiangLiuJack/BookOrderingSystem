@@ -12,4 +12,5 @@ public interface OrderPersistence {
 
     List<Order> getSellerOrders(int userID);
 
+    List<Order> getOrders();
 }

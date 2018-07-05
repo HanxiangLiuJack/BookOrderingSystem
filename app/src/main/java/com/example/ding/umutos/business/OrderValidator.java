@@ -10,28 +10,28 @@ public class OrderValidator {
                 validateAddress(order.getAddress());
     }
 
-    private boolean validateLastName(String lastName)
+    public boolean validateLastName(String lastName)
     {
-        return lastName.length() < 20 && lastName.length() > 0;
+        return lastName.length() <= 20 && lastName.length() > 0;
     }
 
-    private boolean validateFirstName(String firstName)
+    public boolean validateFirstName(String firstName)
     {
-        return firstName.length() < 20 && firstName.length() > 0;
+        return firstName.length() <= 20 && firstName.length() > 0;
     }
 
-    private boolean validatePostCode(String postCode)
+    public  boolean validatePostCode(String postCode)
     {
-        return postCode.length() < 8 && postCode.length() > 0;
+        return postCode.length() <=7 && postCode.length() > 0;
     }
 
-    private boolean validatePhoneNumber(String phoneNumber)
+    public  boolean validatePhoneNumber(String phoneNumber)
     {
-        return phoneNumber.length() < 16 && phoneNumber.length() > 0;
+        return phoneNumber.length() <=10 && phoneNumber.length() > 0;
     }
 
-    private boolean validateAddress(String address)
+    public boolean validateAddress(String address)
     {
-        return address.length() < 30 && address.length() > 0;
+        return address.length() <=100 && address.length() > 0;
     }
 }

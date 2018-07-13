@@ -20,17 +20,21 @@ public class AccessOrders {
         this.orderPersistence = orderPersistence;
     }
 
-    //need to test
-    public List<Order> orderHistory(int id, int number) {
-        List<Order> history;
 
-        if (number == 1) {
-            history = orderPersistence.getBuyerOrders(id);
-        } else {
-            history = orderPersistence.getSellerOrders(id);
-        }
+
+    public List<Order> buyerOrderHistory(int id){
+        List<Order> history;
+        history = orderPersistence.getBuyerOrders(id);
         return history;
     }
+
+    public List<Order> sellerOrderHistory(int id){
+        List<Order> history;
+        history = orderPersistence.getSellerOrders(id);
+        return history;
+    }
+
+
 
     public List<Order> getOrder()
     {

@@ -33,10 +33,13 @@ public class HistoryActivity extends AppCompatActivity {
         bookList=(ListView)findViewById(R.id.historyBookList);
 
         userID = getIntent().getIntExtra("userID",-1);
-        userType=getIntent().getIntExtra("userType",-1);
+        userType = getIntent().getIntExtra("userType",-1);
 
         accessOrderList=new AccessOrders(  );
-        newOrderList=accessOrderList.orderHistory( userID,userType );
+        if(userType == 1)
+            newOrderList = accessOrderList.buyerOrderHistory(userID);
+        else
+            newOrderList=accessOrderList.sellerOrderHistory( userID );
         loadList(newOrderList);
 
         TextView historyBar=(TextView)findViewById(R.id.historyBar);

@@ -41,8 +41,8 @@
         android:ems="10"
         android:inputType="text"
         android:text=""
-        android:maxLength="60"
-        android:hint="Max length 60"
+        android:maxLength="30"
+        android:hint="Max length 30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
 
@@ -93,8 +93,8 @@
         android:layout_marginStart="30dp"
         android:background="@drawable/text_style"
         android:ems="10"
-        android:maxLength="10"
-        android:hint="Max length 10"
+        android:maxLength="6"
+        android:hint="Max length 6"
         android:inputType="numberDecimal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookPrice" />

@@ -19,6 +19,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.business.BookSorter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -238,13 +239,16 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         BookListActivity.this.startActivity(intent);
     }
 
+
     public void buttonPriceHighToLow(View view){
-        List<Book> aList=accessBookList.declineSort(newBookList);
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.HighPrice(newBookList);
         loadBookList(aList);
     }
 
     public void buttonPriceLowToHigh(View view){
-        List<Book> aList=accessBookList.ascentSort(newBookList);
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.LowPrice(newBookList);
         loadBookList(aList);
     }
 

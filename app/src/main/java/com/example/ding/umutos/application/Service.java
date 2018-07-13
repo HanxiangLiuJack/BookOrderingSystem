@@ -3,15 +3,18 @@ package com.example.ding.umutos.application;
 import com.example.ding.umutos.persistence.BookPersistence;
 import com.example.ding.umutos.persistence.AccountPersistence;
 import com.example.ding.umutos.persistence.OrderPersistence;
+import com.example.ding.umutos.persistence.WishListPersistence;
 import com.example.ding.umutos.persistence.hsqldb.AccountPersistenceHSQLDB;
 import com.example.ding.umutos.persistence.hsqldb.BookPersistenceHSQLDB;
 import com.example.ding.umutos.persistence.hsqldb.OrderPersistenceHSQLDB;
+import com.example.ding.umutos.persistence.hsqldb.WishListPersistenceHSQLDB;
 
 public class Service {
 
     private static BookPersistence bookPersistence = null;
     private static AccountPersistence accountPersistence = null;
     private static OrderPersistence orderPersistence = null;
+    private static WishListPersistence wishListPersistence = null;
 
     public static synchronized BookPersistence getBookPersistence() {
         if (bookPersistence == null) {
@@ -32,5 +35,11 @@ public class Service {
             orderPersistence = new OrderPersistenceHSQLDB(Main.getDBPathName());
         }
         return orderPersistence;
+    }
+    public static synchronized WishListPersistence getWishListPersistence() {
+        if(wishListPersistence == null) {
+            wishListPersistence = new WishListPersistenceHSQLDB(Main.getDBPathName());
+        }
+        return wishListPersistence;
     }
 }

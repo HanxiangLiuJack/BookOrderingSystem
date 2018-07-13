@@ -33,14 +33,14 @@ public class BookPersistenceHSQLDB implements BookPersistence {
     }
 
     private Book fromResultSet(final ResultSet rs) throws SQLException {
-        int bookID = rs.getInt("bookID");
-        String bookName = rs.getString("bookName");
-        String authorName = rs.getString("authorName");
-        int bookPicture = rs.getInt("bookPicture");
-        String bookDescription = rs.getString("bookDescription");
-        String bookCategory = rs.getString("bookCategory");
-        Double price = rs.getDouble("price");
-        int ownerID = rs.getInt("ownerID");
+            int bookID = rs.getInt("bookID");
+            String bookName = rs.getString("bookName");
+            String authorName = rs.getString("authorName");
+            int bookPicture = rs.getInt("bookPicture");
+            String bookDescription = rs.getString("bookDescription");
+            String bookCategory = rs.getString("bookCategory");
+            Double price = rs.getDouble("price");
+            int ownerID = rs.getInt("ownerID");
 
         if(bookID>maxBookID){
             maxBookID = bookID;

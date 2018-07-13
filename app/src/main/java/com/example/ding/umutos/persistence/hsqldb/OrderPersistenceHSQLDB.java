@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.example.ding.umutos.business.OrderBuilder;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.objects.*;
 
@@ -30,14 +31,24 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         final int buyerID = rs.getInt("buyerID");
         final int sellerID = rs.getInt("sellerID");
         final double price = rs.getDouble("price");
+
         final String buyerFirstName = rs.getString("buyerFirstName");
         final String buyerLastName = rs.getString("buyerLastName");
         final String postCode = rs.getString("postCode");
         final String phoneNumber = rs.getString("phoneNumber");
         final String address = rs.getString("address");
-        final String[] orderInfo = {buyerFirstName,buyerLastName,postCode,phoneNumber,address};
+        //final String[] orderInfo = {buyerFirstName,buyerLastName,postCode,phoneNumber,address};*/
 
-        return new Order(bookName,buyerID,sellerID,price,orderInfo);
+        Order newOrder =  new Order(bookName,buyerID,sellerID,price);
+        OrderBuilder information = new OrderBuilder(newOrder);
+        information.setFirstName(buyerFirstName);
+        information.setLastName(buyerLastName);
+        information.setPostCode(postCode);
+        information.setAddress(address);
+        information.setPhoneNumber(phoneNumber);
+
+
+        return newOrder;
     }
 
 

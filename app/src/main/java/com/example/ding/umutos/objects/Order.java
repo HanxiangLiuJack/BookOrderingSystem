@@ -11,17 +11,17 @@ public class Order {
     private String phoneNumber;
     private String address;
 
-    public Order(String bookName, int buyerID, int sellerID, double price,  String[] orderInfo)
+    public Order(String bookName, int buyerID, int sellerID, double price /*,String[] orderInfo*/)
     {
         this.bookName = bookName;
         this.buyerID = buyerID;
         this.sellerID = sellerID;
         this.price = price;
-        buyerFirstName = orderInfo[0];
+        /*buyerFirstName = orderInfo[0];
         buyerLastName = orderInfo[1];
         postCode = orderInfo[2];
         phoneNumber = orderInfo[3];
-        address = orderInfo[4];
+        address = orderInfo[4];*/
     }
 
     public String getBookName()
@@ -35,7 +35,8 @@ public class Order {
     }
 
     public int getSellerID() {
-        return sellerID; }
+        return sellerID;
+    }
 
     public double getPrice(){
         return price; }
@@ -59,4 +60,30 @@ public class Order {
     public String getAddress() {
         return address;
     }
+
+    public void setFirstName(String buyerFirstName){
+        this.buyerFirstName=buyerFirstName;
+    }
+
+    public void setLastName(String buyerLastName)
+    {
+        this.buyerLastName=buyerLastName;
+    }
+
+    public void setPostCode(String postCode)
+    {
+        this.postCode=postCode;
+    }
+
+    public void setPhoneNumber(String phoneNumber)
+    {
+        this.phoneNumber=phoneNumber;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address=address;
+    }
+
+
 }

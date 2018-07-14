@@ -34,18 +34,9 @@ public class AccessWishlists {
     }
 
 
-    public boolean insertWishList(Book currentBook) {
-        /*WishListValidator validator = new WishListValidator();
-        if(currentBook != null) {
-            if(validator.validateWishList(currentBook)) {
-                wishListPersistence.insertWishList(currentBook);
-                return true;
-            }
-        }
-        return false;*/
-
-        if(currentBook !=null){
-            wishListPersistence.insertWishList(currentBook);
+    public boolean insertWishList(Book currentBook,int userID) {
+        if(currentBook!=null){
+            wishListPersistence.insertWishList(currentBook,userID);
             return true;
         }
         return false;

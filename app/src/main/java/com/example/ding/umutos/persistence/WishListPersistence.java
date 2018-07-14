@@ -10,7 +10,7 @@ public interface WishListPersistence {
 
     void deleteWishList(int id);
 
-    Book insertWishList(Book currentBook);
+    void insertWishList(Book currentBook,int userID);
 
     Book searchWishList(int id);
 

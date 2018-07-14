@@ -67,24 +67,15 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public Book insertWishList(Book currentBook) {
+    public void insertWishList(Book currentBook,int userID) {
         getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1, maxBookID + 1);
-            st.setString(2, currentBook.getName());
-            st.setString(3, currentBook.getAuthor());
-            st.setInt(4, currentBook.getPicture());
-            st.setString(5, currentBook.getDescription());
-            st.setString(6, currentBook.getCategory());
-            st.setDouble(7, currentBook.getPrice());
-            st.setInt(8, currentBook.getOwner());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(NULL,?,?)");
+            st.setString(1,currentBook.getName() );
+            st.setInt(2, userID);
 
             st.executeUpdate();
 
-            currentBook.setBookID(maxBookID + 1);
-
-            return currentBook;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }

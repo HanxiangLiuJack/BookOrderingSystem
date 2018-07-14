@@ -70,4 +70,26 @@ public class AccessAccounts {
         }
         return targetAccount;
     }
+
+    public List<String> getAccountComment(int userID)
+    {
+        return getAccountByID(userID).getComment();
+    }
+
+    public double getAccountRate(int userID)
+    {
+        return getAccountByID(userID).getRate();
+    }
+
+    public boolean CommentUser(String comment, int sellerID)
+    {
+        return getAccountByID(sellerID).getComment().add(comment);
+    }
+
+    public void RateUser(int sellerID, double rate)
+    {
+        Account seller = getAccountByID(sellerID);
+        RateCalculator newCalculator = new RateCalculator();
+        seller.setRate(newCalculator.calculateRate(seller,rate));
+    }
 }

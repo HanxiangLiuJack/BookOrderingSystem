@@ -51,13 +51,13 @@ public class AccessShoppingCart {
 
 
     public int getTotalPrice(int userID){
-        int totalprice=0;
+        int totalPrice=0;
         priceList =shoppingCartPersistence.getShoppingCartSequential(userID);
         for(int i=0;i<priceList.size();i++){
-            totalprice+=priceList.get(i).getPrice();
+            totalPrice+=priceList.get(i).getPrice();
 
         }
-        return totalprice;
+        return totalPrice;
     }
 
 

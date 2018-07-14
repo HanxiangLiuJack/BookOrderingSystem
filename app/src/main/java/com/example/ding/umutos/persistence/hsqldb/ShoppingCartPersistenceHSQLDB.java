@@ -69,7 +69,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public Book searchShoppingCart(int id){
         Book book = null;
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM ShoppingCart WHERE bookID = ?");
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
@@ -92,7 +92,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     @Override
     public void deleteBookfromShoppingCart(int bookID) {
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("DELETE FROM books WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM ShoppingCart WHERE bookID = ?");
             st.setInt(1, bookID);
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -104,7 +104,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public List<Book> getShoppingCartSequential(int userID) {
         final List<Book> books = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM ShoppingCart WHERE ownerID = ?");
             st.setInt(1, userID);
 
             final ResultSet rs = st.executeQuery();

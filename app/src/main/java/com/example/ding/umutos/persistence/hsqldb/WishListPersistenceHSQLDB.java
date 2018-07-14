@@ -48,18 +48,18 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
     @Override
     public List<Book> getWishListSequential() {
-        final List<Book> books = new ArrayList<>();
+        final List<Book> wishList = new ArrayList<>();
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
-            final ResultSet rs = st.executeQuery("SELECT * FROM WishList");
+            final ResultSet rs = st.executeQuery("SELECT * FROM wishList");
             while (rs.next()) {
                 final Book book = fromResultSet(rs);
-                books.add(book);
+                wishList.add(book);
             }
             rs.close();
             st.close();
 
-            return books;
+            return wishList;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
@@ -70,7 +70,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     public void insertWishList(Book currentBook,int userID) {
         getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO WishList VALUES(?,?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?)");
             st.setString(1,currentBook.getName() );
             st.setInt(2, userID);
 
@@ -86,7 +86,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     public Book searchWishList(int id) {
         Book book = null;
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM WishList WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE bookID = ?");
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
@@ -107,21 +107,21 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
     @Override
     public List<Book> getUserWishListSequential(int userID) {
-        final List<Book> books = new ArrayList<>();
+        final List<Book> wishList = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM WishList WHERE ownerID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE ownerID = ?");
             st.setInt(1, userID);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
                 final Book book = fromResultSet(rs);
-                books.add(book);
+                wishList.add(book);
             }
 
             rs.close();
             st.close();
 
-            return books;
+            return wishList;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
@@ -130,7 +130,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     @Override
     public void deleteWishList(int id) {
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM WishList WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM wishList WHERE bookID = ?");
             st.setInt(1, id);
             st.executeUpdate();
         } catch (final SQLException e) {

@@ -53,8 +53,9 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
     @Override
     public void insertShoppingCart(Book currentBook, int userID){
+        shoppingCartSequential();
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO ShoppingCart VALUES(?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?)");
             st.setString(1,currentBook.getName() );
             st.setInt(2, userID);
 
@@ -69,7 +70,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public Book searchShoppingCart(int id){
         Book book = null;
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM ShoppingCart WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE bookID = ?");
             st.setInt(1, id);
 
             final ResultSet rs = st.executeQuery();
@@ -92,7 +93,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     @Override
     public void deleteBookfromShoppingCart(int bookID) {
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("DELETE FROM ShoppingCart WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE bookID = ?");
             st.setInt(1, bookID);
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -102,21 +103,21 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
     @Override
     public List<Book> getShoppingCartSequential(int userID) {
-        final List<Book> books = new ArrayList<>();
+        final List<Book> shoppingCart = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM ShoppingCart WHERE ownerID = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE ownerID = ?");
             st.setInt(1, userID);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
                 final Book book = fromResultSet(rs);
-                books.add(book);
+                shoppingCart.add(book);
             }
 
             rs.close();
             st.close();
 
-            return books;
+            return shoppingCart;
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
@@ -126,12 +127,32 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     @Override
     public void clearShoppingCart(int userID) {
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM ShoppingCart WHERE ownerID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE ownerID = ?");
             st.setInt(1, userID);
 
             st.executeUpdate();
         }
         catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
+
+    @Override
+    public List<Book> shoppingCartSequential() {
+        final List<Book> shoppingCart = new ArrayList<>();
+        try (final Connection c = connection()) {
+            final Statement st = c.createStatement();
+            final ResultSet rs = st.executeQuery("SELECT * FROM shoppingCart");
+            while (rs.next()) {
+                final Book book = fromResultSet(rs);
+                shoppingCart.add(book);
+            }
+            rs.close();
+            st.close();
+
+            return shoppingCart;
+        } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
     }

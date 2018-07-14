@@ -9,6 +9,7 @@ import java.util.List;
 public class AccessWishlists {
     private WishListPersistence wishListPersistence;
     private List<Book> list;
+    private List<Book> userWishLists;
 
     public AccessWishlists() {
         wishListPersistence = Service.getWishListPersistence();
@@ -54,6 +55,12 @@ public class AccessWishlists {
     public List<Book> getWishList() {
         list = wishListPersistence.getWishListSequential();
         return list;
+    }
+
+
+    public List<Book> getUserWishLists(int userID) {
+        userWishLists = wishListPersistence.getUserWishListSequential(userID);
+        return userWishLists;
     }
 
 

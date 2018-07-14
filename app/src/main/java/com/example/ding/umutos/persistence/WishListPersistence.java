@@ -14,7 +14,7 @@ public interface WishListPersistence {
 
     Book searchWishList(int id);
 
-    List<Book> getUserWishListSequential(int userID);
+    List<Book> getUserWishListSequential(int useID);
 
 
 }

@@ -12,6 +12,7 @@ import com.example.ding.umutos.persistence.AccountPersistence;
 
 import com.example.ding.umutos.persistence.AccountPersistenceStub;
 
+import static org.mockito.ArgumentMatchers.doubleThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -165,5 +166,53 @@ public class AccessAccountsTest {
         accessAccounts.deleteAccount(templateAccount);
         assertTrue(accessAccounts.getAccounts().size() == 6);
         System.out.println("\nfinished testing testDeleteAccount.\n");
+    }
+
+    @Test
+    public void testGetComments()
+    {
+        System.out.println("\nStart testing testGetComment.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        List<String> comment = accessAccounts.getAccountComment(1);
+        assertTrue(comment.size() == 0);
+        System.out.println("\nEnd testing testGetComment.\n");
+    }
+
+    @Test
+    public void testGetAccountRate()
+    {
+        System.out.println("\nStart testing testGetAccountRate.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        double rate = accessAccounts.getAccountRate(1);
+        assertTrue(rate == 0);
+        System.out.println("\nEnd testing testGetAccountRate.\n");
+    }
+
+    @Test
+    public void testCommentAccount()
+    {
+        System.out.println("\nStart testing testCommentAccount.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        accessAccounts.CommentUser("bad seller", 1);
+        List<String> comment = accessAccounts.getAccountComment(1);
+        assertTrue(comment.size() == 1);
+        assertTrue(comment.get(0).equals("bad seller"));
+        System.out.println("\nEnd testing testCommentAccount.\n");
+    }
+
+    @Test
+    public void testRateUser()
+    {
+        System.out.println("\nStart testing testRateUser.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        accessAccounts.RateUser(1, 4);
+        assertTrue(accessAccounts.getAccountRate(1) == 4);
+        accessAccounts.RateUser(1, 2);
+        assertTrue(accessAccounts.getAccountRate(1) == 3);
+        System.out.println("\nEnd testing testRateUser.\n");
     }
 }

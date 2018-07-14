@@ -13,8 +13,8 @@ public class OrderPersistenceStub implements OrderPersistence {
         this.orders = new ArrayList<>();
         String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
         String[] orderInfo2 = {"firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven"};
-        orders.add(new Order("book1", 1, 2, 1, orderInfo1));
-        orders.add(new Order("book2", 3, 4, 3, orderInfo2));
+        orders.add(new Order("book1", 1, 2, 1));
+        orders.add(new Order("book2", 3, 4, 3));
     }
 
     @Override

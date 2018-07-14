@@ -46,4 +46,14 @@ public class AccountTest {
         assertTrue("Amy".equals(templateAccount.getUserName()));
         System.out.println("End Testing set methods");
     }
+
+    @Test
+    public void testRate() {
+        System.out.println("Testing rate methods");
+        assertTrue(templateAccount.getRate() == 0);
+        templateAccount.setRate(5);
+        assertTrue(templateAccount.getRate() == 5);
+        System.out.println("End Testing rate methods");
+    }
+
 }

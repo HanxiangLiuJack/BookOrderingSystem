@@ -23,8 +23,9 @@ public class Account
     {
         this.userName = userName;
         this.password = password;
-        comment = new ArrayList<String>();
+        comment = new ArrayList<>();
         ratedPerson = 0;
+        rate = 0;
     }
     
     public int getUserID()

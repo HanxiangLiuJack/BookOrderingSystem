@@ -15,7 +15,12 @@ public class OrderTest {
     @Before
     public void setup() {
         String [] orderInfo = {"Hanxiang","Liu","R3T","12345678","101 abcRoad"} ;
-        order = new Order("book1", 1, 2, 100, orderInfo);
+        order = new Order("book1", 1, 2, 100);
+        order.setAddress(orderInfo[4]);
+        order.setPhoneNumber(orderInfo[3]);
+        order.setPostCode(orderInfo[2]);
+        order.setLastName(orderInfo[1]);
+        order.setFirstName(orderInfo[0]);
     }
     @After
     public void tearDown(){

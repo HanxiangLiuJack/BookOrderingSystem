@@ -19,6 +19,7 @@ public class AccessWishlists {
     public AccessWishlists(final WishListPersistence wishListPersistence) {
         this();
         this.wishListPersistence = wishListPersistence;
+
     }
 
 

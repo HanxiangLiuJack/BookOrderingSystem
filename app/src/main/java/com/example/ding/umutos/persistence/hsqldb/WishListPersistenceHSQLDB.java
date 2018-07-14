@@ -114,8 +114,8 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         }
     }
 
-    /*@Override
-    public List<Book> getUserBookSequential(int userID) {
+    @Override
+    public List<Book> getUserWishListSequential(int userID) {
         final List<Book> books = new ArrayList<>();
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerID = ?");
@@ -134,7 +134,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         } catch (final SQLException e) {
             throw new PersistenceException(e);
         }
-    }*/
+    }
 
     @Override
     public void deleteWishList(int id) {

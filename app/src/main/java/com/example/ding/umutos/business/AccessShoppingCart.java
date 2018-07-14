@@ -61,4 +61,10 @@ public class AccessShoppingCart {
     }
 
 
+    public void clearShoppingCart(int userID){
+        shoppingCartPersistence.clearShoppingCart(userID);
+    }
+
+
+
 }

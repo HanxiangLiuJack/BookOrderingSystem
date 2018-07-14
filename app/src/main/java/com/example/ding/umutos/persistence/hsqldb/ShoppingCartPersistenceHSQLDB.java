@@ -54,7 +54,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     @Override
     public void insertShoppingCart(Book currentBook, int userID){
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO ShoppingCart VALUES(NULL, ?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO ShoppingCart VALUES(?, ?)");
             st.setString(1,currentBook.getName() );
             st.setInt(2, userID);
 
@@ -121,6 +121,21 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
             throw new PersistenceException(e);
         }
     }
+
+
+    @Override
+    public void clearShoppingCart(int userID) {
+        try (final Connection c = connection()) {
+            final PreparedStatement st = c.prepareStatement("DELETE FROM ShoppingCart WHERE ownerID = ?");
+            st.setInt(1, userID);
+
+            st.executeUpdate();
+        }
+        catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
+
 
 
 

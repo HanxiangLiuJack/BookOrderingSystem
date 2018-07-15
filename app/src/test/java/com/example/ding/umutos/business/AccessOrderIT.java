@@ -55,8 +55,13 @@ public class AccessOrderIT {
     {
         System.out.println("\nStarting test testInsertOrder\n");
         Order newOrder = new Order("newBook", "Hanxiang Liu", "Tianhua Xu", 100);
+        newOrder.setFirstName("a");
+        newOrder.setLastName("b");
+        newOrder.setPostCode("ad");
+        newOrder.setPhoneNumber("123");
+        newOrder.setAddress("asdad");
         assertTrue(accessOrders.insertOrder(newOrder));
-        assertTrue(accessOrders.getOrder().size() == 3);
+        assertTrue(accessOrders.buyerOrderHistory("Hanxiang Liu").size() == 3);
         System.out.println("\nEnd test testInsertOrder\n");
     }
 

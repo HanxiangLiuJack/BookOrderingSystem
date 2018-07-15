@@ -4,52 +4,52 @@ package com.example.ding.umutos.persistence;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
-import com.example.ding.umutos.objects.Wish;
+import com.example.ding.umutos.objects.Item;
 
 public class ShoppingCartPersistenceStub implements ShoppingCartPersistence {
 
-    private List<Wish> shoppingCart;
+    private List<Item> shoppingCart;
 
     public ShoppingCartPersistenceStub() {
         this.shoppingCart = new ArrayList<>();
-        shoppingCart.add(new Wish(1,11.22,"Tianhua Xu","Essential Scrum"));
-        shoppingCart.add(new Wish(2,9.95,"Tianhua Xu","Economic and Social History of Medieval Europe"));
-        shoppingCart.add(new Wish(3,11.66,"Tianhua Xu","An Economic and Social History of Later Medieval Europe"));
-        shoppingCart.add(new Wish(4,30.22,"Tianhua Xu","The Middle Ages"));
-        shoppingCart.add(new Wish(5,22.45,"Tianhua Xu","The Guilty Wife"));
-        shoppingCart.add(new Wish(6,33.22,"Tianhua Xu","One Way"));
-        shoppingCart.add(new Wish(7,22.55,"Tianhua Xu","Sarah Dunn"));
+        shoppingCart.add(new Item("Tianhua Xu",1,"Essential Scrum", 10));
+        shoppingCart.add(new Item("Tianhua Xu",2,"Economic and Social History of Medieval Europe",11));
+        shoppingCart.add(new Item("Tianhua Xu",3,"An Economic and Social History of Later Medieval Europe",12));
+        shoppingCart.add(new Item("Tianhua Xu",4,"The Middle Ages",123));
+        shoppingCart.add(new Item("Tianhua Xu",5,"The Guilty Wife", 23));
+        shoppingCart.add(new Item("Tianhua Xu",6,"One Way",13));
+        shoppingCart.add(new Item("Tianhua Xu",7,"Sarah Dunn", 55));
     }
 
 
     //Print Book List
     @Override
-    public List<Wish> shoppingCartSequential() {
+    public List<Item> shoppingCartSequential() {
         return Collections.unmodifiableList(shoppingCart);
     }
 
 
     @Override
-    public void insertShoppingCart(Wish wish, String userName) {
-        if(userName.equals("Tianhua Xu"))
-            shoppingCart.add(wish);
+    public void insertShoppingCart(Item item) {
+        if(item.getUserName().equals("Tianhua Xu"))
+            shoppingCart.add(item);
     }
 
 
     @Override
-    public Wish searchShoppingCart(int id) {
-        Wish wish = null;
+    public Item searchShoppingCart(int id) {
+        Item item = null;
         for (int i = 0; i < shoppingCart.size()&&id>=0; i++) {
             if(shoppingCart.get(i).getBookID()==id)
-                wish = shoppingCart.get(i);
+                item = shoppingCart.get(i);
         }
-        return wish;
+        return item;
     }
 
 
     @Override
-    public List<Wish> getShoppingCartSequential(String userName) {
-        List<Wish> newList = new ArrayList<>();
+    public List<Item> getShoppingCartSequential(String userName) {
+        List<Item> newList = new ArrayList<>();
         if(userName.equals("Tianhua Xu"))
             newList = shoppingCart;
         return newList;

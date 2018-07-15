@@ -44,8 +44,8 @@ public class AccessWishListIT {
     {
         System.out.println("\nStarting test testGetUserWishList.\n");
         assertNotNull(accessWishlists.getUserWishLists("Xiao Peng"));
-        assertNull(accessWishlists.getUserWishLists("Tianhua Xu"));
-        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 2);
+        assertTrue(accessWishlists.getUserWishLists("Tianhua Xu").size() == 0);
+        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 1);
         System.out.println("\nEnd test testGetUserWishList.\n");
     }
 
@@ -64,7 +64,7 @@ public class AccessWishListIT {
     {
         System.out.println("\nStarting test testDeleteWishList.\n");
         accessWishlists.deleteWishList(1, "Xiao Peng");
-        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 2);
+        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 0);
         System.out.println("\nStarting test testDeleteWishList.\n");
     }
 }

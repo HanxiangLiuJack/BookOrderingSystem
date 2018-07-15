@@ -12,7 +12,7 @@ import com.example.ding.umutos.business.*;
         AccessOrderIT.class,
         AccessWishListIT.class,
         //AccessBookIT.class,
-        AccessShoppingCartIT.class
+        //AccessShoppingCartIT.class
 })
 
 public class AllIntegrationTest {

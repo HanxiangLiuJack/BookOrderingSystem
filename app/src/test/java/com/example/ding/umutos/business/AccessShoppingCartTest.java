@@ -101,7 +101,7 @@ public class AccessShoppingCartTest {
         System.out.println("\nStart testing testGetTotalPrice.\n");
         shoppingCartPersistence = new ShoppingCartPersistenceStub();
         accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);
-        assertTrue(accessShoppingCart.getTotalPrice("Tianhua Xu") == 141.17000000000002);
+        assertTrue(accessShoppingCart.getTotalPrice("Tianhua Xu") == 141.27);
         System.out.println("\nStart testing testGetTotalPrice.\n");
     }
 

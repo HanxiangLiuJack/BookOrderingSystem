@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import com.example.ding.umutos.objects.Book;
+
+import com.example.ding.umutos.objects.Wish;
 import static junit.framework.Assert.*;
 
 import com.example.ding.umutos.persistence.WishListPersistence;
@@ -41,7 +42,7 @@ public class AccessWishListTest {
     public void testGetWishList()
     {
         System.out.println("\nStart testing testGetWishList.\n");
-        List<Book> wishList = new ArrayList<>();
+        List<Wish> wishList = new ArrayList<>();
 
         when(wishListPersistence.getWishListSequential()).thenReturn(wishList);
 
@@ -59,7 +60,7 @@ public class AccessWishListTest {
     public void testGetUserWishList()
     {
         System.out.println("\nStart testing testGetUserWishList.\n");
-        List<Book> wishList = new ArrayList<>();
+        List<Wish> wishList = new ArrayList<>();
 
         when(wishListPersistence.getUserWishListSequential("Tianhua")).thenReturn(wishList);
 

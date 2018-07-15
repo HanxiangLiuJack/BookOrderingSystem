@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Wish;
 import com.example.ding.umutos.persistence.WishListPersistence;
 
 
@@ -27,13 +28,12 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
     private Wish fromResultSet(final ResultSet rs) throws SQLException {
         int bookID = rs.getInt("bookID");
-        String userName = rs.getString("userName")
         String bookName = rs.getString("bookName");
 
         Double price = rs.getDouble("price");
         String ownerName = rs.getString("ownerName");
 
-        Wish wish = new Book(userName, bookID, bookName, price, ownerName);
+        Wish wish = new Wish(bookID, price, ownerName, bookName);
 
         return wish;
     }
@@ -64,10 +64,10 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?,?)");
             st.setString(1,userName );
-            st.setInt(2,currentBook.getBookID());
-            st.setString(3, currentBook.getName());
-            st.setDouble(4, currentBook.getPrice());
-            st.setString(5, currentBook.getOwner());
+            st.setInt(2,wish.getBookID());
+            st.setString(3, wish.getName());
+            st.setDouble(4, wish.getPrice());
+            st.setString(5, wish.getOwner());
 
             st.executeUpdate();
 

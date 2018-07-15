@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Wish;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 
 public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
@@ -26,13 +27,12 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
     private Wish fromResultSet(final ResultSet rs) throws SQLException {
         int bookID = rs.getInt("bookID");
-        String userName = rs.getString("userName")
         String bookName = rs.getString("bookName");
 
         Double price = rs.getDouble("price");
         String ownerName = rs.getString("ownerName");
 
-        Wish wish = new Book(userName, bookID, bookName, price, ownerName);
+        Wish wish = new Wish(bookID, price, ownerName, bookName);
 
         return wish;
     }

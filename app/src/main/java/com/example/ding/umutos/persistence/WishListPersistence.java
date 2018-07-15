@@ -1,7 +1,6 @@
 package com.example.ding.umutos.persistence;
 
-import com.example.ding.umutos.objects.Book;
-
+import com.example.ding.umutos.objects.Wish;
 import java.util.List;
 
 public interface WishListPersistence {

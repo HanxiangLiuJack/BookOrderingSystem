@@ -1,4 +1,4 @@
-package com.example.ding.umutos.presentation;
+package com.example.ding.umutos;
 
 
 import com.example.ding.umutos.presentation.HomeActivity;

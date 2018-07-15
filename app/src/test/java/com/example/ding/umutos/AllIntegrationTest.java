@@ -8,7 +8,11 @@ import com.example.ding.umutos.business.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-
+        AccessAccountIT.class,
+        AccessOrderIT.class,
+        AccessWishListIT.class,
+        AccessBookIT.class,
+        AccessShoppingCartIT.class
 })
 
 public class AllIntegrationTest {

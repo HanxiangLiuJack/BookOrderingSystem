@@ -29,7 +29,7 @@ public class AccessOrderIT {
     @After
     public void tearDown() {
         this.tempDB.delete();
-        accessOrders = new AccessOrders();
+        accessOrders = null;
     }
 
     @Test

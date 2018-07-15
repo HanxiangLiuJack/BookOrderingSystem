@@ -35,13 +35,13 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         String bookDescription = rs.getString("bookDescription");
         String bookCategory = rs.getString("bookCategory");
         Double price = rs.getDouble("price");
-        int ownerID = rs.getInt("ownerID");
+        String ownerName = rs.getString("ownerName");
 
         if (bookID > maxBookID) {
             maxBookID = bookID;
         }
 
-        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
         return book;
     }
@@ -67,12 +67,12 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public void insertWishList(Book currentBook,int userID) {
+    public void insertWishList(Book currentBook,String userName) {
         getWishListSequential();
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?)");
             st.setString(1,currentBook.getName() );
-            st.setInt(2, userID);
+            st.setString(2, userName);
 
             st.executeUpdate();
 
@@ -106,11 +106,11 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     }
 
     @Override
-    public List<Book> getUserWishListSequential(int userID) {
+    public List<Book> getUserWishListSequential(String userName) {
         final List<Book> wishList = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE ownerID = ?");
-            st.setInt(1, userID);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE ownerName= ?");
+            st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {

@@ -34,9 +34,9 @@ public class AccessWishlists {
     }
 
 
-    public boolean insertWishList(Book currentBook,int userID) {
+    public boolean insertWishList(Book currentBook,String userName) {
         if(currentBook!=null){
-            wishListPersistence.insertWishList(currentBook,userID);
+            wishListPersistence.insertWishList(currentBook,userName);
             return true;
         }
         return false;
@@ -50,8 +50,8 @@ public class AccessWishlists {
     }
 
 
-    public List<Book> getUserWishLists(int userID) {
-        userWishLists = wishListPersistence.getUserWishListSequential(userID);
+    public List<Book> getUserWishLists(String userName) {
+        userWishLists = wishListPersistence.getUserWishListSequential(userName);
         return userWishLists;
     }
 

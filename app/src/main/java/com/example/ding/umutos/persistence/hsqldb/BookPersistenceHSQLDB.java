@@ -40,13 +40,13 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             String bookDescription = rs.getString("bookDescription");
             String bookCategory = rs.getString("bookCategory");
             Double price = rs.getDouble("price");
-            String ownerID = rs.getString("ownerName");
+            String ownerName = rs.getString("ownerName");
 
         if(bookID>maxBookID){
             maxBookID = bookID;
         }
 
-        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
         return book;
     }

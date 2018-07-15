@@ -26,9 +26,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Book currentBook,int userID) {
+    public boolean insertShoppingCart(Book currentBook,String userName) {
         if(currentBook!=null){
-            shoppingCartPersistence.insertShoppingCart(currentBook,userID);
+            shoppingCartPersistence.insertShoppingCart(currentBook,userName);
             return true;
         }
         return false;
@@ -44,15 +44,15 @@ public class AccessShoppingCart {
     }
 
 
-    public List<Book> getUserShoppingCart(int userID) {
-        userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userID);
+    public List<Book> getUserShoppingCart(String userName) {
+        userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
         return userShoppingCart;
     }
 
 
-    public int getTotalPrice(int userID){
+    public int getTotalPrice(String userName){
         int totalPrice=0;
-        priceList =shoppingCartPersistence.getShoppingCartSequential(userID);
+        priceList =shoppingCartPersistence.getShoppingCartSequential(userName);
         for(int i=0;i<priceList.size();i++){
             totalPrice+=priceList.get(i).getPrice();
 
@@ -61,8 +61,8 @@ public class AccessShoppingCart {
     }
 
 
-    public void clearShoppingCart(int userID){
-        shoppingCartPersistence.clearShoppingCart(userID);
+    public void clearShoppingCart(String userName){
+        shoppingCartPersistence.clearShoppingCart(userName);
     }
 
 

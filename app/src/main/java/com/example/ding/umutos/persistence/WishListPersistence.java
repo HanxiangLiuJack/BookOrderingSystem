@@ -10,11 +10,11 @@ public interface WishListPersistence {
 
     void deleteWishList(int id);
 
-    void insertWishList(Book currentBook,int userID);
+    void insertWishList(Book currentBook,String userName);
 
     Book searchWishList(int id);
 
-    List<Book> getUserWishListSequential(int useID);
+    List<Book> getUserWishListSequential(String userName);
 
 
 }

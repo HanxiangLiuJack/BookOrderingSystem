@@ -26,14 +26,15 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
+
+
     private Wish fromResultSet(final ResultSet rs) throws SQLException {
         int bookID = rs.getInt("bookID");
         String bookName = rs.getString("bookName");
-
-        Double price = rs.getDouble("price");
+        String userName = rs.getString("userName");
         String ownerName = rs.getString("ownerName");
 
-        Wish wish = new Wish(bookID, price, ownerName, bookName);
+        Wish wish = new Wish(bookID, userName, ownerName, bookName);
 
         return wish;
     }
@@ -59,15 +60,14 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public void insertWishList(Wish wish,String userName) {
+    public void insertWishList(Wish wish) {
         getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?,?)");
-            st.setString(1,userName );
+            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?)");
+            st.setString(1,wish.getAuthorName() );
             st.setInt(2,wish.getBookID());
             st.setString(3, wish.getName());
-            st.setDouble(4, wish.getPrice());
-            st.setString(5, wish.getOwner());
+            st.setString(4, wish.getUserName());
 
             st.executeUpdate();
 
@@ -99,6 +99,9 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
             throw new PersistenceException(e);
         }
     }
+
+
+
 
     @Override
     public List<Wish> getUserWishListSequential(String userName) {

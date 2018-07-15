@@ -3,15 +3,15 @@ package com.example.ding.umutos.objects;
 
 public class Wish {
     private int bookID;
-    private double price;
-    private String ownerName;
+    private String authorName;
+    private String userName;
     private String bookName;
 
-    public Wish(int bookID, double price, String ownerName, String bookName)
+    public Wish(int bookID, String userName, String authorName, String bookName)
     {
         this.bookName = bookName;
-        this.price = price;
-        this.ownerName = ownerName;
+        this.authorName = authorName;
+        this.userName = userName;
         this.bookID=bookID;
     }
 
@@ -20,9 +20,9 @@ public class Wish {
         return bookName;
     }
 
-    public double getPrice()
+    public String getAuthorName()
     {
-        return price;
+        return authorName;
     }
 
     public int getBookID()
@@ -30,8 +30,8 @@ public class Wish {
         return bookID;
     }
 
-    public String getOwner(){
-        return ownerName;
+    public String getUserName(){
+        return userName;
     }
 
 }

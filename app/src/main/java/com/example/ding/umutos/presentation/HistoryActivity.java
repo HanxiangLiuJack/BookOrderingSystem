@@ -51,8 +51,9 @@ public class HistoryActivity extends AppCompatActivity {
 
         int size=newOrderList.size();
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
+        AccessAccounts accounts=new AccessAccounts(  );
+
         for (int i = 0; i <size; i++) {
-            AccessAccounts accounts=new AccessAccounts(  );
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("account","Sold by: "+accounts.getAccountByUserName( newOrderList.get(i).getSellerName() ).getUserName()+"\nBought by: "+accounts.getAccountByUserName( newOrderList.get(i).getBuyerName() ).getUserName());
             book.put("title", newOrderList.get(i).getBookName());

@@ -258,4 +258,13 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
     }
+
+    public void btnToWishList(View view){
+        Intent intent = new Intent(BookListActivity.this,WishActivity.class);
+        intent.putExtra("userType", userType);
+        intent.putExtra("userName", userName);
+        BookListActivity.this.startActivity(intent);
+    }
+
+
 }

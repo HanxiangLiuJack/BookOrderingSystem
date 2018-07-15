@@ -41,27 +41,37 @@
 
             <TextView
                 android:id="@+id/cusBookListTitle"
-                android:layout_width="300dp"
+                android:layout_width="360dp"
                 android:layout_height="100dp"
-                android:layout_marginEnd="68dp"
-                android:layout_marginRight="68dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="32dp"
                 android:text="Hey hey hey"
                 android:textSize="23dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cusBookListImg"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/cusBookListPrice"
-                android:layout_width="300dp"
+                android:layout_width="180dp"
                 android:layout_height="46dp"
-                android:layout_marginEnd="68dp"
-                android:layout_marginRight="68dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="10dp"
                 android:text="$25.6"
                 android:textColor="#b92646"
                 android:textSize="22dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cusBookListImg"
+                app:layout_constraintTop_toBottomOf="@+id/cusBookListTitle" />
+
+            <TextView
+                android:id="@+id/cusBookListSellerRate"
+                android:layout_width="160dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:text="Seller Rate: 4.3"
+                android:textSize="22dp"
+                app:layout_constraintStart_toEndOf="@+id/cusBookListPrice"
                 app:layout_constraintTop_toBottomOf="@+id/cusBookListTitle" />
         </android.support.constraint.ConstraintLayout>
     </LinearLayout>

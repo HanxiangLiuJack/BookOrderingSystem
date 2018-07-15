@@ -169,17 +169,6 @@ public class AccessAccountsTest {
     }
 
     @Test
-    public void testGetComments()
-    {
-        System.out.println("\nStart testing testGetComment.\n");
-        accountPersistence = new AccountPersistenceStub();
-        accessAccounts = new AccessAccounts(accountPersistence);
-        List<String> comment = accessAccounts.getAccountComment("Tianhua Xu");
-        assertTrue(comment.size() == 0);
-        System.out.println("\nEnd testing testGetComment.\n");
-    }
-
-    @Test
     public void testGetAccountRate()
     {
         System.out.println("\nStart testing testGetAccountRate.\n");
@@ -188,19 +177,6 @@ public class AccessAccountsTest {
         double rate = accessAccounts.getAccountRate("Tianhua Xu");
         assertTrue(rate == 0);
         System.out.println("\nEnd testing testGetAccountRate.\n");
-    }
-
-    @Test
-    public void testCommentAccount()
-    {
-        System.out.println("\nStart testing testCommentAccount.\n");
-        accountPersistence = new AccountPersistenceStub();
-        accessAccounts = new AccessAccounts(accountPersistence);
-        accessAccounts.CommentUser("bad seller", "Tianhua Xu");
-        List<String> comment = accessAccounts.getAccountComment("Tianhua Xu");
-        assertTrue(comment.size() == 1);
-        assertTrue(comment.get(0).equals("bad seller"));
-        System.out.println("\nEnd testing testCommentAccount.\n");
     }
 
     @Test

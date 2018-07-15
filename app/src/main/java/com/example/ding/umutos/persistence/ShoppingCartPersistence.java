@@ -1,22 +1,22 @@
 package com.example.ding.umutos.persistence;
 
-import com.example.ding.umutos.objects.Wish;
+import com.example.ding.umutos.objects.Item;
 
 import java.util.List;
 
 public interface ShoppingCartPersistence {
 
-    void insertShoppingCart(Wish wish, String userName);
+    void insertShoppingCart(Item item);
 
     void deleteBookfromShoppingCart(int bookID, String userName);
 
-    Wish searchShoppingCart(int id);
+    Item searchShoppingCart(int id);
 
-    List<Wish> getShoppingCartSequential(String userName);
+    List<Item> getShoppingCartSequential(String userName);
 
     void clearShoppingCart(String userName);
 
-    List<Wish> shoppingCartSequential();
+    List<Item> shoppingCartSequential();
 
 
 }

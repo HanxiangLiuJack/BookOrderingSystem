@@ -70,13 +70,10 @@ public class ShoppingCartPersistenceStub implements ShoppingCartPersistence {
 
 
     @Override
-    public boolean clearShoppingCart(String userName){
+    public void clearShoppingCart(String userName){
         if(userName.equals("Tianhua Xu")){
-            if(shoppingCart==null){
-                return true;
-            }
+            shoppingCart.clear();
         }
-        return false;
     }
 
 

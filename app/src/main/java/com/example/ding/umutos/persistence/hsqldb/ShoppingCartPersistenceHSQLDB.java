@@ -15,11 +15,9 @@ import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
     private final String dbPath;
-    private int maxBookID;
 
     public ShoppingCartPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        maxBookID = 0;
     }
 
     private Connection connection() throws SQLException {
@@ -36,10 +34,6 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
         Double price = rs.getDouble("price");
         String ownerName = rs.getString("ownerName");
 
-        if (bookID > maxBookID) {
-            maxBookID = bookID;
-        }
-
         Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
         return book;
@@ -50,11 +44,16 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public void insertShoppingCart(Book currentBook, String userName){
         shoppingCartSequential();
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             st.setString(1,currentBook.getName() );
-            st.setString(2,currentBook.getOwner());
-            st.setDouble(3,currentBook.getPrice());
-            st.setString(4, userName);
+            st.setInt(2,currentBook.getBookID());
+            st.setString(3, currentBook.getName());
+            st.setString(4, currentBook.getAuthor());
+            st.setInt(5, currentBook.getPicture());
+            st.setString(6, currentBook.getDescription());
+            st.setString(7, currentBook.getCategory());
+            st.setDouble(8, currentBook.getPrice());
+            st.setString(9, currentBook.getOwner());
 
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -123,16 +122,11 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public boolean clearShoppingCart(String userName) {
+    public void clearShoppingCart(String userName) {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE userName = ?");
             st.setString(1, userName);
             st.executeUpdate();
-            final ResultSet rs = st.executeQuery();
-            if(!rs.next()){
-                return true;
-            }
-            return false;
         }
         catch (final SQLException e) {
             throw new PersistenceException(e);

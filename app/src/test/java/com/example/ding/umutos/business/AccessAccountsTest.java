@@ -12,6 +12,7 @@ import com.example.ding.umutos.persistence.AccountPersistence;
 
 import com.example.ding.umutos.persistence.AccountPersistenceStub;
 
+import static org.mockito.ArgumentMatchers.doubleThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -70,17 +71,17 @@ public class AccessAccountsTest {
         System.out.println("\nStart testing GetAccountByID.\n");
 
         final Account account =  new Account ("Hanxiang Liu","3234");
-        when(accountPersistence.getAccountByID(3)).thenReturn(account);
-        Account result = accessAccounts.getAccountByID(3);
+        when(accountPersistence.getAccountByUserName("Hanxiang Liu")).thenReturn(account);
+        Account result = accessAccounts.getAccountByUserName("Hanxiang Liu");
         assertTrue(result.equals(account));
-        verify(accountPersistence).getAccountByID(3);
+        verify(accountPersistence).getAccountByUserName("Hanxiang Liu");
 
         accountPersistence = new AccountPersistenceStub();
         accessAccounts = new AccessAccounts(accountPersistence);
 
-        assertTrue(accessAccounts.getAccountByID(1).getUserID() == 1);
+        assertTrue(accessAccounts.getAccountByUserName("Hanxiang Liu").getUserName().equals("Hanxiang Liu"));
 
-        assertNull(accessAccounts.getAccountByID(100));
+        assertNull(accessAccounts.getAccountByUserName("abc"));
         System.out.println("\nEnd testing GetAccountByID.\n");
 
     }
@@ -165,5 +166,53 @@ public class AccessAccountsTest {
         accessAccounts.deleteAccount(templateAccount);
         assertTrue(accessAccounts.getAccounts().size() == 6);
         System.out.println("\nfinished testing testDeleteAccount.\n");
+    }
+
+    @Test
+    public void testGetComments()
+    {
+        System.out.println("\nStart testing testGetComment.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        List<String> comment = accessAccounts.getAccountComment("Tianhua Xu");
+        assertTrue(comment.size() == 0);
+        System.out.println("\nEnd testing testGetComment.\n");
+    }
+
+    @Test
+    public void testGetAccountRate()
+    {
+        System.out.println("\nStart testing testGetAccountRate.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        double rate = accessAccounts.getAccountRate("Tianhua Xu");
+        assertTrue(rate == 0);
+        System.out.println("\nEnd testing testGetAccountRate.\n");
+    }
+
+    @Test
+    public void testCommentAccount()
+    {
+        System.out.println("\nStart testing testCommentAccount.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        accessAccounts.CommentUser("bad seller", "Tianhua Xu");
+        List<String> comment = accessAccounts.getAccountComment("Tianhua Xu");
+        assertTrue(comment.size() == 1);
+        assertTrue(comment.get(0).equals("bad seller"));
+        System.out.println("\nEnd testing testCommentAccount.\n");
+    }
+
+    @Test
+    public void testRateUser()
+    {
+        System.out.println("\nStart testing testRateUser.\n");
+        accountPersistence = new AccountPersistenceStub();
+        accessAccounts = new AccessAccounts(accountPersistence);
+        accessAccounts.RateUser("Tianhua Xu", 4);
+        assertTrue(accessAccounts.getAccountRate("Tianhua Xu") == 4);
+        accessAccounts.RateUser("Tianhua Xu", 2);
+        assertTrue(accessAccounts.getAccountRate("Tianhua Xu") == 3);
+        System.out.println("\nEnd testing testRateUser.\n");
     }
 }

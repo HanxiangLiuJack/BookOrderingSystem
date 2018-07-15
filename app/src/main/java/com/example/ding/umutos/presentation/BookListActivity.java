@@ -19,6 +19,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.business.BookSorter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +34,8 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private AccessAccounts accessAccounts;
     private List<Book> newBookList;
     private TextView infoBar;
-    private int userType, userID;
+    private int userType;
+    private String userName;
     private ArrayAdapter<String> adapter;
 
     @Override
@@ -41,7 +43,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         super.onCreate(savedInstanceState);
 
         userType = getIntent().getIntExtra("userType",-1);
-        userID = getIntent().getIntExtra("userID",-1);
+        userName = getIntent().getStringExtra("userName");
 
 
         if (userType==0){
@@ -50,10 +52,10 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
             accessBookList=new AccessBooks();
             accessAccounts=new AccessAccounts();
-            newBookList=accessBookList.getUserBooks(userID);
+            newBookList=accessBookList.getUserBooks(userName);
 
             infoBar=(TextView)findViewById(R.id.sellListInfoBar);
-            infoBar.setText("Hi "+accessAccounts.getAccountByID(userID).getUserName()+".");
+            infoBar.setText("Hi "+accessAccounts.getAccountByUserName(userName).getUserName()+".");
 
             loadBookList(newBookList);
         }
@@ -148,7 +150,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
                 else{
                     Intent intent = new Intent(BookListActivity.this,SingleBookActivity.class);
                     intent.putExtra("bookID", bookID);
-                    intent.putExtra("userID", userID);
+                    intent.putExtra("userName", userName);
                     BookListActivity.this.startActivity(intent);
                 }
             }
@@ -194,7 +196,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
                                         int which) {
                         accessBookList.deleteBook(bookID);
                         Intent intent = new Intent(BookListActivity.this, BookListActivity.class);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         intent.putExtra("userType", userType);
                         startActivity(intent);
                     }
@@ -219,14 +221,14 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     private void openEditBookActivity(){
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
-        intent.putExtra("userID", userID);
+        intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
     }
 
     private void openEditBookActivity(int bookID){
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
         intent.putExtra("bookID", bookID);
-        intent.putExtra("userID", userID);
+        intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
     }
 
@@ -234,23 +236,26 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void buttonOpenHistory(View view){
         Intent intent = new Intent(BookListActivity.this,HistoryActivity.class);
         intent.putExtra("userType", userType);
-        intent.putExtra("userID", userID);
+        intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
     }
 
+
     public void buttonPriceHighToLow(View view){
-        List<Book> aList=accessBookList.declineSort(newBookList);
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.HighPrice(newBookList);
         loadBookList(aList);
     }
 
     public void buttonPriceLowToHigh(View view){
-        List<Book> aList=accessBookList.ascentSort(newBookList);
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.LowPrice(newBookList);
         loadBookList(aList);
     }
 
     public void btnCusBackToMain(View view) {
         Intent intent = new Intent(BookListActivity.this,HomeActivity.class);
-        intent.putExtra("userID", userID);
+        intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
     }
 }

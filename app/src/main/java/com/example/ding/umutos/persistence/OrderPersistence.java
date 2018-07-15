@@ -7,9 +7,9 @@ public interface OrderPersistence {
 
     Order insertOrder(Order currentOrder);
 
-    List<Order> getBuyerOrders(int userID);
+    List<Order> getBuyerOrders(String userName);
 
-    List<Order> getSellerOrders(int userID);
+    List<Order> getSellerOrders(String userName);
 
     List<Order> getOrders();
 }

@@ -15,22 +15,24 @@ public class Wish {
         this.bookID=bookID;
     }
 
-    public void setPrice(double p)
+    public String getName()
     {
-        this.price = p;
+        return bookName;
     }
 
-    public void setBookID(int bookID)
+    public double getPrice()
     {
-        this.bookID = bookID;
+        return price;
     }
 
-    public void setName(String name)
+    public int getBookID()
     {
-        this.bookName = name;
+        return bookID;
     }
 
-    public void setOwnerName(String name){this.ownerName=name;}
-
+    public String getOwner(){
+        return ownerName;
+    }
+    
 
 }

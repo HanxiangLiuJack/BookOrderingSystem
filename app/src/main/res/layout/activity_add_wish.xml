@@ -79,7 +79,7 @@
 
 
     <Button
-        android:id="@+id/addCancel"
+        android:id="@+id/addWishCancel"
         android:layout_width="240dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/addSubmit"
+        android:id="@+id/addWishSubmit"
         android:layout_width="240dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"

@@ -44,7 +44,9 @@
         <activity android:name=".presentation.WishActivity">
 
         </activity>
+        <activity android:name=".presentation.NewWishActivity">
 
+        </activity>
 
 
     </application>

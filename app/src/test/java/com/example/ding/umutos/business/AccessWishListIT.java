@@ -53,8 +53,8 @@ public class AccessWishListIT {
     public void testInsertWishList()
     {
         System.out.println("\nStarting test testInsertWishList.\n");
-        Wish newWish = new Wish(5, 9.95, "Tianhua Xu", "Economic and Social History of Medieval Europe");
-        assertTrue(accessWishlists.insertWishList(newWish);
+        Wish newWish = new Wish(5, "Yu Gu", "Henri Pirenne", "Economic and Social History of Medieval Europe");
+        assertTrue(accessWishlists.insertWishList(newWish));
         assertTrue(accessWishlists.getUserWishLists("Yu Gu").size() == 1);
         System.out.println("\nEnd test testInsertWishList.\n");
     }

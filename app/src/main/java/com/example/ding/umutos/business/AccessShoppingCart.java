@@ -26,9 +26,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Item item,String userName) {
+    public boolean insertShoppingCart(Item item) {
         if(item!=null){
-            shoppingCartPersistence.insertShoppingCart(item,userName);
+            shoppingCartPersistence.insertShoppingCart(item);
             return true;
         }
         return false;

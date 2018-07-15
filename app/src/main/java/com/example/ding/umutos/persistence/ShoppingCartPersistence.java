@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ShoppingCartPersistence {
 
-    void insertShoppingCart(Item item, String userName);
+    void insertShoppingCart(Item item);
 
     void deleteBookfromShoppingCart(int bookID, String userName);
 

@@ -70,9 +70,11 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     public void insertWishList(Book currentBook,String userName) {
         getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?)");
             st.setString(1,currentBook.getName() );
-            st.setString(2, userName);
+            st.setString(2,currentBook.getOwner());
+            st.setDouble(3,currentBook.getPrice());
+            st.setString(4, userName);
 
             st.executeUpdate();
 
@@ -109,7 +111,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     public List<Book> getUserWishListSequential(String userName) {
         final List<Book> wishList = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE ownerName= ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE userName= ?");
             st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
@@ -128,10 +130,11 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     }
 
     @Override
-    public void deleteWishList(int id) {
+    public void deleteWishList(int id ,String userName) {
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM wishList WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM wishList WHERE bookID = ? AND userName = ?");
             st.setInt(1, id);
+            st.setString(2,userName);
             st.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);

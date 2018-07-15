@@ -1,10 +1,5 @@
 package com.example.ding.umutos.persistence.hsqldb;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -55,9 +50,11 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public void insertShoppingCart(Book currentBook, String userName){
         shoppingCartSequential();
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?)");
+            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?)");
             st.setString(1,currentBook.getName() );
-            st.setString(2, userName);
+            st.setString(2,currentBook.getOwner());
+            st.setDouble(3,currentBook.getPrice());
+            st.setString(4, userName);
 
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -91,10 +88,11 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public void deleteBookfromShoppingCart(int bookID) {
+    public void deleteBookfromShoppingCart(int bookID ,String userName) {
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE bookID = ? AND userName = ?");
             st.setInt(1, bookID);
+            st.setString(2,userName);
             st.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);
@@ -125,12 +123,16 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public void clearShoppingCart(String userName) {
+    public boolean clearShoppingCart(String userName) {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE ownerName = ?");
             st.setString(1, userName);
-
             st.executeUpdate();
+            final ResultSet rs = st.executeQuery();
+            if(!rs.next()){
+                return true;
+            }
+            return false;
         }
         catch (final SQLException e) {
             throw new PersistenceException(e);

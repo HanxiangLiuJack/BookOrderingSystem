@@ -8,13 +8,13 @@ public interface ShoppingCartPersistence {
 
     void insertShoppingCart(Book currentBook, String userName);
 
-    void deleteBookfromShoppingCart(int bookID);
+    void deleteBookfromShoppingCart(int bookID, String userName);
 
     Book searchShoppingCart(int id);
 
     List<Book> getShoppingCartSequential(String userName);
 
-    void clearShoppingCart(String userName);
+    boolean clearShoppingCart(String userName);
 
     List<Book> shoppingCartSequential();
 

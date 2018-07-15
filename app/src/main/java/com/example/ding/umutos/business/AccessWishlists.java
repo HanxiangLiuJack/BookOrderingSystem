@@ -23,9 +23,9 @@ public class AccessWishlists {
     }
 
 
-    public void deleteWishList(int bookID) {
+    public void deleteWishList(int bookID,String userName) {
         if(searchWishList(bookID) != null)
-            wishListPersistence.deleteWishList(bookID);
+            wishListPersistence.deleteWishList(bookID, userName);
     }
 
 

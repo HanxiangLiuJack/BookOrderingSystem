@@ -16,11 +16,8 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
 
     private final String dbPath;
 
-    private int maxUserID;
-
     public AccountPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        maxUserID = 0;
     }
 
     private Connection connection() throws SQLException {
@@ -28,16 +25,10 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     private Account fromResultSet(final ResultSet rs) throws SQLException {
-        final int userID = rs.getInt("accountID");
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
 
-        if(userID>maxUserID){
-            maxUserID = userID;
-        }
-
         Account account =  new Account(userName,password);
-        account.setUserID(userID);
         return account;
     }
 
@@ -61,11 +52,11 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
     @Override
-    public Account getAccountByID(int userID) {
+    public Account getAccountByUserName(String userName) {
         Account account = null;
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE accountID = ?");
-            st.setInt(1, userID);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM accounts WHERE userName = ?");
+            st.setString(1, userName);
             final ResultSet rs = st.executeQuery();
             if(rs.next()){
                 account = fromResultSet(rs);
@@ -82,14 +73,11 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public Account insertAccount(Account currentAccount) {
         getAccountSequential();
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?)");
-            st.setInt(1, maxUserID+1);
-            st.setString(2,currentAccount.getUserName());
-            st.setString(3,currentAccount.getPassword());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts (userName, password) VALUES(?,?)");
+            st.setString(1,currentAccount.getUserName());
+            st.setString(2,currentAccount.getPassword());
 
             st.executeUpdate();
-
-            currentAccount.setUserID(maxUserID+1);
 
             return currentAccount;
         } catch (final SQLException e){
@@ -103,7 +91,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
             final PreparedStatement st = c.prepareStatement("UPDATE accounts SET userName = ?, passWord = ? WHERE userID = ?");
             st.setString(1, currentAccount.getUserName());
             st.setString(2, currentAccount.getPassword());
-            st.setInt(3,currentAccount.getUserID());
+            st.setString(3,currentAccount.getUserName());
 
             st.executeUpdate();
 
@@ -117,7 +105,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public void deleteAccount(Account currentAccount) {
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("DELETE FROM accounts WHERE userID = ?");
-            st.setInt(1, currentAccount.getUserID());
+            st.setString(1, currentAccount.getUserName());
             st.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);

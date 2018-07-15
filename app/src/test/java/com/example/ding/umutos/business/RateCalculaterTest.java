@@ -15,7 +15,6 @@ public class RateCalculaterTest {
     public void setup()
     {
         account = new Account("huahua" , "1111");
-        account.setUserID(1);
         rateCalculator = new RateCalculator();
     }
 

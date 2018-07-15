@@ -19,7 +19,7 @@ public class AccountPersistenceStub implements AccountPersistence{
         Accounts.add(new Account("Tianhua Xu", "456"));
         Accounts.add(new Account("Zitao Zheng", "567"));
         Accounts.add(new Account("Xiao Peng", "678"));
-        Accounts.get(0).setUserID(1);
+
     }
 
     @Override
@@ -28,10 +28,10 @@ public class AccountPersistenceStub implements AccountPersistence{
     }
 
     @Override
-    public Account getAccountByID(int userID) {
+    public Account getAccountByUserName(String userName) {
         for(int i = 0; i < Accounts.size(); i++)
         {
-            if(Accounts.get(i).getUserID() == userID)
+            if(Accounts.get(i).getUserName().equals(userName))
                 return Accounts.get(i);
         }
         return null;

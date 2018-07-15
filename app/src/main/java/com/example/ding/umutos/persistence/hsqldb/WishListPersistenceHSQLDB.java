@@ -35,13 +35,13 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         String bookDescription = rs.getString("bookDescription");
         String bookCategory = rs.getString("bookCategory");
         Double price = rs.getDouble("price");
-        int ownerID = rs.getInt("ownerID");
+        String ownerName = rs.getString("ownerName");
 
         if (bookID > maxBookID) {
             maxBookID = bookID;
         }
 
-        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
         return book;
     }
@@ -78,7 +78,7 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
             st.setString(5, currentBook.getDescription());
             st.setString(6, currentBook.getCategory());
             st.setDouble(7, currentBook.getPrice());
-            st.setInt(8, currentBook.getOwner());
+            st.setString(8, currentBook.getOwner());
 
             st.executeUpdate();
 

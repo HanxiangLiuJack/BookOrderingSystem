@@ -53,7 +53,7 @@ public class AccessBooksTest {
 
         System.out.println("\nStarting test testGetBookList\n");
         final List<Book> books = new ArrayList<>();
-        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
+        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua"));
 
         when(bookPersistence.getBookSequential()).thenReturn(books);
 
@@ -79,23 +79,23 @@ public class AccessBooksTest {
 
         System.out.println("\nStarting test testGetUserBookList\n");
         final List<Book> books = new ArrayList<>();
-        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
-        books.add(new Book("bbb","ccc",2,"eee","fff",5.99,1));
+        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua Xu"));
+        books.add(new Book("bbb","ccc",2,"eee","fff",5.99,"Tianhua Xu"));
 
-        when(bookPersistence.getUserBookSequential(1)).thenReturn(books);
+        when(bookPersistence.getUserBookSequential("Tianhua Xu")).thenReturn(books);
 
-        List<Book> temp = accessBooks.getUserBooks(1);
+        List<Book> temp = accessBooks.getUserBooks("Tianhua Xu");
 
         assertTrue(temp.equals(books));
 
-        verify(bookPersistence).getUserBookSequential(1);
+        verify(bookPersistence).getUserBookSequential("Tianhua Xu");
 
         bookPersistence = new BookPersistenceStub();
         accessBooks = new AccessBooks(bookPersistence);
 
-        List<Book> testUserBookList = accessBooks.getUserBooks(1);
+        List<Book> testUserBookList = accessBooks.getUserBooks("Tianhua Xu");
         int numOfBooks = testUserBookList.size();
-        assertTrue(numOfBooks == 1);//account 1 has 1 books
+        assertTrue(numOfBooks == 9);//account 1 has 1 books
         System.out.println("\nFinished testing testGetUserBookList\n");
 
     }
@@ -105,8 +105,8 @@ public class AccessBooksTest {
         System.out.println("\nStarting test testInsertBook\n");
 
         final List<Book> books = new ArrayList<>();
-        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
-        final Book book = new Book("bbb","ccc",2,"eee","fff",5.99,1);
+        books.add(new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua Xu"));
+        final Book book = new Book("bbb","ccc",2,"eee","fff",5.99,"Tianhua Xu");
         Boolean result ;
 
         when(bookPersistence.insertBook(book)).thenReturn(book);
@@ -119,7 +119,7 @@ public class AccessBooksTest {
         bookPersistence = new BookPersistenceStub();
         accessBooks = new AccessBooks(bookPersistence);
 
-        Book templateBook = new Book( "name", "Author", 1, "info", "COMP", 100, 1 );
+        Book templateBook = new Book( "name", "Author", 1, "info", "COMP", 100, "Tianhua Xu" );
         assertTrue(accessBooks.insertBook(templateBook));
 
         templateBook = null;
@@ -132,7 +132,7 @@ public class AccessBooksTest {
     @Test
     public void testSearchBook() {
         System.out.println("\nStarting test testSearchBook\n");
-        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99,1);
+        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99,"Tianhua Xu");
         when(bookPersistence.searchBook(1)).thenReturn(book);
 
         Book temp = accessBooks.searchBook(1);
@@ -143,7 +143,7 @@ public class AccessBooksTest {
 
         bookPersistence = new BookPersistenceStub();
         accessBooks = new AccessBooks(bookPersistence);
-        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
+        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, "Tianhua Xu");
         templateBook.setBookID(100);
         accessBooks.insertBook(templateBook);
 
@@ -160,7 +160,7 @@ public class AccessBooksTest {
     public void testSearchBookByKeyWord() {
         System.out.println("\nStarting test testSearchBookByKeyWord\n");
         final List <Book> bookList = new ArrayList<>();
-        bookList.add(new Book("aaa","bbb",1,"ddd","eee",9.99, 1));
+        bookList.add(new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua Xu"));
         String key = "aaa";
         when(bookPersistence.searchKeyword(key)).thenReturn(bookList);
         List <Book> temp = accessBooks.searchBooksByKeyWord(key);
@@ -173,7 +173,7 @@ public class AccessBooksTest {
     @Test
     public void testDeleteBook() {
         System.out.println("\nStarting test testDeleteBook\n");
-        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99, 1);
+        final Book book = new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua Xu");
 
         when(bookPersistence.searchBook(1)).thenReturn(book);
 
@@ -186,7 +186,7 @@ public class AccessBooksTest {
 
         bookPersistence = new BookPersistenceStub();
         accessBooks = new AccessBooks(bookPersistence);
-        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, 1);
+        Book templateBook = new Book("name", "author", 1, "info", "COMP", 100, "Tianhua Xu");
         templateBook.setBookID(20);
         accessBooks.insertBook(templateBook);
         accessBooks.deleteBook(templateBook.getBookID());

@@ -26,8 +26,8 @@ public class AccessAccounts {
         return accounts;
     }
 
-    public Account getAccountByID(int userID) {
-        return accountPersistence.getAccountByID(userID);
+    public Account getAccountByUserName(String userName) {
+        return accountPersistence.getAccountByUserName(userName);
     }
 
     public boolean insertAccount(Account currentAccount) {
@@ -59,11 +59,19 @@ public class AccessAccounts {
         return targetAccount;
     }
 
+    public boolean userByUsername(String userName, List<Account> db) {
+        for(int i = 0; i < db.size(); i++) {
+            if(db.get(i).getUserName().equals(userName))
+                return false;
+        }
+        return true;
+    }
+    
     public Account register(String userName, String passWord) {
         Account targetAccount = null;
         AccountValidator validator = new AccountValidator();
         getAccounts();
-        if(validator.validateUserName(userName, accounts) && validator.validatePassword(passWord))
+        if(this.userByUsername(userName, accounts) && validator.validatePassword(passWord))
         {
             targetAccount = new Account(userName, Integer.toString(passWord.hashCode()));
             this.insertAccount(targetAccount);
@@ -71,24 +79,24 @@ public class AccessAccounts {
         return targetAccount;
     }
 
-    public List<String> getAccountComment(int userID)
+    public List<String> getAccountComment(String userName)
     {
-        return getAccountByID(userID).getComment();
+        return getAccountByUserName(userName).getComment();
     }
 
-    public double getAccountRate(int userID)
+    public double getAccountRate(String userName)
     {
-        return getAccountByID(userID).getRate();
+        return getAccountByUserName(userName).getRate();
     }
 
-    public boolean CommentUser(String comment, int sellerID)
+    public boolean CommentUser(String comment, String sellerName)
     {
-        return getAccountByID(sellerID).getComment().add(comment);
+        return getAccountByUserName(sellerName).getComment().add(comment);
     }
 
-    public void RateUser(int sellerID, double rate)
+    public void RateUser(String sellerName, double rate)
     {
-        Account seller = getAccountByID(sellerID);
+        Account seller = getAccountByUserName(sellerName);
         RateCalculator newCalculator = new RateCalculator();
         seller.setRate(newCalculator.calculateRate(seller,rate));
     }

@@ -2,8 +2,10 @@ package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccessShoppingCart {
@@ -26,9 +28,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Book currentBook,int userID) {
+    public boolean insertShoppingCart(Book currentBook,String userName) {
         if(currentBook!=null){
-            shoppingCartPersistence.insertShoppingCart(currentBook,userID);
+            shoppingCartPersistence.insertShoppingCart(currentBook,userName);
             return true;
         }
         return false;
@@ -43,16 +45,14 @@ public class AccessShoppingCart {
         return shoppingCartPersistence.searchShoppingCart(id);
     }
 
-
-    public List<Book> getUserShoppingCart(int userID) {
-        userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userID);
+    public List<Book> getUserShoppingCart(String userName) {
+        userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
         return userShoppingCart;
     }
 
-
-    public int getTotalPrice(int userID){
-        int totalPrice=0;
-        priceList =shoppingCartPersistence.getShoppingCartSequential(userID);
+    public double getTotalPrice(String userName){
+        double totalPrice = 0;
+        priceList = shoppingCartPersistence.getShoppingCartSequential(userName);
         for(int i=0;i<priceList.size();i++){
             totalPrice+=priceList.get(i).getPrice();
 
@@ -60,5 +60,18 @@ public class AccessShoppingCart {
         return totalPrice;
     }
 
+    public List<Order> checkout(String buyerName)
+    {
+        List<Book> shoppingCart = this.getUserShoppingCart(buyerName);
 
+        List<Order> shoppingCartOrder = new ArrayList<>();
+
+        for(int i = 0; i < shoppingCart.size(); i++)
+        {
+            shoppingCartOrder.add(new Order(shoppingCart.get(i).getName(), buyerName, shoppingCart.get(i).getOwner(), shoppingCart.get(i).getPrice()));
+            this.deleteBookfromShoppingCart(shoppingCart.get(i).getBookID());
+        }
+
+        return shoppingCartOrder;
+    }
 }

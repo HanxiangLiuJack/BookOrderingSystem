@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface ShoppingCartPersistence {
 
-    void insertShoppingCart(Book currentBook, int userID);
+    void insertShoppingCart(Book currentBook, String userName);
 
     void deleteBookfromShoppingCart(int bookID);
 
     Book searchShoppingCart(int id);
 
-    List<Book> getShoppingCartSequential(int userID);
+    List<Book> getShoppingCartSequential(String userName);
 
 
 }

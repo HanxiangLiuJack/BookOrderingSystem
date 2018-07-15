@@ -38,9 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
             showDialog();
         }
         else{
-            int userID=newAcc.getUserID();
+            userName=newAcc.getUserName();
             Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-            intent.putExtra("userID", userID);
+            intent.putExtra("userName", userName);
             RegisterActivity.this.startActivity(intent);
         }
     }

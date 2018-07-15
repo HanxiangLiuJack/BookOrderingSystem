@@ -1,8 +1,5 @@
 package com.example.ding.umutos;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -20,7 +17,8 @@ import com.example.ding.umutos.business.*;
         BookSorterTest.class,
         BookValidatorTest.class,
         AccountValidatorTest.class,
-        OrderValidatorTest.class
+        OrderValidatorTest.class,
+        RateCalculaterTest.class
 })
 
 public class AllTests {

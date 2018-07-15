@@ -22,12 +22,12 @@ public class Book
     private int bookPicture;
     private String bookDescription;
     private String bookCategory;
-    private int ownerID;
+    private String ownerName;
     private  double price;
     private int[] bookImg;
     private String[] categoryArr;
 
-    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
+    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, String ownerName)
     {
         this.bookName = bookName;
         this.authorName = authorName;
@@ -35,7 +35,7 @@ public class Book
         this.bookDescription = bookDescription;
         this.bookCategory = bookCategory;
         this.price = price;
-        this.ownerID = ownerID;
+        this.ownerName = ownerName;
     }
 
     public Book(){
@@ -115,8 +115,8 @@ public class Book
         this.bookID = bookID;
     }
 
-    public int getOwner(){
-        return ownerID;
+    public String getOwner(){
+        return ownerName;
     }
 
     public int getImageByBookID(int bookID){

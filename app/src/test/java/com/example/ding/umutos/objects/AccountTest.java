@@ -16,7 +16,6 @@ public class AccountTest {
     @Before
     public void setup() {
         templateAccount = new Account("huahua", "7797047");
-        templateAccount.setUserID(12345);
     }
 
     @After
@@ -34,7 +33,6 @@ public class AccountTest {
     @Test
     public void testAccessorMethods() {
         System.out.println("Testing get methods");
-        assertTrue(12345 == templateAccount.getUserID());
         assertTrue("huahua".equals(templateAccount.getUserName()));
         System.out.println("End Testing get methods");
     }

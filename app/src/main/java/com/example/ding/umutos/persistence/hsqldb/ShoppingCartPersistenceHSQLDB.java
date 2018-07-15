@@ -39,24 +39,24 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
         String bookDescription = rs.getString("bookDescription");
         String bookCategory = rs.getString("bookCategory");
         Double price = rs.getDouble("price");
-        int ownerID = rs.getInt("ownerID");
+        String ownerName = rs.getString("ownerName");
 
         if (bookID > maxBookID) {
             maxBookID = bookID;
         }
 
-        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerID);
+        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
         return book;
     }
 
 
     @Override
-    public void insertShoppingCart(Book currentBook, int userID){
+    public void insertShoppingCart(Book currentBook, String userName){
         try (final Connection c = connection()) {
             PreparedStatement st = c.prepareStatement("INSERT INTO ShoppingCart VALUES(NULL, ?, ?)");
             st.setString(1,currentBook.getName() );
-            st.setInt(2, userID);
+            st.setString(2, userName);
 
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -101,11 +101,11 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     }
 
     @Override
-    public List<Book> getShoppingCartSequential(int userID) {
+    public List<Book> getShoppingCartSequential(String userName) {
         final List<Book> books = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerID = ?");
-            st.setInt(1, userID);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM books WHERE ownerName = ?");
+            st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {

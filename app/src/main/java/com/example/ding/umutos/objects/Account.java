@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Account
 {
-    private int userID;
     private String userName;
     private String password;
 
@@ -26,16 +25,6 @@ public class Account
         comment = new ArrayList<>();
         ratedPerson = 0;
         rate = 0;
-    }
-    
-    public int getUserID()
-    {
-        return userID;
-    }
-
-    public void setUserID(int newUserID)
-    {
-        userID = newUserID;
     }
 
     public String getUserName()

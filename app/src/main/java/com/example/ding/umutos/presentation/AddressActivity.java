@@ -18,7 +18,7 @@ public class AddressActivity extends AppCompatActivity {
     private int bookID;
     private AccessBooks accessBookList;
     private AccessOrders accessOrders;
-    private int userID;
+    private String userName;
     private String firstName, lastName,phoneNum,postCode,addressInfo,additionInfo;
 
     @Override
@@ -26,8 +26,8 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
-        userID = getIntent().getIntExtra("userID",-1);
-        accessOrders=new AccessOrders(  );
+        userName = getIntent().getStringExtra("userName");
+        accessOrders=new AccessOrders();
         accessBookList=new AccessBooks();
     }
 
@@ -79,9 +79,7 @@ public class AddressActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
-                        //String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
-                        Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice());
+                        Order newOrder =  new Order(aBook.getName(),userName,aBook.getOwner(),aBook.getPrice());
                         OrderBuilder information = new OrderBuilder(newOrder);
                         information.setFirstName(firstName);
                         information.setLastName(lastName);
@@ -94,7 +92,7 @@ public class AddressActivity extends AppCompatActivity {
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         startActivity(intent);
                     }
                 })

@@ -39,15 +39,15 @@ public class AccessOrderTest {
       String[] orderInfo2 = {"firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven"};
       final List<Order> orders1 = new ArrayList<>();
       final List<Order> orders2 = new ArrayList<>();
-      orders1.add(new Order("book1", 1, 2, 1));
-      orders2.add(new Order("book2", 3, 4, 11));
-      when(orderPersistence.getBuyerOrders(1)).thenReturn(orders1);
-      when(orderPersistence.getSellerOrders(1)).thenReturn(orders2);
+      orders1.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1));
+      orders2.add(new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 11));
+      when(orderPersistence.getBuyerOrders("Tianhua Xu")).thenReturn(orders1);
+      when(orderPersistence.getSellerOrders("Tianhua Xu")).thenReturn(orders2);
 
-      accessOrders.buyerOrderHistory(1);
-      accessOrders.sellerOrderHistory(1);
-      verify(orderPersistence).getBuyerOrders(1);
-      verify(orderPersistence).getSellerOrders(1);
+      accessOrders.buyerOrderHistory("Tianhua Xu");
+      accessOrders.sellerOrderHistory("Tianhua Xu");
+      verify(orderPersistence).getBuyerOrders("Tianhua Xu");
+      verify(orderPersistence).getSellerOrders("Tianhua Xu");
 
       System.out.println("\nStarting test testInsertOrder\n");
 
@@ -59,8 +59,8 @@ public class AccessOrderTest {
       System.out.println("\nStarting test testInsertOrder\n");
       final List<Order> orders = new ArrayList<>();
       String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
-      orders.add(new Order("book1", 1, 2, 1));
-      final Order order=new Order("book2", 3, 4, 3);
+      orders.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1));
+      final Order order=new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 3);
       order.setAddress(orderInfo1[4]);
       order.setPhoneNumber(orderInfo1[3]);
       order.setPostCode(orderInfo1[2]);
@@ -79,7 +79,7 @@ public class AccessOrderTest {
       accessOrders = new AccessOrders(orderPersistence);
 
       String[] orderInfo3 = {"firstName3", "lastName3", "r3y0b7", "2046666664", "Heaves"};
-      Order newOrder = new Order("book3", 3, 3, 4);
+      Order newOrder = new Order("book3", "Tianhua Xu", "Tianhua Xu", 4);
       newOrder.setAddress(orderInfo3[4]);
       newOrder.setPhoneNumber(orderInfo3[3]);
       newOrder.setPostCode(orderInfo3[2]);

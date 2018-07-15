@@ -33,6 +33,5 @@ public class Wish {
     public String getOwner(){
         return ownerName;
     }
-    
 
 }

@@ -60,14 +60,14 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public void insertWishList(Wish wish,String userName) {
+    public void insertWishList(Wish wish) {
         getWishListSequential();
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?)");
-            st.setString(1,wish.getUserName() );
+            st.setString(1,wish.getAuthorName() );
             st.setInt(2,wish.getBookID());
             st.setString(3, wish.getName());
-            st.setString(4, wish.getAuthorName());
+            st.setString(4, wish.getUserName());
 
             st.executeUpdate();
 

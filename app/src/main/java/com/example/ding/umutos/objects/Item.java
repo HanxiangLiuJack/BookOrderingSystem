@@ -5,14 +5,20 @@ public class Item {
     private int bookID;
     private String bookName;
     private double price;
+    private String userName;
 
-    public Item(int bookID, String bookName, double price)
+    public Item(String userName, int bookID, String bookName, double price)
     {
+        this.userName = userName;
         this.bookName = bookName;
         this.bookID = bookID;
         this.price = price;
     }
 
+    public String getUserName()
+    {
+        return userName;
+    }
     public String getName()
     {
         return bookName;

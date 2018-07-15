@@ -35,9 +35,9 @@ public class AccessWishlists {
     }
 
 
-    public boolean insertWishList(Wish wish,String userName) {
+    public boolean insertWishList(Wish wish) {
         if(wish!=null){
-            wishListPersistence.insertWishList(wish,userName);
+            wishListPersistence.insertWishList(wish);
             return true;
         }
         return false;

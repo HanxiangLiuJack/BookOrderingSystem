@@ -31,18 +31,18 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
         Double price = rs.getDouble("price");
         String userName = rs.getString("userName");
 
-        Item item = new Item(bookID, bookName, price);
+        Item item = new Item(userName,bookID, bookName, price);
 
         return item;
     }
 
 
     @Override
-    public void insertShoppingCart(Item item, String userName){
+    public void insertShoppingCart(Item item){
         shoppingCartSequential();
         try (final Connection c = connection()) {
-            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?, ?)");
-            st.setString(1,userName );
+            PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?)");
+            st.setString(1,item.getUserName());
             st.setInt(2,item.getBookID());
             st.setString(3, item.getName());
             st.setDouble(4, item.getPrice());

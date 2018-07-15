@@ -11,7 +11,7 @@ import com.example.ding.umutos.business.*;
         AccessAccountIT.class,
         AccessOrderIT.class,
         AccessWishListIT.class,
-        AccessBookIT.class,
+        //AccessBookIT.class,
         AccessShoppingCartIT.class
 })
 

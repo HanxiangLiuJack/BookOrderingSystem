@@ -79,19 +79,9 @@ public class AccessAccounts {
         return targetAccount;
     }
 
-    public List<String> getAccountComment(String userName)
-    {
-        return getAccountByUserName(userName).getComment();
-    }
-
     public double getAccountRate(String userName)
     {
         return getAccountByUserName(userName).getRate();
-    }
-
-    public boolean CommentUser(String comment, String sellerName)
-    {
-        return getAccountByUserName(sellerName).getComment().add(comment);
     }
 
     public void RateUser(String sellerName, double rate)

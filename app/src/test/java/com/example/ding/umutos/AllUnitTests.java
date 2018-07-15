@@ -23,6 +23,6 @@ import com.example.ding.umutos.business.*;
         AccessWishListTest.class
 })
 
-public class AllTests {
+public class AllUnitTests {
 
 }

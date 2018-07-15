@@ -14,7 +14,6 @@ public class Account
     private String userName;
     private String password;
 
-    private List<String> comment;
     private double rate;
     private int ratedPerson;
 
@@ -22,7 +21,6 @@ public class Account
     {
         this.userName = userName;
         this.password = password;
-        comment = new ArrayList<>();
         ratedPerson = 0;
         rate = 0;
     }
@@ -40,16 +38,6 @@ public class Account
     public String getPassword()
     {
         return password;
-    }
-
-    public void setPassWord(String newPassword)
-    {
-        password = newPassword;
-    }
-
-    public List<String> getComment()
-    {
-        return comment;
     }
 
     public double getRate(){

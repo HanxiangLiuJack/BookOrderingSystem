@@ -1,8 +1,7 @@
 package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.application.Service;
-import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.objects.Wish;
+import com.example.ding.umutos.objects.Item;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 
 import java.util.List;
@@ -10,9 +9,9 @@ import java.util.List;
 public class AccessShoppingCart {
 
     private ShoppingCartPersistence shoppingCartPersistence;
-    private List<Wish> list;
-    private List<Wish> userShoppingCart;
-    private List<Wish> priceList;
+    private List<Item> list;
+    private List<Item> userShoppingCart;
+    private List<Item> priceList;
 
 
     public AccessShoppingCart() {
@@ -27,9 +26,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Wish wish,String userName) {
-        if(wish!=null){
-            shoppingCartPersistence.insertShoppingCart(wish,userName);
+    public boolean insertShoppingCart(Item item,String userName) {
+        if(item!=null){
+            shoppingCartPersistence.insertShoppingCart(item,userName);
             return true;
         }
         return false;
@@ -40,12 +39,12 @@ public class AccessShoppingCart {
             shoppingCartPersistence.deleteBookfromShoppingCart(bookID, userName);
     }
 
-    public Wish searchShoppingCart(int id) {
+    public Item searchShoppingCart(int id) {
         return shoppingCartPersistence.searchShoppingCart(id);
     }
 
 
-    public List<Wish> getUserShoppingCart(String userName) {
+    public List<Item> getUserShoppingCart(String userName) {
         userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
         return userShoppingCart;
     }

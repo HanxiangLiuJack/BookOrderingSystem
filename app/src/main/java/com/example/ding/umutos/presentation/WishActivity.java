@@ -66,7 +66,7 @@ public class WishActivity extends AppCompatActivity {
             wish.put("title", newWishList.get( i ).getName());
             wish.put("author","Author: "+newWishList.get(i).getAuthorName());
             wish.put("user","Wished by: "+newWishList.get(i).getUserName());
-            wish.put("id","Wished by: "+newWishList.get(i).getBookID());
+            wish.put("id",""+newWishList.get(i).getBookID());
             wishes.add(wish);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
@@ -81,7 +81,8 @@ public class WishActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 HashMap<String,String> map=(HashMap<String,String>)wishList.getItemAtPosition(arg2);
-                bookID=Integer.parseInt(  map.get( "id" ));
+                String id=map.get("id");
+                bookID=Integer.parseInt(id);
                 infoBar.setText("You selected wish: "+ map.get("title"));
             }
         });
@@ -89,7 +90,10 @@ public class WishActivity extends AppCompatActivity {
 
 
     public void btnWishBack(View view){
-        finish();
+        Intent intent = new Intent(WishActivity.this, WishActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
     }
 
     public void btnOpenNewWish(View view){
@@ -126,7 +130,7 @@ public class WishActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        //accessBookList.deleteBook(bookID);
+                        accessWishList.deleteWishList( bookID,userName );
                         Intent intent = new Intent(WishActivity.this, WishActivity.class);
                         intent.putExtra("userName", userName);
                         intent.putExtra("userType", userType);

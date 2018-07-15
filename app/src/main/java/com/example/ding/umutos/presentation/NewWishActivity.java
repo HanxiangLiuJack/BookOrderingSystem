@@ -6,15 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.example.ding.umutos.R;
-import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessWishlists;
-import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Wish;
 
 public class NewWishActivity extends AppCompatActivity {
 
@@ -71,6 +67,7 @@ public class NewWishActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
+                       // Wish newWish=new Wish();
                        // Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userName);
                         //accessBookList.insertBook(aBook);
                         int userType = 0;

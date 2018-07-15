@@ -22,15 +22,15 @@ public class AccessOrders {
 
 
 
-    public List<Order> buyerOrderHistory(int id){
+    public List<Order> buyerOrderHistory(String userName){
         List<Order> history;
-        history = orderPersistence.getBuyerOrders(id);
+        history = orderPersistence.getBuyerOrders(userName);
         return history;
     }
 
-    public List<Order> sellerOrderHistory(int id){
+    public List<Order> sellerOrderHistory(String userName){
         List<Order> history;
-        history = orderPersistence.getSellerOrders(id);
+        history = orderPersistence.getSellerOrders(userName);
         return history;
     }
 

@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         if(newAcc==null){
             showDialog();
         }else{
-            int userID=newAcc.getUserID();
+            userName = newAcc.getUserName();
             Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-            homeIntent.putExtra("userID", userID);
+            homeIntent.putExtra("userName", userName);
             LoginActivity.this.startActivity(homeIntent);
         }
     }

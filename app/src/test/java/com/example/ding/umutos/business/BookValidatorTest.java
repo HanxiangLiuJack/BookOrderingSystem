@@ -13,8 +13,8 @@ public class BookValidatorTest {
    private BookValidator bookValidator;
    @Before
     public void setup(){
-       validBook = new Book ("aaa","bbb",1,"ccc","ddd",5.99, 1);
-       invalidBook = new Book ("","",-1,"","",-1, 1);
+       validBook = new Book ("aaa","bbb",1,"ccc","ddd",5.99, "Tianhua Xu");
+       invalidBook = new Book ("","",-1,"","",-1, "Tianhua Xu");
        bookValidator = new BookValidator();
    }
     @After

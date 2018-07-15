@@ -26,8 +26,8 @@ public class AccessBooks {
         return books;
     }
 
-    public List<Book> getUserBooks(int userID) {
-        userBooks = bookPersistence.getUserBookSequential(userID);
+    public List<Book> getUserBooks(String userName) {
+        userBooks = bookPersistence.getUserBookSequential(userName);
         return userBooks;
     }
 

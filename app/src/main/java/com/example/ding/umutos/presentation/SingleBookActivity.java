@@ -14,7 +14,8 @@ import com.example.ding.umutos.objects.Book;
 
 public class SingleBookActivity extends AppCompatActivity {
 
-    private int bookID, userID;
+    private int bookID;
+    private String userName;
     private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription, bookCategory;
     private ImageView bookImg;
     private Book newBook;
@@ -30,7 +31,7 @@ public class SingleBookActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
-        userID = getIntent().getIntExtra("userID",-1);
+        userName = getIntent().getStringExtra("userName");
 
         accessBookList=new AccessBooks();
         accessAccounts=new AccessAccounts();
@@ -48,7 +49,7 @@ public class SingleBookActivity extends AppCompatActivity {
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
         System.out.println(newBook.getOwner());
-        bookOwner.setText("Sold by "+accessAccounts.getAccountByID(newBook.getOwner()).getUserName());
+        bookOwner.setText("Sold by "+accessAccounts.getAccountByUserName(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(aBook.getImageByBookID(bookID));
         bookCategory.setText("Category: "+newBook.getCategory());
@@ -70,7 +71,7 @@ public class SingleBookActivity extends AppCompatActivity {
                                         int which) {
                         Intent intent = new Intent(SingleBookActivity.this,AddressActivity.class);
                         intent.putExtra("bookID", bookID);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         SingleBookActivity.this.startActivity(intent);
                     }
                 })

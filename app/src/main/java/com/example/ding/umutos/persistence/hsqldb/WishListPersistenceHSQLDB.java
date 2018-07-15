@@ -25,30 +25,28 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Book fromResultSet(final ResultSet rs) throws SQLException {
+    private Wish fromResultSet(final ResultSet rs) throws SQLException {
         int bookID = rs.getInt("bookID");
+        String userName = rs.getString("userName")
         String bookName = rs.getString("bookName");
-        String authorName = rs.getString("authorName");
-        int bookPicture = rs.getInt("bookPicture");
-        String bookDescription = rs.getString("bookDescription");
-        String bookCategory = rs.getString("bookCategory");
+
         Double price = rs.getDouble("price");
         String ownerName = rs.getString("ownerName");
 
-        Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
-        book.setBookID(bookID);
-        return book;
+        Wish wish = new Book(userName, bookID, bookName, price, ownerName);
+
+        return wish;
     }
 
     @Override
-    public List<Book> getWishListSequential() {
-        final List<Book> wishList = new ArrayList<>();
+    public List<Wish> getWishListSequential() {
+        final List<Wish> wishList = new ArrayList<>();
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM wishList");
             while (rs.next()) {
-                final Book book = fromResultSet(rs);
-                wishList.add(book);
+                final Wish wish = fromResultSet(rs);
+                wishList.add(wish);
             }
             rs.close();
             st.close();
@@ -61,19 +59,15 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public void insertWishList(Book currentBook,String userName) {
+    public void insertWishList(Wish wish,String userName) {
         getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?,?,?,?,?,?)");
-            st.setString(1,currentBook.getName() );
+            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?,?)");
+            st.setString(1,userName );
             st.setInt(2,currentBook.getBookID());
             st.setString(3, currentBook.getName());
-            st.setString(4, currentBook.getAuthor());
-            st.setInt(5, currentBook.getPicture());
-            st.setString(6, currentBook.getDescription());
-            st.setString(7, currentBook.getCategory());
-            st.setDouble(8, currentBook.getPrice());
-            st.setString(9, currentBook.getOwner());
+            st.setDouble(4, currentBook.getPrice());
+            st.setString(5, currentBook.getOwner());
 
             st.executeUpdate();
 
@@ -84,8 +78,8 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
 
     @Override
-    public Book searchWishList(int id) {
-        Book book = null;
+    public Wish searchWishList(int id) {
+        Wish wish = null;
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE bookID = ?");
             st.setInt(1, id);
@@ -93,13 +87,13 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
             final ResultSet rs = st.executeQuery();
 
             if (rs.next()) {
-                book = fromResultSet(rs);
+                wish = fromResultSet(rs);
             }
 
             rs.close();
             st.close();
 
-            return book;
+            return wish;
 
         } catch (final SQLException e) {
             throw new PersistenceException(e);
@@ -107,16 +101,16 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
     }
 
     @Override
-    public List<Book> getUserWishListSequential(String userName) {
-        final List<Book> wishList = new ArrayList<>();
+    public List<Wish> getUserWishListSequential(String userName) {
+        final List<Wish> wishList = new ArrayList<>();
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM wishList WHERE userName= ?");
             st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
-                final Book book = fromResultSet(rs);
-                wishList.add(book);
+                final Wish wish = fromResultSet(rs);
+                wishList.add(wish);
             }
 
             rs.close();

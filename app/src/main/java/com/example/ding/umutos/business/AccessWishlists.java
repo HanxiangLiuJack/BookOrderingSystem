@@ -29,14 +29,14 @@ public class AccessWishlists {
     }
 
 
-    public Book searchWishList(int id) {
+    public Wish searchWishList(int id) {
         return wishListPersistence.searchWishList(id);
     }
 
 
-    public boolean insertWishList(Book currentBook,String userName) {
+    public boolean insertWishList(Wish wish,String userName) {
         if(currentBook!=null){
-            wishListPersistence.insertWishList(currentBook,userName);
+            wishListPersistence.insertWishList(wish,userName);
             return true;
         }
         return false;

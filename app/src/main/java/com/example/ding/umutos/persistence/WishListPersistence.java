@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface WishListPersistence {
 
-    List<Book> getWishListSequential();
+    List<Wish> getWishListSequential();
 
     void deleteWishList(int id,String userName);
 
-    void insertWishList(Book currentBook,String userName);
+    void insertWishList(Wish wish,String userName);
 
-    Book searchWishList(int id);
+    Wish searchWishList(int id);
 
-    List<Book> getUserWishListSequential(String userName);
+    List<Wish> getUserWishListSequential(String userName);
 
 }

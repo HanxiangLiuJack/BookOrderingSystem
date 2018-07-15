@@ -8,7 +8,7 @@ import com.example.ding.umutos.objects.Book;
 
 public class ShoppingCartPersistenceStub implements ShoppingCartPersistence {
 
-    private List<Book> shoppingCart;
+    private List<Wish> shoppingCart;
 
     public ShoppingCartPersistenceStub() {
         this.shoppingCart = new ArrayList<>();
@@ -18,40 +18,38 @@ public class ShoppingCartPersistenceStub implements ShoppingCartPersistence {
         shoppingCart.add(new Book("The Middle Ages","Jeffrey L. Singman",7,"We consider the Middle Ages barbaric, yet the period furnished some of our most enduring icons, including King Arthur's Round Table, knights in shining armor, and the idealized noblewoman. In this vivid history of the time, the medieval world comes to life in all its rich daily experience. Find out what people's beds were like, how often they washed, what they wore, what they cooked, how they worked, how they entertained themselves, how they wed, and what life was like in a medieval village, castle, or monastery.","Journalism, media studies and communication",30.22,"Tianhua Xu"));
         shoppingCart.add(new Book("The Guilty Wife","Elle Croft",8,"When Bethany's lover is brutally murdered, she has to hide her grief from everyone.But someone knows her secret. And then one day the threats begin.With an ever-growing pile of evidence pointing to her as the murderer, the only way she can protect her secrets is to prove her innocence. And that means tracking down a killer.An unbelievably gripping game of cat and mouse - with a twist you'll never see coming. Fans of The Child by Fiona Barton, Close to Home by Cara Hunter, Come a Little Closer by Rachel Abbott and I Am Watching You by Tessa Driscoll will love The Guilty Wife.","Human physical performance and recreation",22.45,"Tianhua Xu"));
         shoppingCart.add(new Book("One Way","S. J. Morden",9,"Frank Kittridge is serving life for murdering his son's drug dealer, so when he's offered a deal by Xenosystems Operations - the corporation that owns the prison - he takes it. He's been selected to help build the first permanent base on Mars. Unfortunately, his crewmates are just as guilty of their crimes as he is. ","Human physical performance and recreation",33.22,"Tianhua Xu"));
-        shoppingCart.get(5).setBookID(5);
         shoppingCart.add(new Book("The Arrangement","Sarah Dunn",10,"Lucy and Owen, ambitious, thoroughly-therapized New Yorkers, have taken the plunge, trading in their crazy life in a cramped apartment for Beekman, a bucolic Hudson Valley exurb. They've got a two hundred year-old house, an autistic son obsessed with the Titanic, and 17 chickens, at last count. It's the kind of paradise where stay-at-home moms team up to cook the school's hot lunch, dads grill grass-fed burgers, and, as Lucy observes.","Human physical performance and recreation",22.55,"Hanxiang Liu"));
     }
 
 
     //Print Book List
     @Override
-    public List<Book> shoppingCartSequential() {
+    public List<Wish> shoppingCartSequential() {
         return Collections.unmodifiableList(shoppingCart);
     }
 
 
     @Override
-    public void insertShoppingCart(Book currentBook, String userName) {
+    public void insertShoppingCart(Wish wish, String userName) {
         if(userName.equals("Tianhua Xu"))
-            shoppingCart.add(currentBook);
+            shoppingCart.add(wish);
     }
 
 
     @Override
-    public Book searchShoppingCart(int id) {
-        Book searchBook = null;
-
+    public Wish searchShoppingCart(int id) {
+        Wish wish = null;
         for (int i = 0; i < shoppingCart.size()&&id>=0; i++) {
             if(shoppingCart.get(i).getBookID()==id)
-                searchBook = shoppingCart.get(i);
+                wish = shoppingCart.get(i);
         }
-        return searchBook;
+        return wish;
     }
 
 
     @Override
-    public List<Book> getShoppingCartSequential(String userName) {
-        List<Book> newList = new ArrayList<>();
+    public List<Wish> getShoppingCartSequential(String userName) {
+        List<Wish> newList = new ArrayList<>();
         if(userName.equals("Tianhua Xu"))
             newList = shoppingCart;
         return newList;

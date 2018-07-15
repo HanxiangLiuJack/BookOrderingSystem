@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WishListPersistenceStub implements WishListPersistence{
 
-    private List<Book> wishList;
+    private List<Wish> wishList;
 
     public WishListPersistenceStub() {
         this.wishList = new ArrayList<>();
@@ -24,7 +24,7 @@ public class WishListPersistenceStub implements WishListPersistence{
 
 
     @Override
-    public List<Book> getWishListSequential(){
+    public List<Wish> getWishListSequential(){
         return Collections.unmodifiableList(wishList);
     }
 
@@ -40,25 +40,25 @@ public class WishListPersistenceStub implements WishListPersistence{
     }
 
     @Override
-    public Book searchWishList(int id) {
-        Book searchBook = null;
+    public Wish searchWishList(int id) {
+        Wish wish = null;
 
         for (int i = 0; i < wishList.size()&&id>=0; i++) {
             if(wishList.get(i).getBookID()==id)
-                searchBook = wishList.get(i);
+                wish = wishList.get(i);
         }
-        return searchBook;
+        return wish;
     }
 
     @Override
-    public void insertWishList(Book currentBook,String userName){
+    public void insertWishList(Wish wish,String userName){
         if(userName.equals("Tianhua Xu"))
-            wishList.add(currentBook);
+            wishList.add(wish);
     }
 
     @Override
-    public List<Book> getUserWishListSequential(String userName){
-        List<Book> newList = new ArrayList<>();
+    public List<Wish> getUserWishListSequential(String userName){
+        List<Wish> newList = new ArrayList<>();
         if(userName.equals("Tianhua Xu"))
             newList = wishList;
         return newList;

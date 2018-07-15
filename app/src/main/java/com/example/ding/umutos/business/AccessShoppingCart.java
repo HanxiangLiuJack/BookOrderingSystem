@@ -26,9 +26,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Book currentBook,String userName) {
-        if(currentBook!=null){
-            shoppingCartPersistence.insertShoppingCart(currentBook,userName);
+    public boolean insertShoppingCart(Wish wish,String userName) {
+        if(wish!=null){
+            shoppingCartPersistence.insertShoppingCart(wish,userName);
             return true;
         }
         return false;
@@ -39,7 +39,7 @@ public class AccessShoppingCart {
             shoppingCartPersistence.deleteBookfromShoppingCart(bookID, userName);
     }
 
-    public Book searchShoppingCart(int id) {
+    public Wish searchShoppingCart(int id) {
         return shoppingCartPersistence.searchShoppingCart(id);
     }
 

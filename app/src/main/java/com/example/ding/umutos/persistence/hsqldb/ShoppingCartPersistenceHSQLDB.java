@@ -91,10 +91,11 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public void deleteBookfromShoppingCart(int bookID) {
+    public void deleteBookfromShoppingCart(int bookID, String userName) {
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE bookID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE bookID = ? AND userName = ?");
             st.setInt(1, bookID);
+            st.setString(2,userName);
             st.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);

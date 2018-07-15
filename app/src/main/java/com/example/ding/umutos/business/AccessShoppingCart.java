@@ -34,9 +34,9 @@ public class AccessShoppingCart {
         return false;
     }
 
-    public void deleteBookfromShoppingCart(int bookID) {
+    public void deleteBookfromShoppingCart(int bookID, String userName) {
         if(searchShoppingCart(bookID) != null)
-            shoppingCartPersistence.deleteBookfromShoppingCart(bookID);
+            shoppingCartPersistence.deleteBookfromShoppingCart(bookID, userName);
     }
 
     public Book searchShoppingCart(int id) {

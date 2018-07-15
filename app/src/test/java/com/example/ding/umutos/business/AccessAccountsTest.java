@@ -12,7 +12,7 @@ import com.example.ding.umutos.persistence.AccountPersistence;
 
 import com.example.ding.umutos.persistence.AccountPersistenceStub;
 
-import static org.mockito.ArgumentMatchers.doubleThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,7 +67,7 @@ public class AccessAccountsTest {
     }
 
     @Test
-    public void testGetAccountByID() {
+    public void testGetAccountByName() {
         System.out.println("\nStart testing GetAccountByID.\n");
 
         final Account account =  new Account ("Hanxiang Liu","3234");

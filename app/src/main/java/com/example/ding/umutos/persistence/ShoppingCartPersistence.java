@@ -8,7 +8,7 @@ public interface ShoppingCartPersistence {
 
     void insertShoppingCart(Book currentBook, String userName);
 
-    void deleteBookfromShoppingCart(int bookID);
+    void deleteBookfromShoppingCart(int bookID, String userName);
 
     Book searchShoppingCart(int id);
 

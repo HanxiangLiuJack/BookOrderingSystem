@@ -103,7 +103,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     public List<Book> getShoppingCartSequential(String userName) {
         final List<Book> shoppingCart = new ArrayList<>();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE ownerName = ?");
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE userName = ?");
             st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
@@ -125,7 +125,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     @Override
     public boolean clearShoppingCart(String userName) {
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE ownerName = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE userName = ?");
             st.setString(1, userName);
             st.executeUpdate();
             final ResultSet rs = st.executeQuery();

@@ -2,6 +2,7 @@ package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Wish;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 
 import java.util.List;
@@ -9,9 +10,9 @@ import java.util.List;
 public class AccessShoppingCart {
 
     private ShoppingCartPersistence shoppingCartPersistence;
-    private List<Book> list;
-    private List<Book> userShoppingCart;
-    private List<Book> priceList;
+    private List<Wish> list;
+    private List<Wish> userShoppingCart;
+    private List<Wish> priceList;
 
 
     public AccessShoppingCart() {
@@ -26,9 +27,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Book currentBook,String userName) {
-        if(currentBook!=null){
-            shoppingCartPersistence.insertShoppingCart(currentBook,userName);
+    public boolean insertShoppingCart(Wish wish,String userName) {
+        if(wish!=null){
+            shoppingCartPersistence.insertShoppingCart(wish,userName);
             return true;
         }
         return false;
@@ -39,12 +40,12 @@ public class AccessShoppingCart {
             shoppingCartPersistence.deleteBookfromShoppingCart(bookID, userName);
     }
 
-    public Book searchShoppingCart(int id) {
+    public Wish searchShoppingCart(int id) {
         return shoppingCartPersistence.searchShoppingCart(id);
     }
 
 
-    public List<Book> getUserShoppingCart(String userName) {
+    public List<Wish> getUserShoppingCart(String userName) {
         userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
         return userShoppingCart;
     }

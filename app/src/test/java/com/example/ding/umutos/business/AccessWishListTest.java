@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-import com.example.ding.umutos.objects.Book;
+
+import com.example.ding.umutos.objects.Wish;
 import static junit.framework.Assert.*;
 
 import com.example.ding.umutos.persistence.WishListPersistence;
@@ -41,7 +42,7 @@ public class AccessWishListTest {
     public void testGetWishList()
     {
         System.out.println("\nStart testing testGetWishList.\n");
-        List<Book> wishList = new ArrayList<>();
+        List<Wish> wishList = new ArrayList<>();
 
         when(wishListPersistence.getWishListSequential()).thenReturn(wishList);
 
@@ -59,7 +60,7 @@ public class AccessWishListTest {
     public void testGetUserWishList()
     {
         System.out.println("\nStart testing testGetUserWishList.\n");
-        List<Book> wishList = new ArrayList<>();
+        List<Wish> wishList = new ArrayList<>();
 
         when(wishListPersistence.getUserWishListSequential("Tianhua")).thenReturn(wishList);
 
@@ -77,9 +78,9 @@ public class AccessWishListTest {
     public void testDeleteWishList()
     {
         System.out.println("\nStart testing testDeleteWishList.\n");
-        Book newBook = new Book("a","b",1,"c","d",20,"huahua");
+        Wish desire = new Wish(1, 2.2, "a", "b");
         doNothing().when(wishListPersistence).deleteWishList(4, "Tianhua Xu");
-        when(wishListPersistence.searchWishList(4)).thenReturn(newBook);
+        when(wishListPersistence.searchWishList(4)).thenReturn(desire);
         accessWishlists.deleteWishList(4, "Tianhua Xu");
 
         verify(wishListPersistence).deleteWishList(4, "Tianhua Xu");
@@ -96,16 +97,16 @@ public class AccessWishListTest {
     public void testInsertWishList()
     {
         System.out.println("\nStart testing testInsertWishList.\n");
-        Book newBook = new Book("a","b",1,"c","d",20,"huahua");
+        Wish desire = new Wish(1, 2.2, "a", "b");
 
-        doNothing().when(wishListPersistence).insertWishList(newBook, "Tianhua Xu");
-        assertTrue(accessWishlists.insertWishList(newBook, "Tianhua Xu"));
-        verify(wishListPersistence).insertWishList(newBook, "Tianhua Xu");
+        doNothing().when(wishListPersistence).insertWishList(desire, "Tianhua Xu");
+        assertTrue(accessWishlists.insertWishList(desire, "Tianhua Xu"));
+        verify(wishListPersistence).insertWishList(desire, "Tianhua Xu");
 
         wishListPersistence = new WishListPersistenceStub();
         accessWishlists = new AccessWishlists(wishListPersistence);
 
-        assertTrue(accessWishlists.insertWishList(newBook, "Tianhua Xu"));
+        assertTrue(accessWishlists.insertWishList(desire, "Tianhua Xu"));
         assertTrue(accessWishlists.getUserWishLists("Tianhua Xu").size() == 8);
         System.out.println("\nEnd testing testInsertWishList.\n");
     }

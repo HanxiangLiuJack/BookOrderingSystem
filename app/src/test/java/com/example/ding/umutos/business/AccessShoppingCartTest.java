@@ -6,9 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import com.example.ding.umutos.objects.Book;
-
+import com.example.ding.umutos.objects.Wish;
 import static junit.framework.Assert.*;
 
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
@@ -41,10 +39,10 @@ public class AccessShoppingCartTest {
     public void testGetUserShoppingCart()
     {
         System.out.println("\nStart testing testGetUserShoppingCart.\n");
-        List<Book> shoppingCart = new ArrayList<>();
-        shoppingCart.add(new Book("a","b",1,"c","d",20,"huahua"));
+        List<Wish> shoppingCart = new ArrayList<>();
+        shoppingCart.add(new Wish(1,2.2,"c","d"));
         when(shoppingCartPersistence.getShoppingCartSequential("huahua")).thenReturn(shoppingCart);
-        List<Book> result = accessShoppingCart.getUserShoppingCart("huahua");
+        List<Wish> result = accessShoppingCart.getUserShoppingCart("huahua");
 
         assertTrue(result.equals(shoppingCart));
 
@@ -62,15 +60,15 @@ public class AccessShoppingCartTest {
     public void testInsertShoppingCart()
     {
         System.out.println("\nStart testing testInsertShoppingCart.\n");
-        Book desiredBook = new Book("a","b",1,"c","d",20,"huahua");
-        doNothing().when(shoppingCartPersistence).insertShoppingCart(desiredBook,"Tianhua Xu");
-        accessShoppingCart.insertShoppingCart(desiredBook,"Tianhua Xu");
-        verify(shoppingCartPersistence).insertShoppingCart(desiredBook,"Tianhua Xu");
+        Wish desire = new Wish(1, 2.2, "a", "b");
+        doNothing().when(shoppingCartPersistence).insertShoppingCart(desire,"Tianhua Xu");
+        accessShoppingCart.insertShoppingCart(desire,"Tianhua Xu");
+        verify(shoppingCartPersistence).insertShoppingCart(desire,"Tianhua Xu");
 
         shoppingCartPersistence = new ShoppingCartPersistenceStub();
         accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);
 
-        assertTrue(accessShoppingCart.insertShoppingCart(desiredBook,"Tianhua Xu"));
+        assertTrue(accessShoppingCart.insertShoppingCart(desire,"Tianhua Xu"));
 
         assertTrue(accessShoppingCart.getUserShoppingCart("Tianhua Xu").size() == 8);
         System.out.println("\nEnd testing testInsertShoppingCart.\n");
@@ -80,14 +78,13 @@ public class AccessShoppingCartTest {
     public void testDeleteBookFromShoppingCart()
     {
         System.out.println("\nStart testing testDeleteBookfromShoppingCart.\n");
-        Book desiredBook = new Book("a","b",1,"c","d",20,"huahua");
-        desiredBook.setBookID(1);
-        doNothing().when(shoppingCartPersistence).deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
-        when(shoppingCartPersistence.searchShoppingCart(desiredBook.getBookID())).thenReturn(desiredBook);
-        accessShoppingCart.deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
-        assertTrue(accessShoppingCart.searchShoppingCart(desiredBook.getBookID()).equals(desiredBook));
+        Wish desire = new Wish(1, 2.2, "a", "b");
+        doNothing().when(shoppingCartPersistence).deleteBookfromShoppingCart(desire.getBookID(), "Tianhua Xu");
+        when(shoppingCartPersistence.searchShoppingCart(desire.getBookID())).thenReturn(desire);
+        accessShoppingCart.deleteBookfromShoppingCart(desire.getBookID(), "Tianhua Xu");
+        assertTrue(accessShoppingCart.searchShoppingCart(desire.getBookID()).equals(desire));
 
-        verify(shoppingCartPersistence).deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
+        verify(shoppingCartPersistence).deleteBookfromShoppingCart(desire.getBookID(), "Tianhua Xu");
 
         shoppingCartPersistence = new ShoppingCartPersistenceStub();
         accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);

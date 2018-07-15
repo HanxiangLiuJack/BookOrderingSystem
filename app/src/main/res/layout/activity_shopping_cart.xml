@@ -11,17 +11,30 @@
         android:layout_height="wrap_content"   >
         <LinearLayout android:id="@+id/top"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:orientation="horizontal"
             android:background="#eeeeee"
             android:layout_alignParentTop="true"  >
 
             <TextView
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:id="@+id/shoppingBar"
+                android:layout_marginTop="10dp"
+                android:text="Shopping Cart"
+                android:textSize="30dp"
+                />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAlignment="center"
-                android:id="@+id/sellListInfoBar"
-                android:layout_marginTop="10dp"
+                android:id="@+id/priceBar"
+                android:layout_marginTop="15dp"
+                android:textColor="#b92646"
+                android:text="Total Price:"
+                android:textSize="25dp"
                 />
 
         </LinearLayout>
@@ -34,7 +47,7 @@
             android:layout_above="@id/bottom"
              >
 
-            <ListView android:id="@+id/sellerBookList"
+            <ListView android:id="@+id/shoppingList"
                 android:focusableInTouchMode="true"
                 android:focusable="true"
                 android:layout_width="fill_parent"
@@ -42,67 +55,51 @@
                 android:layout_marginTop="6dip"/>
         </LinearLayout>
 
+
         <LinearLayout android:id="@+id/bottom"
             android:layout_width="fill_parent"
             android:layout_height="80dp"
             android:orientation="horizontal"
             android:background="#eeeeee"
             android:layout_alignParentBottom="true"  >
+
             <Button
-                android:id="@+id/btnSellBackToMain"
+                android:id="@+id/shoppingListBack"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
-                android:onClick="btnCusBackToMain"
-                android:text="BACK" />
+                android:text="Back"
+              />
 
-            <Button android:id="@+id/addNewBook"
+            <Button
+                android:id="@+id/shoppingListRemove"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_style"
+                android:text="Remove"
+                />
+
+            <Button
+                android:id="@+id/shoppingListDone"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:textColor="#ffffff"
-                android:background="@drawable/buy_button_style"
-                android:onClick="buttonAddNewBook"
-                android:text="ADD"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/editPostedBook"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_style"
-                android:onClick="buttonEditPostedBook"
-                android:text="Edit"
-                android:layout_weight="1"/>
-            <Button android:id="@+id/viewAllWishList"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/button_style"
-                android:text="Wish List"
-                android:onClick="btnToWishList"
-                android:layout_weight="1"/>
-
-            <Button
-                android:id="@+id/viewSellerHistory"
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_style"
-                android:onClick="buttonOpenHistory"
-                android:text="HISTORY" />
+                android:background="@drawable/buy_button_style"
+                android:text="Buy"
+                />
+
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

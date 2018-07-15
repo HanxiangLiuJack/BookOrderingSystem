@@ -9,8 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.objects.Wish;
+import com.example.ding.umutos.objects.Item;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 
 public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
@@ -25,29 +24,28 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
         return DriverManager.getConnection("jdbc:hsqldb:file:" + dbPath + ";shutdown=true", "SA", "");
     }
 
-    private Wish fromResultSet(final ResultSet rs) throws SQLException {
+    private Item fromResultSet(final ResultSet rs) throws SQLException {
         int bookID = rs.getInt("bookID");
         String bookName = rs.getString("bookName");
 
         Double price = rs.getDouble("price");
-        String ownerName = rs.getString("ownerName");
+        String userName = rs.getString("userName");
 
-        Wish wish = new Wish(bookID, price, ownerName, bookName);
+        Item item = new Item(bookID, bookName, price);
 
-        return wish;
+        return item;
     }
 
 
     @Override
-    public void insertShoppingCart(Wish wish, String userName){
+    public void insertShoppingCart(Item item, String userName){
         shoppingCartSequential();
         try (final Connection c = connection()) {
             PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?, ?)");
             st.setString(1,userName );
-            st.setInt(2,wish.getBookID());
-            st.setString(3, wish.getName());
-            st.setDouble(4, wish.getPrice());
-            st.setString(5, wish.getOwner());
+            st.setInt(2,item.getBookID());
+            st.setString(3, item.getName());
+            st.setDouble(4, item.getPrice());
 
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -57,8 +55,8 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public Wish searchShoppingCart(int id){
-        Wish wish = null;
+    public Item searchShoppingCart(int id){
+        Item item = null;
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE bookID = ?");
             st.setInt(1, id);
@@ -66,13 +64,13 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
             final ResultSet rs = st.executeQuery();
 
             if(rs.next()) {
-                wish = fromResultSet(rs);
+                item = fromResultSet(rs);
             }
 
             rs.close();
             st.close();
 
-            return wish;
+            return item;
 
         } catch (final SQLException e) {
             throw new PersistenceException(e);
@@ -93,16 +91,16 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
     }
 
     @Override
-    public List<Wish> getShoppingCartSequential(String userName) {
-        final List<Wish> shoppingCart = new ArrayList<>();
+    public List<Item> getShoppingCartSequential(String userName) {
+        final List<Item> shoppingCart = new ArrayList<>();
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("SELECT * FROM shoppingCart WHERE userName = ?");
             st.setString(1, userName);
 
             final ResultSet rs = st.executeQuery();
             while(rs.next()) {
-                final Wish wish = fromResultSet(rs);
-                shoppingCart.add(wish);
+                final Item item = fromResultSet(rs);
+                shoppingCart.add(item);
             }
 
             rs.close();
@@ -129,14 +127,14 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public List<Wish> shoppingCartSequential() {
-        final List<Wish> shoppingCart = new ArrayList<>();
+    public List<Item> shoppingCartSequential() {
+        final List<Item> shoppingCart = new ArrayList<>();
         try (final Connection c = connection()) {
             final Statement st = c.createStatement();
             final ResultSet rs = st.executeQuery("SELECT * FROM shoppingCart");
             while (rs.next()) {
-                final Wish wish = fromResultSet(rs);
-                shoppingCart.add(wish);
+                final Item item = fromResultSet(rs);
+                shoppingCart.add(item);
             }
             rs.close();
             st.close();

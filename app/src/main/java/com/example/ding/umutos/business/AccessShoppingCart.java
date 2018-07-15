@@ -50,8 +50,8 @@ public class AccessShoppingCart {
     }
 
 
-    public int getTotalPrice(String userName){
-        int totalPrice=0;
+    public double getTotalPrice(String userName){
+        double totalPrice=0;
         priceList =shoppingCartPersistence.getShoppingCartSequential(userName);
         for(int i=0;i<priceList.size();i++){
             totalPrice+=priceList.get(i).getPrice();

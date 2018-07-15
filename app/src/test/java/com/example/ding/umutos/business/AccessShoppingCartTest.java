@@ -8,10 +8,11 @@ import org.junit.Test;
 
 
 import com.example.ding.umutos.objects.Book;
+
 import static junit.framework.Assert.*;
 
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
-
+import com.example.ding.umutos.persistence.ShoppingCartPersistenceStub;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -70,7 +71,6 @@ public class AccessShoppingCartTest {
         accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);
 
         assertTrue(accessShoppingCart.insertShoppingCart(desiredBook,"Tianhua Xu"));
-        assertFalse(accessShoppingCart.insertShoppingCart(desiredBook,"abc"));
 
         assertTrue(accessShoppingCart.getUserShoppingCart("Tianhua Xu").size() == 8);
         System.out.println("\nEnd testing testInsertShoppingCart.\n");
@@ -83,8 +83,10 @@ public class AccessShoppingCartTest {
         Book desiredBook = new Book("a","b",1,"c","d",20,"huahua");
         desiredBook.setBookID(1);
         doNothing().when(shoppingCartPersistence).deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
-
+        when(shoppingCartPersistence.searchShoppingCart(desiredBook.getBookID())).thenReturn(desiredBook);
         accessShoppingCart.deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
+        assertTrue(accessShoppingCart.searchShoppingCart(desiredBook.getBookID()).equals(desiredBook));
+
         verify(shoppingCartPersistence).deleteBookfromShoppingCart(desiredBook.getBookID(), "Tianhua Xu");
 
         shoppingCartPersistence = new ShoppingCartPersistenceStub();
@@ -102,7 +104,7 @@ public class AccessShoppingCartTest {
         System.out.println("\nStart testing testGetTotalPrice.\n");
         shoppingCartPersistence = new ShoppingCartPersistenceStub();
         accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);
-        assertTrue(accessShoppingCart.getTotalPrice("Tianhua Xu") = );
+        assertTrue(accessShoppingCart.getTotalPrice("Tianhua Xu") == 141.17000000000002);
         System.out.println("\nStart testing testGetTotalPrice.\n");
     }
 

@@ -20,6 +20,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.business.BookSorter;
 
 import java.util.ArrayList;
@@ -120,13 +121,20 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
+        List<Account> accounts = accessAccounts.getAccounts();
+        double rate = 0;
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
             book.put("img",newBookList.get(i).getPicture());
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
-            book.put("rate","Seller rate: "+accessAccounts.getAccountByUserName( newBookList.get( i ).getOwner() ).getRate());
+            for(int j = 0; j < accounts.size(); j++)
+            {
+                if(accounts.get(j).getUserName().equals(newBookList.get( i ).getOwner()))
+                    rate = accounts.get(j).getRate();
+            }
+            book.put("rate","Seller rate: "+rate);
             books.add(book);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,

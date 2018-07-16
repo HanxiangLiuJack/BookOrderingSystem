@@ -43,10 +43,10 @@ android:orientation="vertical">
 
                 <Spinner
                     android:id="@+id/searchByCategory"
-                    android:layout_width="250dp"
+                    android:layout_width="200dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="30dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:spinnerMode="dialog"
                      />
@@ -58,10 +58,10 @@ android:orientation="vertical">
 
                 <Button
                     android:id="@+id/priceLowToHigh"
-                    android:layout_width="60dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_style"
@@ -70,15 +70,38 @@ android:orientation="vertical">
 
                 <Button
                     android:id="@+id/priceHighToLow"
-                    android:layout_width="60dp"
+                    android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_style"
                     android:onClick="buttonPriceHighToLow"
                     android:text="Price ↓" />
+
+                <Button
+                    android:id="@+id/rateLowToHigh"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:onClick="buttonPriceHighToLow"
+                    android:text="Rate ↑" />
+                <Button
+                    android:id="@+id/rateHighToLow"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_style"
+                    android:onClick="buttonPriceHighToLow"
+                    android:text="Rate ↓" />
 
             </LinearLayout>
 
@@ -122,8 +145,8 @@ android:orientation="vertical">
                 android:id="@+id/btnCusBackToMain"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
@@ -134,13 +157,37 @@ android:orientation="vertical">
                 android:id="@+id/viewCustomerHistory"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
                 android:onClick="buttonOpenHistory"
                 android:text="HISTORY" />
+
+            <Button
+                android:id="@+id/cusWishList"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_style"
+                android:onClick="btnToWishList"
+                android:text="Wish List" />
+
+            <Button
+                android:id="@+id/viewShoppingCart"
+                android:layout_width="120dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_style"
+                android:onClick="btnBookListToShoppingCart"
+                android:text="Shopping Cart" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

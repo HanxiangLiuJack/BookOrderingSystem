@@ -15,7 +15,12 @@ public class OrderTest {
     @Before
     public void setup() {
         String [] orderInfo = {"Hanxiang","Liu","R3T","12345678","101 abcRoad"} ;
-        order = new Order("book1", 1, 2, 100, orderInfo);
+        order = new Order("book1", "Tianhua Xu", "Tianhua Xu2", 100);
+        order.setAddress(orderInfo[4]);
+        order.setPhoneNumber(orderInfo[3]);
+        order.setPostCode(orderInfo[2]);
+        order.setLastName(orderInfo[1]);
+        order.setFirstName(orderInfo[0]);
     }
     @After
     public void tearDown(){
@@ -25,9 +30,7 @@ public class OrderTest {
     @Test
     public void testGetBuyer() {
         System.out.println("Test getBuyer() :");
-
-        assertTrue(order.getBuyerID() == 1);
-
+        assertTrue(order.getBuyerName().equals("Tianhua Xu"));
         System.out.println("Finish getBuyer() :");
     }
 
@@ -35,7 +38,7 @@ public class OrderTest {
     public void testGetSeller() {
         System.out.println("Test getSeller() :");
 
-        assertTrue(order.getSellerID() == 2);
+        assertTrue(order.getSellerName().equals("Tianhua Xu2"));
 
         System.out.println("Finish getSeller() :");
     }

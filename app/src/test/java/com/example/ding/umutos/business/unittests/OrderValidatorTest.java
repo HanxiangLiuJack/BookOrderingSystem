@@ -1,7 +1,8 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.unittests;
 
-import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.business.OrderValidator;
+import com.example.ding.umutos.objects.Order;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,10 +19,20 @@ public class OrderValidatorTest {
     @Before
     public void setup() {
         String [] validInfo = {"Liu","Hanxiang ","R3T","123456","abdRoad"};
-       validOrder = new Order("abc",1,2,3.99,validInfo);
-       String [] invalidInfo = {"","","","",""};
-       invalidOrder = new Order("cde",1,2,19.99, invalidInfo);
-       orderValidator = new OrderValidator();
+        validOrder = new Order("abc","Tianhua Xu","Tianhua Xu1",3.99);
+        validOrder.setFirstName(validInfo[1]);
+        validOrder.setLastName(validInfo[0]);
+        validOrder.setPostCode(validInfo[2]);
+        validOrder.setPhoneNumber(validInfo[3]);
+        validOrder.setAddress(validInfo[4]);
+        String [] invalidInfo = {"","","","",""};
+        invalidOrder = new Order("cde","Tianhua Xu2","Tianhua Xu3",19.99);
+        invalidOrder.setFirstName(invalidInfo[1]);
+        invalidOrder.setLastName(invalidInfo[0]);
+        invalidOrder.setPostCode(invalidInfo[2]);
+        invalidOrder.setPhoneNumber(invalidInfo[3]);
+        invalidOrder.setAddress(invalidInfo[4]);
+        orderValidator = new OrderValidator();
     }
 
     @After

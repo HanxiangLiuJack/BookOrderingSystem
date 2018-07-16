@@ -15,7 +15,7 @@ public class BookTest {
 
     @Before
     public void setup() {
-        templateBook = new Book("abc","Amy",123,"a good book","CS",24.99,12345);
+        templateBook = new Book("abc","Amy",123,"a good book","CS",24.99,"Tianhua Xu");
     }
 
     @After
@@ -39,7 +39,7 @@ public class BookTest {
         assertTrue("a good book".equals(templateBook.getDescription()));
         assertTrue("CS".equals(templateBook.getCategory()));
         assertTrue(24.99 == templateBook.getPrice());
-        assertTrue(12345 == templateBook.getOwner());
+        assertTrue(templateBook.getOwner().equals("Tianhua Xu"));
         System.out.println("End Testing get methods");
     }
 

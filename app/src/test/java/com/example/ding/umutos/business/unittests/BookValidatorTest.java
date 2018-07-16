@@ -1,6 +1,6 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.unittests;
 import com.example.ding.umutos.objects.Book;
-
+import com.example.ding.umutos.business.BookValidator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,8 +13,8 @@ public class BookValidatorTest {
    private BookValidator bookValidator;
    @Before
     public void setup(){
-       validBook = new Book ("aaa","bbb",1,"ccc","ddd",5.99, 1);
-       invalidBook = new Book ("","",-1,"","",-1, 1);
+       validBook = new Book ("aaa","bbb",1,"ccc","ddd",5.99, "Tianhua Xu");
+       invalidBook = new Book ("","",-1,"","",-1, "Tianhua Xu");
        bookValidator = new BookValidator();
    }
     @After

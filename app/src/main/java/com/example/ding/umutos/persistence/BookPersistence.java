@@ -13,7 +13,7 @@ public interface  BookPersistence {
     
     Book searchBook(int id);
     
-    List<Book> getUserBookSequential(int userID);
+    List<Book> getUserBookSequential(String userName);
     
     void deleteBook(int id);
 

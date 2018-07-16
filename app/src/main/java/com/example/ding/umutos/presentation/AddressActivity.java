@@ -35,7 +35,7 @@ public class AddressActivity extends AppCompatActivity {
         userName = getIntent().getStringExtra("userName");
         accessOrders=new AccessOrders();
         accessBookList=new AccessBooks();
-        accessShoppingCart=new AccessShoppingCart(  );
+        accessShoppingCart=new AccessShoppingCart();
     }
 
     public void buttonAddSubmit(View view) {

@@ -51,7 +51,6 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         return newOrder;
     }
 
-
     @Override
     public Order insertOrder(Order currentOrder) {
         try(final Connection c = connection()){

@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.example.ding.umutos.objects.Item;
 import static junit.framework.Assert.*;
 
+import com.example.ding.umutos.objects.OrderInfo;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 import com.example.ding.umutos.persistence.ShoppingCartPersistenceStub;
 
@@ -110,9 +111,9 @@ public class AccessShoppingCartTest {
     public void testClearShoppingCart()
     {
         System.out.println("\nStart testing testClearShoppingCart.\n");
-        String[] addressInfo = {"fn","ln","pc","pn","add"};
+        OrderInfo orderInfo = new OrderInfo("fn","ln","pc","pn","add");
         doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
-        accessShoppingCart.clearShoppingCart("Tianhua Xu",addressInfo);
+        accessShoppingCart.clearShoppingCart("Tianhua Xu",orderInfo);
         verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
         System.out.println("\nStart testing testClearShoppingCart.\n");
 

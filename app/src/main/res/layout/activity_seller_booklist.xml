@@ -34,12 +34,13 @@
             android:layout_above="@id/bottom"
              >
 
-            <ListView android:id="@+id/sellerBookList"
-                android:focusableInTouchMode="true"
-                android:focusable="true"
+            <ListView
+                android:id="@+id/sellerBookList"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dip"/>
+                android:layout_marginTop="6dip"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </LinearLayout>
 
         <LinearLayout android:id="@+id/bottom"
@@ -60,17 +61,18 @@
                 android:onClick="btnCusBackToMain"
                 android:text="BACK" />
 
-            <Button android:id="@+id/addNewBook"
+            <Button
+                android:id="@+id/addNewBook"
                 android:layout_width="120dp"
-                android:layout_height="60dp"
+                android:layout_height="58dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
+                android:layout_weight="1"
                 android:background="@drawable/buy_button_style"
                 android:onClick="buttonAddNewBook"
                 android:text="ADD"
-                android:layout_weight="1"/>
+                android:textColor="#ffffff" />
             <Button android:id="@+id/editPostedBook"
                 android:layout_width="120dp"
                 android:layout_height="60dp"

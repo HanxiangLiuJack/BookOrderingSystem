@@ -1,4 +1,4 @@
-package com.example.ding.umutos;
+package com.example.ding.umutos.Acceptance;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class Application {
     @Test
     public void useAppContext() throws Exception {
         // Context of the app under test.

@@ -2,8 +2,14 @@ package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Item;
+import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
+import com.example.ding.umutos.persistence.BookPersistence;
+import com.example.ding.umutos.persistence.OrderPersistence;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class AccessShoppingCart {
@@ -12,7 +18,8 @@ public class AccessShoppingCart {
     private List<Item> list;
     private List<Item> userShoppingCart;
     private List<Item> priceList;
-
+    private BookPersistence bookPersistence;
+    private OrderPersistence orderPersitence;
 
     public AccessShoppingCart() {
         shoppingCartPersistence = Service.getShoppingCartPersistence();
@@ -61,10 +68,33 @@ public class AccessShoppingCart {
     }
 
 
-    public void clearShoppingCart(String userName){
-        shoppingCartPersistence.clearShoppingCart(userName);
-    }
 
+
+    public List<Item> clearShoppingCart(String userName){
+
+        List<Item> item = this.getUserShoppingCart(userName);
+        List<Item> booksNotFound = null;
+        Order newOrder;
+        for(int i = 0; i < item.size(); i++)
+        {
+            if(bookPersistence.searchBook(item.get(i).getBookID()) == null)
+            {
+                if(booksNotFound == null)
+                    booksNotFound = new ArrayList<>();
+                booksNotFound.add(item.get(i));
+            }
+        }
+        if(booksNotFound == null){
+            for(int i=0;i<item.size();i++){
+                String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
+                newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
+                orderPersitence.insertOrder(newOrder);
+            }
+            shoppingCartPersistence.clearShoppingCart(userName);
+        }
+        return booksNotFound;
+
+    }
 
 
 }

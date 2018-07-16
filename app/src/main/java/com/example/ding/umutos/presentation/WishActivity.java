@@ -1,7 +1,9 @@
 package com.example.ding.umutos.presentation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,8 +27,9 @@ public class WishActivity extends AppCompatActivity {
     private AccessWishlists accessWishList;
     private List<Wish> newWishList;
     private TextView infoBar;
-    int userType;
-    String userName;
+    private int userType;
+    private String userName;
+    private int bookID=-1;
 
 
     @Override
@@ -63,6 +66,7 @@ public class WishActivity extends AppCompatActivity {
             wish.put("title", newWishList.get( i ).getName());
             wish.put("author","Author: "+newWishList.get(i).getAuthorName());
             wish.put("user","Wished by: "+newWishList.get(i).getUserName());
+            wish.put("id",""+newWishList.get(i).getBookID());
             wishes.add(wish);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
@@ -77,7 +81,9 @@ public class WishActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                                     long arg3) {
                 HashMap<String,String> map=(HashMap<String,String>)wishList.getItemAtPosition(arg2);
-                System.out.println(map.get("title"));
+                String id=map.get("id");
+                bookID=Integer.parseInt(id);
+                infoBar.setTextSize( 2,15 );
                 infoBar.setText("You selected wish: "+ map.get("title"));
             }
         });
@@ -85,7 +91,58 @@ public class WishActivity extends AppCompatActivity {
 
 
     public void btnWishBack(View view){
-        finish();
+        Intent intent = new Intent(WishActivity.this, BookListActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
+    }
+
+    public void btnOpenNewWish(View view){
+        Intent intent = new Intent(WishActivity.this, NewWishActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
+    }
+
+
+    public void btnDeleteWish(View view) {
+        if (bookID<1)
+            showDeleteDialog();
+        else
+            showDeleteDialog("Success");
+    }
+
+    private void showDeleteDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("\n"+"Please select a wish to delete.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
+    }
+
+    private void showDeleteDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to delete wish "+msg+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        accessWishList.deleteWishList( bookID,userName );
+                        Intent intent = new Intent(WishActivity.this, WishActivity.class);
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
     }
 
 }

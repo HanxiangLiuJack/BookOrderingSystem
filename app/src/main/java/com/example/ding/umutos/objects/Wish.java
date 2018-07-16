@@ -7,12 +7,11 @@ public class Wish {
     private String userName;
     private String bookName;
 
-    public Wish(int bookID, String userName, String authorName, String bookName)
+    public Wish( String userName, String authorName, String bookName)
     {
         this.bookName = bookName;
         this.authorName = authorName;
         this.userName = userName;
-        this.bookID=bookID;
     }
 
     public String getName()
@@ -29,6 +28,8 @@ public class Wish {
     {
         return bookID;
     }
+
+    public void setBookID(int bookID) { this.bookID = bookID; }
 
     public String getUserName(){
         return userName;

@@ -9,7 +9,7 @@ public interface WishListPersistence {
 
     void deleteWishList(int id,String userName);
 
-    void insertWishList(Wish wish);
+    Wish insertWishList(Wish wish);
 
     Wish searchWishList(int id);
 

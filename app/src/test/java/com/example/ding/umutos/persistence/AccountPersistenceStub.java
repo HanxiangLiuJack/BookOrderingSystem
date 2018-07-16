@@ -62,5 +62,10 @@ public class AccountPersistenceStub implements AccountPersistence{
             Accounts.remove(index);
     }
 
+    @Override
+    public void updateRating(String userName, double rate, int ratedPerson)
+    {
+
+    }
 
 }

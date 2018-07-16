@@ -12,7 +12,6 @@ public class RateCalculator {
             newRate = rate;
         else
             newRate = (oldRate*ratedPeople + rate)/(ratedPeople+1);
-        seller.setRatedPerson(ratedPeople+1);
         return newRate;
     }
 }

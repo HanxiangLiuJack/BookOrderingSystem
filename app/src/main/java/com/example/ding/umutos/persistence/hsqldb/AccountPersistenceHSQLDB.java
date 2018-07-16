@@ -27,8 +27,11 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     private Account fromResultSet(final ResultSet rs) throws SQLException {
         final String userName = rs.getString("userName");
         final String password = rs.getString("password");
-
+        final double rate = rs.getDouble("rate");
+        final int ratedPerson = rs.getInt("ratedPerson");
         Account account =  new Account(userName,password);
+        account.setRate(rate);
+        account.setRatedPerson(ratedPerson);
         return account;
     }
 
@@ -73,10 +76,11 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public Account insertAccount(Account currentAccount) {
         getAccountSequential();
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts (userName, password) VALUES(?,?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO accounts VALUES(?,?,?,?)");
             st.setString(1,currentAccount.getUserName());
             st.setString(2,currentAccount.getPassword());
-
+            st.setDouble(3,currentAccount.getRate());
+            st.setInt(4,currentAccount.getRatedPerson());
             st.executeUpdate();
 
             return currentAccount;
@@ -104,7 +108,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     @Override
     public void deleteAccount(Account currentAccount) {
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("DELETE FROM accounts WHERE userID = ?");
+            final PreparedStatement st = c.prepareStatement("DELETE FROM accounts WHERE userName = ?");
             st.setString(1, currentAccount.getUserName());
             st.executeUpdate();
         } catch (final SQLException e) {
@@ -113,4 +117,17 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     }
 
 
+    @Override
+    public void updateRating(String userName, double rate, int ratedPerson)
+    {
+        try(final Connection c = connection()){
+            final PreparedStatement st = c.prepareStatement("UPDATE FROM accounts SET rate = ?, ratedPerson = ? WHERE userName = ?");
+            st.setDouble(1, rate);
+            st.setInt(2,ratedPerson);
+            st.setString(3,userName);
+            st.executeUpdate();
+        } catch (final SQLException e) {
+            throw new PersistenceException(e);
+        }
+    }
 }

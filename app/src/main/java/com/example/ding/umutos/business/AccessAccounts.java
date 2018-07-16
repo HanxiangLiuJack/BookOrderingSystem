@@ -89,5 +89,7 @@ public class AccessAccounts {
         Account seller = getAccountByUserName(sellerName);
         RateCalculator newCalculator = new RateCalculator();
         seller.setRate(newCalculator.calculateRate(seller,rate));
+        seller.setRatedPerson(seller.getRatedPerson()+1);
+        accountPersistence.updateRating(sellerName, seller.getRate(), seller.getRatedPerson());
     }
 }

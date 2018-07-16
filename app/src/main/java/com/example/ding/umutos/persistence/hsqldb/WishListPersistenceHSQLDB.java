@@ -16,11 +16,9 @@ import com.example.ding.umutos.persistence.WishListPersistence;
 public class WishListPersistenceHSQLDB implements WishListPersistence {
 
     private final String dbPath;
-    private int maxBookID;
 
     public WishListPersistenceHSQLDB(final String dbPath) {
         this.dbPath = dbPath;
-        maxBookID = 0;
     }
 
     private Connection connection() throws SQLException {
@@ -34,10 +32,6 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
         String bookName = rs.getString("bookName");
         String userName = rs.getString("userName");
         String ownerName = rs.getString("ownerName");
-
-        if(bookID > maxBookID){
-            maxBookID = bookID;
-        }
 
         Wish wish = new Wish(userName, ownerName, bookName);
         wish.setBookID(bookID);
@@ -67,16 +61,13 @@ public class WishListPersistenceHSQLDB implements WishListPersistence {
 
     @Override
     public Wish insertWishList(Wish wish) {
-        getWishListSequential();
         try (final Connection c = connection()) {
-            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList VALUES(?,?,?,?)");
+            final PreparedStatement st = c.prepareStatement("INSERT INTO wishList (ownerName,bookName,userName) VALUES(?,?,?)");
             st.setString(1,wish.getAuthorName() );
-            st.setInt(2, maxBookID+1);
-            st.setString(3, wish.getName());
-            st.setString(4, wish.getUserName());
+            st.setString(2, wish.getName());
+            st.setString(3, wish.getUserName());
 
             st.executeUpdate();
-            wish.setBookID(maxBookID+1);
 
             return  wish;
         } catch (final SQLException e) {

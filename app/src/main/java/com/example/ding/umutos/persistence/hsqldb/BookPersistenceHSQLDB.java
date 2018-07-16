@@ -71,7 +71,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book insertBook(Book currentBook) {
-        getBookSequential();
         try (final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO books (bookName,authorName,bookPicture,bookDescription,bookCategory,price,ownerName) VALUES(?, ?, ?, ?, ?, ?, ?)");
             st.setString(1, currentBook.getName());

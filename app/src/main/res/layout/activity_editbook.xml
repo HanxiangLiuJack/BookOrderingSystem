@@ -150,7 +150,7 @@
     <Button
         android:id="@+id/deletePostedBook"
         android:layout_width="160dp"
-        android:layout_height="60dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

@@ -105,7 +105,7 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userName);
+                        Book aBook= new Book(title,author,2131361792,detail,category,Double.parseDouble(price),userName);
                         accessBookList.insertBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);

@@ -35,8 +35,6 @@ public class SingleBookActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        Book aBook=new Book(  );
-
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
         userName = getIntent().getStringExtra("userName");
@@ -62,7 +60,7 @@ public class SingleBookActivity extends AppCompatActivity {
         System.out.println(newBook.getOwner());
         bookOwner.setText("Sold by "+accessAccounts.getAccountByUserName(newBook.getOwner()).getUserName());
         bookDecription.setText(newBook.getDescription());
-        bookImg.setImageResource(aBook.getImageByBookID(bookID));
+        bookImg.setImageResource(newBook.getPicture());
         bookCategory.setText("Category: "+newBook.getCategory());
         rb_normal.setRating( (float)accessAccounts.getAccountByUserName( newBook.getOwner() ) .getRate());
 

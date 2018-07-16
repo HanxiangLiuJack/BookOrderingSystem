@@ -119,12 +119,11 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
-        Book aBook=new Book();
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",aBook.getImageByBookID(newBookList.get(i).getBookID()) );
+            book.put("img",newBookList.get(i).getPicture());
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
             book.put("rate","Seller rate: "+accessAccounts.getAccountByUserName( newBookList.get( i ).getOwner() ).getRate());

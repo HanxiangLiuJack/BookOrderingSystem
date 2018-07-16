@@ -1,7 +1,6 @@
 package com.example.ding.umutos.Acceptance;
 
 
-
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.presentation.HomeActivity;
@@ -10,6 +9,7 @@ import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import com.example.ding.umutos.R;
 
 
 import org.junit.Rule;
@@ -38,36 +38,32 @@ import static org.hamcrest.core.AllOf.allOf;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class CreateAccountTest
-{
-    private String userName = "Zapp1";
-    private String userPsw = "Zapp123";
+public class AddDeleteEditTest {
+
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @After
-    public void tearDown(){
-        Service.getAccountPersistence().deleteAccount(new Account(userName, userPsw));
-    }
-
-
     @Test
-    public void createAccountAndLogin()
-    {
+    public void AddDeleteEditTest() {
+        onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
-        onView( withId(R.id.buttonRegister)).perform(click());
-
-        onView(withId(R.id.registerName)).perform(typeText(userName));
+        onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.registerPsw)).perform(typeText(userPsw));
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        onView(withId(R.id.buttonLoginAsSeller)).perform(click());
+
+        onView(withId(R.id.addNewBook)).perform(click());
+
+        onView(withId(R.id.editBookTitle)).perform(typeText("abcd"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.registerSubmit)).perform(click());
 
-        onView(withId(R.id.buttonLoginOut)).perform(click());
+
     }
+
+
 
 }
-

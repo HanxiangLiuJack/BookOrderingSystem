@@ -127,13 +127,38 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void btnShoppingCartBuy(View view) {
-        showDialog();
+        if (accessShoppingCart.getUserShoppingCart( userName ).size()==0){
+            showFailDialog();
+        }else{
+            showDialog();
+        }
     }
 
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
                 .setMessage("\n"+"Sure to buy all these books? \nPress 'Yes' to the Delivery Info page.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Intent intent = new Intent(ShoppingCartActivity.this,AddressActivity.class);
+                        intent.putExtra("userName", userName);
+                        ShoppingCartActivity.this.startActivity(intent);                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+                .show();
+    }
+
+    private void showFailDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("\nShopping cart is empty!")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,

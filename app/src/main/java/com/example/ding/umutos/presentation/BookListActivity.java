@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -21,7 +20,6 @@ import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Account;
-import com.example.ding.umutos.business.BookSorter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -259,6 +257,18 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void buttonPriceLowToHigh(View view){
         BookSorter sort=new BookSorter();
         List<Book> aList=sort.LowPrice(newBookList);
+        loadBookList(aList);
+    }
+
+    public void buttonRateHighToLow(View view){
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.HighRate(newBookList);
+        loadBookList(aList);
+    }
+
+    public void buttonRateLowToHigh(View view){
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.LowRate(newBookList);
         loadBookList(aList);
     }
 

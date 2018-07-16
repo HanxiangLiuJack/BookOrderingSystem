@@ -76,17 +76,19 @@ public class WishActivity extends AppCompatActivity {
                 new int[] { R.id.wishListTitle, R.id.wishListByAuthor, R.id.wisher});
         wishList.setAdapter(sItems);
 
-        wishList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-                                    long arg3) {
-                HashMap<String,String> map=(HashMap<String,String>)wishList.getItemAtPosition(arg2);
-                String id=map.get("id");
-                bookID=Integer.parseInt(id);
-                infoBar.setTextSize( 2,15 );
-                infoBar.setText("You selected wish: "+ map.get("title"));
-            }
-        });
+        if (userType==1){
+            wishList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                @Override
+                public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                        long arg3) {
+                    HashMap<String,String> map=(HashMap<String,String>)wishList.getItemAtPosition(arg2);
+                    String id=map.get("id");
+                    bookID=Integer.parseInt(id);
+                    infoBar.setTextSize( 2,15 );
+                    infoBar.setText("You selected wish: "+ map.get("title"));
+                }
+            });
+        }
     }
 
 

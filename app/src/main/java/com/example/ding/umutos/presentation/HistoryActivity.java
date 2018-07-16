@@ -95,7 +95,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void buttonHistoryBack(View view) {
-        finish();
+        Intent intent = new Intent(HistoryActivity.this, BookListActivity.class);
+        intent.putExtra("userType", userType);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
     }
+
 
 }

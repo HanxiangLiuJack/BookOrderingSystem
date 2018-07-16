@@ -113,7 +113,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
 
     @Override
-    public void clearShoppingCart(String userName) {
+    public void clearShoppingCart(String userName, String[] address) {
         try (final Connection c = connection()) {
             final PreparedStatement st = c.prepareStatement("DELETE FROM shoppingCart WHERE userName = ?");
             st.setString(1, userName);

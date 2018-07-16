@@ -15,5 +15,5 @@ public interface AccountPersistence{
 
     void deleteAccount(Account currentAccount);
 
-
+    void updateRating(String userName, double rate, int ratedPerson);
 }

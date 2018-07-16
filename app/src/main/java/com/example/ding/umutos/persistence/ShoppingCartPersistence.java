@@ -14,7 +14,7 @@ public interface ShoppingCartPersistence {
 
     List<Item> getShoppingCartSequential(String userName);
 
-    void clearShoppingCart(String userName);
+    void clearShoppingCart(String userName, String[] address);
 
     List<Item> shoppingCartSequential();
 

@@ -79,7 +79,7 @@ public class AccessWishListTest {
     public void testDeleteWishList()
     {
         System.out.println("\nStart testing testDeleteWishList.\n");
-        Wish desire = new Wish(1, "a", "b", "c");
+        Wish desire = new Wish( "a", "b", "c");
         doNothing().when(wishListPersistence).deleteWishList(4, "Tianhua Xu");
         when(wishListPersistence.searchWishList(4)).thenReturn(desire);
         accessWishlists.deleteWishList(4, "Tianhua Xu");
@@ -98,9 +98,9 @@ public class AccessWishListTest {
     public void testInsertWishList()
     {
         System.out.println("\nStart testing testInsertWishList.\n");
-        Wish desire = new Wish(19, "Tianhua Xu", "a", "b");
+        Wish desire = new Wish("Tianhua Xu", "a", "b");
 
-        doNothing().when(wishListPersistence).insertWishList(desire);
+        when(wishListPersistence.insertWishList(desire)).thenReturn(desire);
         assertTrue(accessWishlists.insertWishList(desire));
         verify(wishListPersistence).insertWishList(desire);
 

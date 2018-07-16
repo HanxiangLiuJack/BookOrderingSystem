@@ -9,4 +9,4 @@
 ### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zitao Zheng (7763424)
 ---
 ## &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Architecture:
-![alt text](/ARCHITECTURE.png "Architecture")
+![alt text](/ARCHITECTURE.PNG "Architecture")

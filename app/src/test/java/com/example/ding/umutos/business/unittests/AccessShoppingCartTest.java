@@ -113,12 +113,6 @@ public class AccessShoppingCartTest {
         doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
         accessShoppingCart.clearShoppingCart("Tianhua Xu");
         verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
-
-        shoppingCartPersistence = new ShoppingCartPersistenceStub();
-        accessShoppingCart = new AccessShoppingCart(shoppingCartPersistence);
-
-        accessShoppingCart.clearShoppingCart("Tianhua Xu");
-        assertTrue(accessShoppingCart.getUserShoppingCart("Tianhua Xu").size() == 0);
         System.out.println("\nStart testing testClearShoppingCart.\n");
 
     }

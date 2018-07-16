@@ -98,13 +98,13 @@ public class OrderBookAndRateSellerTest {
 
         onView(withId(R.id.singleBookAddToCart)).perform(click());
 
-        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.viewShoppingCart)).perform(click());
 
         onView(withId(R.id.shoppingListDone)).perform(click());
 
-        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
     }
 

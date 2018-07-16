@@ -69,6 +69,7 @@ public class AddAndDeleteWishTest {
 
        onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
 
+       closeSoftKeyboard();
        onView(withId(R.id.cusWishList)).perform(click());
 
        onView(withId(R.id.addWish)).perform(click());

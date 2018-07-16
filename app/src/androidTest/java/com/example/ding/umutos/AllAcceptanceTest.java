@@ -19,17 +19,21 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AddAndDeleteWishTest.class,
+        ViewOrderAndWishListTest.class,
+
+        OrderBookAndRateSellerTest.class,
+
+
         AddBookTest.class,
         CreateAccountTest.class,
         DeleteBookTest.class,
         EditBookTest.class,
         LoginWithBuyerOrSellerModeTest.class,
-        OrderBookAndRateSellerTest.class,
         SearchBookByCategoryTest.class,
         SearchBookByKeyTest.class,
         SortBookByPriceTest.class,
-        ViewOrderAndWishListTest.class
-})
+
+}) 
 
 public class AllAcceptanceTest {
 

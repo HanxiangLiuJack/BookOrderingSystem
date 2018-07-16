@@ -7,7 +7,7 @@ import com.example.ding.umutos.objects.Account;
 public interface AccountPersistence{
     List<Account> getAccountSequential();
 
-    Account getAccountByID(int userID);
+    Account getAccountByUserName(String userName);
 
     Account insertAccount(Account currentAccount);
 
@@ -15,5 +15,5 @@ public interface AccountPersistence{
 
     void deleteAccount(Account currentAccount);
 
-
+    void updateRating(String userName, double rate, int ratedPerson);
 }

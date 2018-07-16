@@ -22,11 +22,11 @@ public class Book
     private int bookPicture;
     private String bookDescription;
     private String bookCategory;
-    private int ownerID;
+    private String ownerName;
     private  double price;
     private String[] categoryArr;
 
-    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, int ownerID)
+    public Book(String bookName , String authorName , int bookPicture, String bookDescription, String bookCategory, double price, String ownerName)
     {
         this.bookName = bookName;
         this.authorName = authorName;
@@ -34,11 +34,11 @@ public class Book
         this.bookDescription = bookDescription;
         this.bookCategory = bookCategory;
         this.price = price;
-        this.ownerID = ownerID;
+        this.ownerName = ownerName;
     }
 
     public Book(){
-        categoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business","Biology", "Computer Science","Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
+         categoryArr = new String[]{"ALL","Agriculture", "Architecture and design", "Business","Biology", "Computer Science","Divinity", "Education", "Engineering and technology", "Environmental studies and forestry", "Family and consumer science", "Human physical performance and recreation", "Journalism, media studies and communication", "Law", "Library and museum studies", "Medicine", "Military sciences", "Public administration", "Public policy", "Social work", "Transportation"};
     }
 
     public int getPicture()
@@ -111,8 +111,8 @@ public class Book
         this.bookID = bookID;
     }
 
-    public int getOwner(){
-        return ownerID;
+    public String getOwner(){
+        return ownerName;
     }
 
     public String[] getCategoryArr(){

@@ -99,22 +99,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/singleBookSellerName" />
 
-        <!--<RatingBar-->
-            <!--android:id="@+id/ratingBar"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginEnd="30dp"-->
-            <!--android:layout_marginLeft="30dp"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:layout_marginStart="10dp"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:isIndicator="true"-->
-            <!--android:maxWidth="200dp"-->
-            <!--android:numStars="5"-->
-            <!--android:rating="4.3"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toEndOf="@+id/singleBookSellerName"-->
-            <!--app:layout_constraintTop_toBottomOf="@+id/singleBookImg" />-->
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:isIndicator="true"
+            android:maxWidth="200dp"
+            android:numStars="5"
+            android:rating="4.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/singleBookSellerName"
+            app:layout_constraintTop_toBottomOf="@+id/singleBookImg" />
 
         <TextView
             android:id="@+id/singleBookDes"
@@ -126,27 +126,42 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/text_style"
-            android:text="@string/des_test"
+            android:text="aaa"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/singleBookCategory" />
 
         <Button
-            android:id="@+id/singleBookBuy"
+            android:id="@+id/singleBookAddToCart"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
-            android:layout_marginEnd="180dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/buy_button_style"
             android:onClick="buttonAdd"
-            android:text="Buy"
+            android:text="Add to Shopping Cart"
             android:textColor="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/singleBookDes"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <Button
+            android:id="@+id/viewShoppingCart"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_style"
+            android:onClick="btnSingleToShoppingCart"
+            android:text="View Shopping Cart"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/singleBookDes" />
+            app:layout_constraintTop_toBottomOf="@+id/singleBookDes"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </android.support.constraint.ConstraintLayout>

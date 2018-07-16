@@ -18,7 +18,8 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
 
-    private int bookID, userID;
+    private int bookID;
+    private String userName;
 
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
@@ -31,7 +32,7 @@ public class EditBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
 
-        userID = getIntent().getIntExtra("userID",-1);
+        userName = getIntent().getStringExtra("userName");
         bookID = getIntent().getIntExtra("bookID",-1);
         System.out.println("BookID"+bookID);
 
@@ -104,12 +105,12 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,2131361792,detail,category,Double.parseDouble(price),userID);
+                        Book aBook= new Book(title,author,2131361792,detail,category,Double.parseDouble(price),userName);
                         accessBookList.insertBook(aBook);
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
 
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
@@ -143,7 +144,7 @@ public class EditBookActivity extends AppCompatActivity {
                         int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         startActivity(intent);
                     }
                 })

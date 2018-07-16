@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context=".presentation.EditBookActivity">
+
+    <TextView
+        android:id="@+id/registerTitle"
+        android:layout_width="440dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="36dp"
+        android:text="Rate the seller"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/rateInfo"
+        android:layout_width="540dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
+        android:text="Select a star:"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle"  />
+
+
+    <RatingBar
+        android:id="@+id/editRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="80dp"
+        android:maxWidth="200dp"
+        android:numStars="5"
+        android:rating="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rateInfo" />
+
+
+    <Button
+        android:id="@+id/rateCancel"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginStart="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonRateCancel"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/rateSubmit"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/button_style"
+        android:onClick="buttonEditRate"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="OnClick" />
+
+
+</android.support.constraint.ConstraintLayout>

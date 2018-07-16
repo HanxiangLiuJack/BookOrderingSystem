@@ -9,25 +9,33 @@ import android.support.v7.app.AlertDialog;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessOrders;
+import com.example.ding.umutos.business.AccessShoppingCart;
 import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.Item;
 import com.example.ding.umutos.objects.Order;
+import com.example.ding.umutos.business.OrderBuilder;
+
+import java.util.List;
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
     private AccessBooks accessBookList;
     private AccessOrders accessOrders;
-    private int userID;
+    private String userName;
     private String firstName, lastName,phoneNum,postCode,addressInfo,additionInfo;
+    private AccessShoppingCart accessShoppingCart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
-        userID = getIntent().getIntExtra("userID",-1);
-        accessOrders=new AccessOrders(  );
+        userName = getIntent().getStringExtra("userName");
+        accessOrders=new AccessOrders();
         accessBookList=new AccessBooks();
+        accessShoppingCart=new AccessShoppingCart(  );
     }
 
     public void buttonAddSubmit(View view) {
@@ -71,21 +79,7 @@ public class AddressActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook=accessBookList.searchBook( bookID );
-                        accessBookList.deleteBook(bookID);
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
-                        Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
-                        accessOrders.insertOrder( newOrder );
-                        int userType=1;
-                        Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
-                        intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
-                        startActivity(intent);
+                        clearShoppingCart();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -95,6 +89,36 @@ public class AddressActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void clearShoppingCart(){
+        String add[]={firstName,lastName,phoneNum,postCode,addressInfo};
+        List<Item> newList=accessShoppingCart.clearShoppingCart( userName, add );
+        if (newList==null){
+            Intent intent = new Intent(AddressActivity.this,BookListActivity.class);
+            intent.putExtra("bookID", bookID);
+            intent.putExtra("userName", userName);
+            intent.putExtra("userType", 1);
+            AddressActivity.this.startActivity(intent);
+        }else {
+            String bookName="";
+            for (int i=0;i<newList.size();i++){
+                bookName+=newList.get( i ).getName()+"\n";
+            }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Alert:")
+                    .setMessage("\n"+"Books below have been sold out.\n"+bookName)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,
+                                            int which) {
+
+                        }
+                    })
+                    .show();
+        }
+
     }
 
     public void buttonBookCancel(View view) {

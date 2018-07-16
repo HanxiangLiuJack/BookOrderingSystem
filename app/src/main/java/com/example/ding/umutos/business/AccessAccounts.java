@@ -79,9 +79,15 @@ public class AccessAccounts {
         return targetAccount;
     }
 
-    public double getAccountRate(String userName)
+    public double getAccountRate(String userName,List<Account> accounts)
     {
-        return getAccountByUserName(userName).getRate();
+        double rate = 5;
+        for(int j = 0; j < accounts.size(); j++)
+        {
+            if(accounts.get(j).getUserName().equals(userName))
+                rate = accounts.get(j).getRate();
+        }
+        return rate;
     }
 
     public void RateUser(String sellerName, double rate)

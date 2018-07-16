@@ -36,7 +36,6 @@ public class EditBookActivity extends AppCompatActivity {
         userName = getIntent().getStringExtra("userName");
         userType =getIntent().getIntExtra("userType",-1);
         bookID = getIntent().getIntExtra("bookID",-1);
-        System.out.println("BookID"+bookID);
 
         accessBookList=new AccessBooks();
 
@@ -110,12 +109,9 @@ public class EditBookActivity extends AppCompatActivity {
                                         int which) {
                         Book aBook= new Book(title,author,2131361792,detail,category,Double.parseDouble(price),userName);
                         accessBookList.insertBook(aBook);
-                        int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userName", userName);
-
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
 
                     }
@@ -144,7 +140,6 @@ public class EditBookActivity extends AppCompatActivity {
                         newBook.setName( title );
                         newBook.setPrice( Double.parseDouble( price ) );
                         accessBookList.updateBook(newBook);
-                        int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userName", userName);
@@ -186,7 +181,7 @@ public class EditBookActivity extends AppCompatActivity {
     private void showDeleteDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Alert:")
-                .setMessage("\n"+"Please select a book to delete.")
+                .setMessage("\n"+"You cannot delete a new book!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int which) {}

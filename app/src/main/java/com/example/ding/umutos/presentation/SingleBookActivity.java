@@ -60,19 +60,12 @@ public class SingleBookActivity extends AppCompatActivity {
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
-        String userName = "";
-        double rate = 0;
+        String sellerName;
+        double rate;
         List<Account> a = accessAccounts.getAccounts();
-        for (int i = 0; i < a.size(); i++)
-        {
-            if(a.get(i).getUserName().equals(newBook.getOwner()))
-            {
-                userName = a.get(i).getUserName();
-                rate = a.get(i).getRate();
-                break;
-            }
-        }
-        bookOwner.setText("Sold by "+userName);
+        rate = accessAccounts.getAccountRate(newBook.getOwner(),a);
+        sellerName = accessBookList.searchBook(bookID).getOwner();
+        bookOwner.setText("Sold by "+sellerName);
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(newBook.getPicture());
         bookCategory.setText("Category: "+newBook.getCategory());

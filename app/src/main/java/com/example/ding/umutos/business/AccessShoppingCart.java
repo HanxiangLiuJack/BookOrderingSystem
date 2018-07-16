@@ -15,7 +15,6 @@ import java.util.List;
 public class AccessShoppingCart {
 
     private ShoppingCartPersistence shoppingCartPersistence;
-    private List<Item> list;
     private List<Item> priceList;
     private BookPersistence bookPersistence;
     private OrderPersistence orderPersistence;
@@ -24,7 +23,6 @@ public class AccessShoppingCart {
         shoppingCartPersistence = Service.getShoppingCartPersistence();
         bookPersistence = Service.getBookPersistence();
         orderPersistence = Service.getOrderPersistence();
-        list = null;
     }
 
     public AccessShoppingCart(final ShoppingCartPersistence shoppingCartPersistence) {
@@ -95,12 +93,7 @@ public class AccessShoppingCart {
             for(int i=0;i<item.size();i++){
                 String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
                 bookPersistence.deleteBook(item.get(i).getBookID());
-                newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
-                newOrder.setAddress(orderInfo.getAddress());
-                newOrder.setPhoneNumber(orderInfo.getPhoneNumber());
-                newOrder.setPostCode(orderInfo.getFirstName());
-                newOrder.setLastName(orderInfo.getLastName());
-                newOrder.setFirstName(orderInfo.getFirstName());
+                newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice(),orderInfo);
                 orderPersistence.insertOrder(newOrder);
             }
             shoppingCartPersistence.clearShoppingCart(userName);

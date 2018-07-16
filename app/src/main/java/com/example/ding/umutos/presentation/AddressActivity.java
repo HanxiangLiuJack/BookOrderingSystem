@@ -19,8 +19,6 @@ import java.util.List;
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
-    private AccessBooks accessBookList;
-    private AccessOrders accessOrders;
     private String userName;
     private String firstName, lastName,phoneNum,postCode,addressInfo,additionInfo;
     private AccessShoppingCart accessShoppingCart;
@@ -32,9 +30,7 @@ public class AddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
         userName = getIntent().getStringExtra("userName");
-        accessOrders=new AccessOrders();
-        accessBookList=new AccessBooks();
-        accessShoppingCart=new AccessShoppingCart();
+        accessShoppingCart=new AccessShoppingCart(  );
     }
 
     public void buttonAddSubmit(View view) {

@@ -37,14 +37,14 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private int userType;
     private String userName;
     private ArrayAdapter<String> adapter;
-
+    private BookSorter sort;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         userType = getIntent().getIntExtra("userType",-1);
         userName = getIntent().getStringExtra("userName");
-
+        sort = new BookSorter();
 
         if (userType==0){
             setContentView(R.layout.activity_seller_booklist);
@@ -127,11 +127,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             book.put("img",newBookList.get(i).getPicture());
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
-            for(int j = 0; j < accounts.size(); j++)
-            {
-                if(accounts.get(j).getUserName().equals(newBookList.get( i ).getOwner()))
-                    rate = accounts.get(j).getRate();
-            }
+            rate = accessAccounts.getAccountRate(newBookList.get(i).getOwner(),accounts);
             book.put("rate","Seller rate: "+rate);
             books.add(book);
         }
@@ -215,25 +211,21 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
 
     public void buttonPriceHighToLow(View view){
-        BookSorter sort=new BookSorter();
         List<Book> aList=sort.HighPrice(newBookList);
         loadBookList(aList);
     }
 
     public void buttonPriceLowToHigh(View view){
-        BookSorter sort=new BookSorter();
         List<Book> aList=sort.LowPrice(newBookList);
         loadBookList(aList);
     }
 
     public void buttonRateHighToLow(View view){
-        BookSorter sort=new BookSorter();
         List<Book> aList=sort.HighRate(newBookList);
         loadBookList(aList);
     }
 
     public void buttonRateLowToHigh(View view){
-        BookSorter sort=new BookSorter();
         List<Book> aList=sort.LowRate(newBookList);
         loadBookList(aList);
     }

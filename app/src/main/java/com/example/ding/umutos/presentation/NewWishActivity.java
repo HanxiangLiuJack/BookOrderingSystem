@@ -54,7 +54,7 @@ public class NewWishActivity extends AppCompatActivity {
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Lack of wish information")
-                .setMessage("\nPlease enter valid wish book title and author.")
+                .setMessage("\nPlease enter valid book title and author.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int which) {}

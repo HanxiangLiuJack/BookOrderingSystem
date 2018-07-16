@@ -1,4 +1,4 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.integrationtests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.utils.TestUtils;
-
+import com.example.ding.umutos.business.AccessOrders;
 import static junit.framework.Assert.assertNotNull;
 
 import static junit.framework.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.integrationtests;
 
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.utils.TestUtils;
@@ -11,12 +11,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.List;
-
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
+import com.example.ding.umutos.business.AccessBooks;
 
 public class AccessBooksIT {
         private AccessBooks accessBooks;
@@ -32,7 +30,7 @@ public class AccessBooksIT {
         @Test
         public void testListBooks() {
             final Book book;
-            book = accessBooks.getBooks().get(1);
+            book = accessBooks.getBooks().get(0);
             assertNotNull("first sequential course should not be null", book);
             assertTrue("Agile Development".equals(book.getName()));
             assertTrue("James Shore".equals(book.getAuthor()));
@@ -71,7 +69,7 @@ public class AccessBooksIT {
             Book newBook=new Book("aaa","bbb",1,"ddd","eee",9.99, "Tianhua Xu");
             String key = "aaa";
             assertTrue(accessBooks.insertBook(newBook));
-            assertTrue(accessBooks.searchBooksByKeyWord(key).equals(accessBooks));
+            assertTrue(accessBooks.searchBooksByKeyWord(key).get(0).getName().equals(newBook.getName()));
             System.out.println("Finished test AccessBooks");
         }
 

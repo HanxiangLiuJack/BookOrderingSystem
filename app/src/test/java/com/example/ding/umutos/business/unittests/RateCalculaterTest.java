@@ -1,4 +1,6 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.unittests;
+
+import com.example.ding.umutos.business.RateCalculator;
 
 import com.example.ding.umutos.objects.Account;
 

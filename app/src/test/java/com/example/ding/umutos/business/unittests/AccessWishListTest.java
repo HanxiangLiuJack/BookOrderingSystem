@@ -1,5 +1,6 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.unittests;
 
+import com.example.ding.umutos.business.AccessWishlists;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;

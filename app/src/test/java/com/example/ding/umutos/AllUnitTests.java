@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 import com.example.ding.umutos.objects.*;
-import com.example.ding.umutos.business.*;
+import com.example.ding.umutos.business.unittests.*;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

@@ -38,6 +38,7 @@ public class SingleBookActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
+        System.out.println("bookid:"+bookID);
         userName = getIntent().getStringExtra("userName");
         userType = getIntent().getIntExtra("userType",-1);
 

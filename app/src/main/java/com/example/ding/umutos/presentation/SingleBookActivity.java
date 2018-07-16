@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -19,8 +18,6 @@ import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
 import java.util.List;
-
-import static android.app.PendingIntent.getActivity;
 
 public class SingleBookActivity extends AppCompatActivity {
 

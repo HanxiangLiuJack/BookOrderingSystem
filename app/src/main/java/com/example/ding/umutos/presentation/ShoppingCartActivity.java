@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessShoppingCart;
@@ -25,7 +28,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private List<Item> newShoppingCart;
     private int userType, bookID;
     private String userName;
-    private TextView shopInfoBar,priceBar;
+    private TextView priceBar;
 
 
     @Override
@@ -33,7 +36,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
         shopList=(ListView)findViewById(R.id.shoppingList);
-        shopInfoBar=(TextView)findViewById( R.id.shoppingBar ) ;
         priceBar=(TextView)findViewById( R.id.priceBar );
 
         userName = getIntent().getStringExtra("userName");
@@ -74,9 +76,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 HashMap<String,String> map=(HashMap<String,String>)shopList.getItemAtPosition(arg2);
                 String id=map.get("id");
                 bookID=Integer.parseInt(id);
-                shopInfoBar.setText("You selected: "+ map.get("title"));
+
+                Toast toast = Toast.makeText(ShoppingCartActivity.this, "You have selected:" +  map.get("title"), Toast.LENGTH_SHORT);
+                toast.setGravity( Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
+
     }
 
     public void btnShopToCus(View view) {

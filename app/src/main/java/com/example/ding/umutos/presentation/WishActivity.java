@@ -128,7 +128,7 @@ public class WishActivity extends AppCompatActivity {
     private void showDeleteDialog(String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+"Sure to delete wish "+msg+"?")
+                .setMessage("\n"+"Sure to delete this wish?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,

@@ -93,9 +93,7 @@ public class ShoppingCartTest {
 
         onView(withId(R.id.shoppingListRemove)).perform(click());
 
-
         onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
 
     }
 

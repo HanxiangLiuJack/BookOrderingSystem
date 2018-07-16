@@ -46,7 +46,6 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
             st.setInt(2,item.getBookID());
             st.setString(3, item.getName());
             st.setDouble(4, item.getPrice());
-
             st.executeUpdate();
         } catch (final SQLException e) {
             throw new PersistenceException(e);

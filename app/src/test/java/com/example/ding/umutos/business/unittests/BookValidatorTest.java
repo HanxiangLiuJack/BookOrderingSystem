@@ -1,6 +1,6 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.unittests;
 import com.example.ding.umutos.objects.Book;
-
+import com.example.ding.umutos.business.BookValidator;
 
 import org.junit.After;
 import org.junit.Before;

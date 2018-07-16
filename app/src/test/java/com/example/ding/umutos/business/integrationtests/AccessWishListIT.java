@@ -1,4 +1,4 @@
-package com.example.ding.umutos.business;
+package com.example.ding.umutos.business.integrationtests;
 
 import org.junit.After;
 import org.junit.Before;
@@ -6,13 +6,12 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
+import com.example.ding.umutos.business.AccessWishlists;
 import com.example.ding.umutos.objects.Wish;
 import com.example.ding.umutos.utils.TestUtils;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 public class AccessWishListIT {
 
@@ -44,8 +43,8 @@ public class AccessWishListIT {
     {
         System.out.println("\nStarting test testGetUserWishList.\n");
         assertNotNull(accessWishlists.getUserWishLists("Xiao Peng"));
-        assertNull(accessWishlists.getUserWishLists("Tianhua Xu"));
-        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 2);
+        assertTrue(accessWishlists.getUserWishLists("Tianhua Xu").size() == 0);
+        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 1);
         System.out.println("\nEnd test testGetUserWishList.\n");
     }
 
@@ -64,7 +63,7 @@ public class AccessWishListIT {
     {
         System.out.println("\nStarting test testDeleteWishList.\n");
         accessWishlists.deleteWishList(1, "Xiao Peng");
-        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 2);
+        assertTrue(accessWishlists.getUserWishLists("Xiao Peng").size() == 0);
         System.out.println("\nStarting test testDeleteWishList.\n");
     }
 }

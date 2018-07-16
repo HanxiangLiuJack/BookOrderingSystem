@@ -13,13 +13,13 @@ public class WishListPersistenceStub implements WishListPersistence{
 
     public WishListPersistenceStub() {
         this.wishList = new ArrayList<>();
-        wishList.add(new Wish(1,11.22,"Tianhua Xu","Essential Scrum"));
-        wishList.add(new Wish(2,9.95,"Tianhua Xu","Economic and Social History of Medieval Europe"));
-        wishList.add(new Wish(3,11.66,"Tianhua Xu","An Economic and Social History of Later Medieval Europe"));
-        wishList.add(new Wish(4,30.22,"Tianhua Xu","The Middle Ages"));
-        wishList.add(new Wish(5,22.45,"Tianhua Xu","The Guilty Wife"));
-        wishList.add(new Wish(6,33.22,"Tianhua Xu","One Way"));
-        wishList.add(new Wish(7,22.55,"Tianhua Xu","Sarah Dunn"));
+        wishList.add(new Wish(1,"Tianhua Xu","a","Essential Scrum"));
+        wishList.add(new Wish(2,"Tianhua Xu","b","Economic and Social History of Medieval Europe"));
+        wishList.add(new Wish(3,"Tianhua Xu","c","An Economic and Social History of Later Medieval Europe"));
+        wishList.add(new Wish(4,"Tianhua Xu","d","The Middle Ages"));
+        wishList.add(new Wish(5,"Tianhua Xu","e","The Guilty Wife"));
+        wishList.add(new Wish(6,"Tianhua Xu","f","One Way"));
+        wishList.add(new Wish(7,"Tianhua Xu","g","Sarah Dunn"));
     }
 
 
@@ -51,8 +51,8 @@ public class WishListPersistenceStub implements WishListPersistence{
     }
 
     @Override
-    public void insertWishList(Wish wish,String userName){
-        if(userName.equals("Tianhua Xu"))
+    public void insertWishList(Wish wish){
+        if(wish.getUserName().equals("Tianhua Xu"))
             wishList.add(wish);
     }
 

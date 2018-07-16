@@ -40,7 +40,6 @@ public class SingleBookActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
-        System.out.println("bookid:"+bookID);
         userName = getIntent().getStringExtra("userName");
         userType = getIntent().getIntExtra("userType",-1);
 
@@ -61,7 +60,6 @@ public class SingleBookActivity extends AppCompatActivity {
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
-        System.out.println(newBook.getOwner());
         String userName = "";
         double rate = 0;
         List<Account> a = accessAccounts.getAccounts();

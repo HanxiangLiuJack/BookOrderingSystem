@@ -18,7 +18,7 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
 
-    private int bookID;
+    private int bookID,userType;
     private String userName;
 
     private ArrayAdapter<String> adapter;
@@ -33,6 +33,7 @@ public class EditBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_editbook);
 
         userName = getIntent().getStringExtra("userName");
+        userType =getIntent().getIntExtra("userType",-1);
         bookID = getIntent().getIntExtra("bookID",-1);
         System.out.println("BookID"+bookID);
 
@@ -171,6 +172,46 @@ public class EditBookActivity extends AppCompatActivity {
 
         public void onNothingSelected(AdapterView<?> arg0) {
         }
+    }
+
+    public void buttonDeletePostedBook(View view) {
+        if (bookID<1)
+            showDeleteDialog();
+        else
+            showDeleteDialog(newBook.getName());
+    }
+
+    private void showDeleteDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("\n"+"Please select a book to delete.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
+    }
+
+    private void showDeleteDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to delete "+msg+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        accessBookList.deleteBook(bookID);
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
     }
 
 

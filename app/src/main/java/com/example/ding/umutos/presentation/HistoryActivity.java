@@ -48,7 +48,12 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         TextView historyBar=(TextView)findViewById(R.id.historyBar);
-        historyBar.setText("Order history");
+        if (userType==0){
+            historyBar.setText("Order history");
+
+        }else{
+            historyBar.setText( "Order History\n (Select an order to rate seller)" );
+        }
     }
 
     private void loadList(List<Order> newOrderList){

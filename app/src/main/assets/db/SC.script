@@ -43,5 +43,5 @@ INSERT INTO ORDERS VALUES('GUILTY HUSBAND','Hanxiang Liu','Tianhua Xu',35.00,'Yu
 INSERT INTO SHOPPINGCART VALUES('Xiao Peng',17,'How to be a good professor',66.66)
 INSERT INTO SHOPPINGCART VALUES('Xiao Peng',18,'Business Law',79.98)
 INSERT INTO SHOPPINGCART VALUES('Xiao Peng',19,'Business Adventures: Twelve Classic Tales from the World of Wall Street',34.99)
-INSERT INTO WISHLIST VALUES('Robert',1,'Agile Development','Xiao Peng')
-INSERT INTO WISHLIST VALUES('Franklin',2,'Microeconomics','Yunlong Liu')
+INSERT INTO WISHLIST VALUES('Robert',1,'Hello','Xiao Peng')
+INSERT INTO WISHLIST VALUES('Franklin',2,'Long way','Yunlong Liu')

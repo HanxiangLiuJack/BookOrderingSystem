@@ -13,6 +13,7 @@ import java.io.IOException;
 
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 
@@ -56,7 +57,7 @@ public class AccessShoppingCartIT {
         @Test
         public void TestClearShoppingCart(){
             accessShoppingCart.clearShoppingCart("Peng Xiao");
-            assertNotNull("first sequential course should not be null",accessShoppingCart.getUserShoppingCart("Xiao Peng"));
+            assertNull(accessShoppingCart.getUserShoppingCart("Xiao Peng"));
             System.out.println("Finished test ShoppingCart");
         }
 

@@ -45,7 +45,7 @@ public class AccessOrderIT {
         List<Order> orders = accessOrders.sellerOrderHistory("Tianhua Xu");
         assertTrue(orders.size() == 1);
         orders = accessOrders.buyerOrderHistory("Hanxiang Liu");
-        assertTrue(orders.size() == 2);
+        assertTrue(orders.size() == 1);
         System.out.println("\nStarting test testInsertOrder\n");
 
     }
@@ -61,7 +61,7 @@ public class AccessOrderIT {
         newOrder.setPhoneNumber("123");
         newOrder.setAddress("asdad");
         assertTrue(accessOrders.insertOrder(newOrder));
-        assertTrue(accessOrders.buyerOrderHistory("Hanxiang Liu").size() == 3);
+        assertTrue(accessOrders.buyerOrderHistory("Hanxiang Liu").size() == 2);
         System.out.println("\nEnd test testInsertOrder\n");
     }
 

@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.objects.Book;
@@ -25,6 +26,8 @@ public class SingleBookActivity extends AppCompatActivity {
     private AccessBooks accessBookList;
     private AccessAccounts accessAccounts;
     private AccessShoppingCart accessShoppingCart;
+    private RatingBar rb_normal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class SingleBookActivity extends AppCompatActivity {
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
         bookCategory=(TextView)findViewById(R.id.singleBookCategory);
+        rb_normal=(RatingBar)findViewById( R.id.ratingBar ) ;
 
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
@@ -60,6 +64,7 @@ public class SingleBookActivity extends AppCompatActivity {
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(aBook.getImageByBookID(bookID));
         bookCategory.setText("Category: "+newBook.getCategory());
+        rb_normal.setRating( (float)accessAccounts.getAccountByUserName( newBook.getOwner() ) .getRate());
 
     }
 

@@ -63,6 +63,7 @@ public class HistoryActivity extends AppCompatActivity {
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());
+            book.put("sellername", accounts.getAccountByUserName( newOrderList.get(i).getSellerName()).getUserName());
             books.add(book);
 
         }
@@ -81,7 +82,7 @@ public class HistoryActivity extends AppCompatActivity {
                                         long arg3) {
                     HashMap<String,String> map=(HashMap<String,String>)bookList.getItemAtPosition(arg2);
 
-                    sellerName=map.get("account");
+                    sellerName=map.get("sellername");
                     Intent intent = new Intent(HistoryActivity.this,RateActivity.class);
                     intent.putExtra("userName", userName);
                     intent.putExtra("userType", userType);

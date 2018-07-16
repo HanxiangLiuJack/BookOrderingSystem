@@ -21,6 +21,7 @@ public class RateActivity extends AppCompatActivity {
     private int userType;
     private TextView rateInfo;
     private RatingBar rb_normal;
+    private float rate=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +41,14 @@ public class RateActivity extends AppCompatActivity {
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Toast.makeText(RateActivity.this, "Rating:" + String.valueOf(rating),
                         Toast.LENGTH_LONG).show();
+                rate=rating;
             }
         });
     }
 
     public void buttonEditRate(View view) {
 
-        if (  1==1 )
+        if (  rate<0 )
             showDialog();
 
         else
@@ -56,8 +58,8 @@ public class RateActivity extends AppCompatActivity {
 
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Lack of wish information")
-                .setMessage("\nPlease enter valid wish book title and author.")
+        builder.setTitle("Alert")
+                .setMessage("\n Please select a star!")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int which) {}
@@ -68,14 +70,13 @@ public class RateActivity extends AppCompatActivity {
     private void showNewDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+"Sure to add  as a new wish?")
+                .setMessage("\n"+"Sure to rate the seller?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        //Wish newWish=new Wish(userName,author,title);
-                        //accessWishList.insertWishList( newWish );
-                        Intent intent = new Intent(RateActivity.this, WishActivity.class);
+                        accessAccounts.RateUser( sellerName,rate );
+                        Intent intent = new Intent(RateActivity.this, HistoryActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userName", userName);
                         startActivity(intent);
@@ -92,7 +93,7 @@ public class RateActivity extends AppCompatActivity {
                 .show();
     }
 
-    public void buttonNewWishCancel(View view) {
+    public void buttonRateCancel(View view) {
         finish();
     }
 

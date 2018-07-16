@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -62,7 +63,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
-
+            accessAccounts=new AccessAccounts();
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
             loadBookList(newBookList);
@@ -119,7 +120,6 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
         Book aBook=new Book();
-
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
@@ -127,13 +127,14 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             book.put("img",aBook.getImageByBookID(newBookList.get(i).getBookID()) );
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
+            book.put("rate","Seller rate: "+accessAccounts.getAccountByUserName( newBookList.get( i ).getOwner() ).getRate());
             books.add(book);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,
                 R.layout.activity_book_row,
-                new String[] {"img", "title", "price","id" },
-                new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID});
+                new String[] {"img", "title", "price","id","rate" },
+                new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID,R.id.cusBookListSellerRate});
         bookList.setAdapter(sItems);
 
         bookList.setOnItemClickListener(new OnItemClickListener(){

@@ -7,13 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
+import java.util.List;
 
+import static android.app.PendingIntent.getActivity;
 
 public class SingleBookActivity extends AppCompatActivity {
 
@@ -25,14 +32,14 @@ public class SingleBookActivity extends AppCompatActivity {
     private AccessBooks accessBookList;
     private AccessAccounts accessAccounts;
     private AccessShoppingCart accessShoppingCart;
+    private RatingBar rb_normal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         accessShoppingCart=new AccessShoppingCart(  );
 
         super.onCreate(savedInstanceState);
-
-        Book aBook=new Book(  );
 
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
@@ -51,15 +58,29 @@ public class SingleBookActivity extends AppCompatActivity {
         bookDecription=(TextView)findViewById(R.id.singleBookDes);
         bookImg=(ImageView)findViewById(R.id.singleBookImg);
         bookCategory=(TextView)findViewById(R.id.singleBookCategory);
+        rb_normal=(RatingBar)findViewById( R.id.ratingBar ) ;
 
         bookTitle.setText(newBook.getName());
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
         System.out.println(newBook.getOwner());
-        bookOwner.setText("Sold by "+accessAccounts.getAccountByUserName(newBook.getOwner()).getUserName());
+        String userName = "";
+        double rate = 0;
+        List<Account> a = accessAccounts.getAccounts();
+        for (int i = 0; i < a.size(); i++)
+        {
+            if(a.get(i).getUserName().equals(newBook.getOwner()))
+            {
+                userName = a.get(i).getUserName();
+                rate = a.get(i).getRate();
+                break;
+            }
+        }
+        bookOwner.setText("Sold by "+userName);
         bookDecription.setText(newBook.getDescription());
-        bookImg.setImageResource(aBook.getImageByBookID(bookID));
+        bookImg.setImageResource(newBook.getPicture());
         bookCategory.setText("Category: "+newBook.getCategory());
+        rb_normal.setRating( (float)rate);
 
     }
 
@@ -77,7 +98,15 @@ public class SingleBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Item aItem=new Item(userName,newBook.getBookID(),newBook.getName(),newBook.getPrice());
-                        accessShoppingCart.insertShoppingCart( aItem );
+
+                        if(!accessShoppingCart.insertShoppingCart( aItem )){
+                            showOverDialog();
+                        }
+                        else{
+                            Toast.makeText(SingleBookActivity.this, "Book added!",
+                                    Toast.LENGTH_LONG).show();
+
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -88,6 +117,22 @@ public class SingleBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
+    private void showOverDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("This book already existed in the shopping cart!")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+
+                .show();
+    }
+
+
 
     public void btnSingleToShoppingCart(View view) {
         Intent intent = new Intent(SingleBookActivity.this, ShoppingCartActivity.class);

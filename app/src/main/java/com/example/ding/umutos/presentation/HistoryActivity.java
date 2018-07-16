@@ -48,7 +48,12 @@ public class HistoryActivity extends AppCompatActivity {
 
 
         TextView historyBar=(TextView)findViewById(R.id.historyBar);
-        historyBar.setText("Order history");
+        if (userType==0){
+            historyBar.setText("Order history");
+
+        }else{
+            historyBar.setText( "Order History\n (Select an order to rate seller)" );
+        }
     }
 
     private void loadList(List<Order> newOrderList){
@@ -63,6 +68,7 @@ public class HistoryActivity extends AppCompatActivity {
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());
+            book.put("sellername", accounts.getAccountByUserName( newOrderList.get(i).getSellerName()).getUserName());
             books.add(book);
 
         }
@@ -81,7 +87,7 @@ public class HistoryActivity extends AppCompatActivity {
                                         long arg3) {
                     HashMap<String,String> map=(HashMap<String,String>)bookList.getItemAtPosition(arg2);
 
-                    sellerName=map.get("account");
+                    sellerName=map.get("sellername");
                     Intent intent = new Intent(HistoryActivity.this,RateActivity.class);
                     intent.putExtra("userName", userName);
                     intent.putExtra("userType", userType);
@@ -94,7 +100,11 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void buttonHistoryBack(View view) {
-        finish();
+        Intent intent = new Intent(HistoryActivity.this, BookListActivity.class);
+        intent.putExtra("userType", userType);
+        intent.putExtra("userName", userName);
+        startActivity(intent);
     }
+
 
 }

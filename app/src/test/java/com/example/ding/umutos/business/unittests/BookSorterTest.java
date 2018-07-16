@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.List;
 import com.example.ding.umutos.business.AccessBooks;
-import com.example.ding.umutos.business.BookSorter;
+import com.example.ding.umutos.presentation.BookSorter;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 

@@ -89,8 +89,9 @@ android:orientation="vertical">
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_style"
-                    android:onClick="buttonPriceHighToLow"
+                    android:onClick="buttonRateLowToHigh"
                     android:text="Rate ↑" />
+
                 <Button
                     android:id="@+id/rateHighToLow"
                     android:layout_width="40dp"
@@ -100,7 +101,7 @@ android:orientation="vertical">
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/button_style"
-                    android:onClick="buttonPriceHighToLow"
+                    android:onClick="buttonRateHighToLow"
                     android:text="Rate ↓" />
 
             </LinearLayout>

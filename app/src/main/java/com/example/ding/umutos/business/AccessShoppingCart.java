@@ -16,7 +16,6 @@ public class AccessShoppingCart {
 
     private ShoppingCartPersistence shoppingCartPersistence;
     private List<Item> list;
-    private List<Item> userShoppingCart;
     private List<Item> priceList;
     private BookPersistence bookPersistence;
     private OrderPersistence orderPersitence;
@@ -52,7 +51,7 @@ public class AccessShoppingCart {
 
 
     public List<Item> getUserShoppingCart(String userName) {
-        userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
+        List<Item> userShoppingCart = shoppingCartPersistence.getShoppingCartSequential(userName);
         return userShoppingCart;
     }
 

@@ -101,7 +101,7 @@ public class AccessShoppingCart {
                 newOrder.setPostCode(orderInfo.getFirstName());
                 newOrder.setLastName(orderInfo.getLastName());
                 newOrder.setFirstName(orderInfo.getFirstName());
-                orderPersitence.insertOrder(newOrder);
+                orderPersistence.insertOrder(newOrder);
             }
             shoppingCartPersistence.clearShoppingCart(userName);
         }

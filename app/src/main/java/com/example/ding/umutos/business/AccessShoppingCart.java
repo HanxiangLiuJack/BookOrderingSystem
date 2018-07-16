@@ -69,12 +69,11 @@ public class AccessShoppingCart {
     }
 
 
-
-
-    public List<Item> clearShoppingCart(String userName){
+    public List<Item> clearShoppingCart(String userName, String[] addressInfo){
         List<Item> item = this.getUserShoppingCart(userName);
         List<Item> booksNotFound = null;
         Order newOrder;
+        bookPersistence = Service.getBookPersistence();
         for(int i = 0; i < item.size(); i++)
         {
             if(bookPersistence.searchBook(item.get(i).getBookID()) == null)
@@ -89,7 +88,15 @@ public class AccessShoppingCart {
                 String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
                 bookPersistence.deleteBook(item.get(i).getBookID());
                 newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
+                OrderBuilder orderBuilder=new OrderBuilder(newOrder);
+                orderBuilder.setPhoneNumber(addressInfo[2]);
+                orderBuilder.setAddress(addressInfo[4]);
+                orderBuilder.setPostCode(addressInfo[3]);
+                orderBuilder.setLastName(addressInfo[1]);
+                orderBuilder.setFirstName(addressInfo[0]);
                 orderPersitence.insertOrder(newOrder);
+
+
             }
             shoppingCartPersistence.clearShoppingCart(userName);
         }

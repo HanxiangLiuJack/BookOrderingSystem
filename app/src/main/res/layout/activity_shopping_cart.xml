@@ -113,11 +113,11 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:textColor="#ffffff"
                 android:layout_weight="1"
                 android:background="@drawable/buy_button_style"
+                android:onClick="btnShoppingCartBuy"
                 android:text="Buy"
-                />
+                android:textColor="#ffffff" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -136,10 +136,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Intent intent = new Intent(ShoppingCartActivity.this,AddressActivity.class);
-                        intent.putExtra("bookID", bookID);
                         intent.putExtra("userName", userName);
-                        ShoppingCartActivity.this.startActivity(intent);
-                    }
+                        ShoppingCartActivity.this.startActivity(intent);                    }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -149,5 +147,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
+
 
 }

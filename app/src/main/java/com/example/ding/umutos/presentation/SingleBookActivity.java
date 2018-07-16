@@ -12,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.example.ding.umutos.R;
+import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
-
+import java.util.List;
 
 public class SingleBookActivity extends AppCompatActivity {
 
@@ -60,11 +61,23 @@ public class SingleBookActivity extends AppCompatActivity {
         bookAuthor.setText("by "+newBook.getAuthor());
         bookPrice.setText("$"+newBook.getPrice());
         System.out.println(newBook.getOwner());
-        bookOwner.setText("Sold by "+accessAccounts.getAccountByUserName(newBook.getOwner()).getUserName());
+        String userName = "";
+        double rate = 0;
+        List<Account> a = accessAccounts.getAccounts();
+        for (int i = 0; i < a.size(); i++)
+        {
+            if(a.get(i).getUserName().equals(newBook.getOwner()))
+            {
+                userName = a.get(i).getUserName();
+                rate = a.get(i).getRate();
+                break;
+            }
+        }
+        bookOwner.setText("Sold by "+userName);
         bookDecription.setText(newBook.getDescription());
         bookImg.setImageResource(aBook.getImageByBookID(bookID));
         bookCategory.setText("Category: "+newBook.getCategory());
-        rb_normal.setRating( (float)accessAccounts.getAccountByUserName( newBook.getOwner() ) .getRate());
+        rb_normal.setRating( (float)rate);
 
     }
 

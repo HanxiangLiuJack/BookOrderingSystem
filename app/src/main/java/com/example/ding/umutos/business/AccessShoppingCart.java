@@ -73,7 +73,7 @@ public class AccessShoppingCart {
             totalPrice+=priceList.get(i).getPrice();
 
         }
-        return totalPrice;
+        return (double)Math.round(totalPrice*100d)/100d;
     }
 
 

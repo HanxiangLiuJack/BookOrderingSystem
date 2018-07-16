@@ -94,7 +94,7 @@ public class OrderBookAndRateSellerTest {
 
     private void testPlaceAnOrder()
     {
-        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(1).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(0).perform(click());
 
         onView(withId(R.id.singleBookAddToCart)).perform(click());
 

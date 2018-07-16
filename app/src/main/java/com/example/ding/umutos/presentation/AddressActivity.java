@@ -10,6 +10,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.business.AccessShoppingCart;
+import com.example.ding.umutos.business.OrderValidator;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
 import com.example.ding.umutos.objects.Order;
@@ -52,11 +53,12 @@ public class AddressActivity extends AppCompatActivity {
         postCode=editPostCode.getText().toString();
         addressInfo=editAddressInfo.getText().toString();
         additionInfo=editAdditionInfo.getText().toString();
-
-        if (firstName.length()<1 || lastName.length()<1 || phoneNum.length()<1 || postCode.length()<1 || addressInfo.length()<1)
-            showDialog();
-        else
+        OrderValidator orderValidator = new OrderValidator();
+        if (orderValidator.validateAddress(addressInfo)&&orderValidator.validateFirstName(firstName)&&
+                orderValidator.validateLastName(lastName)&&orderValidator.validatePhoneNumber(phoneNum)&&orderValidator.validatePostCode(postCode))
             showDialog(firstName);
+        else
+            showDialog();
     }
 
     private void showDialog(){

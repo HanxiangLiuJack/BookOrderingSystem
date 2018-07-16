@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessWishlists;
+import com.example.ding.umutos.business.WishValidator;
 import com.example.ding.umutos.objects.Wish;
 
 public class NewWishActivity extends AppCompatActivity {
@@ -40,9 +41,9 @@ public class NewWishActivity extends AppCompatActivity {
         title=newWishName.getText().toString();
         author=newWishAuthor.getText().toString();
 
+        WishValidator wishValidator = new WishValidator();
 
-
-        if (title.length()<1 || author.length()<1  )
+        if (!wishValidator.validateWish(title,author))
             showDialog();
 
         else

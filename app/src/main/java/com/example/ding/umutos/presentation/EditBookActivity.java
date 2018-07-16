@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Spinner;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
+import com.example.ding.umutos.business.BookValidator;
 import com.example.ding.umutos.objects.Book;
 
 public class EditBookActivity extends AppCompatActivity {
@@ -75,9 +76,10 @@ public class EditBookActivity extends AppCompatActivity {
         author=editBookAuthor.getText().toString();
         price=editBookPrice.getText().toString();
         detail=editBookDetail.getText().toString();
+        BookValidator bookValidator = new BookValidator();
 
-
-        if (title.length()<1 || author.length()<1 || price.length()<1 )
+        if (!(bookValidator.validatePrice(Double.parseDouble(price))&&bookValidator.validateAuthorName(author)&&
+            bookValidator.validateBookName(title)))
             showDialog();
         else {
             if (bookID==-1)

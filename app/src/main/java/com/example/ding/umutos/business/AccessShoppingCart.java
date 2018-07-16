@@ -87,6 +87,7 @@ public class AccessShoppingCart {
         if(booksNotFound == null){
             for(int i=0;i<item.size();i++){
                 String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
+                bookPersistence.deleteBook(item.get(i).getBookID());
                 newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
                 orderPersitence.insertOrder(newOrder);
             }

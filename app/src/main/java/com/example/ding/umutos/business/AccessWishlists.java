@@ -37,8 +37,8 @@ public class AccessWishlists {
 
     public boolean insertWishList(Wish wish) {
         if(wish!=null){
-                wishListPersistence.insertWishList(wish);
-                return true;
+            wishListPersistence.insertWishList(wish);
+            return true;
         }
         return false;
     }

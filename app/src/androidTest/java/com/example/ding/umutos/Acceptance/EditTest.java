@@ -92,7 +92,7 @@ public class EditTest {
         onView(withId(R.id.searchByKeyword)).perform(typeText("abcd"));
         closeSoftKeyboard();
 
-        
+
 
     }
 

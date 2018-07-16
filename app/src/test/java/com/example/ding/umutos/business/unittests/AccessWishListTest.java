@@ -107,7 +107,7 @@ public class AccessWishListTest {
         wishListPersistence = new WishListPersistenceStub();
         accessWishlists = new AccessWishlists(wishListPersistence);
 
-        assertTrue(accessWishlists.insertWishList(desire));
+        accessWishlists.insertWishList(desire);
         assertTrue(accessWishlists.getUserWishLists("Tianhua Xu").size() == 8);
         System.out.println("\nEnd testing testInsertWishList.\n");
     }

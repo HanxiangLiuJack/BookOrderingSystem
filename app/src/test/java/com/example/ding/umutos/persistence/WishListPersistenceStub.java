@@ -53,8 +53,9 @@ public class WishListPersistenceStub implements WishListPersistence{
 
     @Override
     public Wish insertWishList(Wish wish){
-        if(wish.getUserName().equals("Tianhua Xu"))
+        if(wish.getUserName().equals("Tianhua Xu")) {
             wishList.add(wish);
+        }
         return wish;
     }
 

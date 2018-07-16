@@ -39,7 +39,6 @@ public class AccessBooksIT {
             assertTrue("Family and consumer science".equals(book.getCategory()));
             assertTrue(1==book.getBookID());
             assertTrue("The Art of Agile Development contains practical guidance for anyone considering or applying agile development for building valuable software. Plenty of books describe what agile development is or why it helps software projects succeed, but very few combine information for developers, managers, testers, and customers into a single package that they can apply directly.".equals(book.getDescription()));
-            assertTrue(1==(book.getPicture()));
             System.out.println("Finished test AccessBooks");
         }
 

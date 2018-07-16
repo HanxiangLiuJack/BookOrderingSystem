@@ -1,6 +1,5 @@
 package com.example.ding.umutos.Acceptance;
 
-
 import com.example.ding.umutos.presentation.HomeActivity;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.presentation.LoginActivity;
@@ -24,41 +23,40 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
 
+ @LargeTest
+ @RunWith(AndroidJUnit4.class)
 
-@LargeTest
-@RunWith(AndroidJUnit4.class)
-public class PriceUpDownTest {
-    @Rule
-    public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
+public class LoginTest {
+     @Rule
+     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
+
+     @Test
+     public void LoginTest() {
+         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
+         closeSoftKeyboard();
+
+         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
+         closeSoftKeyboard();
+
+         onView(withId(R.id.buttonLogin)).perform(click());
+
+         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
+
+         onView(withId(R.id.btnCusBackToMain)).perform(click());
+
+         onView(withId(R.id.buttonLoginAsSeller)).perform(click());
+
+         onView(withId(R.id.btnSellBackToMain)).perform(click());
+
+         onView(withId(R.id.buttonLoginOut)).perform(click());
+
+     }
+
+ }
 
 
-    @Test
-    public void PirceUpDownTest()
-    {
-        onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
-        closeSoftKeyboard();
-
-        onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
-        closeSoftKeyboard();
-
-
-        onView(withId(R.id.buttonLogin)).perform(click());
-
-        onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
-
-        closeSoftKeyboard();
-
-        onView(withId(R.id.priceLowToHigh)).perform(click());
-
-        onView(withId(R.id.priceHighToLow)).perform(click());
-
-
-    }
-
-}

@@ -1,12 +1,6 @@
 ## Group iOS
 ## UofM Used Textbook Ordering System (UMUTOS)
-### Group members (in alphabet order):
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hanxiang Liu ()
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tianhua Xu (7797047)
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Xiao Peng (7813579)
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yu Gu (7714892)
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yunlong Liu (7795537)
-### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zitao Zheng (7763424)
+## Retrospective
 ---
 ### After the retrospective activity in Iteration 2, we found the book id and account id of our project (UMUTOS) that has not been as successful as we would have liked. At Iteration 1, we use a static integer variable in both book and account class, but when we transform to HSQLDB, it becomes a problem. When this problem appeared, we have no idea how to solve, it becomes a bottleneck. After search and trying, we finally implement max id in database, the variable is incremented when a new book or new account been created. Although it works, it is not a wise way to solve this problem. 
 ### Through the deeper level study of HSQLDB and get helped by instructor, we find a new way to solve this problem, and compared to the previously one, it easier to use and more efficiency. In this Iteration, we are going to use ‘IDENTITY’ in HSQLDB to get these IDs. We will add the key word ‘IDENTITY’ in front of the PRIMARY KEY of BOOK and ACCOUNT table, and the id of book and account will be created each time when we add a new book or account and increment automatically started from 0. After fix, if the id of books and accounts works well (we can use book id and account id), every time user register a new book or new user sign up, the book id and account id will increment automatically, then we can decide this change is succeed.

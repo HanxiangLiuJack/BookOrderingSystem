@@ -34,10 +34,12 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Item item) {
+    public boolean insertShoppingCart(Item item, String userName) {
         if(item!=null){
-            shoppingCartPersistence.insertShoppingCart(item);
-            return true;
+            if(searchShoppingCart(item.getBookID()) == null ||(searchShoppingCart(item.getBookID()) != null&& ! searchShoppingCart(item.getBookID()).getUserName().equals( userName ))) {
+                shoppingCartPersistence.insertShoppingCart(item);
+                return true;
+            }
         }
         return false;
     }

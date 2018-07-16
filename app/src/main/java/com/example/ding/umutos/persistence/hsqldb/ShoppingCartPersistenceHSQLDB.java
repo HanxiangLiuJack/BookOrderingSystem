@@ -39,7 +39,7 @@ public class ShoppingCartPersistenceHSQLDB implements ShoppingCartPersistence {
 
     @Override
     public void insertShoppingCart(Item item){
-        shoppingCartSequential();
+
         try (final Connection c = connection()) {
             PreparedStatement st = c.prepareStatement("INSERT INTO shoppingCart VALUES(?, ?, ?, ?)");
             st.setString(1,item.getUserName());

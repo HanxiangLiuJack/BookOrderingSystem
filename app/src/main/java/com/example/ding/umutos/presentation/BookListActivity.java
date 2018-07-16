@@ -19,7 +19,7 @@ import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.objects.Book;
-import com.example.ding.umutos.business.BookSorter;
+import com.example.ding.umutos.objects.Account;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +62,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         else {
             setContentView(R.layout.activity_customer_booklist);
             bookList=(ListView)findViewById(R.id.cusListView);
-
+            accessAccounts=new AccessAccounts();
             accessBookList=new AccessBooks();
             newBookList=accessBookList.getBooks();
             loadBookList(newBookList);
@@ -118,22 +118,28 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
 
     public void loadBookList( List<Book> newBookList ){
         int size=newBookList.size();
-        Book aBook=new Book();
-
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
+        List<Account> accounts = accessAccounts.getAccounts();
+        double rate = 0;
         for (int i = 0; i <size; i++) {
             HashMap<String, Object> book = new HashMap<String, Object>();
             book.put("id",""+newBookList.get(i).getBookID());
-            book.put("img",aBook.getImageByBookID(newBookList.get(i).getBookID()) );
+            book.put("img",newBookList.get(i).getPicture());
             book.put("title", newBookList.get(i).getName());
             book.put("price","$"+newBookList.get(i).getPrice());
+            for(int j = 0; j < accounts.size(); j++)
+            {
+                if(accounts.get(j).getUserName().equals(newBookList.get( i ).getOwner()))
+                    rate = accounts.get(j).getRate();
+            }
+            book.put("rate","Seller rate: "+rate);
             books.add(book);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,
                 R.layout.activity_book_row,
-                new String[] {"img", "title", "price","id" },
-                new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID});
+                new String[] {"img", "title", "price","id","rate" },
+                new int[] { R.id.cusBookListImg, R.id.cusBookListTitle, R.id.cusBookListPrice , R.id.cusBookListID,R.id.cusBookListSellerRate});
         bookList.setAdapter(sItems);
 
         bookList.setOnItemClickListener(new OnItemClickListener(){
@@ -169,45 +175,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
             openEditBookActivity(bookID);
     }
 
-    public void buttonDeletePostedBook(View view) {
-        if (bookID<1)
-            showDeleteDialog();
-        else
-            showDeleteDialog(bookTitle);
-    }
 
-    private void showDeleteDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Alert:")
-                .setMessage("\n"+"Please select a book to delete.")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,int which) {}
-                })
-                .show();
-    }
-
-    private void showDeleteDialog(String msg){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirmation:")
-                .setMessage("\n"+"Sure to delete "+msg+"?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        accessBookList.deleteBook(bookID);
-                        Intent intent = new Intent(BookListActivity.this, BookListActivity.class);
-                        intent.putExtra("userName", userName);
-                        intent.putExtra("userType", userType);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,int which) {}
-                })
-                .show();
-    }
 
     private void showEditDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -223,6 +191,8 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     private void openEditBookActivity(){
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
         intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+
         BookListActivity.this.startActivity(intent);
     }
 
@@ -230,6 +200,8 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         Intent intent = new Intent(BookListActivity.this,EditBookActivity.class);
         intent.putExtra("bookID", bookID);
         intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+
         BookListActivity.this.startActivity(intent);
     }
 
@@ -251,6 +223,18 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
     public void buttonPriceLowToHigh(View view){
         BookSorter sort=new BookSorter();
         List<Book> aList=sort.LowPrice(newBookList);
+        loadBookList(aList);
+    }
+
+    public void buttonRateHighToLow(View view){
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.HighRate(newBookList);
+        loadBookList(aList);
+    }
+
+    public void buttonRateLowToHigh(View view){
+        BookSorter sort=new BookSorter();
+        List<Book> aList=sort.LowRate(newBookList);
         loadBookList(aList);
     }
 

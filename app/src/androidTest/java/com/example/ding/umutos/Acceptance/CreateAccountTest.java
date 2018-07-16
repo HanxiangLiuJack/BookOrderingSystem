@@ -51,7 +51,7 @@ public class CreateAccountTest
         closeSoftKeyboard();
 
         onView(withId(R.id.registerSubmit)).perform(click());
-        
+
         onView(withId(R.id.buttonLoginOut)).perform(click());
     }
 

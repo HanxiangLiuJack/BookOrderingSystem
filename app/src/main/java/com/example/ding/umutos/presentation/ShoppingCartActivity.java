@@ -80,7 +80,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void btnShopToCus(View view) {
-        finish();
+        Intent intent = new Intent(ShoppingCartActivity.this, BookListActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
     }
 
     public void btnDeleteItem(View view) {
@@ -104,7 +107,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private void showDeleteDialog(String msg){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirmation:")
-                .setMessage("\n"+"Sure to delete wish "+msg+"?")
+                .setMessage("\n"+"Sure to delete?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,

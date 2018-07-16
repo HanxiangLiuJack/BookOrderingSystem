@@ -95,7 +95,6 @@ public class ShoppingCartTest {
 
         onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
-
     }
 
 

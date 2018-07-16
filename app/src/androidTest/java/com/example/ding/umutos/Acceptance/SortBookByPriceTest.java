@@ -1,5 +1,4 @@
-//This test is about testing sort book by price as a user.
-
+//User Story: As a user, i want to be able to sort Books by price ( Tested )
 package com.example.ding.umutos.Acceptance;
 
 
@@ -36,7 +35,7 @@ import static org.hamcrest.core.AllOf.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class PriceUpDownTest {
+public class SortBookByPriceTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 

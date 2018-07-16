@@ -1,4 +1,4 @@
-//This test is for browsing category as a user.
+//User Story: As a user, i want to be able to search book by category ( Tested )
 
 package com.example.ding.umutos.Acceptance;
 
@@ -45,7 +45,7 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class CategoryTest {
+public class SearchBookByCategoryTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);

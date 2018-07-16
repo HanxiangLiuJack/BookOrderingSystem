@@ -1,4 +1,6 @@
-//This test is for testing add new book as a seller.
+
+
+//User Story: As a seller, i want to edit selling book.( Tested )
 
 package com.example.ding.umutos.Acceptance;
 
@@ -27,6 +29,7 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
@@ -45,7 +48,7 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class AddTest {
+public class EditBookTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -61,21 +64,31 @@ public class AddTest {
     }
 
     @Test
-    public void AddTest() {
+    public void editBookTest()
+    {
+
+        EditTest();
+    }
+
+    private void EditTest() {
+
 
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsSeller)).perform(click());
 
-        onView(withId(R.id.addNewBook)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.sellerBookList)).atPosition(0).perform(click());
 
-        onView(withId(R.id.editBookTitle)).perform(typeText("abcd"));
+        onView(withId(R.id.editPostedBook)).perform(click());
+
+
+        onView(withId(R.id.editBookTitle)).perform(replaceText("abcd"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.editBookAuthor)).perform(typeText("cccc"));
+        onView(withId(R.id.editBookAuthor)).perform(replaceText("cccc"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.editBookPrice)).perform(typeText("1.222"));
+        onView(withId(R.id.editBookPrice)).perform(replaceText("1.222"));
         closeSoftKeyboard();
 
 
@@ -94,6 +107,7 @@ public class AddTest {
 
         onView(withId(R.id.searchByKeyword)).perform(typeText("abcd"));
         closeSoftKeyboard();
+
 
 
     }

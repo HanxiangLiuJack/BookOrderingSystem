@@ -1,3 +1,5 @@
+//User Story: As a user, i want to be able to  view order history ( Tested )
+//User Story: As a user, i want to be able to view wish list ( Tested )
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.presentation.HomeActivity;
@@ -28,7 +30,7 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
- 
+
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)

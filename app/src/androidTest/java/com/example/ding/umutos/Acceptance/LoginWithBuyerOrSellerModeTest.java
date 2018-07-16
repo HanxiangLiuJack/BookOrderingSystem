@@ -1,5 +1,7 @@
-//This test is for testing log in as buyer or seller mode as a user.
-
+//User story: as a user, i want to be able to buy books (Tested)
+//User story: as a user, i want to be able to sell books(Tested)
+//User story: as a user, i want to be able to  view all selling books (Tested)
+//User story: as a user, i want to be able to  view all availabe books for buying (Tested)
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.presentation.HomeActivity;
@@ -11,6 +13,7 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,30 +36,44 @@ import static org.hamcrest.core.AllOf.allOf;
  @LargeTest
  @RunWith(AndroidJUnit4.class)
 
-public class LoginTest {
+public class LoginWithBuyerOrSellerModeTest {
      @Rule
      public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-     @Test
-     public void LoginTest() {
+     @Before
+     public void setup(){
          onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
          closeSoftKeyboard();
 
          onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
          closeSoftKeyboard();
+     }
+
+     @Test
+     public void BuyOrSellTest() {
 
          onView(withId(R.id.buttonLogin)).perform(click());
 
-         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
+         LoginBuyerAndViewAllBuyingBooks();
 
          onView(withId(R.id.btnCusBackToMain)).perform(click());
 
-         onView(withId(R.id.buttonLoginAsSeller)).perform(click());
+         loginAsSellerAndViewSellingBooks();
 
          onView(withId(R.id.btnSellBackToMain)).perform(click());
 
          onView(withId(R.id.buttonLoginOut)).perform(click());
 
+     }
+
+     private void LoginBuyerAndViewAllBuyingBooks()
+     {
+         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
+     }
+
+     private void loginAsSellerAndViewSellingBooks()
+     {
+         onView(withId(R.id.buttonLoginAsSeller)).perform(click());
      }
 
  }

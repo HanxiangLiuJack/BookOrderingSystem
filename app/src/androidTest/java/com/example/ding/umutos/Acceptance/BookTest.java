@@ -33,7 +33,7 @@ import static org.hamcrest.core.AllOf.allOf;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class CreateAccountTest
+public class BookTest
 {
     private String userName = "Zapp";
     private String userPsw = "Zapp123";

@@ -96,7 +96,6 @@ public class AccessShoppingCart {
                 orderBuilder.setFirstName(addressInfo[0]);
                 orderPersitence.insertOrder(newOrder);
 
-
             }
             shoppingCartPersistence.clearShoppingCart(userName);
         }

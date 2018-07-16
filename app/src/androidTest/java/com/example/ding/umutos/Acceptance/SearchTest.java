@@ -1,3 +1,5 @@
+//This test is about testing search book as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 
@@ -10,6 +12,7 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,15 +39,19 @@ public class SearchTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-
-    @Test
-    public void createAccountAndLogin()
+    @Before
+    public void setup()
     {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
+    }
+
+    @Test
+    public void createAccountAndLogin()
+    {
 
 
         onView(withId(R.id.buttonLogin)).perform(click());

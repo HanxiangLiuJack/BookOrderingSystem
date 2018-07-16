@@ -1,3 +1,5 @@
+//This test is about testing delete book as a seller.
+
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;
@@ -48,16 +50,19 @@ public class DeleteBookTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Test
-    public void testDeleteBook()
+    @Before
+    public void setup()
     {
-        closeSoftKeyboard();
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
+    }
 
+    @Test
+    public void testDeleteBook()
+    {
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsSeller)).perform(click());

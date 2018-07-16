@@ -1,3 +1,5 @@
+//This test is for browsing category as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 
@@ -48,13 +50,19 @@ public class CategoryTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Test
-    public void CategoryTest() {
+    @Before
+    public void setup()
+    {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
+    }
+
+    @Test
+    public void CategoryTest() {
+
 
         onView(withId(R.id.buttonLogin)).perform(click());
 

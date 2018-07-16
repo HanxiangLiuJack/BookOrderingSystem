@@ -1,3 +1,5 @@
+//This test is about testing add and delete shopping cart as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;
@@ -47,21 +49,33 @@ public class ShoppingCartTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Test
-    public void ShoppingCartTest() {
+    @Before
+    public void setup()
+    {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
+    }
 
+    @Test
+    public void ShoppingCartTest() {
+
+       addShoppingCart();
+       deleteShoppingCart();
+
+    }
+
+    private void addShoppingCart()
+    {
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
 
         closeSoftKeyboard();
 
-        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(1).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(0).perform(click());
 
 
         onView(withId(R.id.singleBookAddToCart)).perform(click());
@@ -70,7 +84,17 @@ public class ShoppingCartTest {
         onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.viewShoppingCart)).perform(click());
+    }
 
+
+    private void deleteShoppingCart()
+    {
+        onData(anything()).inAdapterView(withId(R.id.shoppingList)).atPosition(0).perform(click());
+
+        onView(withId(R.id.shoppingListRemove)).perform(click());
+
+
+        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
 
     }

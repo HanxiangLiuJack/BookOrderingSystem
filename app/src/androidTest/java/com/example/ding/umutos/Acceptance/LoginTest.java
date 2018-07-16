@@ -1,3 +1,5 @@
+//This test is for testing log in as buyer or seller mode as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.presentation.HomeActivity;

@@ -92,7 +92,8 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void clearShoppingCart(){
-        List<Item> newList=accessShoppingCart.clearShoppingCart( userName );
+        String[] a = new String[5];
+        List<Item> newList=accessShoppingCart.clearShoppingCart( userName ,a);
         if (newList==null){
             Intent intent = new Intent(AddressActivity.this,BookListActivity.class);
             intent.putExtra("bookID", bookID);

@@ -111,9 +111,9 @@ public class AccessShoppingCartTest {
     {
         System.out.println("\nStart testing testClearShoppingCart.\n");
         String[] addressInfo = {"fn","ln","pc","pn","add"};
-        doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu",addressInfo);
+        doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
         accessShoppingCart.clearShoppingCart("Tianhua Xu",addressInfo);
-        verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu",addressInfo);
+        verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
         System.out.println("\nStart testing testClearShoppingCart.\n");
 
     }

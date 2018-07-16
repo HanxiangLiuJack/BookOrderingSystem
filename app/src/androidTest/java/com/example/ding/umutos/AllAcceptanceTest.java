@@ -1,16 +1,6 @@
 package com.example.ding.umutos;
 
-import com.example.ding.umutos.Acceptance.AddAndDeleteWishTest;
-import com.example.ding.umutos.Acceptance.AddBookTest;
-import com.example.ding.umutos.Acceptance.CreateAccountTest;
-import com.example.ding.umutos.Acceptance.DeleteBookTest;
-import com.example.ding.umutos.Acceptance.EditBookTest;
-import com.example.ding.umutos.Acceptance.LoginWithBuyerOrSellerModeTest;
-import com.example.ding.umutos.Acceptance.OrderBookAndRateSellerTest;
-import com.example.ding.umutos.Acceptance.SearchBookByCategoryTest;
-import com.example.ding.umutos.Acceptance.SearchBookByKeyTest;
-import com.example.ding.umutos.Acceptance.SortBookByPriceTest;
-import com.example.ding.umutos.Acceptance.ViewOrderAndWishListTest;
+import com.example.ding.umutos.Acceptance.*;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -18,12 +8,10 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        AddAndDeleteWishTest.class,
-        ViewOrderAndWishListTest.class,
-
-        OrderBookAndRateSellerTest.class,
 
 
+        OrderRateWishTest.class,
+        ShoppingCartTest.class,
         AddBookTest.class,
         CreateAccountTest.class,
         DeleteBookTest.class,
@@ -33,7 +21,7 @@ import org.junit.runners.Suite;
         SearchBookByKeyTest.class,
         SortBookByPriceTest.class,
 
-}) 
+})
 
 public class AllAcceptanceTest {
 

@@ -3,7 +3,10 @@
 //User story: as a user, i want to be able to confirm my order(Tested)
 //User story: as a user, i want to be able to rate the seller(Tested)
 //User story: as a user, i want to be able to view order history(Tested)
-
+//User Story: As a user, i want to be able to  view order history ( Tested )
+//User Story: As a user, i want to be able to view wish list ( Tested )
+//User story: as a user, i want to be able to add book from wish List(Tested)
+//User story: as a user, i want to be able to delete Book from wish list(Tested)
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;
@@ -60,7 +63,7 @@ import android.widget.RatingBar;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class OrderBookAndRateSellerTest {
+public class OrderRateWishTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -188,6 +191,9 @@ public class OrderBookAndRateSellerTest {
 
         onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
+
+
+
 
     private static ViewAction setRating(final float rating) {
         if (rating % 0.5 != 0) {

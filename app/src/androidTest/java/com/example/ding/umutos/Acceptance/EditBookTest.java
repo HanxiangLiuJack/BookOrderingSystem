@@ -82,13 +82,13 @@ public class EditBookTest {
         onView(withId(R.id.editPostedBook)).perform(click());
 
 
-        onView(withId(R.id.editBookTitle)).perform(replaceText("abcd"));
+        onView(withId(R.id.editBookTitle)).perform(replaceText("Hahahaa"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.editBookAuthor)).perform(replaceText("cccc"));
+        onView(withId(R.id.editBookAuthor)).perform(replaceText("Wowowow"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.editBookPrice)).perform(replaceText("1.222"));
+        onView(withId(R.id.editBookPrice)).perform(replaceText("1.99"));
         closeSoftKeyboard();
 
 
@@ -105,7 +105,7 @@ public class EditBookTest {
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
 
-        onView(withId(R.id.searchByKeyword)).perform(typeText("abcd"));
+        onView(withId(R.id.searchByKeyword)).perform(typeText("Hahahaa"));
         closeSoftKeyboard();
 
 

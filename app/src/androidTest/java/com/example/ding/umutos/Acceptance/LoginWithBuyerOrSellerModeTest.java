@@ -62,7 +62,7 @@ public class LoginWithBuyerOrSellerModeTest {
 
          onView(withId(R.id.btnSellBackToMain)).perform(click());
 
-         onView(withId(R.id.buttonLoginOut)).perform(click());
+         //onView(withId(R.id.buttonLoginOut)).perform(click());
 
      }
 

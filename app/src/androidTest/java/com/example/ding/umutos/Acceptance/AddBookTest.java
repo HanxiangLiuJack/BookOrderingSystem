@@ -75,7 +75,7 @@ public class AddBookTest {
         onView(withId(R.id.editBookAuthor)).perform(typeText("cccc"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.editBookPrice)).perform(typeText("1.222"));
+        onView(withId(R.id.editBookPrice)).perform(typeText("1.22"));
         closeSoftKeyboard();
 
 

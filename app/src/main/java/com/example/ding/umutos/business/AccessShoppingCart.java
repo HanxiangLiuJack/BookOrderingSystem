@@ -68,8 +68,6 @@ public class AccessShoppingCart {
     }
 
 
-
-
     public List<Item> clearShoppingCart(String userName){
 
         List<Item> item = this.getUserShoppingCart(userName);

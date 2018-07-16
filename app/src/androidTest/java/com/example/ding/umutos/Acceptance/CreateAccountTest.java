@@ -1,6 +1,6 @@
+//This test is for testing register a new Account as a user.
+
 package com.example.ding.umutos.Acceptance;
-
-
 
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Account;

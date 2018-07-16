@@ -1,3 +1,5 @@
+//This test is for browsing category as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 

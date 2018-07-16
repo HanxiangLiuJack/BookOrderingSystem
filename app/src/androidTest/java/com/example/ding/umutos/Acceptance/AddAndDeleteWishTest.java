@@ -1,3 +1,5 @@
+// This test is for testing add and delete Wish as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;

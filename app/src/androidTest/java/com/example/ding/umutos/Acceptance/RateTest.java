@@ -1,3 +1,5 @@
+//This test is about testing rate for seller as a user.
+
 package com.example.ding.umutos.Acceptance;
 
 

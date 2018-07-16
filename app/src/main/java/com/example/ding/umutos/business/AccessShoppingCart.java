@@ -18,12 +18,12 @@ public class AccessShoppingCart {
     private List<Item> list;
     private List<Item> priceList;
     private BookPersistence bookPersistence;
-    private OrderPersistence orderPersitence;
+    private OrderPersistence orderPersistence;
 
     public AccessShoppingCart() {
         shoppingCartPersistence = Service.getShoppingCartPersistence();
         bookPersistence = Service.getBookPersistence();
-        orderPersitence = Service.getOrderPersistence();
+        orderPersistence = Service.getOrderPersistence();
         list = null;
     }
 
@@ -96,7 +96,7 @@ public class AccessShoppingCart {
                 orderBuilder.setPostCode(addressInfo[3]);
                 orderBuilder.setLastName(addressInfo[1]);
                 orderBuilder.setFirstName(addressInfo[0]);
-                orderPersitence.insertOrder(newOrder);
+                orderPersistence.insertOrder(newOrder);
 
 
             }

@@ -1,3 +1,2 @@
-
-[Vision Statement](../VISION.md)
-[Architecture](../ARCHITECTURE.md)
+#### [Vision Statement](../VISION.md)
+#### [Architecture](../ARCHITECTURE.md)

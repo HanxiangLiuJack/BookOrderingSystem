@@ -38,7 +38,6 @@ public class HistoryActivity extends AppCompatActivity {
         userType = getIntent().getIntExtra("userType",-1);
 
         accessOrderList=new AccessOrders();
-        Log.e( "USERTYPE",""+userType );
         if(userType == 1)
             newOrderList = accessOrderList.buyerOrderHistory(userName);
         else
@@ -68,7 +67,7 @@ public class HistoryActivity extends AppCompatActivity {
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());
-            book.put("sellername", accounts.getAccountByUserName( newOrderList.get(i).getSellerName()).getUserName());
+            book.put("seller", accounts.getAccountByUserName( newOrderList.get(i).getSellerName()).getUserName());
             books.add(book);
 
         }
@@ -87,7 +86,7 @@ public class HistoryActivity extends AppCompatActivity {
                                         long arg3) {
                     HashMap<String,String> map=(HashMap<String,String>)bookList.getItemAtPosition(arg2);
 
-                    sellerName=map.get("sellername");
+                    sellerName=map.get("seller");
                     Intent intent = new Intent(HistoryActivity.this,RateActivity.class);
                     intent.putExtra("userName", userName);
                     intent.putExtra("userType", userType);

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.Toast;
@@ -39,8 +40,9 @@ public class RateActivity extends AppCompatActivity {
         rb_normal.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(RateActivity.this, "Rating:" + String.valueOf(rating),
-                        Toast.LENGTH_LONG).show();
+                Toast toast = Toast.makeText(RateActivity.this, "Rating:" + String.valueOf(rating), Toast.LENGTH_SHORT);
+                toast.setGravity( Gravity.CENTER, 0, 0);
+                toast.show();
                 rate=rating;
             }
         });

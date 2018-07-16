@@ -38,6 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
         userType = getIntent().getIntExtra("userType",-1);
 
         accessOrderList=new AccessOrders();
+        Log.e( "USERTYPE",""+userType );
         if(userType == 1)
             newOrderList = accessOrderList.buyerOrderHistory(userName);
         else
@@ -63,6 +64,7 @@ public class HistoryActivity extends AppCompatActivity {
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());
             books.add(book);
+
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
                 books,

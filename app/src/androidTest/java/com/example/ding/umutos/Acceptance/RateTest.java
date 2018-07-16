@@ -48,7 +48,6 @@ public class RateTest {
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
 
-
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());

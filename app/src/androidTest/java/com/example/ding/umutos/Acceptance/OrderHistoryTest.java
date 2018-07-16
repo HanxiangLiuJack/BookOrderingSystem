@@ -1,6 +1,5 @@
 package com.example.ding.umutos.Acceptance;
 
-
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.presentation.HomeActivity;
@@ -43,13 +42,13 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class AddTest {
+public class OrderHistoryTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void AddTest() {
+    public void OrderHistoryTest() {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
@@ -58,39 +57,50 @@ public class AddTest {
 
         onView(withId(R.id.buttonLogin)).perform(click());
 
-        onView(withId(R.id.buttonLoginAsSeller)).perform(click());
-
-        onView(withId(R.id.addNewBook)).perform(click());
-
-        onView(withId(R.id.editBookTitle)).perform(typeText("abcd"));
-        closeSoftKeyboard();
-
-        onView(withId(R.id.editBookAuthor)).perform(typeText("cccc"));
-        closeSoftKeyboard();
-
-        onView(withId(R.id.editBookPrice)).perform(typeText("1.222"));
-        closeSoftKeyboard();
-
-
-        onView(withId(R.id.editBookCategory)).perform(click());
-        onData(allOf(is(instanceOf(String.class)),is("Computer Science"))).perform(click());
-
-        closeSoftKeyboard();
-
-        onView(withId(R.id.editSubmit)).perform(click());
-
-        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
-
-        onView(withId(R.id.btnSellBackToMain)).perform(click());
-
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
 
-        onView(withId(R.id.searchByKeyword)).perform(typeText("abcd"));
         closeSoftKeyboard();
+
+        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(1).perform(click());
+
+        onView(withId(R.id.singleBookAddToCart)).perform(click());
+
+        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
+        onView(withId(R.id.viewShoppingCart)).perform(click());
+
+        onView(withId(R.id.shoppingListDone)).perform(click());
+
+        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
+        onView(withId(R.id.editFirstName)).perform(typeText("abcd"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editLastName)).perform(typeText("cccc"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editPhoneNum)).perform(typeText("123456"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editPostCode)).perform(typeText("R2M2J8"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editAddressInfo)).perform(typeText("R2M2J8"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editAdditionInfo)).perform(typeText("R2M2J8"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.addSubmit)).perform(click());
+
+        onView(withText("OK")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.viewCustomerHistory)).perform(click());
 
 
     }
-
 
 
 }

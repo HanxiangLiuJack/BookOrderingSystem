@@ -43,10 +43,6 @@ public class HomeActivity extends AppCompatActivity {
         HomeActivity.this.startActivity(buyIntent);
     }
 
-    public void buttonLogoutOnClick(View v) {
-        Intent buyIntent = new Intent(HomeActivity.this, LoginActivity.class);
-        HomeActivity.this.startActivity(buyIntent);
-    }
 
 
 }

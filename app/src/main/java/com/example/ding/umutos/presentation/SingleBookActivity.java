@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.objects.Book;
@@ -94,8 +96,14 @@ public class SingleBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Item aItem=new Item(userName,newBook.getBookID(),newBook.getName(),newBook.getPrice());
+
                         if(!accessShoppingCart.insertShoppingCart( aItem )){
                             showOverDialog();
+                        }
+                        else{
+                            Toast.makeText(SingleBookActivity.this, "Book added!",
+                                    Toast.LENGTH_LONG).show();
+
                         }
                     }
                 })

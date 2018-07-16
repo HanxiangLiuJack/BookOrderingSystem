@@ -1,7 +1,5 @@
 package com.example.ding.umutos.persistence.hsqldb;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -10,7 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.example.ding.umutos.business.OrderBuilder;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.objects.*;
 
@@ -42,13 +39,11 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
 
         Order newOrder =  new Order(bookName,buyerName,sellerName,price);
-        OrderBuilder information = new OrderBuilder(newOrder);
-        information.setFirstName(buyerFirstName);
-        information.setLastName(buyerLastName);
-        information.setPostCode(postCode);
-        information.setAddress(address);
-        information.setPhoneNumber(phoneNumber);
-
+        newOrder.setFirstName(buyerFirstName);
+        newOrder.setLastName(buyerLastName);
+        newOrder.setPostCode(postCode);
+        newOrder.setAddress(address);
+        newOrder.setPhoneNumber(phoneNumber);
 
         return newOrder;
     }

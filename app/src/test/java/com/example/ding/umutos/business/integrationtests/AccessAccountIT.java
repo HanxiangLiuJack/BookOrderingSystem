@@ -28,7 +28,7 @@ public class AccessAccountIT {
     @After
     public void tearDown()
     {
-        this.tempDB.delete();
+        TestUtils.delete();
         accessAccounts = null;
     }
 

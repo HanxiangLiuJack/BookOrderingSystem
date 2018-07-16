@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Wish;
 import com.example.ding.umutos.persistence.WishListPersistence;
 

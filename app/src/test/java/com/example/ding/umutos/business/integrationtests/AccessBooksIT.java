@@ -76,7 +76,7 @@ public class AccessBooksIT {
         @After
         public void tearDown() {
             // reset DB
-            this.tempDB.delete();
+            TestUtils.delete();
             accessBooks=null;
         }
 

@@ -28,7 +28,7 @@ public class AccessOrderIT {
 
     @After
     public void tearDown() {
-        this.tempDB.delete();
+        TestUtils.delete();
         accessOrders = null;
     }
 

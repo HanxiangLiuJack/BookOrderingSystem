@@ -27,7 +27,6 @@ public class TestUtils {
         input.close();
         output.close();
         Main.setDBPathName("src/main/assets/tempdb/SC");
-
         return DB_DST;
     }
 

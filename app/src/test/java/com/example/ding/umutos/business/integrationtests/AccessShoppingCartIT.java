@@ -64,7 +64,7 @@ public class AccessShoppingCartIT {
 
         @After
         public void tearDown() {
-            this.tempDB.delete();
+            TestUtils.delete();
             accessShoppingCart= null;
         }
 

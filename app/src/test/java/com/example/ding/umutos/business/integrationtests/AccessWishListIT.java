@@ -26,7 +26,7 @@ public class AccessWishListIT {
 
     @After
     public void tearDown() {
-        this.tempDB.delete();
+        TestUtils.delete();
         accessWishlists = null;
     }
 

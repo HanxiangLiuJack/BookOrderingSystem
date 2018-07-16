@@ -1,5 +1,6 @@
 package com.example.ding.umutos.business.integrationtests;
 
+import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Item;
 import com.example.ding.umutos.utils.TestUtils;
 import com.example.ding.umutos.business.AccessShoppingCart;
@@ -20,12 +21,14 @@ import static org.junit.Assert.assertTrue;
 public class AccessShoppingCartIT {
 
         private AccessShoppingCart accessShoppingCart;
+        private AccessOrders accessOrders;
         private File tempDB;
 
         @Before
         public void setUp() throws IOException {
             this.tempDB = TestUtils.copyDB();
             this.accessShoppingCart = new AccessShoppingCart();
+            this.accessOrders = new AccessOrders();
         }
 
         @Test
@@ -56,8 +59,10 @@ public class AccessShoppingCartIT {
         }
         @Test
         public void TestClearShoppingCart(){
-            assertNull(accessShoppingCart.clearShoppingCart("Xiao Peng"));
+            String[] a = {"a","b","c","d","e"};
+            assertNull(accessShoppingCart.clearShoppingCart("Xiao Peng",a));
             assertTrue(accessShoppingCart.getUserShoppingCart("Xiao Peng").size() == 0);
+            assertTrue(accessOrders.buyerOrderHistory("Xiao Peng").size() == 4);
             System.out.println("Finished test ShoppingCart");
         }
 

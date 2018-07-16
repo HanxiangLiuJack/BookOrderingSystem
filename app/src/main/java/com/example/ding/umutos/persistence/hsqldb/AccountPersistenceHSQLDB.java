@@ -121,7 +121,7 @@ public class AccountPersistenceHSQLDB implements AccountPersistence{
     public void updateRating(String userName, double rate, int ratedPerson)
     {
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("UPDATE FROM accounts SET rate = ?, ratedPerson = ? WHERE userName = ?");
+            final PreparedStatement st = c.prepareStatement("UPDATE accounts SET rate = ?, ratedPerson = ? WHERE userName = ?");
             st.setDouble(1, rate);
             st.setInt(2,ratedPerson);
             st.setString(3,userName);

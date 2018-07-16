@@ -11,10 +11,8 @@ import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.business.AccessShoppingCart;
 import com.example.ding.umutos.business.OrderValidator;
-import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
-import com.example.ding.umutos.objects.Order;
-import com.example.ding.umutos.business.OrderBuilder;
+import com.example.ding.umutos.objects.OrderInfo;
 
 import java.util.List;
 
@@ -94,8 +92,8 @@ public class AddressActivity extends AppCompatActivity {
     }
 
     private void clearShoppingCart(){
-        String add[]={firstName,lastName,phoneNum,postCode,addressInfo};
-        List<Item> newList=accessShoppingCart.clearShoppingCart( userName, add );
+        OrderInfo orderInfo = new OrderInfo(firstName,lastName,postCode,phoneNum,addressInfo);
+        List<Item> newList=accessShoppingCart.clearShoppingCart( userName, orderInfo );
         if (newList==null){
             Intent intent = new Intent(AddressActivity.this,BookListActivity.class);
             intent.putExtra("bookID", bookID);

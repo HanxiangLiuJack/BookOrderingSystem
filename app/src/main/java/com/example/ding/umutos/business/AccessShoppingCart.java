@@ -22,6 +22,8 @@ public class AccessShoppingCart {
 
     public AccessShoppingCart() {
         shoppingCartPersistence = Service.getShoppingCartPersistence();
+        bookPersistence = Service.getBookPersistence();
+        orderPersitence = Service.getOrderPersistence();
         list = null;
     }
 
@@ -58,7 +60,7 @@ public class AccessShoppingCart {
 
     public double getTotalPrice(String userName){
         double totalPrice=0;
-        priceList =shoppingCartPersistence.getShoppingCartSequential(userName);
+        priceList =this.getUserShoppingCart(userName);
         for(int i=0;i<priceList.size();i++){
             totalPrice+=priceList.get(i).getPrice();
 
@@ -68,7 +70,6 @@ public class AccessShoppingCart {
 
 
     public List<Item> clearShoppingCart(String userName){
-
         List<Item> item = this.getUserShoppingCart(userName);
         List<Item> booksNotFound = null;
         Order newOrder;

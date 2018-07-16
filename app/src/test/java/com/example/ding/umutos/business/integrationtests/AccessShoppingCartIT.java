@@ -56,8 +56,8 @@ public class AccessShoppingCartIT {
         }
         @Test
         public void TestClearShoppingCart(){
-            assertNull(accessShoppingCart.clearShoppingCart("Peng Xiao"));
-            assertTrue(accessShoppingCart.getUserShoppingCart("Peng Xiao").size() == 0);
+            assertNull(accessShoppingCart.clearShoppingCart("Xiao Peng"));
+            assertTrue(accessShoppingCart.getUserShoppingCart("Xiao Peng").size() == 0);
             System.out.println("Finished test ShoppingCart");
         }
 

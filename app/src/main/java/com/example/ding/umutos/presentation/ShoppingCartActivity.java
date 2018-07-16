@@ -1,6 +1,9 @@
 package com.example.ding.umutos.presentation;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -71,8 +74,78 @@ public class ShoppingCartActivity extends AppCompatActivity {
         });
     }
 
-    public void buttonHistoryBack(View view) {
-        finish();
+    public void btnShopToCus(View view) {
+        Intent intent = new Intent(ShoppingCartActivity.this, BookListActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
+    }
+
+    public void btnDeleteItem(View view) {
+        if (bookID<1)
+            showDeleteDialog();
+        else
+            showDeleteDialog("Success");
+    }
+
+    private void showDeleteDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("\n"+"Please select a book to delete.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
+    }
+
+    private void showDeleteDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to delete wish "+msg+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        accessShoppingCart.deleteBookfromShoppingCart( bookID,userName );
+                        Intent intent = new Intent(ShoppingCartActivity.this, ShoppingCartActivity.class);
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
+    }
+
+    public void btnShoppingCartBuy(View view) {
+        showDialog();
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to buy all these books? \nPress 'Yes' to the Delivery Info page.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        Intent intent = new Intent(ShoppingCartActivity.this,AddressActivity.class);
+                        intent.putExtra("bookID", bookID);
+                        intent.putExtra("userName", userName);
+                        ShoppingCartActivity.this.startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+                .show();
     }
 
 }

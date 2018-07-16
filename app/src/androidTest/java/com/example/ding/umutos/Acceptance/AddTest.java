@@ -27,24 +27,29 @@ import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.isDialog;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
+import static org.hamcrest.Matchers.is;
+
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class AddDeleteEditTest {
+public class AddTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
     @Test
-    public void AddDeleteEditTest() {
+    public void AddTest() {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
@@ -59,6 +64,32 @@ public class AddDeleteEditTest {
 
         onView(withId(R.id.editBookTitle)).perform(typeText("abcd"));
         closeSoftKeyboard();
+
+        onView(withId(R.id.editBookAuthor)).perform(typeText("cccc"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editBookPrice)).perform(typeText("1.222"));
+        closeSoftKeyboard();
+
+
+        onView(withId(R.id.editBookCategory)).perform(click());
+        onData(allOf(is(instanceOf(String.class)),is("Computer Science"))).perform(click());
+
+        closeSoftKeyboard();
+
+        onView(withId(R.id.editSubmit)).perform(click());
+
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
+        onView(withId(R.id.btnSellBackToMain)).perform(click());
+
+        onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
+
+        onView(withId(R.id.searchByKeyword)).perform(typeText("abcd"));
+        closeSoftKeyboard();
+
+
+
 
 
 

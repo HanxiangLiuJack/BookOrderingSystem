@@ -99,7 +99,7 @@ public class SingleBookActivity extends AppCompatActivity {
                                         int which) {
                         Item aItem=new Item(userName,newBook.getBookID(),newBook.getName(),newBook.getPrice());
 
-                        if(!accessShoppingCart.insertShoppingCart( aItem, userName )){
+                        if(!accessShoppingCart.insertShoppingCart( aItem )){
                             showOverDialog();
                         }
                         else{

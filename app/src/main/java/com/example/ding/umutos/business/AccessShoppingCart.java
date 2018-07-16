@@ -34,9 +34,9 @@ public class AccessShoppingCart {
     }
 
 
-    public boolean insertShoppingCart(Item item, String userName) {
+    public boolean insertShoppingCart(Item item) {
         if(item!=null){
-            if(searchShoppingCart(item.getBookID()) == null ||(searchShoppingCart(item.getBookID()) != null&& ! searchShoppingCart(item.getBookID()).getUserName().equals( userName ))) {
+            if(searchShoppingCart(item.getBookID()) == null ||(searchShoppingCart(item.getBookID()) != null&& ! searchShoppingCart(item.getBookID()).getUserName().equals( item.getUserName() ))) {
                 shoppingCartPersistence.insertShoppingCart(item);
                 return true;
             }

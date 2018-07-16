@@ -28,7 +28,7 @@ public class BookPersistenceStub implements BookPersistence {
     //Print Book List
     @Override
     public List<Book> getBookSequential() {
-        return Collections.unmodifiableList(books);
+        return books;
     }
 
     @Override

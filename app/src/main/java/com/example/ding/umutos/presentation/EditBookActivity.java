@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Spinner;
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.business.AccessBooks;
+import com.example.ding.umutos.business.BookValidator;
 import com.example.ding.umutos.objects.Book;
 
 public class EditBookActivity extends AppCompatActivity {
@@ -18,7 +19,8 @@ public class EditBookActivity extends AppCompatActivity {
     private EditText editBookTitle, editBookAuthor, editBookPrice, editBookDetail;
     private Spinner editBookCategory;
 
-    private int bookID, userID;
+    private int bookID,userType;
+    private String userName;
 
     private ArrayAdapter<String> adapter;
     private String title, author, price, detail, category;
@@ -31,9 +33,9 @@ public class EditBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editbook);
 
-        userID = getIntent().getIntExtra("userID",-1);
+        userName = getIntent().getStringExtra("userName");
+        userType =getIntent().getIntExtra("userType",-1);
         bookID = getIntent().getIntExtra("bookID",-1);
-        System.out.println("BookID"+bookID);
 
         accessBookList=new AccessBooks();
 
@@ -73,9 +75,10 @@ public class EditBookActivity extends AppCompatActivity {
         author=editBookAuthor.getText().toString();
         price=editBookPrice.getText().toString();
         detail=editBookDetail.getText().toString();
+        BookValidator bookValidator = new BookValidator();
 
-
-        if (title.length()<1 || author.length()<1 || price.length()<1 )
+        if (!(bookValidator.validatePrice(Double.parseDouble(price))&&bookValidator.validateAuthorName(author)&&
+            bookValidator.validateBookName(title)))
             showDialog();
         else {
             if (bookID==-1)
@@ -104,14 +107,11 @@ public class EditBookActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userID);
+                        Book aBook= new Book(title,author,2131361792,detail,category,Double.parseDouble(price),userName);
                         accessBookList.insertBook(aBook);
-                        int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
-
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("userName", userName);
                         startActivity(intent);
 
                     }
@@ -140,10 +140,9 @@ public class EditBookActivity extends AppCompatActivity {
                         newBook.setName( title );
                         newBook.setPrice( Double.parseDouble( price ) );
                         accessBookList.updateBook(newBook);
-                        int userType = 0;
                         Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         startActivity(intent);
                     }
                 })
@@ -170,6 +169,46 @@ public class EditBookActivity extends AppCompatActivity {
 
         public void onNothingSelected(AdapterView<?> arg0) {
         }
+    }
+
+    public void buttonDeletePostedBook(View view) {
+        if (bookID<1)
+            showDeleteDialog();
+        else
+            showDeleteDialog(newBook.getName());
+    }
+
+    private void showDeleteDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("\n"+"You cannot delete a new book!")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
+    }
+
+    private void showDeleteDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirmation:")
+                .setMessage("\n"+"Sure to delete "+msg+"?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        accessBookList.deleteBook(bookID);
+                        Intent intent = new Intent(EditBookActivity.this, BookListActivity.class);
+                        intent.putExtra("userName", userName);
+                        intent.putExtra("userType", userType);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {}
+                })
+                .show();
     }
 
 

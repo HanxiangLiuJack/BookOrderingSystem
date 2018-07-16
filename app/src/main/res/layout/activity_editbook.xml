@@ -35,14 +35,13 @@
         android:id="@+id/editBookTitle"
         android:layout_width="240dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="28dp"
         android:background="@drawable/text_style"
         android:ems="10"
-        android:inputType="text"
-        android:text=""
-        android:maxLength="30"
         android:hint="Max length 30"
+        android:inputType="text"
+        android:maxLength="30"
+        android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
 
@@ -137,7 +136,7 @@
 
     <Button
         android:id="@+id/editCancel"
-        android:layout_width="240dp"
+        android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="40dp"
@@ -149,13 +148,29 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
+        android:id="@+id/deletePostedBook"
+        android:layout_width="160dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/button_style"
+        android:onClick="buttonDeletePostedBook"
+        android:text="Delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/editSubmit"
+        app:layout_constraintStart_toEndOf="@+id/editCancel" />
+
+    <Button
         android:id="@+id/editSubmit"
-        android:layout_width="240dp"
+        android:layout_width="160dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/button_style"
+        android:background="@drawable/buy_text_style"
+        android:textColor="#ffffff"
         android:onClick="buttonBookSubmit"
         android:text="Submit"
         app:layout_constraintBottom_toBottomOf="parent"

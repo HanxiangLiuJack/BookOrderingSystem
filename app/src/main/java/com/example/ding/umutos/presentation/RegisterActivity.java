@@ -38,9 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
             showDialog();
         }
         else{
-            int userID=newAcc.getUserID();
+            userName=newAcc.getUserName();
             Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-            intent.putExtra("userID", userID);
+            intent.putExtra("userName", userName);
             RegisterActivity.this.startActivity(intent);
         }
     }
@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void showDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Alert:")
-                .setMessage("\nPlease input valid user name or password!")
+                .setMessage("\nPlease input valid user name or password!\n Password should have at least one upper, lower letter and a number.")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,

@@ -72,8 +72,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
-                android:text="Remove"
-                />
+                android:onClick="btnDeleteWish"
+                android:text="Remove" />
 
             <Button
                 android:id="@+id/addWish"
@@ -84,8 +84,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
-                android:text="+ New Wish"
-                />
+                android:onClick="btnOpenNewWish"
+                android:text="+ New Wish" />
 
         </LinearLayout>
     </RelativeLayout>

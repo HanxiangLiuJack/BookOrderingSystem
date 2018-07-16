@@ -44,8 +44,12 @@
         <activity android:name=".presentation.WishActivity">
 
         </activity>
+        <activity android:name=".presentation.NewWishActivity">
 
+        </activity>
+        <activity android:name=".presentation.ShoppingCartActivity">
 
+        </activity>
 
     </application>
 

@@ -151,6 +151,7 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
                     Intent intent = new Intent(BookListActivity.this,SingleBookActivity.class);
                     intent.putExtra("bookID", bookID);
                     intent.putExtra("userName", userName);
+                    intent.putExtra("userType", userType);
                     BookListActivity.this.startActivity(intent);
                 }
             }
@@ -264,6 +265,13 @@ public class BookListActivity extends AppCompatActivity implements SearchView.On
         intent.putExtra("userType", userType);
         intent.putExtra("userName", userName);
         BookListActivity.this.startActivity(intent);
+    }
+
+    public void btnBookListToShoppingCart(View view) {
+        Intent intent = new Intent(BookListActivity.this, ShoppingCartActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
     }
 
 

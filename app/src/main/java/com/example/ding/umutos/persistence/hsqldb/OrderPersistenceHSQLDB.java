@@ -1,5 +1,7 @@
 package com.example.ding.umutos.persistence.hsqldb;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -50,6 +52,7 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
         return newOrder;
     }
+
 
     @Override
     public Order insertOrder(Order currentOrder) {

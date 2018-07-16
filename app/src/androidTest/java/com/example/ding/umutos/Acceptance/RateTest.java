@@ -53,6 +53,8 @@ public class RateTest {
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
 
+        closeSoftKeyboard();
+
         onView(withId(R.id.rateLowToHigh)).perform(click());
 
         onView(withId(R.id.rateHighToLow)).perform(click());

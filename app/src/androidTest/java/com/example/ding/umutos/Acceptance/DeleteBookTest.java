@@ -24,6 +24,7 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.isDialog;
@@ -33,7 +34,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.hasEntry;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.AllOf.allOf;
 import static org.hamcrest.CoreMatchers.anything;
 
@@ -62,11 +65,12 @@ public class DeleteBookTest {
         onData(anything()).inAdapterView(withId(R.id.sellerBookList)).atPosition(0).perform(click());
 
         onView(withId(R.id.editPostedBook)).perform(click());
+
         closeSoftKeyboard();
 
         onView(withId(R.id.deletePostedBook)).perform(click());
 
-        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
     }
 }

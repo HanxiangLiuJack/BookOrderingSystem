@@ -31,12 +31,12 @@ import static org.hamcrest.core.AllOf.allOf;
  @LargeTest
  @RunWith(AndroidJUnit4.class)
 
-public class BookTest {
+public class LoginTest {
      @Rule
      public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
      @Test
-     public void BookTes() {
+     public void LoginTest() {
          onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
          closeSoftKeyboard();
 

@@ -1,24 +1,18 @@
 package com.example.ding.umutos.Acceptance;
 
 
-
-import com.example.ding.umutos.application.Service;
-import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.presentation.HomeActivity;
+import com.example.ding.umutos.R;
+import com.example.ding.umutos.presentation.LoginActivity;
 
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
 import org.junit.runner.RunWith;
-import com.example.ding.umutos.R;
-import com.example.ding.umutos.presentation.LoginActivity;
 
 import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onData;
@@ -35,39 +29,32 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
 
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-
-public class CreateAccountTest
-{
-    private String userName = "Zapp1";
-    private String userPsw = "Zapp123";
+public class SearchTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
-
-    @After
-    public void tearDown(){
-        Service.getAccountPersistence().deleteAccount(new Account(userName, userPsw));
-    }
 
 
     @Test
     public void createAccountAndLogin()
     {
+        onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
-        onView( withId(R.id.buttonRegister)).perform(click());
-
-        onView(withId(R.id.registerName)).perform(typeText(userName));
+        onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.registerPsw)).perform(typeText(userPsw));
+
+        onView(withId(R.id.buttonLogin)).perform(click());
+
+        onView(withId(R.id.buttonLoginAsCustomer)).perform(click());
+
+        onView(withId(R.id.searchByKeyword)).perform(typeText("Guilty Wife"));
         closeSoftKeyboard();
 
-        onView(withId(R.id.registerSubmit)).perform(click());
 
-        onView(withId(R.id.buttonLoginOut)).perform(click());
     }
 
 }
-

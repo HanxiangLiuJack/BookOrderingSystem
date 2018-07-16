@@ -28,11 +28,11 @@ import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.core.AllOf.allOf;
-
+ 
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ViewOrderAndWishList {
+public class ViewOrderAndWishListTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 

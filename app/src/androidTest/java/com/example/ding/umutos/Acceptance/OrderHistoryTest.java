@@ -16,7 +16,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import com.example.ding.umutos.R;
 
-
+ 
 import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;

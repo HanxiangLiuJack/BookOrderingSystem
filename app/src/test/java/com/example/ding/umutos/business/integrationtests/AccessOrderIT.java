@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.example.ding.umutos.objects.Order;
+import com.example.ding.umutos.objects.OrderInfo;
 import com.example.ding.umutos.utils.TestUtils;
 import com.example.ding.umutos.business.AccessOrders;
 import static junit.framework.Assert.assertNotNull;
@@ -54,12 +55,9 @@ public class AccessOrderIT {
     public void testInsertOrder()
     {
         System.out.println("\nStarting test testInsertOrder\n");
-        Order newOrder = new Order("newBook", "Hanxiang Liu", "Tianhua Xu", 100);
-        newOrder.setFirstName("a");
-        newOrder.setLastName("b");
-        newOrder.setPostCode("ad");
-        newOrder.setPhoneNumber("123");
-        newOrder.setAddress("asdad");
+        OrderInfo orderInfo = new OrderInfo("a","b","c","d","e");
+        Order newOrder = new Order("newBook", "Hanxiang Liu", "Tianhua Xu", 100, orderInfo);
+
         assertTrue(accessOrders.insertOrder(newOrder));
         assertTrue(accessOrders.buyerOrderHistory("Hanxiang Liu").size() == 2);
         System.out.println("\nEnd test testInsertOrder\n");

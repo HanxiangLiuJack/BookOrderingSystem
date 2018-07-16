@@ -21,11 +21,9 @@ import com.example.ding.umutos.persistence.BookPersistence;
 public class BookPersistenceHSQLDB implements BookPersistence {
 
     private final String dbPath;
-    private int maxBookID;
 
     public BookPersistenceHSQLDB(final String dbPath){
         this.dbPath = dbPath;
-        maxBookID = 0;
     }
 
     private Connection connection() throws SQLException {
@@ -41,10 +39,6 @@ public class BookPersistenceHSQLDB implements BookPersistence {
             String bookCategory = rs.getString("bookCategory");
             Double price = rs.getDouble("price");
             String ownerName = rs.getString("ownerName");
-
-        if(bookID>maxBookID){
-            maxBookID = bookID;
-        }
 
         Book book = new Book(bookName, authorName, bookPicture, bookDescription, bookCategory, price, ownerName);
         book.setBookID(bookID);
@@ -77,21 +71,17 @@ public class BookPersistenceHSQLDB implements BookPersistence {
 
     @Override
     public Book insertBook(Book currentBook) {
-        getBookSequential();
         try (final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("INSERT INTO books VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-            st.setInt(1,maxBookID+1);
-            st.setString(2, currentBook.getName());
-            st.setString(3, currentBook.getAuthor());
-            st.setInt(4, currentBook.getPicture());
-            st.setString(5, currentBook.getDescription());
-            st.setString(6, currentBook.getCategory());
-            st.setDouble(7, currentBook.getPrice());
-            st.setString(8, currentBook.getOwner());
+            final PreparedStatement st = c.prepareStatement("INSERT INTO books (bookName,authorName,bookPicture,bookDescription,bookCategory,price,ownerName) VALUES(?, ?, ?, ?, ?, ?, ?)");
+            st.setString(1, currentBook.getName());
+            st.setString(2, currentBook.getAuthor());
+            st.setInt(3, currentBook.getPicture());
+            st.setString(4, currentBook.getDescription());
+            st.setString(5, currentBook.getCategory());
+            st.setDouble(6, currentBook.getPrice());
+            st.setString(7, currentBook.getOwner());
 
             st.executeUpdate();
-
-            currentBook.setBookID(maxBookID+1);
 
             return currentBook;
         } catch (final SQLException e) {

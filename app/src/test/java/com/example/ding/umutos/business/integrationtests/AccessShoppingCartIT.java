@@ -2,6 +2,7 @@ package com.example.ding.umutos.business.integrationtests;
 
 import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Item;
+import com.example.ding.umutos.objects.OrderInfo;
 import com.example.ding.umutos.utils.TestUtils;
 import com.example.ding.umutos.business.AccessShoppingCart;
 
@@ -59,7 +60,7 @@ public class AccessShoppingCartIT {
         }
         @Test
         public void TestClearShoppingCart(){
-            String[] a = {"a","b","c","d","e"};
+            OrderInfo a = new OrderInfo("a","b","c","d","e");
             assertNull(accessShoppingCart.clearShoppingCart("Xiao Peng",a));
             assertTrue(accessShoppingCart.getUserShoppingCart("Xiao Peng").size() == 0);
             assertTrue(accessOrders.buyerOrderHistory("Xiao Peng").size() == 4);

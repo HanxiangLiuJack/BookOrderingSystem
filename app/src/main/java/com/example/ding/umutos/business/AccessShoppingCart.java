@@ -2,7 +2,7 @@ package com.example.ding.umutos.business;
 
 import com.example.ding.umutos.application.Service;
 import com.example.ding.umutos.objects.Item;
-import com.example.ding.umutos.objects.Book;
+import com.example.ding.umutos.objects.OrderInfo;
 import com.example.ding.umutos.objects.Order;
 import com.example.ding.umutos.persistence.ShoppingCartPersistence;
 import com.example.ding.umutos.persistence.BookPersistence;
@@ -33,10 +33,16 @@ public class AccessShoppingCart {
 
     }
 
+    public boolean checkShoppingCartItem(Item item)
+    {
+        return searchShoppingCart(item.getBookID()) == null ||
+                ((searchShoppingCart(item.getBookID()) != null && !searchShoppingCart(item.getBookID()).getUserName().equals(item.getUserName())));
+    }
+
 
     public boolean insertShoppingCart(Item item) {
         if(item!=null){
-            if(searchShoppingCart(item.getBookID()) == null ||(searchShoppingCart(item.getBookID()) != null&& ! searchShoppingCart(item.getBookID()).getUserName().equals( item.getUserName() ))) {
+            if(checkShoppingCartItem(item)) {
                 shoppingCartPersistence.insertShoppingCart(item);
                 return true;
             }
@@ -67,11 +73,11 @@ public class AccessShoppingCart {
             totalPrice+=priceList.get(i).getPrice();
 
         }
-        return totalPrice;
+        return (double)Math.round(totalPrice*100d)/100d;
     }
 
 
-    public List<Item> clearShoppingCart(String userName, String[] addressInfo){
+    public List<Item> clearShoppingCart(String userName, OrderInfo orderInfo){
         List<Item> item = this.getUserShoppingCart(userName);
         List<Item> booksNotFound = null;
         Order newOrder;
@@ -90,20 +96,17 @@ public class AccessShoppingCart {
                 String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
                 bookPersistence.deleteBook(item.get(i).getBookID());
                 newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
-                OrderBuilder orderBuilder=new OrderBuilder(newOrder);
-                orderBuilder.setPhoneNumber(addressInfo[2]);
-                orderBuilder.setAddress(addressInfo[4]);
-                orderBuilder.setPostCode(addressInfo[3]);
-                orderBuilder.setLastName(addressInfo[1]);
-                orderBuilder.setFirstName(addressInfo[0]);
+                newOrder.setAddress(orderInfo.getAddress());
+                newOrder.setPhoneNumber(orderInfo.getPhoneNumber());
+                newOrder.setPostCode(orderInfo.getFirstName());
+                newOrder.setLastName(orderInfo.getLastName());
+                newOrder.setFirstName(orderInfo.getFirstName());
                 orderPersitence.insertOrder(newOrder);
-
             }
             shoppingCartPersistence.clearShoppingCart(userName);
         }
         return booksNotFound;
 
     }
-
 
 }

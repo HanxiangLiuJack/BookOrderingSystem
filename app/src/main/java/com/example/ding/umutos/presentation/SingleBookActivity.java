@@ -7,15 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.ding.umutos.R;
 import com.example.ding.umutos.objects.Account;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Item;
 import java.util.List;
+
+import static android.app.PendingIntent.getActivity;
 
 public class SingleBookActivity extends AppCompatActivity {
 
@@ -35,8 +40,6 @@ public class SingleBookActivity extends AppCompatActivity {
         accessShoppingCart=new AccessShoppingCart(  );
 
         super.onCreate(savedInstanceState);
-
-        Book aBook=new Book(  );
 
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
@@ -75,7 +78,7 @@ public class SingleBookActivity extends AppCompatActivity {
         }
         bookOwner.setText("Sold by "+userName);
         bookDecription.setText(newBook.getDescription());
-        bookImg.setImageResource(aBook.getImageByBookID(bookID));
+        bookImg.setImageResource(newBook.getPicture());
         bookCategory.setText("Category: "+newBook.getCategory());
         rb_normal.setRating( (float)rate);
 
@@ -95,8 +98,14 @@ public class SingleBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Item aItem=new Item(userName,newBook.getBookID(),newBook.getName(),newBook.getPrice());
-                        if(!accessShoppingCart.insertShoppingCart( aItem )){
+
+                        if(!accessShoppingCart.insertShoppingCart( aItem, userName )){
                             showOverDialog();
+                        }
+                        else{
+                            Toast.makeText(SingleBookActivity.this, "Book added!",
+                                    Toast.LENGTH_LONG).show();
+
                         }
                     }
                 })

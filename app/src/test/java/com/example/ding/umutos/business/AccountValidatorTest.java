@@ -32,16 +32,6 @@ public class AccountValidatorTest {
     }
 
     @Test
-    public void testValidateUserName() {
-        System.out.println("Test validating user name.");
-        //exist user name
-        assertTrue(!accountValidator.validateUserName("Yunlong Liu", accessAccounts.getAccounts()));
-        //non exist user name
-        assertTrue(accountValidator.validateUserName("zapp", accessAccounts.getAccounts()));
-        System.out.println("End test validating user name.");
-    }
-
-    @Test
     public void testValidatePassWord() {
         System.out.println("Test validating password.");
         assertTrue(!accountValidator.validatePassword("123"));

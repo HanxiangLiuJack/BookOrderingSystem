@@ -46,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         if(newAcc==null){
             showDialog();
         }else{
-            int userID=newAcc.getUserID();
+            userName = newAcc.getUserName();
             Intent homeIntent = new Intent(LoginActivity.this, HomeActivity.class);
-            homeIntent.putExtra("userID", userID);
+            homeIntent.putExtra("userName", userName);
             LoginActivity.this.startActivity(homeIntent);
         }
     }
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             int count;
 
             File outFile = new File(copyPath);
-            if (!outFile.exists()){
+            //if (!outFile.exists()){
 
                 InputStreamReader in = new InputStreamReader(assetManager.open(asset));
                 FileWriter out = new FileWriter(outFile);
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 out.close();
                 in.close();
-            }
+            //}
 
             BufferedReader br = new BufferedReader(new FileReader(outFile));
 

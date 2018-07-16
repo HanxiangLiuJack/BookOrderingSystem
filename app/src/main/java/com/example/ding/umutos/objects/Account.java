@@ -1,5 +1,7 @@
 package com.example.ding.umutos.objects;
 
+import java.util.ArrayList;
+import java.util.List;
 /*
    Account object:
    1. userID, which is a final int cannot be changed or setted.
@@ -9,24 +11,18 @@ package com.example.ding.umutos.objects;
 
 public class Account
 {
-    private int userID;
     private String userName;
     private String password;
-   
+
+    private double rate;
+    private int ratedPerson;
+
     public Account( String userName ,String password)
     {
         this.userName = userName;
         this.password = password;
-    }
-    
-    public int getUserID()
-    {
-        return userID;
-    }
-
-    public void setUserID(int newUserID)
-    {
-        userID = newUserID;
+        ratedPerson = 0;
+        rate = 0;
     }
 
     public String getUserName()
@@ -44,9 +40,23 @@ public class Account
         return password;
     }
 
-    public void setPassWord(String newPassword)
+    public double getRate(){
+        return rate;
+    }
+
+    public void setRate(double rate)
     {
-        password = newPassword;
+        this.rate = rate;
+    }
+
+    public int getRatedPerson()
+    {
+        return ratedPerson;
+    }
+
+    public void setRatedPerson(int num)
+    {
+        ratedPerson = num;
     }
 
 }

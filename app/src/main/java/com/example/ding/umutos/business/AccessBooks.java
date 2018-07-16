@@ -26,8 +26,8 @@ public class AccessBooks {
         return books;
     }
 
-    public List<Book> getUserBooks(int userID) {
-        userBooks = bookPersistence.getUserBookSequential(userID);
+    public List<Book> getUserBooks(String userName) {
+        userBooks = bookPersistence.getUserBookSequential(userName);
         return userBooks;
     }
 
@@ -53,19 +53,6 @@ public class AccessBooks {
         return cBook;
     }
 
-    public List<Book> ascentSort(List<Book> books){
-        List<Book> sortBook;
-        BookSorter sorter = new BookSorter();
-        sortBook=sorter.LowPrice(books);
-        return sortBook;
-    }
-
-    public List<Book> declineSort(List<Book> books){
-        List<Book> sortBook;
-        BookSorter sorter=new BookSorter();
-        sortBook=sorter.HighPrice(books);
-        return sortBook;
-    }
 
     public Book searchBook(int id) {
         return bookPersistence.searchBook(id);

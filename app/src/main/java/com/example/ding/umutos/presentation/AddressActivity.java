@@ -11,13 +11,14 @@ import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Book;
 import com.example.ding.umutos.objects.Order;
+import com.example.ding.umutos.business.OrderBuilder;
 
 public class AddressActivity extends AppCompatActivity {
     private EditText editFirstName, editLastName, editPhoneNum, editPostCode, editAddressInfo, editAdditionInfo;
     private int bookID;
     private AccessBooks accessBookList;
     private AccessOrders accessOrders;
-    private int userID;
+    private String userName;
     private String firstName, lastName,phoneNum,postCode,addressInfo,additionInfo;
 
     @Override
@@ -25,8 +26,8 @@ public class AddressActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         bookID = getIntent().getIntExtra("bookID",-1);
-        userID = getIntent().getIntExtra("userID",-1);
-        accessOrders=new AccessOrders(  );
+        userName = getIntent().getStringExtra("userName");
+        accessOrders=new AccessOrders();
         accessBookList=new AccessBooks();
     }
 
@@ -78,13 +79,20 @@ public class AddressActivity extends AppCompatActivity {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        String[] address={firstName,lastName,postCode,phoneNum,addressInfo};
-                        Order newOrder =  new Order(aBook.getName(),userID,aBook.getOwner(),aBook.getPrice(),address);
+                        Order newOrder =  new Order(aBook.getName(),userName,aBook.getOwner(),aBook.getPrice());
+                        OrderBuilder information = new OrderBuilder(newOrder);
+                        information.setFirstName(firstName);
+                        information.setLastName(lastName);
+                        information.setPostCode(postCode);
+                        information.setAddress(addressInfo);
+                        information.setPhoneNumber(phoneNum);
+
+
                         accessOrders.insertOrder( newOrder );
                         int userType=1;
                         Intent intent = new Intent(AddressActivity.this, BookListActivity.class);
                         intent.putExtra("userType", userType);
-                        intent.putExtra("userID", userID);
+                        intent.putExtra("userName", userName);
                         startActivity(intent);
                     }
                 })

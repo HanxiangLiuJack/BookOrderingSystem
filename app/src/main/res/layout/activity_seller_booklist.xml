@@ -81,15 +81,15 @@
                 android:onClick="buttonEditPostedBook"
                 android:text="Edit"
                 android:layout_weight="1"/>
-            <Button android:id="@+id/deletePostedBook"
+            <Button android:id="@+id/viewAllWishList"
                 android:layout_width="120dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_style"
-                android:onClick="buttonDeletePostedBook"
-                android:text="Delete"
+                android:text="Wish List"
+                android:onClick="btnToWishList"
                 android:layout_weight="1"/>
 
             <Button

@@ -3,7 +3,10 @@
 //User story: as a user, i want to be able to confirm my order(Tested)
 //User story: as a user, i want to be able to rate the seller(Tested)
 //User story: as a user, i want to be able to view order history(Tested)
-
+//User Story: As a user, i want to be able to  view order history ( Tested )
+//User Story: As a user, i want to be able to view wish list ( Tested )
+//User story: as a user, i want to be able to add book from wish List(Tested)
+//User story: as a user, i want to be able to delete Book from wish list(Tested)
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;
@@ -60,7 +63,7 @@ import android.widget.RatingBar;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class OrderBookAndRateSellerTest {
+public class OrderRateWishTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
@@ -89,22 +92,25 @@ public class OrderBookAndRateSellerTest {
        testConfirmAnOrder();
        testViewOrderHistory();
        testRateSeller();
+       testAddWish();
+       testDeleteWish();
+
     }
 
-
+  
     private void testPlaceAnOrder()
     {
-        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(1).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.cusListView)).atPosition(0).perform(click());
 
         onView(withId(R.id.singleBookAddToCart)).perform(click());
 
-        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
         onView(withId(R.id.viewShoppingCart)).perform(click());
 
         onView(withId(R.id.shoppingListDone)).perform(click());
 
-        onView(withText("YES")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 
     }
 
@@ -155,7 +161,39 @@ public class OrderBookAndRateSellerTest {
 
         onView(withId(R.id.rateSubmit)).perform(click());
 
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
     }
+
+    private void testAddWish()
+    {
+        onView(withId(R.id.historyBack)).perform(click());
+
+        onView(withId(R.id.cusWishList)).perform(click());
+
+        onView(withId(R.id.addWish)).perform(click());
+
+        onView(withId(R.id.wishBookName)).perform(typeText("Wished Book"));
+        closeSoftKeyboard();
+        onView(withId(R.id.wishAuthorName)).perform(typeText("Test"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.addWishSubmit)).perform(click());
+
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+    }
+
+    private void testDeleteWish()
+    {
+        onData(anything()).inAdapterView(withId(R.id.wishList)).atPosition(0).perform(click());
+
+        onView(withId(R.id.wishListRemove)).perform(click());
+
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+    }
+
+
+
 
     private static ViewAction setRating(final float rating) {
         if (rating % 0.5 != 0) {

@@ -36,8 +36,10 @@ public class AccessShoppingCart {
 
     public boolean insertShoppingCart(Item item) {
         if(item!=null){
-            shoppingCartPersistence.insertShoppingCart(item);
-            return true;
+            if(searchShoppingCart(item.getBookID()) == null) {
+                shoppingCartPersistence.insertShoppingCart(item);
+                return true;
+            }
         }
         return false;
     }

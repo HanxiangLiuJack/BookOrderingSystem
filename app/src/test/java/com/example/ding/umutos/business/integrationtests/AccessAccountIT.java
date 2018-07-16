@@ -75,7 +75,7 @@ public class AccessAccountIT {
     public void testGetAccountRate()
     {
         System.out.println("\nStart testing testGetAccountRate.\n");
-        assertNotNull(accessAccounts.getAccountRate("Tianhua Xu"));
+        assertNotNull(accessAccounts.getAccountRate("Tianhua Xu",accessAccounts.getAccounts()));
         System.out.println("\nEnd testing testGetAccountRate.\n");
     }
 

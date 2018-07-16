@@ -47,13 +47,18 @@ public class ShoppingCartTest {
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);
 
-    @Test
-    public void ShoppingCartTest() {
+    @Before
+    public void setup()
+    {
         onView(withId(R.id.loginUserName)).perform(typeText("Xiao Peng"));
         closeSoftKeyboard();
 
         onView(withId(R.id.loginPassword)).perform(typeText("66666666"));
         closeSoftKeyboard();
+    }
+
+    @Test
+    public void ShoppingCartTest() {
 
         onView(withId(R.id.buttonLogin)).perform(click());
 

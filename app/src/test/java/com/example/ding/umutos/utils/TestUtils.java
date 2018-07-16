@@ -10,8 +10,8 @@ import java.io.OutputStream;
 import com.example.ding.umutos.application.Main;
 
 public class TestUtils {
-    private static final File DB_SRC = new File("app/src/main/assets/db/SC.script");
-    private static final File DB_DST = new File("app/src/main/assets/tempdb/SC.script");
+    private static final File DB_SRC = new File("src/main/assets/db/SC.script");
+    private static final File DB_DST = new File("src/main/assets/tempdb/SC.script");
     private static final File DB_PROPERTY = new File("src/main/assets/tempdb/SC.properties");
 
     public static File copyDB() throws IOException {

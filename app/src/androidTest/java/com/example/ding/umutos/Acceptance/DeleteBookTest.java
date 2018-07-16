@@ -64,7 +64,7 @@ public class DeleteBookTest {
         onView(withId(R.id.editPostedBook)).perform(click());
         closeSoftKeyboard();
 
-        onView(allOf(withId(R.id.deletePostedBook),withText("Delete"))).perform(click());
+        onView(withId(R.id.deletePostedBook)).perform(click());
 
         onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
 

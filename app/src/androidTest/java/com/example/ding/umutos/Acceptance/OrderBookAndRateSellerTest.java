@@ -1,3 +1,9 @@
+
+//User story: as a user, i want to be able to place an order(Tested)
+//User story: as a user, i want to be able to confirm my order(Tested)
+//User story: as a user, i want to be able to rate the seller(Tested)
+//User story: as a user, i want to be able to view order history(Tested)
+
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;
@@ -16,7 +22,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import com.example.ding.umutos.R;
 
- 
+
 import org.hamcrest.Matcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,7 +60,7 @@ import android.widget.RatingBar;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 
-public class OrderHistoryTest {
+public class OrderBookAndRateSellerTest {
 
     @Rule
     public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class);

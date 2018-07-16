@@ -69,8 +69,9 @@ public class NewWishActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                        Wish newWish=new Wish(userName,author,title);
+                        Wish newWish=new Wish(userName,title,author);
                         accessWishList.insertWishList( newWish );
+
                         Intent intent = new Intent(NewWishActivity.this, WishActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userName", userName);
@@ -87,6 +88,7 @@ public class NewWishActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
 
     public void buttonNewWishCancel(View view) {
         finish();

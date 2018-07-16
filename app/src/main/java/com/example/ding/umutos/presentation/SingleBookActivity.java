@@ -82,7 +82,9 @@ public class SingleBookActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         Item aItem=new Item(userName,newBook.getBookID(),newBook.getName(),newBook.getPrice());
-                        accessShoppingCart.insertShoppingCart( aItem );
+                        if(!accessShoppingCart.insertShoppingCart( aItem )){
+                            showOverDialog();
+                        }
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -93,6 +95,22 @@ public class SingleBookActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
+    private void showOverDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Alert:")
+                .setMessage("This book already existed in the shopping cart!")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                    }
+                })
+
+                .show();
+    }
+
+
 
     public void btnSingleToShoppingCart(View view) {
         Intent intent = new Intent(SingleBookActivity.this, ShoppingCartActivity.class);

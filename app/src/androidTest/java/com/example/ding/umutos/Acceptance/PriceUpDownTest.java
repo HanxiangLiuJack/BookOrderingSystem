@@ -54,7 +54,6 @@ public class PriceUpDownTest {
     @Test
     public void PirceUpDownTest()
     {
-
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());

@@ -57,7 +57,6 @@ public class RateTest {
     {
 
 
-
         onView(withId(R.id.buttonLogin)).perform(click());
 
         onView(withId(R.id.buttonLoginAsCustomer)).perform(click());

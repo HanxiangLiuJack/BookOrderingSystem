@@ -33,8 +33,9 @@ public class AccessShoppingCart {
 
     public boolean checkShoppingCartItem(Item item)
     {
-        return searchShoppingCart(item.getBookID()) == null ||
-                ((searchShoppingCart(item.getBookID()) != null && !searchShoppingCart(item.getBookID()).getUserName().equals(item.getUserName())));
+        Item newItem = searchShoppingCart(item.getBookID());
+        return newItem == null ||
+                (newItem != null && !newItem.getUserName().equals(item.getUserName()));
     }
 
 

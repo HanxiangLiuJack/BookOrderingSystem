@@ -89,6 +89,9 @@ public class OrderBookAndRateSellerTest {
        testConfirmAnOrder();
        testViewOrderHistory();
        testRateSeller();
+       testAddWish();
+       testDeleteWish();
+
     }
 
   
@@ -155,6 +158,35 @@ public class OrderBookAndRateSellerTest {
 
         onView(withId(R.id.rateSubmit)).perform(click());
 
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+
+    }
+
+    private void testAddWish()
+    {
+        onView(withId(R.id.historyBack)).perform(click());
+
+        onView(withId(R.id.cusWishList)).perform(click());
+
+        onView(withId(R.id.addWish)).perform(click());
+
+        onView(withId(R.id.wishBookName)).perform(typeText("Wished Book"));
+        closeSoftKeyboard();
+        onView(withId(R.id.wishAuthorName)).perform(typeText("Test"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.addWishSubmit)).perform(click());
+
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
+    }
+
+    private void testDeleteWish()
+    {
+        onData(anything()).inAdapterView(withId(R.id.wishList)).atPosition(0).perform(click());
+
+        onView(withId(R.id.wishListRemove)).perform(click());
+
+        onView(withText("Yes")).inRoot(isDialog()).check(matches(isDisplayed())).perform(click());
     }
 
     private static ViewAction setRating(final float rating) {

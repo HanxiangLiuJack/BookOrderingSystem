@@ -110,9 +110,10 @@ public class AccessShoppingCartTest {
     public void testClearShoppingCart()
     {
         System.out.println("\nStart testing testClearShoppingCart.\n");
-        doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
-        accessShoppingCart.clearShoppingCart("Tianhua Xu");
-        verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu");
+        String[] addressInfo = {"fn","ln","pc","pn","add"};
+        doNothing().when(shoppingCartPersistence).clearShoppingCart("Tianhua Xu",addressInfo);
+        accessShoppingCart.clearShoppingCart("Tianhua Xu",addressInfo);
+        verify(shoppingCartPersistence).clearShoppingCart("Tianhua Xu",addressInfo);
         System.out.println("\nStart testing testClearShoppingCart.\n");
 
     }

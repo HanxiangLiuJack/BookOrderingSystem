@@ -3,6 +3,7 @@ import com.example.ding.umutos.business.AccessAccounts;
 import com.example.ding.umutos.business.AccessBooks;
 import com.example.ding.umutos.business.AccessShoppingCart;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import com.example.ding.umutos.objects.Item;
 
 public class SingleBookActivity extends AppCompatActivity {
 
-    private int bookID;
+    private int bookID, userType;
     private String userName;
     private TextView bookTitle, bookAuthor, bookPrice, bookOwner, bookDecription, bookCategory;
     private ImageView bookImg;
@@ -36,6 +37,8 @@ public class SingleBookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_singlebook);
         bookID = getIntent().getIntExtra("bookID",-1);
         userName = getIntent().getStringExtra("userName");
+        userType = getIntent().getIntExtra("userType",-1);
+
 
         accessBookList=new AccessBooks();
         accessAccounts=new AccessAccounts();
@@ -84,5 +87,12 @@ public class SingleBookActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    public void btnSingleToShoppingCart(View view) {
+        Intent intent = new Intent(SingleBookActivity.this, ShoppingCartActivity.class);
+        intent.putExtra("userName", userName);
+        intent.putExtra("userType", userType);
+        startActivity(intent);
     }
 }

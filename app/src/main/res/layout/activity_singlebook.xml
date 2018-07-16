@@ -156,6 +156,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/button_style"
+            android:onClick="btnSingleToShoppingCart"
             android:text="View Shopping Cart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -83,6 +83,7 @@ public class WishActivity extends AppCompatActivity {
                 HashMap<String,String> map=(HashMap<String,String>)wishList.getItemAtPosition(arg2);
                 String id=map.get("id");
                 bookID=Integer.parseInt(id);
+                infoBar.setTextSize( 2,15 );
                 infoBar.setText("You selected wish: "+ map.get("title"));
             }
         });
@@ -90,7 +91,7 @@ public class WishActivity extends AppCompatActivity {
 
 
     public void btnWishBack(View view){
-        Intent intent = new Intent(WishActivity.this, WishActivity.class);
+        Intent intent = new Intent(WishActivity.this, BookListActivity.class);
         intent.putExtra("userName", userName);
         intent.putExtra("userType", userType);
         startActivity(intent);

@@ -25,7 +25,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private List<Item> newShoppingCart;
     private int userType, bookID;
     private String userName;
-    private TextView shopInfoBar;
+    private TextView shopInfoBar,priceBar;
 
 
     @Override
@@ -33,6 +33,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
         shopList=(ListView)findViewById(R.id.shoppingList);
+        shopInfoBar=(TextView)findViewById( R.id.shoppingBar ) ;
+        priceBar=(TextView)findViewById( R.id.priceBar );
 
         userName = getIntent().getStringExtra("userName");
         userType = getIntent().getIntExtra("userType",-1);
@@ -40,6 +42,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
         accessShoppingCart=new AccessShoppingCart();
         newShoppingCart=accessShoppingCart.getUserShoppingCart(userName);
         loadList(newShoppingCart);
+        priceBar.setText( "Total: $"+accessShoppingCart.getTotalPrice( userName ) );
+
 
 
     }
@@ -53,6 +57,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             HashMap<String, Object> item = new HashMap<String, Object>();
             item.put("title", newShoppingList.get(i).getName());
             item.put("price", "$"+newShoppingList.get(i).getPrice());
+            item.put("id", ""+newShoppingList.get(i).getBookID());
             items.add(item);
         }
         SimpleAdapter sItems = new SimpleAdapter(this,
@@ -75,10 +80,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void btnShopToCus(View view) {
-        Intent intent = new Intent(ShoppingCartActivity.this, BookListActivity.class);
-        intent.putExtra("userName", userName);
-        intent.putExtra("userType", userType);
-        startActivity(intent);
+        finish();
     }
 
     public void btnDeleteItem(View view) {

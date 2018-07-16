@@ -186,7 +186,7 @@ android:orientation="vertical">
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/button_style"
-                android:onClick="buttonOpenHistory"
+                android:onClick="btnBookListToShoppingCart"
                 android:text="Shopping Cart" />
         </LinearLayout>
     </RelativeLayout>

@@ -21,6 +21,7 @@ public class NewWishActivity extends AppCompatActivity {
     private String title, author;
 
     private AccessWishlists accessWishList;
+    private int userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,11 @@ public class NewWishActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_wish);
 
         userName = getIntent().getStringExtra("userName");
+        userType = getIntent().getIntExtra("userType",-1);
         accessWishList=new AccessWishlists();
     }
 
-    public void buttonBookSubmit(View view) {
+    public void buttonNewWishSubmit(View view) {
         newWishName=(EditText)findViewById(R.id.wishAuthorName);
         newWishAuthor=(EditText)findViewById(R.id.wishBookName);
 
@@ -67,14 +69,11 @@ public class NewWishActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,
                                         int which) {
-                       // Wish newWish=new Wish();
-                       // Book aBook= new Book(title,author,0,detail,category,Double.parseDouble(price),userName);
-                        //accessBookList.insertBook(aBook);
-                        int userType = 0;
+                        Wish newWish=new Wish(userName,author,title);
+                        accessWishList.insertWishList( newWish );
                         Intent intent = new Intent(NewWishActivity.this, WishActivity.class);
                         intent.putExtra("userType", userType);
                         intent.putExtra("userName", userName);
-
                         startActivity(intent);
 
                     }

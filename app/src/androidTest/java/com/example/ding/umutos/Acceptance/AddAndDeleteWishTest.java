@@ -1,4 +1,5 @@
-// This test is for testing add and delete Wish as a user.
+//User story: as a user, i want to be able to add book from wish List(Tested)
+//User story: as a user, i want to be able to delete Book from wish list(Tested)
 
 package com.example.ding.umutos.Acceptance;
 

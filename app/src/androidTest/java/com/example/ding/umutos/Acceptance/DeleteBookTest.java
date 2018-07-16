@@ -1,5 +1,4 @@
-//This test is about testing delete book as a seller.
-
+//User story: as a user, i want to be able to delete a selling book (Tested)
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;

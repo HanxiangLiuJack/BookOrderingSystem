@@ -1,4 +1,4 @@
-//This test is for testing register a new Account as a user.
+//User story: as a user, i want to be able to create an Account (Tested)
 
 package com.example.ding.umutos.Acceptance;
 

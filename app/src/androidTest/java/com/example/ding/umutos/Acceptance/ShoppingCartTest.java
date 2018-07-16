@@ -1,5 +1,5 @@
-//This test is about testing add and delete shopping cart as a user.
-
+//User Story: As a user, i want to be able to add book to shopping cart ( Tested )
+//User Story: As a user, i want to be able to delete book from shopping cart ( Tested )
 package com.example.ding.umutos.Acceptance;
 
 import com.example.ding.umutos.application.Service;

@@ -72,6 +72,7 @@ public class AccessShoppingCart {
         List<Item> item = this.getUserShoppingCart(userName);
         List<Item> booksNotFound = null;
         Order newOrder;
+        bookPersistence = Service.getBookPersistence();
         for(int i = 0; i < item.size(); i++)
         {
             if(bookPersistence.searchBook(item.get(i).getBookID()) == null)
@@ -84,6 +85,7 @@ public class AccessShoppingCart {
         if(booksNotFound == null){
             for(int i=0;i<item.size();i++){
                 String ownerName = bookPersistence.searchBook(item.get(i).getBookID()).getOwner();
+
                 newOrder = new Order(item.get(i).getName(),item.get(i).getUserName(),ownerName,item.get(i).getPrice());
                 orderPersitence.insertOrder(newOrder);
             }

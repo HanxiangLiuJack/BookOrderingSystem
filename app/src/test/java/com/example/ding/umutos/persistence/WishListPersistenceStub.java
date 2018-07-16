@@ -19,7 +19,7 @@ public class WishListPersistenceStub implements WishListPersistence{
         wishList.add(new Wish(4,"Tianhua Xu","d","The Middle Ages"));
         wishList.add(new Wish(5,"Tianhua Xu","e","The Guilty Wife"));
         wishList.add(new Wish(6,"Tianhua Xu","f","One Way"));
-        wishList.add(new Wish(7,"Tianhua Xu","g","Sarah Dunn"));  
+        wishList.add(new Wish(7,"Tianhua Xu","g","Sarah Dunn"));
     }
 
 

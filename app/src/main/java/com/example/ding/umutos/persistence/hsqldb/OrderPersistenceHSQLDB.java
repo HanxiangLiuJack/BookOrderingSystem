@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.example.ding.umutos.business.OrderBuilder;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.objects.*;
 
@@ -27,27 +28,36 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
 
     private Order fromResultSet(final ResultSet rs) throws SQLException {
         final String bookName = rs.getString("bookName");
-        final int buyerID = rs.getInt("buyerID");
-        final int sellerID = rs.getInt("sellerID");
+        final String buyerName = rs.getString("buyerName");
+        final String sellerName = rs.getString("sellerName");
         final double price = rs.getDouble("price");
+
         final String buyerFirstName = rs.getString("buyerFirstName");
         final String buyerLastName = rs.getString("buyerLastName");
         final String postCode = rs.getString("postCode");
         final String phoneNumber = rs.getString("phoneNumber");
         final String address = rs.getString("address");
-        final String[] orderInfo = {buyerFirstName,buyerLastName,postCode,phoneNumber,address};
 
-        return new Order(bookName,buyerID,sellerID,price,orderInfo);
+
+        Order newOrder =  new Order(bookName,buyerName,sellerName,price);
+        OrderBuilder information = new OrderBuilder(newOrder);
+        information.setFirstName(buyerFirstName);
+        information.setLastName(buyerLastName);
+        information.setPostCode(postCode);
+        information.setAddress(address);
+        information.setPhoneNumber(phoneNumber);
+
+
+        return newOrder;
     }
-
 
     @Override
     public Order insertOrder(Order currentOrder) {
         try(final Connection c = connection()){
             final PreparedStatement st = c.prepareStatement("INSERT INTO orders VALUES(?,?,?,?,?,?,?,?,?)");
             st.setString(1,currentOrder.getBookName());
-            st.setInt(2,currentOrder.getBuyerID());
-            st.setInt(3,currentOrder.getSellerID());
+            st.setString(2,currentOrder.getBuyerName());
+            st.setString(3,currentOrder.getSellerName());
             st.setDouble(4,currentOrder.getPrice());
             st.setString(5,currentOrder.getBuyerFirstName());
             st.setString(6,currentOrder.getBuyerLastName());
@@ -64,11 +74,11 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     }
 
     @Override
-    public List<Order> getBuyerOrders(int userID) {
+    public List<Order> getBuyerOrders(String userName) {
         final List<Order> orders = new ArrayList<>();
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE buyerID = ?");
-            st.setInt(1, userID);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE buyerName = ?");
+            st.setString(1, userName);
             final ResultSet rs = st.executeQuery();
             while(rs.next()){
                 final Order order = fromResultSet(rs);
@@ -85,11 +95,11 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
     }
 
     @Override
-    public List<Order> getSellerOrders(int userID) {
+    public List<Order> getSellerOrders(String sellerName) {
         final List<Order> orders = new ArrayList<>();
         try(final Connection c = connection()){
-            final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE sellerID = ?");
-            st.setInt(1, userID);
+            final PreparedStatement st = c.prepareStatement("SELECT * FROM orders WHERE sellerName = ?");
+            st.setString(1, sellerName);
             final ResultSet rs = st.executeQuery();
             while(rs.next()){
                 final Order order = fromResultSet(rs);

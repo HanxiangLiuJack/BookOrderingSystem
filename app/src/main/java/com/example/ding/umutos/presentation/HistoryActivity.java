@@ -23,7 +23,8 @@ public class HistoryActivity extends AppCompatActivity {
     private ListView bookList;
     private AccessOrders accessOrderList;
     private List<Order> newOrderList;
-    int userType,userID;
+    int userType;
+    String userName;
 
 
     @Override
@@ -32,11 +33,14 @@ public class HistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_history_booklist);
         bookList=(ListView)findViewById(R.id.historyBookList);
 
-        userID = getIntent().getIntExtra("userID",-1);
-        userType=getIntent().getIntExtra("userType",-1);
+        userName = getIntent().getStringExtra("userName");
+        userType = getIntent().getIntExtra("userType",-1);
 
-        accessOrderList=new AccessOrders(  );
-        newOrderList=accessOrderList.orderHistory( userID,userType );
+        accessOrderList=new AccessOrders();
+        if(userType == 1)
+            newOrderList = accessOrderList.buyerOrderHistory(userName);
+        else
+            newOrderList=accessOrderList.sellerOrderHistory(userName);
         loadList(newOrderList);
 
         TextView historyBar=(TextView)findViewById(R.id.historyBar);
@@ -47,10 +51,11 @@ public class HistoryActivity extends AppCompatActivity {
 
         int size=newOrderList.size();
         ArrayList<HashMap<String, Object>> books = new ArrayList<HashMap<String, Object>>();
+        AccessAccounts accounts=new AccessAccounts(  );
+
         for (int i = 0; i <size; i++) {
-            AccessAccounts accounts=new AccessAccounts(  );
             HashMap<String, Object> book = new HashMap<String, Object>();
-            book.put("account","Sold by: "+accounts.getAccountByID( newOrderList.get(i).getSellerID() ).getUserName()+"\nBought by: "+accounts.getAccountByID( newOrderList.get(i).getBuyerID() ).getUserName());
+            book.put("account","Sold by: "+accounts.getAccountByUserName( newOrderList.get(i).getSellerName() ).getUserName()+"\nBought by: "+accounts.getAccountByUserName( newOrderList.get(i).getBuyerName() ).getUserName());
             book.put("title", newOrderList.get(i).getBookName());
             book.put("price", "$"+newOrderList.get(i).getPrice());
             book.put("address","Address: "+newOrderList.get(i).getAddress());

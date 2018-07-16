@@ -2,6 +2,7 @@ package com.example.ding.umutos.business.unittests;
 
 import com.example.ding.umutos.business.AccessOrders;
 import com.example.ding.umutos.objects.Order;
+import com.example.ding.umutos.objects.OrderInfo;
 import com.example.ding.umutos.persistence.OrderPersistence;
 import com.example.ding.umutos.persistence.OrderPersistenceStub;
 
@@ -36,12 +37,12 @@ public class AccessOrderTest {
     @Test
     public void testOrderHistory() {
       System.out.println("\nStarting test testOrderHistory\n");
-      String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
-      String[] orderInfo2 = {"firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven"};
+      OrderInfo orderInfo1 = new OrderInfo("firstName1", "lastName1", "r3y0b6", "2046666666", "Mars");
+      OrderInfo orderInfo2 = new OrderInfo("firstName2", "lastName2", "r3y0b7", "2046666667", "Heaven");
       final List<Order> orders1 = new ArrayList<>();
       final List<Order> orders2 = new ArrayList<>();
-      orders1.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1));
-      orders2.add(new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 11));
+      orders1.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1,orderInfo1));
+      orders2.add(new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 11,orderInfo2));
       when(orderPersistence.getBuyerOrders("Tianhua Xu")).thenReturn(orders1);
       when(orderPersistence.getSellerOrders("Tianhua Xu")).thenReturn(orders2);
 
@@ -59,14 +60,10 @@ public class AccessOrderTest {
     public void InsertOrder(){
       System.out.println("\nStarting test testInsertOrder\n");
       final List<Order> orders = new ArrayList<>();
-      String[] orderInfo1 = {"firstName1", "lastName1", "r3y0b6", "2046666666", "Mars"};
-      orders.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1));
-      final Order order=new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 3);
-      order.setAddress(orderInfo1[4]);
-      order.setPhoneNumber(orderInfo1[3]);
-      order.setPostCode(orderInfo1[2]);
-      order.setLastName(orderInfo1[1]);
-      order.setFirstName(orderInfo1[0]);
+      OrderInfo orderInfo1 = new OrderInfo("firstName1", "lastName1", "r3y0b6", "2046666666", "Mars");
+      orders.add(new Order("book1", "Tianhua Xu", "Tianhua Xu1", 1,orderInfo1));
+      final Order order=new Order("book2", "Tianhua Xu2", "Tianhua Xu3", 3,orderInfo1);
+
       Boolean result;
 
       when(orderPersistence.insertOrder(order)).thenReturn(order);
@@ -79,13 +76,9 @@ public class AccessOrderTest {
       orderPersistence = new OrderPersistenceStub();
       accessOrders = new AccessOrders(orderPersistence);
 
-      String[] orderInfo3 = {"firstName3", "lastName3", "r3y0b7", "2046666664", "Heaves"};
-      Order newOrder = new Order("book3", "Tianhua Xu", "Tianhua Xu", 4);
-      newOrder.setAddress(orderInfo3[4]);
-      newOrder.setPhoneNumber(orderInfo3[3]);
-      newOrder.setPostCode(orderInfo3[2]);
-      newOrder.setLastName(orderInfo3[1]);
-      newOrder.setFirstName(orderInfo3[0]);
+      OrderInfo orderInfo3 = new OrderInfo("firstName3", "lastName3", "r3y0b7", "2046666664", "Heaves");
+      Order newOrder = new Order("book3", "Tianhua Xu", "Tianhua Xu", 4,orderInfo3);
+
       accessOrders.insertOrder(newOrder);
 
       assertTrue(accessOrders.getOrder().size() == 3);

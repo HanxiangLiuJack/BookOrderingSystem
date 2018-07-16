@@ -5,18 +5,15 @@ public class Order {
     private String buyerName;
     private String sellerName;
     private double price;
-    private String buyerFirstName;
-    private String buyerLastName;
-    private String postCode;
-    private String phoneNumber;
-    private String address;
+    private OrderInfo orderInfo;
 
-    public Order(String bookName, String buyerName, String sellerName, double price )
+    public Order(String bookName, String buyerName, String sellerName, double price, OrderInfo orderInfo )
     {
         this.bookName = bookName;
         this.buyerName = buyerName;
         this.sellerName = sellerName;
         this.price = price;
+        this.orderInfo = orderInfo;
     }
 
     public String getBookName()
@@ -38,47 +35,47 @@ public class Order {
     }
 
     public String getBuyerFirstName() {
-        return buyerFirstName;
+        return orderInfo.getFirstName();
     }
 
     public String getBuyerLastName() {
-        return buyerLastName;
+        return orderInfo.getLastName();
     }
 
     public String getPostCode() {
-        return postCode;
+        return orderInfo.getPostCode();
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return orderInfo.getPhoneNumber();
     }
 
     public String getAddress() {
-        return address;
+        return orderInfo.getAddress();
     }
 
     public void setFirstName(String buyerFirstName){
-        this.buyerFirstName=buyerFirstName;
+        this.orderInfo.setFirstName(buyerFirstName);;
     }
 
     public void setLastName(String buyerLastName)
     {
-        this.buyerLastName=buyerLastName;
+        this.orderInfo.setLastName(buyerLastName);;
     }
 
     public void setPostCode(String postCode)
     {
-        this.postCode=postCode;
+        this.orderInfo.setPostCode(postCode);;
     }
 
     public void setPhoneNumber(String phoneNumber)
     {
-        this.phoneNumber=phoneNumber;
+        this.orderInfo.setPhoneNumber(phoneNumber);;
     }
 
     public void setAddress(String address)
     {
-        this.address=address;
+        this.orderInfo.setAddress(address);;
     }
 
 

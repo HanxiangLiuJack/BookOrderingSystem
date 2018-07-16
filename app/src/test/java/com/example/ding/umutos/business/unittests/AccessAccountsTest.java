@@ -174,7 +174,7 @@ public class AccessAccountsTest {
         System.out.println("\nStart testing testGetAccountRate.\n");
         accountPersistence = new AccountPersistenceStub();
         accessAccounts = new AccessAccounts(accountPersistence);
-        double rate = accessAccounts.getAccountRate("Tianhua Xu");
+        double rate = accessAccounts.getAccountRate("Tianhua Xu",accessAccounts.getAccounts());
         assertTrue(rate == 0);
         System.out.println("\nEnd testing testGetAccountRate.\n");
     }
@@ -186,9 +186,9 @@ public class AccessAccountsTest {
         accountPersistence = new AccountPersistenceStub();
         accessAccounts = new AccessAccounts(accountPersistence);
         accessAccounts.RateUser("Tianhua Xu", 4);
-        assertTrue(accessAccounts.getAccountRate("Tianhua Xu") == 4);
+        assertTrue(accessAccounts.getAccountRate("Tianhua Xu",accessAccounts.getAccounts()) == 4);
         accessAccounts.RateUser("Tianhua Xu", 2);
-        assertTrue(accessAccounts.getAccountRate("Tianhua Xu") == 3);
+        assertTrue(accessAccounts.getAccountRate("Tianhua Xu",accessAccounts.getAccounts()) == 3);
         System.out.println("\nEnd testing testRateUser.\n");
     }
 }

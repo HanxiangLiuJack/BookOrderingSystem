@@ -37,13 +37,8 @@ public class OrderPersistenceHSQLDB  implements OrderPersistence{
         final String phoneNumber = rs.getString("phoneNumber");
         final String address = rs.getString("address");
 
-
-        Order newOrder =  new Order(bookName,buyerName,sellerName,price);
-        newOrder.setFirstName(buyerFirstName);
-        newOrder.setLastName(buyerLastName);
-        newOrder.setPostCode(postCode);
-        newOrder.setAddress(address);
-        newOrder.setPhoneNumber(phoneNumber);
+        OrderInfo orderInfo = new OrderInfo(buyerFirstName,buyerLastName,postCode,phoneNumber,address);
+        Order newOrder =  new Order(bookName,buyerName,sellerName,price,orderInfo);
 
         return newOrder;
     }
